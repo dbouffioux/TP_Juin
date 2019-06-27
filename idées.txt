@@ -1,0 +1,26 @@
+améliorer la DB:
+	- faire les différentes tables:
+		- une avec les activités: id, name, plage horaire, lien avec les lieux
+		- une avec les participants: id, name, fisrtname
+		- une avec les lieux: id, name, liée aux activités
+		- lier un participant à une activité ou plusieurs
+angular: 
+	pour l'organisateur:
+	- restreindre l'accès à la page de modification de la db pour les activites
+	- donner la possiblité d'ajouter une activité
+	- 
+	
+	pour l'utilisateur:
+	- possiblité de s'inscrire
+	- d'ajouter des activités
+	- créer un compte qui retrouve ses préférences
+	
+	
+javaWeb:
+	- modifier l'activité
+	- ajouter activité
+	- ajouter participant
+	- 
+	
+	
+	
