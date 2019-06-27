@@ -1,0 +1,8 @@
+CREATE TABLE activities (
+activity_id  SERIAL PRIMARY KEY ,
+activity_name varchar(20)	
+);
+
+INSERT INTO activities (activity_name) 
+VALUES ('Muse');
+
