@@ -69,9 +69,9 @@ public class FrontController extends HttpServlet {
 		List<Activity> listActivities=repository.findActivities();
 		jsonGenerate(response, listActivities);
 		
+		response.addHeader("Access-Control-Allow-Origin", "*");
 		
-		
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		response.getWriter();
 	}
 
 	/**
