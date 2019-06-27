@@ -1,0 +1,10 @@
+Rapport 27_06:
+Prise de décision sur le sujet global à développer et mise en place d'un test transversale des matières abordées:
+Mise en place de Git
+Mise en place de la Db par PgAdmin
+Mise en place de la servlet avec Eclipse, Java web app
+Mise en place d'Angular
+Liaison des différentes parties avec succès.
+
+
+Rapport 28_06:
