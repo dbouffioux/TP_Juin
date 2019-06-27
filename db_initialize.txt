@@ -1,6 +1,0 @@
-Create table activities (
-activity_id INTEGER PRIMARY KEY AUTOINCREMENT,
-activity_name varchar(20)
-	
-)
-

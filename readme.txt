@@ -1,2 +1,4 @@
-lancer le fichier db_initialize pour créer la base de données
+lancer le fichier db_initialize pour créer la base de données sur pgAdmin
+
+
 
