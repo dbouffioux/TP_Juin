@@ -1,4 +1,4 @@
-Rapport 27_06:
+﻿Rapport 27_06:
 Prise de décision sur le sujet global à développer et mise en place d'un test transversale des matières abordées:
 Mise en place de Git
 Mise en place de la Db par PgAdmin
@@ -8,4 +8,5 @@ Liaison des différentes parties avec succès.
 
 
 Rapport 28_06:
-
+Utilisation d'un logiciel pour les schémas de relation de la DB
+Mise en place d'un logiciel pour l'utilisation de Scrum
