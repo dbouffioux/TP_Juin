@@ -1,27 +1,26 @@
-package be.afelio.controllers.activities;
+package be.afelio.controllers.inscriptions;
 
 import java.io.IOException;
 import java.util.List;
-import javax.servlet.http.HttpServletRequest;
+
 import javax.servlet.http.HttpServletResponse;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-
-import be.afelio.beans.Activity;
+import be.afelio.beans.Inscription;
 import be.afelio.repository.DataRepository;
 
-public class ActivitiesController {
-
+public class InscriptionsController {
+	
 	protected DataRepository repository;
 
-	public ActivitiesController(DataRepository repository) {
+	public InscriptionsController(DataRepository repository) {
 		super();
 		this.repository = repository;
 	}
 
 	public void list(HttpServletResponse response) throws IOException {
-		List<Activity> listActivities = repository.findAllActivities();
-		jsonGenerate(response, listActivities);
+		List<Inscription> listInscriptions = repository.findAllInscriptions();
+		jsonGenerate(response, listInscriptions);
 	}
 
 	protected void jsonGenerate(HttpServletResponse response, Object o) throws IOException {

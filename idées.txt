@@ -1,26 +1,29 @@
-améliorer la DB:
+﻿améliorer la DB:
 	- faire les différentes tables:
-		- une avec les activités: id, name, plage horaire, lien avec les lieux
+		- une avec les activités :id,heure début, heure fin, lien avec participants (id), descriptif, url, lien organisateur
 		- une avec les participants: id, name, fisrtname
-		- une avec les lieux: id, name, liée aux activités
-		- lier un participant à une activité ou plusieurs
 angular: 
 	pour l'organisateur:
-	- restreindre l'accès à la page de modification de la db pour les activites
-	- donner la possiblité d'ajouter une activité
-	- 
+	- autoriser l'accès à la page de modification de la db pour les activités
+	- donner la possiblité d'ajouter/modifier/supprimer  activités , descriptif de l'activité, lien vers URL
 	
 	pour l'utilisateur:
 	- possiblité de s'inscrire
-	- d'ajouter des activités
+	- s'inscrire à une activité
 	- créer un compte qui retrouve ses préférences
+	- surveiller le choix des plages horaire
+	- utilisateur peut être organisateur
+	-évènement: ensemble d'activités
 	
 	
 javaWeb:
 	- modifier l'activité
-	- ajouter activité
+	- ajouter concert, scène
 	- ajouter participant
-	- 
+
+option amélioration:
+	- s'inscrire à un groupe d'activités
+	- notion de paiement
 	
 	
-	
+	http://localhost:8080/TP_juin/activities

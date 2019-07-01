@@ -13,7 +13,11 @@ import javax.servlet.http.HttpServletResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import be.afelio.beans.Activity;
+import be.afelio.beans.Inscription;
 import be.afelio.controllers.activities.ActivitiesController;
+import be.afelio.controllers.events.EventsController;
+import be.afelio.controllers.inscriptions.InscriptionsController;
+import be.afelio.controllers.persons.PersonController;
 import be.afelio.repository.DataRepository;
 
 /**
@@ -25,6 +29,9 @@ public class FrontController extends HttpServlet {
 	DataRepository repository;
 	
 	protected ActivitiesController activitiesController;
+	protected PersonController personController;
+	protected EventsController eventsController;
+	protected InscriptionsController inscriptionsController;
 	
 	protected void jsonGenerate(HttpServletResponse response, Object o) throws IOException {
 
@@ -56,6 +63,9 @@ public class FrontController extends HttpServlet {
 			String password= config.getInitParameter("database.password");
 			repository= new DataRepository(url, user, password);
 			activitiesController = new ActivitiesController(repository);
+			personController = new PersonController(repository);
+			eventsController = new EventsController(repository);
+			inscriptionsController= new InscriptionsController(repository);
 		} catch (Exception e) {
 			throw new ServletException(e);
 		}
@@ -66,19 +76,35 @@ public class FrontController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("FrontController.doGet()");
-		List<Activity> listActivities=repository.findActivities();
-		jsonGenerate(response, listActivities);
+		String pathInfoString=request.getPathInfo();
+		System.out.println("FrontController.doGet()"+pathInfoString);
+		switch (pathInfoString) {
+		case "/activity/all":
+			activitiesController.list(response);
+			break;
+		case "/person/all":
+			personController.list(response);
+			break;
+		case "/events/all":
+			eventsController.list(response);
+			break;
+		case "/inscriptions/all":
+			inscriptionsController.list(response);
+			break;
+
+		default:
+			System.out.println("FrontController.doGet().default");
+			break;
+		}
 		
-		response.addHeader("Access-Control-Allow-Origin", "*");
 		
-		response.getWriter();
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		
 		doGet(request, response);
 	}
 

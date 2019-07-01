@@ -10,15 +10,10 @@ export class ActivitiesService {
 
   constructor(private http: HttpClient) { }
 
-
-
   public getActivities(): Observable<Activity[]> {
 
-    return this.http.get<Activity[]>(`http://localhost:8080/festival/festival`)
+    return this.http.get<Activity[]>(`${environment.baseUrl}/TP_juin/activity/all`)
       .pipe(catchError((error: any) => throwError(error.json())));
   }
-
-
-
 
 }

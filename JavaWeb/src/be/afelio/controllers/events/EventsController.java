@@ -1,27 +1,28 @@
-package be.afelio.controllers.activities;
+package be.afelio.controllers.events;
 
 import java.io.IOException;
 import java.util.List;
-import javax.servlet.http.HttpServletRequest;
+
 import javax.servlet.http.HttpServletResponse;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import be.afelio.beans.Activity;
+import be.afelio.beans.Event;
 import be.afelio.repository.DataRepository;
 
-public class ActivitiesController {
+public class EventsController {
 
 	protected DataRepository repository;
 
-	public ActivitiesController(DataRepository repository) {
+	public EventsController(DataRepository repository) {
 		super();
 		this.repository = repository;
 	}
 
 	public void list(HttpServletResponse response) throws IOException {
-		List<Activity> listActivities = repository.findAllActivities();
-		jsonGenerate(response, listActivities);
+		List<Event> listEvents = repository.findAllEvents();
+		jsonGenerate(response, listEvents);
 	}
 
 	protected void jsonGenerate(HttpServletResponse response, Object o) throws IOException {
@@ -35,4 +36,5 @@ public class ActivitiesController {
 		response.addHeader("Access-Control-Allow-Origin", "*");
 		response.getWriter().write(json);
 	}
+
 }

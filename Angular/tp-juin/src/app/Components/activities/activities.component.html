@@ -1,1 +1,13 @@
-<div *ngFor="let activity of activities">{{activity.name}}</div>
+
+<table>
+  <tr>
+<th>Nom de l'activité</th>
+<th>Heure de début</th>
+<th>Heure de fin</th>
+  </tr>
+<tr *ngFor="let activity of activities">
+  <td> {{activity.name}} </td>
+  <td> {{activity.begin}}</td>
+  <td>{{activity.finish}}</td>
+</tr>
+</table>

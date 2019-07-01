@@ -1,8 +1,37 @@
-CREATE TABLE activities (
-activity_id  SERIAL PRIMARY KEY ,
-activity_name varchar(20)	
+CREATE TABLE person (
+	id SERIAL PRIMARY KEY,
+	firstname VARCHAR(100) ,
+	lastname VARCHAR(100)
+)
+
+	INSERT INTO person(firstname, lastname)
+	VALUES ('toto', 'test')
+
+CREATE TABLE event (
+	id  SERIAL PRIMARY KEY ,
+	name varchar(20) NOT NULL,
+	person_id int NOT NULL
+	CONSTRAINT FK_person_id REFERENCES person (id)
 );
 
-INSERT INTO activities (activity_name) 
-VALUES ('Muse');
+	INSERT INTO event(name, person_id)
+	VALUES ('event1', 1)
+
+
+CREATE TABLE activity(
+	id  SERIAL PRIMARY KEY ,
+	name varchar(20) NOT NULL,
+	begin varchar NOT NULL,
+	finish varchar NOT NULL,
+	url varchar,
+	description varchar,
+	event_id int NOT NULL
+	CONSTRAINT FK_event_id REFERENCES event (id)
+)
+
+INSERT INTO activity (name, begin, finish, event_id) 
+VALUES ('Muse',
+	'05 Dec 2019 15:30', 
+	'05 Dec 2019 16:00',
+	1);
 

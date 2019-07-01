@@ -5,7 +5,7 @@ import { Activity } from 'src/app/models/activity.model';
 @Component({
   selector: 'app-activities',
   templateUrl: './activities.component.html',
-  styleUrls: ['./activities.component.css']
+  styleUrls: ['./activities.component.scss']
 })
 export class ActivitiesComponent implements OnInit {
 

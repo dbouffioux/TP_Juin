@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project name="activities" id="Project_443cf57" template="Default" database="PostgreSQL" >
+	<schema name="public" catalogname="postgres" schemaname="public" >
+		<table name="activity" >
+			<column name="id" type="integer" jt="4" mandatory="y" autoincrement="y" />
+			<column name="name" type="varchar" length="100" jt="12" />
+			<column name="from" type="date" jt="91" />
+			<column name="to" type="date" jt="91" />
+			<column name="url" type="varchar" jt="12" />
+			<column name="description" type="varchar" jt="12" />
+			<column name="event_id" type="integer" jt="4" />
+			<index name="pk_activities_id" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+			<index name="unq_activity_event_id" unique="UNIQUE" >
+				<column name="event_id" />
+			</index>
+			<fk name="fk_activity_inscription" to_schema="public" to_table="inscription" >
+				<fk_column name="id" pk="activity_id" />
+			</fk>
+		</table>
+		<table name="event" >
+			<column name="id" type="integer" jt="4" mandatory="y" autoincrement="y" />
+			<column name="name" type="varchar" length="100" jt="12" />
+			<column name="person_id" type="integer" jt="4" />
+			<index name="pk_event_id" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+			<index name="unq_event_person_id" unique="UNIQUE" >
+				<column name="person_id" />
+			</index>
+			<fk name="fk_event_activity" to_schema="public" to_table="activity" >
+				<fk_column name="id" pk="event_id" />
+			</fk>
+		</table>
+		<table name="inscription" >
+			<column name="id" type="integer" jt="4" mandatory="y" autoincrement="y" />
+			<column name="person_id" type="integer" jt="4" />
+			<column name="activity_id" type="integer" jt="4" />
+			<index name="pk_inscription_id" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+			<index name="unq_inscription_person_id" unique="UNIQUE" >
+				<column name="person_id" />
+			</index>
+			<index name="unq_inscription_activity_id" unique="UNIQUE" >
+				<column name="activity_id" />
+			</index>
+		</table>
+		<table name="person" >
+			<column name="id" type="integer" jt="4" mandatory="y" autoincrement="y" />
+			<column name="lastname" type="varchar" length="100" jt="12" />
+			<column name="firstname" type="varchar" length="100" jt="12" />
+			<index name="pk_person_id" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+			<fk name="fk_person_event" to_schema="public" to_table="event" >
+				<fk_column name="id" pk="person_id" />
+			</fk>
+			<fk name="fk_person_inscription" to_schema="public" to_table="inscription" >
+				<fk_column name="id" pk="person_id" />
+			</fk>
+		</table>
+	</schema>
+	<connector name="activities" database="PostgreSQL" driver_class="org.postgresql.Driver" driver_jar="postgresql-42.2.5.jar" driver_desc="Standard" host="localhost" port="5432" instance="activities" user="postgres" passwd="cG9zdGdyZXM=" />
+	<layout name="Default Layout" id="Layout_5eba4dd" show_schema_name="y" show_relation="columns" >
+		<entity schema="public" name="inscription" color="C1D8EE" x="112" y="224" />
+		<entity schema="public" name="event" color="C1D8EE" x="288" y="48" />
+		<entity schema="public" name="person" color="C1D8EE" x="48" y="96" />
+		<entity schema="public" name="activity" color="C1D8EE" x="304" y="256" />
+	</layout>
+	<layout name="test" id="Layout_4f2f51a" show_relation="columns" />
+</project>
