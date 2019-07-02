@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Activity } from './models/activity.model';
+import { ActivitiesService } from './services/activities.service';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +9,7 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'tp-juin';
+ 
+
+
 }

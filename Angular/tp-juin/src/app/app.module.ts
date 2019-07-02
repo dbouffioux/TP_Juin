@@ -12,6 +12,8 @@ import { EventComponent } from './Components/event/event.component';
 import { EventService } from './services/event.service';
 import { InscriptionComponent } from './Components/inscription/inscription.component';
 import { InscriptionService } from './services/inscription.service';
+import { ActivityFormComponent } from './Components/activity-form/activity-form.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -19,12 +21,14 @@ import { InscriptionService } from './services/inscription.service';
     ActivitiesComponent,
     PersonComponent,
     EventComponent,
-    InscriptionComponent
+    InscriptionComponent,
+    ActivityFormComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule
   ],
   providers: [
     ActivitiesService,

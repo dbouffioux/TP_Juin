@@ -13,7 +13,7 @@ export class PersonService {
 constructor(private http: HttpClient) { }
 
 public getPersons(): Observable<Person[]> {
-  return this.http.get<Person[]>(`${environment.baseUrl}/TP_juin/person/all`)
+  return this.http.get<Person[]>(`${environment.baseUrl}/person/all`)
   .pipe(catchError((error: any) => throwError(error.json())));
 }
 

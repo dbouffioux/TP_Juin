@@ -3,13 +3,17 @@ package be.afelio.controllers.events;
 import java.io.IOException;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import be.afelio.beans.Activity;
 import be.afelio.beans.Event;
 import be.afelio.repository.DataRepository;
+import jsonParameters.EventParameters;
+import jsonParameters.PersonParameters;
 
 public class EventsController {
 
@@ -35,6 +39,19 @@ public class EventsController {
 		response.setCharacterEncoding("UTF-8");
 		response.addHeader("Access-Control-Allow-Origin", "*");
 		response.getWriter().write(json);
+	}
+
+	public void add(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		ObjectMapper mapper = new ObjectMapper();
+		EventParameters eventParameters= mapper.readValue(request.getInputStream(), EventParameters.class );
+		System.out.println("FrontController.doPost()");
+		if ( eventParameters.getName()!= null
+				&& !eventParameters.getName().isBlank() 
+				&& eventParameters.getPerson_id() != null ) {
+			repository.addEvent(eventParameters.getName(),eventParameters.getPerson_id() );
+		}
+		list(response);
+		
 	}
 
 }

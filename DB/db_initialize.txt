@@ -2,7 +2,7 @@ CREATE TABLE person (
 	id SERIAL PRIMARY KEY,
 	firstname VARCHAR(100) ,
 	lastname VARCHAR(100)
-)
+);
 
 CREATE TABLE event (
 	id  SERIAL PRIMARY KEY ,
@@ -20,7 +20,7 @@ CREATE TABLE activity(
 	description varchar,
 	event_id int NOT NULL
 	CONSTRAINT FK_event_id REFERENCES event (id)
-)
+);
 
 
 
@@ -30,9 +30,8 @@ CREATE TABLE inscription(
 	CONSTRAINT FK_person_id REFERENCES person (id),
 	activity_id int NOT NULL
 	CONSTRAINT FK_activity_id REFERENCES activity (id)
-)
-INSERT INTO inscription (person_id, activity_id)
-VALUES (1,1)
+);
+
 
 INSERT INTO person(firstname, lastname)
 	VALUES ('Mélissa', 'Schyns');
@@ -59,55 +58,72 @@ INSERT INTO person(firstname, lastname)
 	INSERT INTO person(firstname, lastname)
 	VALUES ('Thibault', 'Molle');
 	INSERT INTO person(firstname, lastname)
-	VALUES ('Zahraa', 'Obaed')
+	VALUES ('Zahraa', 'Obaed');
 INSERT INTO event(name, person_id)
 	VALUES ('Francofolies', 3);
 	INSERT INTO event(name, person_id)
 	VALUES ('Rock Wechter', 5);
 	INSERT INTO event(name, person_id)
 	VALUES ('Tomorrow Land', 8);
+
 INSERT INTO activity (name, begin, finish, event_id, url, description) 
 VALUES ('Pink',
 	'02 Aou 2019 22:00', 
 	'02 Aou 2019 23:30',
-	3,
-	'wmh.pinkspage.com/',
+	2,
+	'https://www.pinkspage.com/',
 	'rock');
 
 	INSERT INTO activity (name, begin, finish, event_id, url, description) 
 VALUES ('Bastille',
 	'01 Aou 2019 22:00', 
 	'01 Aou 2019 23:30',
-	3,
-	'www.bastillebastille.com',
+	2,
+	'https://www.bastillebastille.com/',
 	'rock');
 	INSERT INTO activity (name, begin, finish, event_id, url, description) 
 VALUES ('Angèle',
 	'03 Aou 2019 22:00', 
 	'03 Aou 2019 23:30',
-	2,
+	1,
 	'https://angele.store/',
 	'pop');
 	INSERT INTO activity (name, begin, finish, event_id, url, description) 
 VALUES ('Stromae',
 	'03 Aou 2019 18:00', 
 	'03 Aou 2019 20:30',
-	2,
-	'fr.wikipedia.org/wiki/Stromae',
+	1,
+	'https://www.facebook.com/stromae/',
 	'pop/rap');
 	INSERT INTO activity (name, begin, finish, event_id, url, description) 
 VALUES ('David Ghetta',
 	'03 Aou 2019 18:00', 
 	'03 Aou 2019 20:30',
-	4,
-	'www.davidguetta.com',
+	3,
+	'https://www.davidguetta.com/',
 	'electro');
 	INSERT INTO activity (name, begin, finish, event_id, url, description) 
 VALUES ('Mortin Solveig',
 	'02 Aou 2019 18:00', 
 	'02 Aou 2019 20:30',
-	4,
+	3,
 	'http://www.martinsolveig.com/',
 	'electro');
+
+INSERT INTO inscription(person_id, activity_id)
+VALUES (5,2);
+INSERT INTO inscription(person_id, activity_id)
+VALUES (5,3);
+INSERT INTO inscription(person_id, activity_id)
+VALUES (5,1);
+INSERT INTO inscription(person_id, activity_id)
+VALUES (9,1);
+INSERT INTO inscription(person_id, activity_id)
+VALUES (6,2);
+INSERT INTO inscription(person_id, activity_id)
+VALUES (2,3);
+INSERT INTO inscription(person_id, activity_id)
+VALUES (6,5);
+
 	
 

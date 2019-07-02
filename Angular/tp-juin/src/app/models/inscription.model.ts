@@ -1,5 +1,7 @@
+import { Activity } from './activity.model';
+
 export interface Inscription {
   id?: number;
-  activity_id?: number;
   person_id?: number;
+  activity?: Activity;
   }

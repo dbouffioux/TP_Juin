@@ -13,7 +13,7 @@ export class EventService {
 constructor(private http: HttpClient) { }
 
 public getAllEvents(): Observable<Event[]> {
-  return this.http.get<Event[]>(`${environment.baseUrl}/TP_juin/events/all`)
+  return this.http.get<Event[]>(`${environment.baseUrl}/events/all`)
   .pipe(catchError((error: any) => throwError(error.json())));
 }
 }

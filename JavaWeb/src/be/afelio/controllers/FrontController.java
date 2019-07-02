@@ -1,19 +1,10 @@
 package be.afelio.controllers;
 
 import java.io.IOException;
-import java.util.List;
-
-import javax.servlet.ServletConfig;
-import javax.servlet.ServletException;
+import javax.servlet.*;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
+import javax.servlet.http.*;
 import com.fasterxml.jackson.databind.ObjectMapper;
-
-import be.afelio.beans.Activity;
-import be.afelio.beans.Inscription;
 import be.afelio.controllers.activities.ActivitiesController;
 import be.afelio.controllers.events.EventsController;
 import be.afelio.controllers.inscriptions.InscriptionsController;
@@ -32,6 +23,7 @@ public class FrontController extends HttpServlet {
 	protected PersonController personController;
 	protected EventsController eventsController;
 	protected InscriptionsController inscriptionsController;
+	
 	
 	protected void jsonGenerate(HttpServletResponse response, Object o) throws IOException {
 
@@ -69,7 +61,7 @@ public class FrontController extends HttpServlet {
 		} catch (Exception e) {
 			throw new ServletException(e);
 		}
-	}
+	}	
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -104,6 +96,28 @@ public class FrontController extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String pathInfoString=request.getPathInfo();
+		System.out.println("FrontController.doPost()");
+		response.addHeader("Access-Control-Allow-Origin", "*");
+		response.addHeader("Access-Control-Allow-Methods", "*");
+		switch (pathInfoString) {
+		case "/person/add":
+			personController.add(request, response);
+			break;
+		case "/event/add":
+			eventsController.add(request, response);
+			break;
+		case "/activity/add":
+			activitiesController.add(request, response);
+			break;
+		case "/inscription/add":
+			inscriptionsController.add(request, response);
+
+		default:
+			System.out.println("FrontController.doPost()/Default");
+			break;
+		}
+		
 		
 		doGet(request, response);
 	}
@@ -121,5 +135,5 @@ public class FrontController extends HttpServlet {
 	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 	}
-
+	
 }

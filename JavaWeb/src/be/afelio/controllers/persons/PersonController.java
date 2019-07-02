@@ -8,9 +8,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import be.afelio.beans.Activity;
 import be.afelio.beans.Person;
 import be.afelio.repository.DataRepository;
+import jsonParameters.PersonParameters;
 
 public class PersonController {
 
@@ -26,6 +26,19 @@ public class PersonController {
 		public void list(HttpServletResponse response) throws IOException {
 			List<Person> listPersons = repository.findAllPersons();
 			jsonGenerate(response, listPersons);
+		}
+		
+		public void add(HttpServletRequest request, HttpServletResponse response) throws IOException {
+			ObjectMapper mapper = new ObjectMapper();
+			PersonParameters personParameters= mapper.readValue(request.getInputStream(), PersonParameters.class );
+			System.out.println("FrontController.doPost()");
+			if (personParameters.getFirstname() != null
+					&& !personParameters.getFirstname().isBlank() 
+					&& personParameters.getLastname() != null 
+					&& !personParameters.getLastname().isBlank() ) {
+				repository.addPerson(personParameters.getFirstname(),personParameters.getLastname() );
+			}
+			list(response);
 		}
 
 		protected void jsonGenerate(HttpServletResponse response, Object o) throws IOException {

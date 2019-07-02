@@ -13,6 +13,21 @@
     <td>{{activity.begin}}</td>
     <td>{{activity.finish}}</td>
     <td>{{activity.description}}</td>
-    <td>{{activity.url}}</td>
+    <td><a href="{{activity.url}}" target="_blank">{{activity.url}}</a></td>
+  </tr>
+  <tr>
+    <td> <input name= "event_name" type="text" [(ngModel)]="activity.event_name" ></td>
+    <td> <input name= "name" type="text"  [(ngModel)]="activity.name" ></td>
+    <td> <input name="begin" type="text"></td>
+    <td> <input name="finish" type="text"></td>
+    <td> <input name="description" type="text"></td>
+    <td> <input name="url" type="text"></td>
+
   </tr>
 </table>
+<app-activity-form
+(create)="onCreate($event)" [activity]="activity"
+></app-activity-form>
+
+
+

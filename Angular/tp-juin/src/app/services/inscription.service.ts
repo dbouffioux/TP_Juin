@@ -14,7 +14,7 @@ export class InscriptionService {
 constructor(private http: HttpClient) { }
 
 public getAllInscriptions(): Observable<Inscription[]> {
-  return this.http.get<Inscription[]>(`${environment.baseUrl}/TP_juin/inscriptions/all`)
+  return this.http.get<Inscription[]>(`${environment.baseUrl}/inscriptions/all`)
   .pipe(catchError((error: any) => throwError(error.json())));
 }
 }
