@@ -4,19 +4,12 @@ CREATE TABLE person (
 	lastname VARCHAR(100)
 )
 
-	INSERT INTO person(firstname, lastname)
-	VALUES ('toto', 'test')
-
 CREATE TABLE event (
 	id  SERIAL PRIMARY KEY ,
 	name varchar(20) NOT NULL,
 	person_id int NOT NULL
 	CONSTRAINT FK_person_id REFERENCES person (id)
 );
-
-	INSERT INTO event(name, person_id)
-	VALUES ('event1', 1)
-
 
 CREATE TABLE activity(
 	id  SERIAL PRIMARY KEY ,
@@ -29,11 +22,7 @@ CREATE TABLE activity(
 	CONSTRAINT FK_event_id REFERENCES event (id)
 )
 
-INSERT INTO activity (name, begin, finish, event_id) 
-VALUES ('Muse1',
-	'05 Dec 2019 15:30', 
-	'05 Dec 2019 16:00',
-	1);
+
 
 CREATE TABLE inscription(
 	id  SERIAL PRIMARY KEY ,
@@ -45,4 +34,80 @@ CREATE TABLE inscription(
 INSERT INTO inscription (person_id, activity_id)
 VALUES (1,1)
 
+INSERT INTO person(firstname, lastname)
+	VALUES ('Mélissa', 'Schyns');
+	INSERT INTO person(firstname, lastname)
+	VALUES ('Jean', 'Leclercq');
+	INSERT INTO person(firstname, lastname)
+	VALUES ('Yannick', 'Boogaerts');
+	INSERT INTO person(firstname, lastname)
+	VALUES ('Roman', 'DelFavero');
+	INSERT INTO person(firstname, lastname)
+	VALUES ('Louis', 'Hella');
+	INSERT INTO person(firstname, lastname)
+	VALUES ('Damien', 'Bouffioux');
+	INSERT INTO person(firstname, lastname)
+	VALUES ('Salvatrice', 'Montalbano');
+	INSERT INTO person(firstname, lastname)
+	VALUES ('Delphine', 'Franquinet');
+	INSERT INTO person(firstname, lastname)
+	VALUES ('Maxime', 'Quoili,');
+	INSERT INTO person(firstname, lastname)
+	VALUES ('Philippe', 'Vancom');
+	INSERT INTO person(firstname, lastname)
+	VALUES ('Romain', 'Celen');
+	INSERT INTO person(firstname, lastname)
+	VALUES ('Thibault', 'Molle');
+	INSERT INTO person(firstname, lastname)
+	VALUES ('Zahraa', 'Obaed')
+INSERT INTO event(name, person_id)
+	VALUES ('Francofolies', 3);
+	INSERT INTO event(name, person_id)
+	VALUES ('Rock Wechter', 5);
+	INSERT INTO event(name, person_id)
+	VALUES ('Tomorrow Land', 8);
+INSERT INTO activity (name, begin, finish, event_id, url, description) 
+VALUES ('Pink',
+	'02 Aou 2019 22:00', 
+	'02 Aou 2019 23:30',
+	3,
+	'wmh.pinkspage.com/',
+	'rock');
+
+	INSERT INTO activity (name, begin, finish, event_id, url, description) 
+VALUES ('Bastille',
+	'01 Aou 2019 22:00', 
+	'01 Aou 2019 23:30',
+	3,
+	'www.bastillebastille.com',
+	'rock');
+	INSERT INTO activity (name, begin, finish, event_id, url, description) 
+VALUES ('Angèle',
+	'03 Aou 2019 22:00', 
+	'03 Aou 2019 23:30',
+	2,
+	'https://angele.store/',
+	'pop');
+	INSERT INTO activity (name, begin, finish, event_id, url, description) 
+VALUES ('Stromae',
+	'03 Aou 2019 18:00', 
+	'03 Aou 2019 20:30',
+	2,
+	'fr.wikipedia.org/wiki/Stromae',
+	'pop/rap');
+	INSERT INTO activity (name, begin, finish, event_id, url, description) 
+VALUES ('David Ghetta',
+	'03 Aou 2019 18:00', 
+	'03 Aou 2019 20:30',
+	4,
+	'www.davidguetta.com',
+	'electro');
+	INSERT INTO activity (name, begin, finish, event_id, url, description) 
+VALUES ('Mortin Solveig',
+	'02 Aou 2019 18:00', 
+	'02 Aou 2019 20:30',
+	4,
+	'http://www.martinsolveig.com/',
+	'electro');
+	
 
