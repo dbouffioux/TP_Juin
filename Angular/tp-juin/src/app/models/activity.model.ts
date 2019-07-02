@@ -5,5 +5,5 @@ begin?: string;
 finish?: string;
 description?: string;
 url?: string;
-event_id?: number;
+event_name?: string;
 }

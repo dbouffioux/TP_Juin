@@ -26,4 +26,4 @@ option amélioration:
 	- notion de paiement
 	
 	
-	http://localhost:8080/TP_juin/activities
+	http://localhost:8080/TP_juin/activity

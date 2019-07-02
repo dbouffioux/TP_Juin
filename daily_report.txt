@@ -10,3 +10,14 @@ Liaison des différentes parties avec succès.
 Rapport 28_06:
 Utilisation d'un logiciel pour les schémas de relation de la DB
 Mise en place d'un logiciel pour l'utilisation de Scrum
+
+Rapport 01_07:
+détail des users story sur sprints
+lancement du premier sprint
+création du schéma de la DB
+création de la DB
+liaison de la DB vers Angular pour chaque table
+mise en page des activités
+remplissage fictif de la DB en vue de tests
+
+

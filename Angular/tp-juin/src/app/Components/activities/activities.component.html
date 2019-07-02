@@ -1,13 +1,18 @@
-
 <table>
   <tr>
-<th>Nom de l'activité</th>
-<th>Heure de début</th>
-<th>Heure de fin</th>
+    <th>Nom de l'évènement</th>
+    <th>Nom de l'activité</th>
+    <th>Heure de début</th>
+    <th>Heure de fin</th>
+    <th>Description</th>
+    <th>URL</th>
   </tr>
-<tr *ngFor="let activity of activities">
-  <td> {{activity.name}} </td>
-  <td> {{activity.begin}}</td>
-  <td>{{activity.finish}}</td>
-</tr>
+  <tr *ngFor="let activity of activities">
+    <td>{{activity.event_name}}</td>
+    <td>{{activity.name}} </td>
+    <td>{{activity.begin}}</td>
+    <td>{{activity.finish}}</td>
+    <td>{{activity.description}}</td>
+    <td>{{activity.url}}</td>
+  </tr>
 </table>

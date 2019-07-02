@@ -8,11 +8,17 @@ public class Activity {
 	protected String finish;
 	protected String url;
 	protected String description;
-	protected Integer event_id;
+	protected String event_name;
 	
 	
+	public String getEvent_name() {
+		return event_name;
+	}
+	public void setEvent_name(String event_name) {
+		this.event_name = event_name;
+	}
 	public Activity(Integer id, String name, String begin, String finish, String url, String description,
-			Integer event_id) {
+			String event_name) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -20,7 +26,7 @@ public class Activity {
 		this.finish = finish;
 		this.url = url;
 		this.description = description;
-		this.event_id = event_id;
+		this.event_name = event_name;
 	}
 	public Integer getId() {
 		return id;
@@ -58,12 +64,7 @@ public class Activity {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public Integer getEvent_id() {
-		return event_id;
-	}
-	public void setEvent_id(Integer event_id) {
-		this.event_id = event_id;
-	}
+
 
 	
 

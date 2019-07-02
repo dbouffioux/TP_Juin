@@ -9,6 +9,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+
 import be.afelio.beans.Activity;
 import be.afelio.beans.Event;
 import be.afelio.beans.Inscription;
@@ -33,10 +34,28 @@ public class DataRepository {
 	public void addActivity(String name) {
 
 	}
+	public String findEventName(int id) {
+		String sql = "SELECT * FROM event WHERE id= ?";
+		String name=null;
+		try (Connection connection = createConnection();
+				PreparedStatement pstatement = connection.prepareStatement(sql)) {
+			connection.setAutoCommit(true);
+			pstatement.setInt(1, id);
+			ResultSet rSet= pstatement.executeQuery();
+			name= rSet.getString("name");
+		} catch (SQLException sqlException) {
+			throw new RuntimeException(sqlException);
+		}	
+		return name;
+	
+	}
 
 	public List<Activity> findAllActivities() {
 		List<Activity> list = new ArrayList<>();
-		String sql = "SELECT * FROM activity";
+		String sql = "SELECT a.id,a.name, a.begin, a.finish , a.url , a.description , e.name as event_name "
+				+ "FROM activity as a " + 
+				"JOIN event as e " + 
+				"on a.event_id = e.id";
 
 		try (Connection connection = createConnection();
 				Statement statement = connection.createStatement();
@@ -59,8 +78,8 @@ public class DataRepository {
 		String finish= resultSet.getString("finish");
 		String description= resultSet.getString("description");
 		String url= resultSet.getString("url");
-		Integer event_id = resultSet.getInt("event_id");
-		Activity activity = new Activity(id, name, begin, finish, description, url, event_id);
+		String event_name = resultSet.getString("event_name");
+		Activity activity = new Activity(id, name, begin, finish,url , description, event_name);
 		return activity;
 	}
 
