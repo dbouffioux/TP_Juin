@@ -86,6 +86,11 @@ public class FrontController extends HttpServlet {
 			break;
 
 		default:
+			if (pathInfoString.startsWith("/event/")) {
+				System.out.println("FrontController.doGet()dans le if event");
+				activitiesController.listForOneEventById(response, request);
+			}
+			
 			System.out.println("FrontController.doGet().default");
 			break;
 		}

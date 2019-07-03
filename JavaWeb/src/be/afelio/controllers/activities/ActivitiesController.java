@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import be.afelio.beans.Activity;
+import be.afelio.beans.Event;
 import be.afelio.repository.DataRepository;
 import jsonParameters.ActivityParameters;
 
@@ -26,6 +27,15 @@ public class ActivitiesController {
 		List<Activity> listActivities = repository.findAllActivities();
 		jsonGenerate(response, listActivities);
 	}
+	public void listForOneEventById(HttpServletResponse response, HttpServletRequest request) throws IOException {
+		String pathInfoString=request.getPathInfo();
+		String[] parts = pathInfoString.split("/");
+		int id = Integer.parseInt(parts[2]);
+		Event event = repository.getOneEventWithActivities(id);
+		jsonGenerate(response, event);
+		
+	}
+
 	public void add(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		ObjectMapper mapper = new ObjectMapper();
 		ActivityParameters activityParameters= mapper.readValue(request.getInputStream(), ActivityParameters.class );

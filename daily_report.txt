@@ -20,4 +20,16 @@ liaison de la DB vers Angular pour chaque table
 mise en page des activités
 remplissage fictif de la DB en vue de tests
 
+Rapport 02_07:
+tous les post dans java
+essais de lien entre angular et java pour les post (problèmes de headers)
+
+Rapport 03_07:
+liaison entre angular et java pour les post réussie
+différentes pages dans angular (home, activités selon évènement sélectionné, path réussis)
+affichage réussi des activités selon l'évènement
+optimisation des methodes Java (un event retourne toutes ses activités s'il en a)
+nouveau sprint
+
+
 

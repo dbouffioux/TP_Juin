@@ -17,9 +17,15 @@ public getAllEvents(): Observable<Event[]> {
   .pipe(catchError((error: any) => throwError(error.json())));
 }
 
+public getEventWithAllActivitiesById(id: number): Observable<Event> {
+  return this.http.get<Event>(`${environment.baseUrl}/event/${id}`)
+    .pipe(catchError((error: any) => throwError(error.json())));
+}
+
 public createEvent(payload: Event): Observable<Event> {
   return this.http
   .post<Event>(`${environment.baseUrl}/event/add`, payload)
   .pipe(catchError((error: any) => throwError(error.json())));
 }
+
 }

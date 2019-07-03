@@ -4,6 +4,8 @@ import { Observable, throwError } from 'rxjs';
 import { Activity } from '../models/activity.model';
 import { environment } from 'src/environments/environment';
 import { catchError } from 'rxjs/operators';
+import { Event } from 'src/app/models/event.model';
+
 
 @Injectable()
 export class ActivitiesService {
@@ -19,8 +21,13 @@ export class ActivitiesService {
 
   public createActivity(payload: Activity): Observable<Activity> {
     return this.http
-    .post<Activity>(`${environment.baseUrl}/activity/add`, payload)
-    .pipe(catchError((error: any) => throwError(error.json())));
+      .post<Activity>(`${environment.baseUrl}/activity/add`, payload, {
+        headers: {
+          // Authorization: 'Basic ' + token;
+        }
+      })
+      .pipe(catchError((error: any) => throwError(error.json())));
   }
+
 
 }

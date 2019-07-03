@@ -17,6 +17,8 @@ import { FormsModule } from '@angular/forms';
 import { PersonFormComponent } from './Components/person-form/person-form.component';
 import { EventFormComponent } from './Components/event-form/event-form.component';
 import { InscriptionFormComponent } from './Components/inscription-form/inscription-form.component';
+import { HomeComponent } from './Pages/home/home.component';
+import { EventItemComponent } from './Components/event-item/event-item.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +30,9 @@ import { InscriptionFormComponent } from './Components/inscription-form/inscript
     ActivityFormComponent,
     PersonFormComponent,
     EventFormComponent,
-    InscriptionFormComponent
+    InscriptionFormComponent,
+    HomeComponent,
+    EventItemComponent
   ],
   imports: [
     BrowserModule,

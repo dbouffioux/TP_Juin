@@ -32,21 +32,33 @@ public class DataRepository {
 	}
 
 	
-	public String findEventName(int id) {
+	public Event findEventById(int id) {
 		String sql = "SELECT * FROM event WHERE id= ?";
-		String name=null;
+		Event event=null;
 		try (Connection connection = createConnection();
 				PreparedStatement pstatement = connection.prepareStatement(sql)) {
 			connection.setAutoCommit(true);
 			pstatement.setInt(1, id);
 			ResultSet rSet= pstatement.executeQuery();
-			name= rSet.getString("name");
+			if(rSet.next()) {
+				event=createEvent(rSet);
+			}
 		} catch (SQLException sqlException) {
 			throw new RuntimeException(sqlException);
 		}	
-		return name;
+		return event;
 	
 	}
+	
+	public Event getOneEventWithActivities(int idEvent) {
+		Event event=findEventById(idEvent);
+		if(event!=null) {
+			List<Activity> list = findAllActivitiesForOneEventById(idEvent);
+			event.setActivities(list);
+		}
+		return event;
+	}
+	
 
 	public void addActivity(String name, String begin, String finish, String url, String description,
 			String event_name) {
@@ -97,6 +109,32 @@ public class DataRepository {
 		return list;
 	}
 	
+	public List<Activity> findAllActivitiesForOneEventById(int id) {
+		List<Activity> list = new ArrayList<>();
+		String sql = "SELECT a.id,a.name, a.begin, a.finish , a.url , a.description , e.name as event_name "
+				+ "FROM activity as a " + 
+				"JOIN event as e " + 
+				"on a.event_id = e.id "+
+				"WHERE e.id = (?)";
+		
+		try (Connection connection = createConnection();
+				PreparedStatement pstatement = connection.prepareStatement(sql)) {
+			pstatement.setInt(1, id);
+			
+			try (ResultSet resultSet = pstatement.executeQuery()) {
+				
+				while (resultSet.next()) {
+					Activity activity = createActivity(resultSet);
+					list.add(activity);
+				}
+			}
+		} catch (SQLException sqlException) {
+			throw new RuntimeException(sqlException);
+		}
+
+		return list;
+	}
+
 	public Activity findOneActivitybyId(int id) {
 		Activity activity=null;
 		String sql = "SELECT a.id,a.name, a.begin, a.finish , a.url , a.description , e.name as event_name "

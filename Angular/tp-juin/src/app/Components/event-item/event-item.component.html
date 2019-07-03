@@ -1,0 +1,20 @@
+<h2>{{event?.name}}</h2>
+<table>
+    <tr>
+        <th>Nom de l'évènement</th>
+        <th>Nom de l'activité</th>
+        <th>Heure de début</th>
+        <th>Heure de fin</th>
+        <th>Description</th>
+        <th>URL</th>
+      </tr>
+      <tr *ngFor="let activity of event?.activities">
+        <td>{{activity.event_name}}</td>
+        <td>{{activity.name}} </td>
+        <td>{{activity.begin}}</td>
+        <td>{{activity.finish}}</td>
+        <td>{{activity.description}}</td>
+        <td><a href="{{activity.url}}" target="_blank">{{activity.url}}</a></td>
+      </tr>
+
+</table>

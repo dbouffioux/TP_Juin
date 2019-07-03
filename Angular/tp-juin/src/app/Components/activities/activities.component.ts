@@ -20,7 +20,7 @@ export class ActivitiesComponent implements OnInit {
 
   constructor(private activitiesServices: ActivitiesService, private eventService: EventService) {
     this.activity = new Activity();
-    this.event= new Event();
+    this.event = new Event();
    }
 
   ngOnInit() {
@@ -34,5 +34,7 @@ export class ActivitiesComponent implements OnInit {
       console.log(error);
     });
   }
+
+
 
 }

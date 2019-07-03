@@ -11,7 +11,6 @@ export class EventComponent implements OnInit {
 
   public events: Event[];
   public event: Event;
-  public sel2 :number;
 
   constructor(private eventService: EventService) {
     this.event = new Event();
@@ -19,7 +18,6 @@ export class EventComponent implements OnInit {
 
   ngOnInit() {
     this.eventService.getAllEvents().subscribe(event => this.events = event);
-
   }
   public onCreate(event: Event) {
     this.eventService.createEvent(event).subscribe(() => {
