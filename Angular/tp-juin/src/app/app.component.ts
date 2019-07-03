@@ -9,7 +9,4 @@ import { ActivitiesService } from './services/activities.service';
 })
 export class AppComponent {
   title = 'tp-juin';
- 
-
-
 }

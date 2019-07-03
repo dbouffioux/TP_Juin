@@ -1,2 +1,13 @@
 <h2>Voici les listes des évènements: </h2>
 <div *ngFor="let event of events">{{event.name}}</div>
+
+<form action="">
+    <div>
+      <label for="name">Nom de l'évènement : </label>
+      <input name="name" type="text" [(ngModel)]="event.name" >
+    </div>
+  </form>
+  <app-event-form
+  (create)="onCreate($event)" [event]="event">
+  </app-event-form>
+

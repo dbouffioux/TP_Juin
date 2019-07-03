@@ -10,16 +10,12 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class ActivityFormComponent implements OnInit {
 
-  public activityForm: FormGroup;
-
   @Input()
   public activity: Activity;
   @Output()
   private create = new EventEmitter<Activity>();
 
-  constructor() {
-    // this.activityForm=this.fb.group();
-   }
+  constructor() { }
 
   ngOnInit() {
   }

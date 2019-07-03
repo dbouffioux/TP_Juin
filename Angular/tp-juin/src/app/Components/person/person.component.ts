@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { Person } from 'src/app/models/person.models';
 import { PersonService } from 'src/app/services/person.service';
 
@@ -9,11 +9,19 @@ import { PersonService } from 'src/app/services/person.service';
 })
 export class PersonComponent implements OnInit {
   public persons: Person[];
+  public person: Person;
 
-  constructor(private personService: PersonService) { }
+  constructor(private personService: PersonService) { this.person = new Person(); }
 
   ngOnInit() {
     this.personService.getPersons().subscribe(person => this.persons = person);
+  }
+  public onCreate(event: Person) {
+    this.personService.createPerson(event).subscribe(() => {
+      console.log('OK');
+    }, error => {
+      console.log(error);
+    });
   }
 
 }

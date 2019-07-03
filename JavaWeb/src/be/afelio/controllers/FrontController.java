@@ -70,6 +70,7 @@ public class FrontController extends HttpServlet {
 		System.out.println("FrontController.doGet()");
 		String pathInfoString=request.getPathInfo();
 		System.out.println("FrontController.doGet()"+pathInfoString);
+		setHeaders(response);
 		switch (pathInfoString) {
 		case "/activity/all":
 			activitiesController.list(response);
@@ -98,8 +99,7 @@ public class FrontController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String pathInfoString=request.getPathInfo();
 		System.out.println("FrontController.doPost()");
-		response.addHeader("Access-Control-Allow-Origin", "*");
-		response.addHeader("Access-Control-Allow-Methods", "*");
+		setHeaders(response);
 		switch (pathInfoString) {
 		case "/person/add":
 			personController.add(request, response);
@@ -117,9 +117,6 @@ public class FrontController extends HttpServlet {
 			System.out.println("FrontController.doPost()/Default");
 			break;
 		}
-		
-		
-		doGet(request, response);
 	}
 
 	/**
@@ -136,4 +133,15 @@ public class FrontController extends HttpServlet {
 		// TODO Auto-generated method stub
 	}
 	
+	@Override
+	protected void doOptions(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		super.doOptions(request, response);
+		setHeaders(response);
+	}
+	
+	private void setHeaders( HttpServletResponse response ) {
+		response.addHeader("Access-Control-Allow-Origin", "*");
+		response.addHeader("Access-Control-Allow-Methods", "*");
+		response.addHeader("Access-Control-Allow-Headers", "*");
+	}
 }

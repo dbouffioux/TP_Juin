@@ -1,2 +1,16 @@
 <h2>Voici les listes des personnes inscrites: </h2>
 <div *ngFor="let person of persons">{{person.id}} {{person.firstname}} {{person.lastname}}</div>
+
+<form action="">
+  <div>
+    <label for="firstname">Prénom : </label>
+    <input name="firstanme" type="text" [(ngModel)]="person.firstname" >
+  </div>
+  <div>
+    <label for="lastname">Nom : </label>
+    <input name="lastname" type="text" [(ngModel)]="person.lastname" >
+  </div>
+</form>
+<app-person-form
+(create)="onCreate($event)" [person]="person"
+></app-person-form>

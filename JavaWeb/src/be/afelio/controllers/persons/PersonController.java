@@ -49,7 +49,6 @@ public class PersonController {
 
 			response.setContentType("application/json");
 			response.setCharacterEncoding("UTF-8");
-			response.addHeader("Access-Control-Allow-Origin", "*");
 			response.getWriter().write(json);
 		}
 	

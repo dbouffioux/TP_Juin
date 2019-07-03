@@ -4,8 +4,6 @@ import { Observable, throwError } from 'rxjs';
 import { Activity } from '../models/activity.model';
 import { environment } from 'src/environments/environment';
 import { catchError } from 'rxjs/operators';
-const headers = new HttpHeaders()
-            .set('*', 'Access-Control-Allow-Origin');
 
 @Injectable()
 export class ActivitiesService {
@@ -19,9 +17,9 @@ export class ActivitiesService {
       .pipe(catchError((error: any) => throwError(error.json())));
   }
 
-  public createActivity(playload: Activity): Observable<Activity> {
+  public createActivity(payload: Activity): Observable<Activity> {
     return this.http
-    .post<Activity>(`${environment.baseUrl}/activity/add`, playload, {headers})
+    .post<Activity>(`${environment.baseUrl}/activity/add`, payload)
     .pipe(catchError((error: any) => throwError(error.json())));
   }
 

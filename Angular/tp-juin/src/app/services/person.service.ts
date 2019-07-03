@@ -17,5 +17,10 @@ public getPersons(): Observable<Person[]> {
   .pipe(catchError((error: any) => throwError(error.json())));
 }
 
+public createPerson(payload: Person): Observable<Person> {
+  return this.http
+  .post<Person>(`${environment.baseUrl}/person/add`, payload)
+  .pipe(catchError((error: any) => throwError(error.json())));
+}
 
 }

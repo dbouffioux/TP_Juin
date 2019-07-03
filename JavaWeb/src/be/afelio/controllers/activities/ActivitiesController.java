@@ -29,7 +29,7 @@ public class ActivitiesController {
 	public void add(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		ObjectMapper mapper = new ObjectMapper();
 		ActivityParameters activityParameters= mapper.readValue(request.getInputStream(), ActivityParameters.class );
-		System.out.println("FrontController.doPost()");
+		System.out.println("FrontController.doPost() add Activity");
 		if ( activityParameters.getName()!= null
 				&& !activityParameters.getName().isBlank() 
 				&& activityParameters.getBegin() != null
@@ -58,7 +58,6 @@ public class ActivitiesController {
 
 		response.setContentType("application/json");
 		response.setCharacterEncoding("UTF-8");
-		response.addHeader("Access-Control-Allow-Origin", "*");
 		response.getWriter().write(json);
 	}
 }

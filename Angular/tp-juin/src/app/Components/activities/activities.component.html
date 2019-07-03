@@ -16,12 +16,20 @@
     <td><a href="{{activity.url}}" target="_blank">{{activity.url}}</a></td>
   </tr>
   <tr>
-    <td> <input name= "event_name" type="text" [(ngModel)]="activity.event_name" ></td>
+    <td>
+
+  <select name="event_name"
+  [(ngModel)]="activity.event_name">
+
+      <option *ngFor="let event of events" value="{{event.name}}">{{event.name}}</option>
+
+
+  </select></td>
     <td> <input name= "name" type="text"  [(ngModel)]="activity.name" ></td>
-    <td> <input name="begin" type="text"></td>
-    <td> <input name="finish" type="text"></td>
-    <td> <input name="description" type="text"></td>
-    <td> <input name="url" type="text"></td>
+    <td> <input name="begin" type="text" [(ngModel)]="activity.begin"></td>
+    <td> <input name="finish" type="text" [(ngModel)]="activity.finish"></td>
+    <td> <input name="description" type="text" [(ngModel)]="activity.description"></td>
+    <td> <input name="url" type="text" [(ngModel)]="activity.url"></td>
 
   </tr>
 </table>
