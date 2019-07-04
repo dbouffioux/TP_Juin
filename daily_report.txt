@@ -31,5 +31,9 @@ affichage réussi des activités selon l'évènement
 optimisation des methodes Java (un event retourne toutes ses activités s'il en a)
 nouveau sprint
 
-
+Rapport 04_07:
+la session fonctionne aussi bien en Angular que en Java
+en utilisant les headers dans Angular et la session dans Java comme demandé
+création de la page account dans angular qui permettra d'afficher le compte relative à la connection
+affichage ou non des boutons login logout selon si on est connecté ou non
 

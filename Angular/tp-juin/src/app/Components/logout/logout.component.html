@@ -1,0 +1,5 @@
+<button *ngIf="getLocalStorage()"
+        type="button"
+        (click)="logout()"
+        [routerLink]="['/home']"
+>Logout</button>

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { Person } from '../models/person.models';
 import { environment } from 'src/environments/environment';
@@ -18,8 +18,11 @@ public getPersons(): Observable<Person[]> {
 }
 
 public createPerson(payload: Person): Observable<Person> {
+  console.log();
+
   return this.http
-  .post<Person>(`${environment.baseUrl}/person/add`, payload)
+  .post<Person>(`${environment.baseUrl}/person/add`, payload,
+  {headers: new HttpHeaders().set('Authorization', localStorage.getItem('Authorization'))})
   .pipe(catchError((error: any) => throwError(error.json())));
 }
 

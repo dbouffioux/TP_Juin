@@ -21,6 +21,8 @@ import { HomeComponent } from './Pages/home/home.component';
 import { EventItemComponent } from './Components/event-item/event-item.component';
 import { LoginComponent } from './Components/login/login.component';
 import { LoginService } from './services/login.service';
+import { AccountComponent } from './Pages/account/account.component';
+import { LogoutComponent } from './Components/logout/logout.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +37,9 @@ import { LoginService } from './services/login.service';
     InscriptionFormComponent,
     HomeComponent,
     EventItemComponent,
-    LoginComponent
+    LoginComponent,
+    AccountComponent,
+    LogoutComponent
   ],
   imports: [
     BrowserModule,

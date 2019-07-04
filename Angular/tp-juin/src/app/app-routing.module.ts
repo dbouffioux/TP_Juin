@@ -4,6 +4,7 @@ import { HomeComponent } from './Pages/home/home.component';
 import { ActivitiesComponent } from './Components/activities/activities.component';
 import { EventItemComponent } from './Components/event-item/event-item.component';
 import { LoginComponent } from './Components/login/login.component';
+import { AccountComponent } from './Pages/account/account.component';
 
 const routes: Routes = [
   {path: '', redirectTo: '/home', pathMatch: 'full'},
@@ -11,6 +12,7 @@ const routes: Routes = [
   {path: 'activity', component: ActivitiesComponent},
   {path: 'connection', component: LoginComponent},
   {path: 'event/:id', component: EventItemComponent},
+  {path: 'account', component: AccountComponent},
   {path: '**', redirectTo: '/home'}
 ];
 

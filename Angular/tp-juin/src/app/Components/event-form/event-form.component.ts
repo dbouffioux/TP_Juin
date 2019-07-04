@@ -1,5 +1,5 @@
 import { Component, OnInit , Input, Output, EventEmitter} from '@angular/core';
-import { Event } from '@angular/router';
+import { Event } from 'src/app/models/event.model';
 
 @Component({
   selector: 'app-event-form',
@@ -12,7 +12,10 @@ export class EventFormComponent implements OnInit {
   public event: Event;
   @Output()
   private create = new EventEmitter<Event>();
-  constructor() { }
+
+  constructor() {
+    this.event = new Event();
+   }
 
   ngOnInit() {
   }

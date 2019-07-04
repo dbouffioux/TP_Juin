@@ -8,12 +8,12 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
 
   public loginForm: FormGroup;
-
+  private auth: boolean;
 
   public person: Person;
   @Output()
@@ -48,4 +48,13 @@ export class LoginComponent implements OnInit {
       console.log(localStorage.getItem('Authorization'));
     }
   }
+  public getLocalStorage(): boolean {
+    if (localStorage.getItem('Authorization') === 'true') {
+      this.auth = true;
+    } else {
+      this.auth = false;
+    }
+    return this.auth;
+  }
+
 }
