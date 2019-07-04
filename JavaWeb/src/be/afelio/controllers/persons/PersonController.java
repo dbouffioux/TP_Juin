@@ -35,8 +35,15 @@ public class PersonController {
 			if (personParameters.getFirstname() != null
 					&& !personParameters.getFirstname().isBlank() 
 					&& personParameters.getLastname() != null 
-					&& !personParameters.getLastname().isBlank() ) {
-				repository.addPerson(personParameters.getFirstname(),personParameters.getLastname() );
+					&& !personParameters.getLastname().isBlank() 
+					&& personParameters.getLogin() != null
+					&& !personParameters.getLogin().isBlank()
+					&& personParameters.getPassword() != null
+					&& !personParameters.getPassword().isBlank()) {
+				repository.addPerson(personParameters.getLastname(),
+										personParameters.getFirstname(),
+										personParameters.getLogin(),
+										personParameters.getPassword());
 			}
 			list(response);
 		}

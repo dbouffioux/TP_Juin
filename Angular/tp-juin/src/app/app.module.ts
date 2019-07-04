@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HttpParams } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -13,12 +13,14 @@ import { EventService } from './services/event.service';
 import { InscriptionComponent } from './Components/inscription/inscription.component';
 import { InscriptionService } from './services/inscription.service';
 import { ActivityFormComponent } from './Components/activity-form/activity-form.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, NgControl, ReactiveFormsModule } from '@angular/forms';
 import { PersonFormComponent } from './Components/person-form/person-form.component';
 import { EventFormComponent } from './Components/event-form/event-form.component';
 import { InscriptionFormComponent } from './Components/inscription-form/inscription-form.component';
 import { HomeComponent } from './Pages/home/home.component';
 import { EventItemComponent } from './Components/event-item/event-item.component';
+import { LoginComponent } from './Components/login/login.component';
+import { LoginService } from './services/login.service';
 
 @NgModule({
   declarations: [
@@ -32,19 +34,22 @@ import { EventItemComponent } from './Components/event-item/event-item.component
     EventFormComponent,
     InscriptionFormComponent,
     HomeComponent,
-    EventItemComponent
+    EventItemComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [
     ActivitiesService,
     PersonService,
     EventService,
-    InscriptionService
+    InscriptionService,
+    LoginService
   ],
   bootstrap: [AppComponent]
 })

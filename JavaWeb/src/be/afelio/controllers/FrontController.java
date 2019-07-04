@@ -8,6 +8,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import be.afelio.controllers.activities.ActivitiesController;
 import be.afelio.controllers.events.EventsController;
 import be.afelio.controllers.inscriptions.InscriptionsController;
+import be.afelio.controllers.login.LoginController;
 import be.afelio.controllers.persons.PersonController;
 import be.afelio.repository.DataRepository;
 
@@ -23,6 +24,7 @@ public class FrontController extends HttpServlet {
 	protected PersonController personController;
 	protected EventsController eventsController;
 	protected InscriptionsController inscriptionsController;
+	protected LoginController loginController;
 	
 	
 	protected void jsonGenerate(HttpServletResponse response, Object o) throws IOException {
@@ -58,6 +60,7 @@ public class FrontController extends HttpServlet {
 			personController = new PersonController(repository);
 			eventsController = new EventsController(repository);
 			inscriptionsController= new InscriptionsController(repository);
+			loginController = new LoginController(repository);
 		} catch (Exception e) {
 			throw new ServletException(e);
 		}
@@ -85,6 +88,7 @@ public class FrontController extends HttpServlet {
 			inscriptionsController.list(response);
 			break;
 
+
 		default:
 			if (pathInfoString.startsWith("/event/")) {
 				System.out.println("FrontController.doGet()dans le if event");
@@ -102,25 +106,56 @@ public class FrontController extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session = request.getSession();
+		Boolean auth = false;
 		String pathInfoString=request.getPathInfo();
-		System.out.println("FrontController.doPost()");
+		System.out.println("FrontController.doPost()" + pathInfoString);
 		setHeaders(response);
-		switch (pathInfoString) {
-		case "/person/add":
-			personController.add(request, response);
-			break;
-		case "/event/add":
-			eventsController.add(request, response);
-			break;
-		case "/activity/add":
-			activitiesController.add(request, response);
-			break;
-		case "/inscription/add":
-			inscriptionsController.add(request, response);
-
-		default:
-			System.out.println("FrontController.doPost()/Default");
-			break;
+		System.out.println(request.getHeader("Authorization"));
+		
+		if (request.getHeader("Authorization").equals("true")) {
+			auth = true;
+		} else {
+			auth = false;
+		}
+		session.setAttribute("Authorization", auth);
+		if (null == session.getAttribute("Authorization") ) {
+			session.setAttribute("Authorization", false);
+			System.out.println("FrontController.doPost() dans la connection null " + session.getAttribute("Authorization"));
+			}
+		boolean authorization = (boolean) session.getAttribute("Authorization");
+		
+		if(!authorization && pathInfoString.startsWith("/connection")) {
+			System.out.println("FrontController.doPost()dans Connection");
+			authorization = loginController.getConnection(request, response);
+			session.setAttribute("Authorization", authorization);
+			System.out.println("FrontController.doPost() fin de connection " + authorization);
+			if (authorization) {
+				response.setHeader("Authorization", "true");
+			}
+		}
+		if(authorization) {
+			switch (pathInfoString) {
+			case "/person/add":
+				personController.add(request, response);
+				System.out.println("FrontController.doPost() person add authorization:"+ authorization);
+				break;
+			case "/event/add":
+				eventsController.add(request, response);
+				break;
+			case "/activity/add":
+				activitiesController.add(request, response);
+				break;
+			case "/inscription/add":
+				inscriptionsController.add(request, response);
+				break;
+	
+			default:
+				System.out.println("FrontController.doPost()/Default");
+				break;
+			}
+		}else {
+			System.out.println("pas d'autorisation  " + authorization);
 		}
 	}
 

@@ -1,5 +1,5 @@
 <h2>Voici les listes des personnes inscrites: </h2>
-<div *ngFor="let person of persons">{{person.id}} {{person.firstname}} {{person.lastname}}</div>
+<div *ngFor="let person of persons">{{person.id}} {{person.firstname}} {{person.lastname}} {{person.login}}</div>
 
 <form action="">
   <div>
@@ -9,6 +9,14 @@
   <div>
     <label for="lastname">Nom : </label>
     <input name="lastname" type="text" [(ngModel)]="person.lastname" >
+  </div>
+  <div>
+    <label for="login">login : </label>
+    <input name="login" type="text" [(ngModel)]="person.login" >
+  </div>
+  <div>
+    <label for="password">password : </label>
+    <input name="password" type="text" [(ngModel)]="person.password" >
   </div>
 </form>
 <app-person-form

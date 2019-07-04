@@ -3,6 +3,8 @@ package jsonParameters;
 public class PersonParameters {
 	protected String firstname;
 	protected String lastname;
+	protected String login;
+	protected String password;
 	
 	public String getFirstname() {
 		return firstname;
@@ -16,4 +18,17 @@ public class PersonParameters {
 	public void setLastname(String lastname) {
 		this.lastname = lastname;
 	}
+	public String getLogin() {
+		return login;
+	}
+	public void setLogin(String login) {
+		this.login = login;
+	}
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	
 }

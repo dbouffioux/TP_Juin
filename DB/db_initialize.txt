@@ -1,7 +1,9 @@
 CREATE TABLE person (
 	id SERIAL PRIMARY KEY,
 	firstname VARCHAR(100) ,
-	lastname VARCHAR(100)
+	lastname VARCHAR(100) ,
+	login VARCHAR NOT NULL ,
+	password VARCHAR NOT NULL
 );
 
 CREATE TABLE event (
@@ -33,32 +35,32 @@ CREATE TABLE inscription(
 );
 
 
-INSERT INTO person(firstname, lastname)
-	VALUES ('Mélissa', 'Schyns');
-	INSERT INTO person(firstname, lastname)
-	VALUES ('Jean', 'Leclercq');
-	INSERT INTO person(firstname, lastname)
-	VALUES ('Yannick', 'Boogaerts');
-	INSERT INTO person(firstname, lastname)
-	VALUES ('Roman', 'DelFavero');
-	INSERT INTO person(firstname, lastname)
-	VALUES ('Louis', 'Hella');
-	INSERT INTO person(firstname, lastname)
-	VALUES ('Damien', 'Bouffioux');
-	INSERT INTO person(firstname, lastname)
-	VALUES ('Salvatrice', 'Montalbano');
-	INSERT INTO person(firstname, lastname)
-	VALUES ('Delphine', 'Franquinet');
-	INSERT INTO person(firstname, lastname)
-	VALUES ('Maxime', 'Quoili,');
-	INSERT INTO person(firstname, lastname)
-	VALUES ('Philippe', 'Vancom');
-	INSERT INTO person(firstname, lastname)
-	VALUES ('Romain', 'Celen');
-	INSERT INTO person(firstname, lastname)
-	VALUES ('Thibault', 'Molle');
-	INSERT INTO person(firstname, lastname)
-	VALUES ('Zahraa', 'Obaed');
+INSERT INTO person(firstname, lastname, login, password)
+	VALUES ('Mélissa', 'Schyns', LOWER(SUBSTRING('Mélissa' from 1 for 3) || SUBSTRING('Schyns' from 1 for 3) || 1), 'test123');
+INSERT INTO person(firstname, lastname, login, password)
+	VALUES ('Jean', 'Leclercq', LOWER(SUBSTRING('Jean' from 1 for 3) || SUBSTRING('Leclercq' from 1 for 3) || 2), 'test123');
+	INSERT INTO person(firstname, lastname, login, password)
+	VALUES ('Yannick', 'Boogaerts', LOWER(SUBSTRING('Yannick' from 1 for 3) || SUBSTRING('Boogaerts' from 1 for 3) || 3), 'test123');
+	INSERT INTO person(firstname, lastname, login, password)
+	VALUES ('Roman', 'DelFavero', LOWER(SUBSTRING('Roman' from 1 for 3) || SUBSTRING('DelFavero' from 1 for 3) || 4), 'test123');
+	INSERT INTO person(firstname, lastname, login, password)
+	VALUES ('Louis', 'Hella', LOWER(SUBSTRING('Louis' from 1 for 3) || SUBSTRING('Hella' from 1 for 3) || 5), 'test123');
+	INSERT INTO person(firstname, lastname, login, password)
+	VALUES ('Damien', 'Bouffioux', LOWER(SUBSTRING('Damien' from 1 for 3) || SUBSTRING('Bouffioux' from 1 for 3) || 6), 'test123');
+	INSERT INTO person(firstname, lastname, login, password)
+	VALUES ('Salvatrice', 'Montalbano', LOWER(SUBSTRING('Salvatrice' from 1 for 3) || SUBSTRING('Montalbano' from 1 for 3) || 7), 'test123');
+	INSERT INTO person(firstname, lastname, login, password)
+	VALUES ('Delphine', 'Franquinet', LOWER(SUBSTRING('Delphine' from 1 for 3) || SUBSTRING('Franquinet' from 1 for 3) || 8), 'test123');
+	INSERT INTO person(firstname, lastname, login, password)
+	VALUES ('Maxime', 'Quoili', LOWER(SUBSTRING('Maxime' from 1 for 3) || SUBSTRING('Quoili' from 1 for 3) || 9), 'test123');
+	INSERT INTO person(firstname, lastname, login, password)
+	VALUES ('Philippe', 'Vancom', LOWER(SUBSTRING('Philippe' from 1 for 3) || SUBSTRING('Vancom' from 1 for 3) || 10), 'test123');
+	INSERT INTO person(firstname, lastname, login, password)
+	VALUES ('Romain', 'Celen', LOWER(SUBSTRING('Romain' from 1 for 3) || SUBSTRING('Celen' from 1 for 3) || 11), 'test123');
+	INSERT INTO person(firstname, lastname, login, password)
+	VALUES ('Thibault', 'Molle', LOWER(SUBSTRING('Thibault' from 1 for 3) || SUBSTRING('Molle' from 1 for 3) || 12), 'test123');
+	INSERT INTO person(firstname, lastname, login, password)
+	VALUES ('Zahraa', 'Obaed', LOWER(SUBSTRING('Zahraa' from 1 for 3) || SUBSTRING('Obaed' from 1 for 3) || 13), 'test123');
 INSERT INTO event(name, person_id)
 	VALUES ('Francofolies', 3);
 	INSERT INTO event(name, person_id)

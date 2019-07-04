@@ -16,8 +16,8 @@ export class PersonComponent implements OnInit {
   ngOnInit() {
     this.personService.getPersons().subscribe(person => this.persons = person);
   }
-  public onCreate(event: Person) {
-    this.personService.createPerson(event).subscribe(() => {
+  public onCreate(personCreate: Person) {
+    this.personService.createPerson(personCreate).subscribe(() => {
       console.log('OK');
     }, error => {
       console.log(error);

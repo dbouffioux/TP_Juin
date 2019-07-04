@@ -9,7 +9,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-
 import be.afelio.beans.Activity;
 import be.afelio.beans.Event;
 import be.afelio.beans.Inscription;
@@ -31,40 +30,36 @@ public class DataRepository {
 		return DriverManager.getConnection(url, user, password);
 	}
 
-	
 	public Event findEventById(int id) {
 		String sql = "SELECT * FROM event WHERE id= ?";
-		Event event=null;
+		Event event = null;
 		try (Connection connection = createConnection();
 				PreparedStatement pstatement = connection.prepareStatement(sql)) {
 			connection.setAutoCommit(true);
 			pstatement.setInt(1, id);
-			ResultSet rSet= pstatement.executeQuery();
-			if(rSet.next()) {
-				event=createEvent(rSet);
+			ResultSet rSet = pstatement.executeQuery();
+			if (rSet.next()) {
+				event = createEvent(rSet);
 			}
 		} catch (SQLException sqlException) {
 			throw new RuntimeException(sqlException);
-		}	
+		}
 		return event;
-	
+
 	}
-	
+
 	public Event getOneEventWithActivities(int idEvent) {
-		Event event=findEventById(idEvent);
-		if(event!=null) {
+		Event event = findEventById(idEvent);
+		if (event != null) {
 			List<Activity> list = findAllActivitiesForOneEventById(idEvent);
 			event.setActivities(list);
 		}
 		return event;
 	}
-	
 
 	public void addActivity(String name, String begin, String finish, String url, String description,
 			String event_name) {
-		if (name != null && !name.isBlank()
-				&& begin != null && !begin.isBlank()
-				&& finish != null && !finish.isBlank()
+		if (name != null && !name.isBlank() && begin != null && !begin.isBlank() && finish != null && !finish.isBlank()
 				&& event_name != null && !event_name.isBlank()) {
 			int event_id = findOneEventByName(event_name);
 			String sql = "insert into activity (name, begin, finish, url, description, event_id)"
@@ -85,15 +80,13 @@ public class DataRepository {
 				throw new RuntimeException(sqlException);
 			}
 		}
-		
+
 	}
 
 	public List<Activity> findAllActivities() {
 		List<Activity> list = new ArrayList<>();
 		String sql = "SELECT a.id,a.name, a.begin, a.finish , a.url , a.description , e.name as event_name "
-				+ "FROM activity as a " + 
-				"JOIN event as e " + 
-				"on a.event_id = e.id";
+				+ "FROM activity as a " + "JOIN event as e " + "on a.event_id = e.id";
 
 		try (Connection connection = createConnection();
 				Statement statement = connection.createStatement();
@@ -108,21 +101,18 @@ public class DataRepository {
 		}
 		return list;
 	}
-	
+
 	public List<Activity> findAllActivitiesForOneEventById(int id) {
 		List<Activity> list = new ArrayList<>();
 		String sql = "SELECT a.id,a.name, a.begin, a.finish , a.url , a.description , e.name as event_name "
-				+ "FROM activity as a " + 
-				"JOIN event as e " + 
-				"on a.event_id = e.id "+
-				"WHERE e.id = (?)";
-		
+				+ "FROM activity as a " + "JOIN event as e " + "on a.event_id = e.id " + "WHERE e.id = (?)";
+
 		try (Connection connection = createConnection();
 				PreparedStatement pstatement = connection.prepareStatement(sql)) {
 			pstatement.setInt(1, id);
-			
+
 			try (ResultSet resultSet = pstatement.executeQuery()) {
-				
+
 				while (resultSet.next()) {
 					Activity activity = createActivity(resultSet);
 					list.add(activity);
@@ -136,17 +126,14 @@ public class DataRepository {
 	}
 
 	public Activity findOneActivitybyId(int id) {
-		Activity activity=null;
+		Activity activity = null;
 		String sql = "SELECT a.id,a.name, a.begin, a.finish , a.url , a.description , e.name as event_name "
-				+ "FROM activity as a " + 
-				"JOIN event as e " + 
-				"on a.event_id = e.id "
-				+ "WHERE a.id = (?)";
-		
+				+ "FROM activity as a " + "JOIN event as e " + "on a.event_id = e.id " + "WHERE a.id = (?)";
+
 		try (Connection connection = createConnection();
 				PreparedStatement pstatement = connection.prepareStatement(sql)) {
 			pstatement.setInt(1, id);
-			
+
 			try (ResultSet resultSet = pstatement.executeQuery()) {
 
 				while (resultSet.next()) {
@@ -162,24 +149,27 @@ public class DataRepository {
 	private Activity createActivity(ResultSet resultSet) throws SQLException {
 		Integer id = resultSet.getInt("id");
 		String name = resultSet.getString("name");
-		String begin= resultSet.getString("begin");
-		String finish= resultSet.getString("finish");
-		String description= resultSet.getString("description");
-		String url= resultSet.getString("url");
+		String begin = resultSet.getString("begin");
+		String finish = resultSet.getString("finish");
+		String description = resultSet.getString("description");
+		String url = resultSet.getString("url");
 		String event_name = resultSet.getString("event_name");
-		Activity activity = new Activity(id, name, begin, finish,url , description, event_name);
+		Activity activity = new Activity(id, name, begin, finish, url, description, event_name);
 		return activity;
 	}
 
-	public void addPerson(String lastname, String firstname) {
-		if (lastname != null && !lastname.isBlank() && firstname != null && !firstname.isBlank()) {
-			String sql = "insert into person(lastname, firstname) values (?, ?)";
+	public void addPerson(String lastname, String firstname, String login, String password) {
+		if (lastname != null && !lastname.isBlank() && firstname != null && !firstname.isBlank() && login != null
+				&& !login.isBlank() && password != null && !password.isBlank()) {
+			String sql = "insert into person(lastname, firstname, login, password) values (?, ?, ?, ?)";
 			try (Connection connection = createConnection();
 					PreparedStatement pstatement = connection.prepareStatement(sql)) {
 
 				connection.setAutoCommit(true);
 				pstatement.setString(1, lastname);
 				pstatement.setString(2, firstname);
+				pstatement.setString(3, login);
+				pstatement.setString(4, password);
 				pstatement.executeUpdate();
 
 			} catch (SQLException sqlException) {
@@ -190,7 +180,7 @@ public class DataRepository {
 
 	public List<Person> findAllPersons() {
 		List<Person> list = new ArrayList<>();
-		String sql = "SELECT id, firstname, lastname FROM person";
+		String sql = "SELECT * FROM person";
 
 		try (Connection connection = createConnection();
 				Statement statement = connection.createStatement();
@@ -210,7 +200,9 @@ public class DataRepository {
 		int id = resultSet.getInt("id");
 		String firstname = resultSet.getString("firstname");
 		String lastname = resultSet.getString("lastname");
-		Person person = new Person(id, firstname, lastname);
+		String login = resultSet.getString("login");
+		String password = resultSet.getString("password");
+		Person person = new Person(id, firstname, lastname, login, password);
 		return person;
 	}
 
@@ -250,18 +242,16 @@ public class DataRepository {
 	}
 
 	public Integer findOneEventByName(String event_name) {
-		Integer id=null;
-		String sql ="SELECT id " + 
-				"FROM event " + 
-				"WHERE UPPER(name) = UPPER(?)";
-		
+		Integer id = null;
+		String sql = "SELECT id " + "FROM event " + "WHERE UPPER(name) = UPPER(?)";
+
 		try (Connection connection = createConnection();
 				PreparedStatement pstatement = connection.prepareStatement(sql)) {
 			pstatement.setString(1, event_name);
-			
+
 			try (ResultSet resultSet = pstatement.executeQuery()) {
-					resultSet.next();
-					id = resultSet.getInt("id");
+				resultSet.next();
+				id = resultSet.getInt("id");
 			}
 		} catch (SQLException sqlException) {
 			throw new RuntimeException(sqlException);
@@ -292,7 +282,7 @@ public class DataRepository {
 				throw new RuntimeException(sqlException);
 			}
 		}
-		
+
 	}
 
 	public List<Inscription> findAllInscriptions() {
@@ -322,12 +312,32 @@ public class DataRepository {
 		return inscription;
 	}
 
+	public Person getConnection(String login, String password) {
+		Person person = null;
+		String sql = "SELECT * FROM person " + "WHERE login = ? AND password = ?";
+		try (Connection connection = createConnection();
+				PreparedStatement pstatement = connection.prepareStatement(sql)) {
 
-	
-	
-	
-	
-	
-	
-	
+			connection.setAutoCommit(true);
+			pstatement.setString(1, login);
+			pstatement.setString(2, password);
+
+			try (ResultSet resultSet = pstatement.executeQuery()) {
+
+				if (resultSet.next()) {
+					person = createPerson(resultSet);
+				}
+			}
+		} catch (SQLException sqlException) {
+			throw new RuntimeException(sqlException);
+		}
+
+		return person;
+	}
+
+	/*
+	 * 
+	 * UPDATE person SET password = ? WHERE id = ?
+	 */
+
 }

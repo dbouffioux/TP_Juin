@@ -1,0 +1,19 @@
+<form [formGroup]="loginForm">
+  <div>
+    <label for="login">login : </label>
+    <input formControlName="login" name="login" type="text" [(ngModel)]="person.login">
+  </div>
+  <div>
+    <label for="password">password : </label>
+    <input formControlName="password" name="password" type="password" [(ngModel)]="person.password" >
+  </div>
+  <button type="button"
+          (click)="getConnection(person.login, person.password)"
+          [disabled]="!loginForm.valid">Connection</button>
+</form>
+
+<div *ngIf="person.firstname !== ''">
+ Bienvenue : {{person?.firstname}}
+</div>
+
+<app-person></app-person>
