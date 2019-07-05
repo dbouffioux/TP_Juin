@@ -1,8 +1,6 @@
 package be.afelio.controllers;
 
 import java.io.IOException;
-import java.util.List;
-
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,8 +10,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import be.afelio.beans.Activity;
-import be.afelio.beans.Inscription;
 import be.afelio.controllers.activities.ActivitiesController;
 import be.afelio.controllers.events.EventsController;
 import be.afelio.controllers.inscriptions.InscriptionsController;
@@ -27,12 +23,12 @@ import be.afelio.repository.DataRepository;
 public class FrontController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	DataRepository repository;
-	
+
 	protected ActivitiesController activitiesController;
 	protected PersonController personController;
 	protected EventsController eventsController;
 	protected InscriptionsController inscriptionsController;
-	
+
 	protected void jsonGenerate(HttpServletResponse response, Object o) throws IOException {
 
 		ObjectMapper mapper = new ObjectMapper();
@@ -43,14 +39,13 @@ public class FrontController extends HttpServlet {
 		response.setCharacterEncoding("UTF-8");
 		response.getWriter().write(json);
 	}
-	
-	
-    /**
-     * Default constructor. 
-     */
-    public FrontController() {
-        // TODO Auto-generated constructor stub
-    }
+
+	/**
+	 * Default constructor.
+	 */
+	public FrontController() {
+		// TODO Auto-generated constructor stub
+	}
 
 	/**
 	 * @see Servlet#init(ServletConfig)
@@ -58,26 +53,28 @@ public class FrontController extends HttpServlet {
 	public void init(ServletConfig config) throws ServletException {
 		try {
 			Class.forName("org.postgresql.Driver");
-			String url= config.getInitParameter("database.url");
-			String user= config.getInitParameter("database.user");
-			String password= config.getInitParameter("database.password");
-			repository= new DataRepository(url, user, password);
+			String url = config.getInitParameter("database.url");
+			String user = config.getInitParameter("database.user");
+			String password = config.getInitParameter("database.password");
+			repository = new DataRepository(url, user, password);
 			activitiesController = new ActivitiesController(repository);
 			personController = new PersonController(repository);
 			eventsController = new EventsController(repository);
-			inscriptionsController= new InscriptionsController(repository);
+			inscriptionsController = new InscriptionsController(repository);
 		} catch (Exception e) {
 			throw new ServletException(e);
 		}
 	}
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		System.out.println("FrontController.doGet()");
-		String pathInfoString=request.getPathInfo();
-		System.out.println("FrontController.doGet()"+pathInfoString);
+		String pathInfoString = request.getPathInfo();
+		System.out.println("FrontController.doGet()" + pathInfoString);
 		switch (pathInfoString) {
 		case "/activity/all":
 			activitiesController.list(response);
@@ -96,30 +93,44 @@ public class FrontController extends HttpServlet {
 			System.out.println("FrontController.doGet().default");
 			break;
 		}
-		
-		
+
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
 		doGet(request, response);
 	}
 
 	/**
 	 * @see HttpServlet#doPut(HttpServletRequest, HttpServletResponse)
 	 */
-	protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPut(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 	}
 
 	/**
 	 * @see HttpServlet#doDelete(HttpServletRequest, HttpServletResponse)
 	 */
-	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+	protected void doDelete(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		String pathInfo = request.getPathInfo();
+		System.out.println(pathInfo);
+
+		if (pathInfo.startsWith("/activity")) {
+			activitiesController.deleteActivity(request);
+		}else if (pathInfo.startsWith("/event")) {
+			eventsController.deleteEvent(request);
+		}else if (pathInfo.startsWith("/person")) {
+			personController.deletePerson(request);
+		}else if (pathInfo.startsWith("/inscription")) {
+			inscriptionsController.deleteInscription(request);
+		}
 	}
 
 }

@@ -35,4 +35,12 @@ public class ActivitiesController {
 		response.addHeader("Access-Control-Allow-Origin", "*");
 		response.getWriter().write(json);
 	}
+
+	public void deleteActivity(HttpServletRequest request) {
+		int index = request.getPathInfo().lastIndexOf("/");
+		String idActivity = request.getPathInfo().substring(index + 1);
+		int id = Integer.parseInt(idActivity);
+		repository.deleteActivityById(id);
+		
+	}
 }

@@ -55,10 +55,10 @@ public class DataRepository {
 	private Activity createActivity(ResultSet resultSet) throws SQLException {
 		Integer id = resultSet.getInt("id");
 		String name = resultSet.getString("name");
-		String begin= resultSet.getString("begin");
-		String finish= resultSet.getString("finish");
-		String description= resultSet.getString("description");
-		String url= resultSet.getString("url");
+		String begin = resultSet.getString("begin");
+		String finish = resultSet.getString("finish");
+		String description = resultSet.getString("description");
+		String url = resultSet.getString("url");
 		Integer event_id = resultSet.getInt("event_id");
 		Activity activity = new Activity(id, name, begin, finish, description, url, event_id);
 		return activity;
@@ -159,11 +159,54 @@ public class DataRepository {
 		return inscription;
 	}
 
+	public void deleteActivityById(int id) {
+		String sql = "DELETE FROM activity WHERE id = ?";
+		try (Connection connection = createConnection();
+				PreparedStatement statement = connection.prepareStatement(sql);) {
+			connection.setAutoCommit(true);
+			statement.setInt(1, id);
+			statement.executeUpdate();
+		} catch (SQLException sqle) {
+			throw new RuntimeException(sqle);
+		}
+	}
 
-	
-	
-	
-	
+	public void deleteEventById(int id) {
+		String sql = "DELETE FROM event WHERE id = ?";
+		try (Connection connection = createConnection();
+				PreparedStatement statement = connection.prepareStatement(sql);) {
+			connection.setAutoCommit(true);
+			statement.setInt(1, id);
+			statement.executeUpdate();
+		} catch (SQLException sqle) {
+			throw new RuntimeException(sqle);
+		}
+	}
+
+	public void deletePersonById(int id) {
+		String sql = "DELETE FROM person WHERE id = ?";
+	try (Connection connection = createConnection();
+			PreparedStatement statement = connection.prepareStatement(sql);) {
+		connection.setAutoCommit(true);
+		statement.setInt(1, id);
+		statement.executeUpdate();
+	} catch (SQLException sqle) {
+		throw new RuntimeException(sqle);
+	}
+}
+
+	public void deleteInscriptionById(int idIns) {
+		String sql = "DELETE FROM inscription WHERE id = ?";
+	try (Connection connection = createConnection();
+			PreparedStatement statement = connection.prepareStatement(sql);) {
+		connection.setAutoCommit(true);
+		statement.setInt(1, idIns);
+		statement.executeUpdate();
+	} catch (SQLException sqle) {
+		throw new RuntimeException(sqle);
+	}
+		
+	}
 	
 	
 	

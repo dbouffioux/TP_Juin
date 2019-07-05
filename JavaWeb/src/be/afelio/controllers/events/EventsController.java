@@ -3,6 +3,7 @@ package be.afelio.controllers.events;
 import java.io.IOException;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -35,6 +36,14 @@ public class EventsController {
 		response.setCharacterEncoding("UTF-8");
 		response.addHeader("Access-Control-Allow-Origin", "*");
 		response.getWriter().write(json);
+	}
+
+	public void deleteEvent(HttpServletRequest request) {
+		int index = request.getPathInfo().lastIndexOf("/");
+		String idEv = request.getPathInfo().substring(index + 1);
+		int id = Integer.parseInt(idEv);
+		repository.deleteEventById(id);
+		
 	}
 
 }

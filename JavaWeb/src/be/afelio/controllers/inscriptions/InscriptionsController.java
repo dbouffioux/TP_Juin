@@ -3,6 +3,7 @@ package be.afelio.controllers.inscriptions;
 import java.io.IOException;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -33,5 +34,13 @@ public class InscriptionsController {
 		response.setCharacterEncoding("UTF-8");
 		response.addHeader("Access-Control-Allow-Origin", "*");
 		response.getWriter().write(json);
+	}
+
+	public void deleteInscription(HttpServletRequest request) {
+		int index = request.getPathInfo().lastIndexOf("/");
+		String id = request.getPathInfo().substring(index + 1);
+		int idIns = Integer.parseInt(id);
+		repository.deleteInscriptionById(idIns);
+		
 	}
 }
