@@ -23,6 +23,7 @@ import { LoginComponent } from './Components/login/login.component';
 import { LoginService } from './services/login.service';
 import { AccountComponent } from './Pages/account/account.component';
 import { LogoutComponent } from './Components/logout/logout.component';
+import { ListActivitiesComponent } from './Pages/listActivities/listActivities.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { LogoutComponent } from './Components/logout/logout.component';
     EventItemComponent,
     LoginComponent,
     AccountComponent,
-    LogoutComponent
+    LogoutComponent,
+    ListActivitiesComponent
   ],
   imports: [
     BrowserModule,

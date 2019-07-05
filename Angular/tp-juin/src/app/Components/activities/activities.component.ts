@@ -18,17 +18,17 @@ export class ActivitiesComponent implements OnInit {
   public event: Event;
 
 
-  constructor(private activitiesServices: ActivitiesService, private eventService: EventService) {
+  constructor(private activitiesService: ActivitiesService, private eventService: EventService) {
     this.activity = new Activity();
     this.event = new Event();
    }
 
   ngOnInit() {
-    this.activitiesServices.getActivities().subscribe(activities => this.activities = activities);
+    this.activitiesService.getActivities().subscribe(activities => this.activities = activities);
     this.eventService.getAllEvents().subscribe(event => this.events = event);
   }
   public onCreate(event: Activity) {
-    this.activitiesServices.createActivity(event).subscribe(() => {
+    this.activitiesService.createActivity(event).subscribe(() => {
       console.log('OK');
     }, error => {
       console.log(error);

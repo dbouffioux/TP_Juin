@@ -1,8 +1,11 @@
-package jsonParameters;
+package be.afelio.jsonParameters;
 
 public class EventParameters {
+	protected Integer id;
 	protected String name;
 	protected Integer person_id;
+	
+	
 	
 	public String getName() {
 		return name;
@@ -15,6 +18,12 @@ public class EventParameters {
 	}
 	public void setPerson_id(Integer person_id) {
 		this.person_id = person_id;
+	}
+	public Integer getId() {
+		return id;
+	}
+	public void setId(Integer id) {
+		this.id = id;
 	}
 	
 	

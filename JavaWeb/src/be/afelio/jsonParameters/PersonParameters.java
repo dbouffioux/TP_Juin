@@ -1,11 +1,18 @@
-package jsonParameters;
+package be.afelio.jsonParameters;
 
 public class PersonParameters {
+	protected Integer id;
 	protected String firstname;
 	protected String lastname;
 	protected String login;
 	protected String password;
 	
+	public Integer getId() {
+		return id;
+	}
+	public void setId(Integer id) {
+		this.id = id;
+	}
 	public String getFirstname() {
 		return firstname;
 	}

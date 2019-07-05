@@ -1,4 +1,4 @@
-package jsonParameters;
+package be.afelio.jsonParameters;
 
 
 public class InscriptionParameters {

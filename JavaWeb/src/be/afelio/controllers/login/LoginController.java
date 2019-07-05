@@ -2,15 +2,13 @@ package be.afelio.controllers.login;
 
 import java.io.IOException;
 import java.util.Base64;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
 import be.afelio.beans.Person;
+import be.afelio.controllers.jsonGenerator;
 import be.afelio.repository.DataRepository;
 
-public class LoginController {
+public class LoginController extends jsonGenerator {
 
 	protected DataRepository repository;
 
@@ -39,20 +37,14 @@ public class LoginController {
 				&& password != null
 				&& !password.isBlank()) {
 			Person person = repository.getConnection(login, password);
-			passwordValid=true;
-			jsonGenerate(response, person);
+			if(person != null) {
+				passwordValid=true;
+				request.getSession().setAttribute("id", person.getId() );
+				request.getSession().setAttribute("Authorization", true);
+				jsonGenerate(response, person);
+			}
 			
-		}		
+		}	
 		return passwordValid;
-	}
-	protected void jsonGenerate(HttpServletResponse response, Object o) throws IOException {
-
-		ObjectMapper mapper = new ObjectMapper();
-
-		String json = mapper.writeValueAsString(o);
-
-		response.setContentType("application/json");
-		response.setCharacterEncoding("UTF-8");
-		response.getWriter().write(json);
 	}
 }

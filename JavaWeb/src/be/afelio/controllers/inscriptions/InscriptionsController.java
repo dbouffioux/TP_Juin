@@ -8,10 +8,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import be.afelio.beans.Inscription;
+import be.afelio.controllers.jsonGenerator;
+import be.afelio.jsonParameters.InscriptionParameters;
 import be.afelio.repository.DataRepository;
-import jsonParameters.InscriptionParameters;
 
-public class InscriptionsController {
+public class InscriptionsController extends jsonGenerator{
 	
 	protected DataRepository repository;
 
@@ -22,30 +23,25 @@ public class InscriptionsController {
 
 	public void add(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		ObjectMapper mapper = new ObjectMapper();
-		InscriptionParameters inscriptionParameters= mapper.readValue(request.getInputStream(), InscriptionParameters.class );
-		System.out.println("FrontController.doPost()");
-		if (inscriptionParameters.getActivity_id() != null
-				&& inscriptionParameters.getPerson_id() != null) {
-			repository.addInscription(inscriptionParameters.getActivity_id(),inscriptionParameters.getPerson_id());
+		try {
+			InscriptionParameters inscriptionParameters= mapper.readValue(request.getInputStream(), InscriptionParameters.class );
+			System.out.println("FrontController.doPost()");
+			if (inscriptionParameters.getActivity_id() != null
+					&& inscriptionParameters.getPerson_id() != null) {
+				repository.addInscription(inscriptionParameters.getActivity_id(),inscriptionParameters.getPerson_id());
+			}
+			list(response);
+			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			response.setStatus(400);
 		}
-		list(response);
-		
 		
 	}
 
 	public void list(HttpServletResponse response) throws IOException {
 		List<Inscription> listInscriptions = repository.findAllInscriptions();
 		jsonGenerate(response, listInscriptions);
-	}
-
-	protected void jsonGenerate(HttpServletResponse response, Object o) throws IOException {
-
-		ObjectMapper mapper = new ObjectMapper();
-
-		String json = mapper.writeValueAsString(o);
-
-		response.setContentType("application/json");
-		response.setCharacterEncoding("UTF-8");
-		response.getWriter().write(json);
 	}
 }

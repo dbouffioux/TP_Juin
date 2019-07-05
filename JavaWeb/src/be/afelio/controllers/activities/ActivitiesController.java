@@ -10,11 +10,13 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import be.afelio.beans.Activity;
 import be.afelio.beans.Event;
+import be.afelio.controllers.jsonGenerator;
+import be.afelio.jsonParameters.ActivityParameters;
+import be.afelio.jsonParameters.PersonParameters;
 import be.afelio.repository.DataRepository;
-import jsonParameters.ActivityParameters;
 
 
-public class ActivitiesController {
+public class ActivitiesController extends jsonGenerator {
 
 	protected DataRepository repository;
 
@@ -36,6 +38,21 @@ public class ActivitiesController {
 		
 	}
 
+	public void listActivitiesByPerson(HttpServletRequest request, HttpServletResponse response)  throws IOException {
+		ObjectMapper mapper = new ObjectMapper();
+		PersonParameters personParameters = mapper.readValue(request.getInputStream(), PersonParameters.class);
+		System.out.println("FrontController.doPost() listActivitiesByPerson");
+		if (personParameters.getId() != null
+				&& personParameters.getFirstname() != null && !personParameters.getFirstname().isBlank()
+				&& personParameters.getLastname() != null && !personParameters.getLastname().isBlank()
+				&& personParameters.getLogin() != null && !personParameters.getLogin().isBlank()
+				&& personParameters.getPassword() != null && !personParameters.getPassword().isBlank()) {
+			int id = personParameters.getId();
+		Event event = repository.getListActivitiesByPersonId(id);
+		jsonGenerate(response, event);
+		}
+	}
+	
 	public void add(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		ObjectMapper mapper = new ObjectMapper();
 		ActivityParameters activityParameters= mapper.readValue(request.getInputStream(), ActivityParameters.class );
@@ -59,15 +76,4 @@ public class ActivitiesController {
 		
 	}
 
-
-	protected void jsonGenerate(HttpServletResponse response, Object o) throws IOException {
-
-		ObjectMapper mapper = new ObjectMapper();
-
-		String json = mapper.writeValueAsString(o);
-
-		response.setContentType("application/json");
-		response.setCharacterEncoding("UTF-8");
-		response.getWriter().write(json);
-	}
 }

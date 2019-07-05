@@ -3,8 +3,6 @@ import { Person } from 'src/app/models/person.models';
 import { LoginService } from 'src/app/services/login.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
-
-
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -14,10 +12,10 @@ export class LoginComponent implements OnInit {
 
   public loginForm: FormGroup;
   private auth: boolean;
-
   public person: Person;
   @Output()
   private connection = new EventEmitter<Person>();
+
 
   constructor(private loginService: LoginService, private fb: FormBuilder) {
     this.person = new Person();
@@ -41,6 +39,7 @@ export class LoginComponent implements OnInit {
   private setLocalStorage() {
     if (this.person !== null) {
       localStorage.setItem('Authorization', 'true');
+      localStorage.setItem('Person', JSON.stringify(this.person ));
       console.log(localStorage.getItem('Authorization'));
 
     } else {

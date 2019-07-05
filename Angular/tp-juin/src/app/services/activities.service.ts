@@ -4,7 +4,7 @@ import { Observable, throwError } from 'rxjs';
 import { Activity } from '../models/activity.model';
 import { environment } from 'src/environments/environment';
 import { catchError } from 'rxjs/operators';
-import { Event } from 'src/app/models/event.model';
+import { Person } from '../models/person.models';
 
 
 @Injectable()
@@ -19,15 +19,15 @@ export class ActivitiesService {
       .pipe(catchError((error: any) => throwError(error.json())));
   }
 
-  public createActivity(payload: Activity): Observable<Activity> {
+  public createActivity(activity: Activity): Observable<Activity> {
     return this.http
-      .post<Activity>(`${environment.baseUrl}/activity/add`, payload, {
-        headers: {
-          // Authorization: 'Basic ' + token;
-        }
-      })
+      .post<Activity>(`${environment.baseUrl}/activity/add`, activity, {withCredentials: true})
       .pipe(catchError((error: any) => throwError(error.json())));
   }
-
+  public getActivitiesByPerson(person: Person): Observable<Activity[]> {
+    return this.http.post<Activity[]>(`${environment.baseUrl}/account/listActivities`, person,
+    {withCredentials: true})
+      .pipe(catchError((error: any) => throwError(error.json())));
+  }
 
 }

@@ -16,6 +16,7 @@ export class LogoutComponent implements OnInit {
 
   private logout() {
     localStorage.setItem('Authorization', 'false');
+    localStorage.setItem('Person', '');
     console.log(localStorage.getItem('Authorization'));
   }
   public getLocalStorage(): boolean {

@@ -6,16 +6,14 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.fasterxml.jackson.core.JsonParseException;
-import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import be.afelio.beans.Event;
+import be.afelio.controllers.jsonGenerator;
+import be.afelio.jsonParameters.EventParameters;
 import be.afelio.repository.DataRepository;
-import jsonParameters.EventParameters;
-import jsonParameters.PersonParameters;
 
-public class EventsController {
+public class EventsController extends jsonGenerator{
 
 	protected DataRepository repository;
 
@@ -29,15 +27,17 @@ public class EventsController {
 		jsonGenerate(response, listEvents);
 	}
 
-	protected void jsonGenerate(HttpServletResponse response, Object o) throws IOException {
-
+	public void listEventsByPersonId(HttpServletRequest request, HttpServletResponse response) {
 		ObjectMapper mapper = new ObjectMapper();
-
-		String json = mapper.writeValueAsString(o);
-
-		response.setContentType("application/json");
-		response.setCharacterEncoding("UTF-8");
-		response.getWriter().write(json);
+		EventParameters eventParameters;
+		try {
+			eventParameters = mapper.readValue(request.getInputStream(), EventParameters.class);
+			List<Event> listEvents = repository.findAllEventsByPersonId(eventParameters.getPerson_id());
+			jsonGenerate(response, listEvents);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 	}
 
 	public void add(HttpServletRequest request, HttpServletResponse response) throws IOException {

@@ -9,6 +9,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+
 import be.afelio.beans.Activity;
 import be.afelio.beans.Event;
 import be.afelio.beans.Inscription;
@@ -61,26 +62,27 @@ public class DataRepository {
 			String event_name) {
 		if (name != null && !name.isBlank() && begin != null && !begin.isBlank() && finish != null && !finish.isBlank()
 				&& event_name != null && !event_name.isBlank()) {
-			int event_id = findOneEventByName(event_name);
-			String sql = "insert into activity (name, begin, finish, url, description, event_id)"
-					+ " values (?, ?, ?, ?, ?, ?)";
-			try (Connection connection = createConnection();
-					PreparedStatement pstatement = connection.prepareStatement(sql)) {
+			Integer event_id = findOneEventByName(event_name);
+			if (event_id != null) {
+				String sql = "insert into activity (name, begin, finish, url, description, event_id)"
+						+ " values (?, ?, ?, ?, ?, ?)";
+				try (Connection connection = createConnection();
+						PreparedStatement pstatement = connection.prepareStatement(sql)) {
 
-				connection.setAutoCommit(true);
-				pstatement.setString(1, name);
-				pstatement.setString(2, begin);
-				pstatement.setString(3, finish);
-				pstatement.setString(4, url);
-				pstatement.setString(5, description);
-				pstatement.setInt(6, event_id);
-				pstatement.executeUpdate();
+					connection.setAutoCommit(true);
+					pstatement.setString(1, name);
+					pstatement.setString(2, begin);
+					pstatement.setString(3, finish);
+					pstatement.setString(4, url);
+					pstatement.setString(5, description);
+					pstatement.setInt(6, event_id);
+					pstatement.executeUpdate();
 
-			} catch (SQLException sqlException) {
-				throw new RuntimeException(sqlException);
+				} catch (SQLException sqlException) {
+					throw new RuntimeException(sqlException);
+				}
 			}
 		}
-
 	}
 
 	public List<Activity> findAllActivities() {
@@ -123,6 +125,29 @@ public class DataRepository {
 		}
 
 		return list;
+	}
+
+	public Event getListActivitiesByPersonId(int id) {
+		Event event = null;
+		String sql = "SELECT e.id as id " + "FROM activity as a "
+				+ "JOIN event as e ON a.event_id = e.id " + "JOIN person as p ON e.person_id = p.id "
+				+ "WHERE p.id = ? ";
+
+		try (Connection connection = createConnection();
+				PreparedStatement pstatement = connection.prepareStatement(sql)) {
+			pstatement.setInt(1, id);
+
+			try (ResultSet resultSet = pstatement.executeQuery()) {
+
+				if (resultSet.next()) {
+					int id1 = resultSet.getInt("id");
+					event = getOneEventWithActivities(id1);
+				}
+			}
+		} catch (SQLException sqlException) {
+			throw new RuntimeException(sqlException);
+		}
+		return event;
 	}
 
 	public Activity findOneActivitybyId(int id) {
@@ -241,6 +266,26 @@ public class DataRepository {
 		return list;
 	}
 
+	public List<Event> findAllEventsByPersonId(int id) {
+		List<Event> list = new ArrayList<>();
+		String sql = "SELECT * FROM event WHERE person_id = ?";
+
+		try (Connection connection = createConnection();
+				PreparedStatement pstatement = connection.prepareStatement(sql)) {
+			pstatement.setInt(1, id);
+
+			try (ResultSet resultSet = pstatement.executeQuery()) {
+				while (resultSet.next()) {
+					Event event = createEvent(resultSet);
+					list.add(event);
+				}
+			}
+		} catch (SQLException sqlException) {
+			throw new RuntimeException(sqlException);
+		}
+		return list;
+	}
+
 	public Integer findOneEventByName(String event_name) {
 		Integer id = null;
 		String sql = "SELECT id " + "FROM event " + "WHERE UPPER(name) = UPPER(?)";
@@ -250,8 +295,9 @@ public class DataRepository {
 			pstatement.setString(1, event_name);
 
 			try (ResultSet resultSet = pstatement.executeQuery()) {
-				resultSet.next();
-				id = resultSet.getInt("id");
+				if (resultSet.next()) {
+					id = resultSet.getInt("id");
+				}
 			}
 		} catch (SQLException sqlException) {
 			throw new RuntimeException(sqlException);
