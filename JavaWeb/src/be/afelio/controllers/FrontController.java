@@ -175,9 +175,19 @@ public class FrontController extends HttpServlet {
 	 */
 	protected void doDelete(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-	}
+		String pathInfo = request.getPathInfo();
+		System.out.println(pathInfo);
 
+		if (pathInfo.startsWith("/activity")) {
+			activitiesController.deleteActivity(request);
+		}else if (pathInfo.startsWith("/event")) {
+			eventsController.deleteEvent(request);
+		}else if (pathInfo.startsWith("/person")) {
+			personController.deletePerson(request);
+		}else if (pathInfo.startsWith("/inscription")) {
+			inscriptionsController.deleteInscription(request);
+		}
+	}
 	@Override
 	protected void doOptions(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {

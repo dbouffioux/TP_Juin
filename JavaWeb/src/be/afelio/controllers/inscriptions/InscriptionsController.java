@@ -44,4 +44,14 @@ public class InscriptionsController extends jsonGenerator{
 		List<Inscription> listInscriptions = repository.findAllInscriptions();
 		jsonGenerate(response, listInscriptions);
 	}
+
+	public void deleteInscription(HttpServletRequest request) {
+		int index = request.getPathInfo().lastIndexOf("/");
+		String id = request.getPathInfo().substring(index + 1);
+		int idIns = Integer.parseInt(id);
+		repository.deleteInscriptionById(idIns);
+		
+	}
+	
+
 }

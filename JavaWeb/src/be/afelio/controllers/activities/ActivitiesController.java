@@ -76,4 +76,12 @@ public class ActivitiesController extends jsonGenerator {
 		
 	}
 
+
+	public void deleteActivity(HttpServletRequest request) {
+		int index = request.getPathInfo().lastIndexOf("/");
+		String idActivity = request.getPathInfo().substring(index + 1);
+		int id = Integer.parseInt(idActivity);
+		repository.deleteActivityById(id);
+		
+	}
 }

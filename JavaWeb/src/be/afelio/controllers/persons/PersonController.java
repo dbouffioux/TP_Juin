@@ -39,4 +39,11 @@ public class PersonController extends jsonGenerator {
 		}
 		list(response);
 	}
+	public void deletePerson(HttpServletRequest request) {
+		int index = request.getPathInfo().lastIndexOf("/");
+		String idPerson = request.getPathInfo().substring(index + 1);
+		int id = Integer.parseInt(idPerson);
+		repository.deletePersonById(id);
+		
+	}
 }
