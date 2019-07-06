@@ -9,7 +9,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-
 import be.afelio.beans.Activity;
 import be.afelio.beans.Event;
 import be.afelio.beans.Inscription;
@@ -129,9 +128,8 @@ public class DataRepository {
 
 	public Event getListActivitiesByPersonId(int id) {
 		Event event = null;
-		String sql = "SELECT e.id as id " + "FROM activity as a "
-				+ "JOIN event as e ON a.event_id = e.id " + "JOIN person as p ON e.person_id = p.id "
-				+ "WHERE p.id = ? ";
+		String sql = "SELECT e.id as id " + "FROM activity as a " + "JOIN event as e ON a.event_id = e.id "
+				+ "JOIN person as p ON e.person_id = p.id " + "WHERE p.id = ? ";
 
 		try (Connection connection = createConnection();
 				PreparedStatement pstatement = connection.prepareStatement(sql)) {
@@ -380,6 +378,7 @@ public class DataRepository {
 
 		return person;
 	}
+
 	public void deleteActivityById(int id) {
 		String sql = "DELETE FROM activity WHERE id = ?";
 		try (Connection connection = createConnection();
@@ -406,32 +405,28 @@ public class DataRepository {
 
 	public void deletePersonById(int id) {
 		String sql = "DELETE FROM person WHERE id = ?";
-	try (Connection connection = createConnection();
-			PreparedStatement statement = connection.prepareStatement(sql);) {
-		connection.setAutoCommit(true);
-		statement.setInt(1, id);
-		statement.executeUpdate();
-	} catch (SQLException sqle) {
-		throw new RuntimeException(sqle);
+		try (Connection connection = createConnection();
+				PreparedStatement statement = connection.prepareStatement(sql);) {
+			connection.setAutoCommit(true);
+			statement.setInt(1, id);
+			statement.executeUpdate();
+		} catch (SQLException sqle) {
+			throw new RuntimeException(sqle);
+		}
 	}
-}
 
 	public void deleteInscriptionById(int idIns) {
 		String sql = "DELETE FROM inscription WHERE id = ?";
-	try (Connection connection = createConnection();
-			PreparedStatement statement = connection.prepareStatement(sql);) {
-		connection.setAutoCommit(true);
-		statement.setInt(1, idIns);
-		statement.executeUpdate();
-	} catch (SQLException sqle) {
-		throw new RuntimeException(sqle);
+		try (Connection connection = createConnection();
+				PreparedStatement statement = connection.prepareStatement(sql);) {
+			connection.setAutoCommit(true);
+			statement.setInt(1, idIns);
+			statement.executeUpdate();
+		} catch (SQLException sqle) {
+			throw new RuntimeException(sqle);
+		}
+
 	}
-
-
-
-
-
-
 
 	/*
 	 * 

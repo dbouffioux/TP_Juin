@@ -1,9 +1,17 @@
-<form action="">
-  <div>
-    <label for="name">Nom de l'évènement : </label>
-    <input name="name" type="text" [(ngModel)]="event.name">
-  </div>
-</form>
+<table>
+    <tr>
+      <th>Nom du gestionnaire</th>
+      <th>Nom de l'évènement</th>
+    </tr>
+    <tr>
+      <td>
+    <select name="event.person_id"
+    [(ngModel)]="event.person_id">
+    <option value="{{person.id}}">{{person.firstname}}</option>
+    </select></td>
+      <td> <input name= "name" type="text"  [(ngModel)]="event.name" ></td>
+    </tr>
+  </table>
 
 <div>
     <button

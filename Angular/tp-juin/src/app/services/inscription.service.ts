@@ -17,4 +17,10 @@ public getAllInscriptions(): Observable<Inscription[]> {
   return this.http.get<Inscription[]>(`${environment.baseUrl}/inscriptions/all`)
   .pipe(catchError((error: any) => throwError(error.json())));
 }
+public createInscription(inscription: Inscription): Observable<Inscription> {
+  return this.http
+    .post<Inscription>(`${environment.baseUrl}/inscription/add`, inscription, {withCredentials: true})
+    .pipe(catchError((error: any) => throwError(error.json())));
+}
+
 }

@@ -31,9 +31,9 @@ public getEventByPersonId(id: number): Observable<Event[]> {
   .pipe(catchError((error: any) => throwError(error.json())));
 }
 
-public createEvent(payload: Event): Observable<Event> {
+public createEvent(event: Event): Observable<Event> {
   return this.http
-  .post<Event>(`${environment.baseUrl}/event/add`, payload)
+  .post<Event>(`${environment.baseUrl}/event/add`, event)
   .pipe(catchError((error: any) => throwError(error.json())));
 }
 

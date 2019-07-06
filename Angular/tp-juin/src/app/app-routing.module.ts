@@ -6,6 +6,7 @@ import { EventItemComponent } from './Components/event-item/event-item.component
 import { LoginComponent } from './Components/login/login.component';
 import { AccountComponent } from './Pages/account/account.component';
 import { ListActivitiesComponent } from './Pages/listActivities/listActivities.component';
+import { InscriptionFormComponent } from './Components/inscription-form/inscription-form.component';
 
 const routes: Routes = [
   {path: '', redirectTo: '/home', pathMatch: 'full'},
@@ -15,6 +16,7 @@ const routes: Routes = [
   {path: 'event/:id', component: EventItemComponent},
   {path: 'account', component: AccountComponent},
   {path: 'account/listActivities', component: ListActivitiesComponent},
+  {path: 'inscription', component: InscriptionFormComponent},
   {path: '**', redirectTo: '/home'}
 ];
 

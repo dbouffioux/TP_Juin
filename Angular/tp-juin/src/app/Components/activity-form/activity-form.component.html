@@ -1,3 +1,33 @@
+<table>
+  <tr>
+    <th>Nom de l'évènement</th>
+    <th>Nom de l'activité</th>
+    <th>Heure de début</th>
+    <th>Heure de fin</th>
+    <th>Description</th>
+    <th>URL</th>
+  </tr>
+
+  <tr>
+    <td>
+
+  <select name="event_name"
+  [(ngModel)]="activity.event_name">
+
+      <option *ngFor="let event of events" value="{{event.name}}">{{event.name}}</option>
+
+
+  </select></td>
+    <td> <input name= "name" type="text"  [(ngModel)]="activity.name" ></td>
+    <td> <input name="begin" type="text" [(ngModel)]="activity.begin"></td>
+    <td> <input name="finish" type="text" [(ngModel)]="activity.finish"></td>
+    <td> <input name="description" type="text" [(ngModel)]="activity.description"></td>
+    <td> <input name="url" type="text" [(ngModel)]="activity.url"></td>
+
+  </tr>
+</table>
+
+
 <div>
   <button
     type="button"
@@ -5,3 +35,6 @@
     Create a new activity
   </button>
 </div>
+<button>
+  <a [routerLink]="['/home']"  >Home</a>
+</button>
