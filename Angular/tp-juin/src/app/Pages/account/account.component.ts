@@ -35,8 +35,15 @@ export class AccountComponent implements OnInit {
                             console.log(this.events);
       });
   }
-  public onCreate(event: Activity) {
+  public onCreateActivity(event: Activity) {
     this.activitiesService.createActivity(event).subscribe(() => {
+      console.log('OK');
+    }, error => {
+      console.log(error);
+    });
+  }
+  public onCreateEvent(event: Event) {
+    this.eventService.createEvent(event).subscribe(() => {
       console.log('OK');
     }, error => {
       console.log(error);

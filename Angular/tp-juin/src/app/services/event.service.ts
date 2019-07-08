@@ -33,7 +33,7 @@ public getEventByPersonId(id: number): Observable<Event[]> {
 
 public createEvent(event: Event): Observable<Event> {
   return this.http
-  .post<Event>(`${environment.baseUrl}/event/add`, event)
+  .post<Event>(`${environment.baseUrl}/event/add`, event, {withCredentials: true})
   .pipe(catchError((error: any) => throwError(error.json())));
 }
 

@@ -1,9 +1,12 @@
 package be.afelio.jsonParameters;
 
+import be.afelio.beans.Activity;
+
 public class EventParameters {
 	protected Integer id;
 	protected String name;
 	protected Integer person_id;
+	protected Activity activities;
 	
 	
 	
@@ -25,6 +28,13 @@ public class EventParameters {
 	public void setId(Integer id) {
 		this.id = id;
 	}
+	public Activity getActivities() {
+		return activities;
+	}
+	public void setActivities(Activity activities) {
+		this.activities = activities;
+	}
+	
 	
 	
 	

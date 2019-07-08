@@ -37,13 +37,13 @@ export class EventItemComponent implements OnInit {
     });
 
   }
-  public onCreate(activity: Activity) {
-    this.activity.event_name = this.event.name;
-    this.activitiesService.createActivity(activity).subscribe(() => {
+  public onCreate(event: Event) {
+    this.eventService.createEvent(event).subscribe(() => {
       console.log('OK');
     }, error => {
       console.log(error);
     });
   }
+  }
 
-}
+

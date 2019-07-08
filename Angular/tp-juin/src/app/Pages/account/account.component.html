@@ -2,6 +2,6 @@
     <a [routerLink]="['/event', event.id]">
       {{event.name}}
     </a></p>
-    <app-event-form></app-event-form>
-<app-activity-form (create)="onCreate($event)" [activity]="activity"></app-activity-form>
+    <app-event-form (create)="onCreateEvent($event)"></app-event-form>
+<app-activity-form (create)="onCreateActivity($event)" [activity]="activity"></app-activity-form>
 
