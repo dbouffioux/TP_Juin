@@ -16,8 +16,8 @@ CREATE TABLE event (
 CREATE TABLE activity(
 	id  SERIAL PRIMARY KEY ,
 	name varchar(20) NOT NULL,
-	begin varchar NOT NULL,
-	finish varchar NOT NULL,
+	begin timestamp with time zone NOT NULL,
+	finish timestamp with time zone NOT NULL,
 	url varchar,
 	description varchar,
 	event_id int NOT NULL
@@ -70,44 +70,44 @@ INSERT INTO event(name, person_id)
 
 INSERT INTO activity (name, begin, finish, event_id, url, description) 
 VALUES ('Pink',
-	'02 Aou 2019 22:00', 
-	'02 Aou 2019 23:30',
+	'2019-08-02T22:30:00Z', 
+	'2019-08-02T23:30:00Z',
 	2,
 	'https://www.pinkspage.com/',
 	'rock');
 
 	INSERT INTO activity (name, begin, finish, event_id, url, description) 
 VALUES ('Bastille',
-	'01 Aou 2019 22:00', 
-	'01 Aou 2019 23:30',
+	'2019-08-01T22:30:00Z', 
+	'2019-08-01T23:30:00Z',
 	2,
 	'https://www.bastillebastille.com/',
 	'rock');
 	INSERT INTO activity (name, begin, finish, event_id, url, description) 
 VALUES ('Angèle',
-	'03 Aou 2019 22:00', 
-	'03 Aou 2019 23:30',
+	'2019-08-03T22:00:00Z', 
+	'2019-08-03T23:30:00Z',
 	1,
 	'https://angele.store/',
 	'pop');
 	INSERT INTO activity (name, begin, finish, event_id, url, description) 
 VALUES ('Stromae',
-	'03 Aou 2019 18:00', 
-	'03 Aou 2019 20:30',
+	'2019-08-03T18:30:00Z', 
+	'2019-08-03T20:30:00Z',
 	1,
 	'https://www.facebook.com/stromae/',
 	'pop/rap');
 	INSERT INTO activity (name, begin, finish, event_id, url, description) 
 VALUES ('David Ghetta',
-	'03 Aou 2019 18:00', 
-	'03 Aou 2019 20:30',
+	'2019-08-03T18:30:00Z', 
+	'2019-08-03T20:30:00Z',
 	3,
 	'https://www.davidguetta.com/',
 	'electro');
 	INSERT INTO activity (name, begin, finish, event_id, url, description) 
 VALUES ('Mortin Solveig',
-	'02 Aou 2019 18:00', 
-	'02 Aou 2019 20:30',
+	'2019-08-02T18:30:00Z', 
+	'2019-08-02T20:30:00Z',
 	3,
 	'http://www.martinsolveig.com/',
 	'electro');

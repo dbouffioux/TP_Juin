@@ -39,7 +39,7 @@ public deleteProfile(personId: number): Observable<boolean> {
 public updatePerson(personUpdated: Person) {
   console.log(personUpdated);
 
-  return this.http.put(`${environment.baseUrl}/person/${personUpdated.id}`,
+  return this.http.put(`${environment.baseUrl}/person/${personUpdated.id}`, personUpdated,
   {headers: new HttpHeaders().set('Authorization', localStorage.getItem('Authorization')),
    withCredentials: true})
   .pipe(catchError((error: any) => throwError(error.json())));
