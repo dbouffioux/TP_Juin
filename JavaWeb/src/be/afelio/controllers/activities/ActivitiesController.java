@@ -71,7 +71,7 @@ public class ActivitiesController extends jsonGenerator {
 					activityParameters.getEvent_name());
 			repository.addActivity(activity);
 		}
-		list(response);
+		//list(response);
 		
 	}
 

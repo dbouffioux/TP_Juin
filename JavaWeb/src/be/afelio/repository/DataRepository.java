@@ -6,6 +6,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -57,11 +59,8 @@ public class DataRepository {
 		return event;
 	}
 
-	public void addActivity(String name, String begin, String finish, String url, String description,
-			String event_name) {
-		if (name != null && !name.isBlank() && begin != null && !begin.isBlank() && finish != null && !finish.isBlank()
-				&& event_name != null && !event_name.isBlank()) {
-			Integer event_id = findOneEventByName(event_name);
+	public Activity addActivity(Activity activity) {
+			Integer event_id = findOneEventByName(activity.getEvent_name());
 			if (event_id != null) {
 				String sql = "insert into activity (name, begin, finish, url, description, event_id)"
 						+ " values (?, ?, ?, ?, ?, ?)";
@@ -69,20 +68,25 @@ public class DataRepository {
 						PreparedStatement pstatement = connection.prepareStatement(sql)) {
 
 					connection.setAutoCommit(true);
-					pstatement.setString(1, name);
-					pstatement.setString(2, begin);
-					pstatement.setString(3, finish);
-					pstatement.setString(4, url);
-					pstatement.setString(5, description);
+					pstatement.setString(1, activity.getName());
+					pstatement.setTimestamp(2 , Timestamp.valueOf(activity.getBegin()));
+					pstatement.setTimestamp(3, Timestamp.valueOf(activity.getFinish()));
+					pstatement.setString(4, activity.getUrl());
+					pstatement.setString(5, activity.getDescription());
 					pstatement.setInt(6, event_id);
 					pstatement.executeUpdate();
-
+					try (ResultSet rSet = pstatement.getGeneratedKeys()) {
+						if(rSet.next()) {
+							activity.setId(rSet.getInt(1));
+						}
+					}
 				} catch (SQLException sqlException) {
 					throw new RuntimeException(sqlException);
 				}
-			}
+			}return activity;
 		}
-	}
+		
+	
 
 	public List<Activity> findAllActivities() {
 		List<Activity> list = new ArrayList<>();
@@ -172,12 +176,12 @@ public class DataRepository {
 	private Activity createActivity(ResultSet resultSet) throws SQLException {
 		Integer id = resultSet.getInt("id");
 		String name = resultSet.getString("name");
-		String begin = resultSet.getString("begin");
-		String finish = resultSet.getString("finish");
+		Timestamp begin = resultSet.getTimestamp("begin");
+		Timestamp finish = resultSet.getTimestamp("finish");
 		String description = resultSet.getString("description");
 		String url = resultSet.getString("url");
 		String event_name = resultSet.getString("event_name");
-		Activity activity = new Activity(id, name, begin, finish, url, description, event_name);
+		Activity activity = new Activity(id, name, begin.toLocalDateTime(), finish.toLocalDateTime(), url, description, event_name);
 		return activity;
 	}
 
