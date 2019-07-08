@@ -14,17 +14,19 @@ import { Event } from 'src/app/models/event.model';
 })
 export class InscriptionFormComponent implements OnInit {
 
-  public activities: Activity[];
   public person: Person;
-  public persons: Person[];
-  public event: Event;
   public events: Event[];
 
-  @Input()
-  public inscription: Inscription;
+  @Input() private inscription: Inscription;
   @Output()
   private create = new EventEmitter<Inscription>();
-  constructor(private inscriptionService: InscriptionService, private eventService: EventService) { }
+
+  @Input() private activity: Activity;
+
+  constructor(private inscriptionService: InscriptionService, private eventService: EventService) {
+    this.person = new Person();
+    this.inscription = new Inscription();
+   }
 
   ngOnInit() {
     this.person = JSON.parse(localStorage.getItem('Person'));
@@ -32,9 +34,17 @@ export class InscriptionFormComponent implements OnInit {
     this.eventService.getEventByPersonId(this.person.id)
       .subscribe(events => {
       this.events = events;
-      console.log(this.events);
       });
   }
+  public createInscription() {
+    this.person = JSON.parse(localStorage.getItem('Person'));
+    console.log(this.person);
 
+    this.inscription.person_id = this.person.id;
+    this.inscription.activity_id = this.activity.id; // Number.parseInt(localStorage.getItem('activityId'), 0);
+    console.log(this.inscription);
+
+    this.create.emit(this.inscription);
+  }
 
 }

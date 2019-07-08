@@ -22,7 +22,26 @@ public createPerson(payload: Person): Observable<Person> {
 
   return this.http
   .post<Person>(`${environment.baseUrl}/person/add`, payload,
-  {headers: new HttpHeaders().set('Authorization', localStorage.getItem('Authorization'))})
+  {headers: new HttpHeaders().set('Authorization',
+   localStorage.getItem('Authorization')),
+   withCredentials: true})
+  .pipe(catchError((error: any) => throwError(error.json())));
+}
+
+public deleteProfile(personId: number): Observable<boolean> {
+  return this.http
+  .delete<boolean>(`${environment.baseUrl}/person/${personId}`,
+  {headers: new HttpHeaders().set('Authorization', localStorage.getItem('Authorization')),
+   withCredentials: true})
+  .pipe(catchError((error: any) => throwError(error.json())));
+}
+
+public updatePerson(personUpdated: Person) {
+  console.log(personUpdated);
+
+  return this.http.put(`${environment.baseUrl}/person/${personUpdated.id}`,
+  {headers: new HttpHeaders().set('Authorization', localStorage.getItem('Authorization')),
+   withCredentials: true})
   .pipe(catchError((error: any) => throwError(error.json())));
 }
 

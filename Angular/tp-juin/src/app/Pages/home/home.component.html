@@ -1,7 +1,8 @@
-<app-event></app-event>
 
-<p >
-  <a [routerLink]="['/account']">Votre compte </a>
-</p>
+<p *ngIf="getLocalStorage()">
+    <a [routerLink]="['/account']">Votre compte </a>
+  </p>
+
+<app-event></app-event>
 
 

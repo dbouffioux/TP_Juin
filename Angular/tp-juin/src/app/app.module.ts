@@ -24,6 +24,7 @@ import { LoginService } from './services/login.service';
 import { AccountComponent } from './Pages/account/account.component';
 import { LogoutComponent } from './Components/logout/logout.component';
 import { ListActivitiesComponent } from './Pages/listActivities/listActivities.component';
+import { UpdateAccountComponent } from './Pages/updateAccount/updateAccount.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { ListActivitiesComponent } from './Pages/listActivities/listActivities.c
     LoginComponent,
     AccountComponent,
     LogoutComponent,
-    ListActivitiesComponent
+    ListActivitiesComponent,
+    UpdateAccountComponent
   ],
   imports: [
     BrowserModule,

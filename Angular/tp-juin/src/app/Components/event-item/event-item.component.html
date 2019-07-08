@@ -8,16 +8,15 @@
         <th>URL</th>
         <th>Inscription</th>
       </tr>
-      <tr *ngFor="let activity of event?.activities">
+      <tr *ngFor="let activity of event?.activities" >
         <td>{{activity.name}} </td>
         <td>{{activity.begin}}</td>
         <td>{{activity.finish}}</td>
         <td>{{activity.description}}</td>
         <td><a href="{{activity.url}}" target="_blank">{{activity.url}}</a></td>
-        <td>
-          <button type="button"
-          (click)="onCreateInscription()">
-            <a [routerLink]="['/inscription']" >s'inscrire</a></button>
+        <td >
+          <app-inscription-form
+          (create) = "onCreateInscription(inscription)" [activity]="activity" [inscription]="inscription"></app-inscription-form>
         </td>
       </tr>
 

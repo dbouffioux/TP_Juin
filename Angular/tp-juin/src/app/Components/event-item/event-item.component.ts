@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output } from '@angular/core';
 import { EventService } from 'src/app/services/event.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Event} from 'src/app/models/event.model';
@@ -26,7 +26,10 @@ export class EventItemComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private activitiesService: ActivitiesService,
-    private inscriptionService: InscriptionService) { }
+    private inscriptionService: InscriptionService) {
+      this.inscription = new Inscription();
+      this.person = new Person();
+     }
 
   ngOnInit() {
 
@@ -49,7 +52,9 @@ export class EventItemComponent implements OnInit {
     });
   }
   public onCreateInscription(inscription: Inscription) {
-    this.inscriptionService.createInscription(inscription).subscribe(()=>{
+    console.log(this.inscription);
+
+    this.inscriptionService.createInscription(inscription).subscribe(() => {
       console.log('OK');
     }, error => {
       console.log(error);

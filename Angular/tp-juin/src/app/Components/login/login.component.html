@@ -5,15 +5,19 @@
 
     <label for="password">password : </label>
     <input formControlName="password" name="password" type="password" [(ngModel)]="person.password" >
-  </div>
-  <button type="button"
+
+   <button type="button"
           (click)="getConnection(person.login, person.password)"
           [disabled]="!loginForm.valid">Login</button>
+  </div>
+  <button>
+      <a [routerLink]="['/inscription']">inscription</a>
+  </button>
 </form>
 
 
 <div *ngIf="person.firstname !== '' && getLocalStorage()">
- Bienvenue : {{person?.firstname}}
+ Bienvenue : {{getPerson().firstname}}
 </div>
 
 
