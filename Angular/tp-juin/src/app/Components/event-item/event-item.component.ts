@@ -5,6 +5,8 @@ import { Event} from 'src/app/models/event.model';
 import { ActivitiesService } from 'src/app/services/activities.service';
 import { Activity } from 'src/app/models/activity.model';
 import { Person } from 'src/app/models/person.models';
+import { Inscription } from 'src/app/models/inscription.model';
+import { InscriptionService } from 'src/app/services/inscription.service';
 
 @Component({
   selector: 'app-event-item',
@@ -17,12 +19,14 @@ export class EventItemComponent implements OnInit {
   public activities: Activity[];
   public activity: Activity ;
   public person: Person;
+  public inscription: Inscription;
 
   constructor(
     private eventService: EventService,
     private route: ActivatedRoute,
     private router: Router,
-    private activitiesService: ActivitiesService) { }
+    private activitiesService: ActivitiesService,
+    private inscriptionService: InscriptionService) { }
 
   ngOnInit() {
 
@@ -39,6 +43,13 @@ export class EventItemComponent implements OnInit {
   }
   public onCreate(event: Event) {
     this.eventService.createEvent(event).subscribe(() => {
+      console.log('OK');
+    }, error => {
+      console.log(error);
+    });
+  }
+  public onCreateInscription(inscription: Inscription) {
+    this.inscriptionService.createInscription(inscription).subscribe(()=>{
       console.log('OK');
     }, error => {
       console.log(error);
