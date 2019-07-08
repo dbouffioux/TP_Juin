@@ -7,9 +7,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
+  private auth: boolean;
+
   constructor() { }
 
   ngOnInit() {
   }
 
+  public getLocalStorage(): boolean {
+    if (localStorage.getItem('Authorization') === 'true') {
+      this.auth = true;
+    } else {
+      this.auth = false;
+    }
+    return this.auth;
+  }
 }

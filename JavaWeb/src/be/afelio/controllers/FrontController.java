@@ -71,10 +71,10 @@ public class FrontController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		System.out.println("FrontController.doGet()");
-		String pathInfoString = request.getPathInfo();
-		System.out.println("FrontController.doGet()" + pathInfoString);
+		String pathInfo = request.getPathInfo();
+		System.out.println("FrontController.doGet()" + pathInfo);
 		setHeaders(response);
-		switch (pathInfoString) {
+		switch (pathInfo) {
 		case "/activity/all":
 			activitiesController.list(response);
 			break;
@@ -87,9 +87,12 @@ public class FrontController extends HttpServlet {
 		case "/inscriptions/all":
 			inscriptionsController.list(response);
 			break;
+		case "/logout":
+			request.getSession().invalidate();
+			break;
 
 		default:
-			if (pathInfoString.startsWith("/event/")) {
+			if (pathInfo.startsWith("/event/")) {
 				System.out.println("FrontController.doGet()dans le if event");
 				activitiesController.listForOneEventById(response, request);
 			}
@@ -107,17 +110,17 @@ public class FrontController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		HttpSession session = request.getSession();
-		String pathInfoString = request.getPathInfo();
-		System.out.println("FrontController.doPost()" + pathInfoString);
+		String pathInfo = request.getPathInfo();
+		System.out.println("FrontController.doPost()" + pathInfo);
 		setHeaders(response);
 		boolean authorization = false;
 		
 		if (null == session.getAttribute("id")) {
 			session.setAttribute("Authorization", false);
 			System.out.println(
-					"FrontController.doPost() dans la connection null " + session.getAttribute("Authorization"));
+					"FrontController.doPost() dans la connection null " + session.getAttribute("id"));
 		
-			if (!authorization && pathInfoString.startsWith("/connection")) {
+			if (!authorization && pathInfo.startsWith("/connection")) {
 				System.out.println("FrontController.doPost()dans Connection");
 				authorization = loginController.getConnection(request, response);
 				session.setAttribute("Authorization", authorization);
@@ -125,16 +128,15 @@ public class FrontController extends HttpServlet {
 				if (authorization) {
 					response.setHeader("Authorization", "true");
 				}
+			}else if (pathInfo.startsWith("/person/add")) {
+				personController.add(request, response);
+				System.out.println("FrontController.doPost() person add authorization:" + authorization);
 			}
 		}else { 
 			authorization = (boolean) session.getAttribute("Authorization");
 			
 			if (authorization) {
-				switch (pathInfoString) {
-				case "/person/add":
-					personController.add(request, response);
-					System.out.println("FrontController.doPost() person add authorization:" + authorization);
-					break;
+				switch (pathInfo) {
 				case "/event/add":
 					eventsController.add(request, response);
 					break;
@@ -167,7 +169,34 @@ public class FrontController extends HttpServlet {
 	 */
 	protected void doPut(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		HttpSession session = request.getSession();
+		String pathInfo = request.getPathInfo();
+		System.out.println("FrontController.doPut() " + pathInfo + session.getAttribute("id"));
+		setHeaders(response);
+		boolean authorization = false;
+		
+		if (null == session.getAttribute("id")) {
+			session.setAttribute("Authorization", false);
+			System.out.println(
+					"FrontController.doPut() dans la connection null " + session.getAttribute("Authorization"));
+		
+			if (!authorization && pathInfo.startsWith("/connection")) {
+				System.out.println("FrontController.doPut()dans Connection");
+				authorization = loginController.getConnection(request, response);
+				session.setAttribute("Authorization", authorization);
+				System.out.println("FrontController.doPut() fin de connection " + authorization);
+				if (authorization) {
+					response.setHeader("Authorization", "true");
+				}
+			}
+		}else {
+			authorization = (boolean) session.getAttribute("Authorization");
+			if (authorization) {
+				if (pathInfo.startsWith("/person")) {
+					personController.updatePerson(request, response);
+				}
+			}
+		}
 	}
 
 	/**
@@ -175,18 +204,40 @@ public class FrontController extends HttpServlet {
 	 */
 	protected void doDelete(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		HttpSession session = request.getSession();
 		String pathInfo = request.getPathInfo();
-		System.out.println(pathInfo);
-
-		if (pathInfo.startsWith("/activity")) {
-			activitiesController.deleteActivity(request);
-		}else if (pathInfo.startsWith("/event")) {
-			eventsController.deleteEvent(request);
-		}else if (pathInfo.startsWith("/person")) {
-			personController.deletePerson(request);
-		}else if (pathInfo.startsWith("/inscription")) {
-			inscriptionsController.deleteInscription(request);
-		}
+		System.out.println("FrontController.doDelete() " + pathInfo + session.getAttribute("id"));
+		setHeaders(response);
+		boolean authorization = false;
+		
+		if (null == session.getAttribute("id")) {
+			session.setAttribute("Authorization", false);
+			System.out.println(
+					"FrontController.doDelete() dans la connection null " + session.getAttribute("Authorization"));
+		
+			if (!authorization && pathInfo.startsWith("/connection")) {
+				System.out.println("FrontController.doDelete()dans Connection");
+				authorization = loginController.getConnection(request, response);
+				session.setAttribute("Authorization", authorization);
+				System.out.println("FrontController.doDelete() fin de connection " + authorization);
+				if (authorization) {
+					response.setHeader("Authorization", "true");
+				}
+			}
+		}else { 
+			authorization = (boolean) session.getAttribute("Authorization");
+			if (authorization) {
+				if (pathInfo.startsWith("/activity")) {
+					activitiesController.deleteActivity(request);
+				}else if (pathInfo.startsWith("/event")) {
+					eventsController.deleteEvent(request);
+				}else if (pathInfo.startsWith("/person")) {
+					personController.deletePerson(request);
+				}else if (pathInfo.startsWith("/inscription")) {
+					inscriptionsController.deleteInscription(request);
+				}
+			}
+		}		
 	}
 	@Override
 	protected void doOptions(HttpServletRequest request, HttpServletResponse response)
@@ -197,7 +248,7 @@ public class FrontController extends HttpServlet {
 
 	private void setHeaders(HttpServletResponse response) {
 		response.addHeader("Access-Control-Allow-Origin", "http://localhost:4200");
-		response.addHeader("Access-Control-Allow-Methods", "*");
+		response.addHeader("Access-Control-Allow-Methods", "GET, HEAD, POST, PUT, DELETE, OPTIONS");
 		response.addHeader("Access-Control-Allow-Headers", "content-type,authorization");
 		response.addHeader("Access-Control-Allow-Credentials", "true");
 	}

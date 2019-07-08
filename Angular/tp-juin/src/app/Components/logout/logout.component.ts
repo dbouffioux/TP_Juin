@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { LoginService } from 'src/app/services/login.service';
 
 @Component({
   selector: 'app-logout',
@@ -9,7 +10,7 @@ export class LogoutComponent implements OnInit {
 
   private auth: boolean;
 
-  constructor() { }
+  constructor(private loginService: LoginService) { }
 
   ngOnInit() {
   }
@@ -18,6 +19,7 @@ export class LogoutComponent implements OnInit {
     localStorage.setItem('Authorization', 'false');
     localStorage.setItem('Person', '');
     console.log(localStorage.getItem('Authorization'));
+    this.loginService.closeConnection().subscribe();
   }
   public getLocalStorage(): boolean {
     if (localStorage.getItem('Authorization') === 'true') {

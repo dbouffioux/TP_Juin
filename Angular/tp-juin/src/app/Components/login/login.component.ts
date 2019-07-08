@@ -56,4 +56,7 @@ export class LoginComponent implements OnInit {
     return this.auth;
   }
 
+  public getPerson(): Person {
+    return this.person = JSON.parse(localStorage.getItem('Person'));
+  }
 }

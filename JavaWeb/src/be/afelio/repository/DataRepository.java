@@ -13,6 +13,7 @@ import be.afelio.beans.Activity;
 import be.afelio.beans.Event;
 import be.afelio.beans.Inscription;
 import be.afelio.beans.Person;
+import be.afelio.jsonParameters.PersonParameters;
 
 public class DataRepository {
 	private String url;
@@ -425,6 +426,60 @@ public class DataRepository {
 		} catch (SQLException sqle) {
 			throw new RuntimeException(sqle);
 		}
+
+	}
+
+	public void updatePersonById(PersonParameters personParameters, int id) {
+		String sql = "UPDATE person "
+				   + "SET firstname = ?, "
+				   + "	 lastname = ?, "
+				   + "	 login = ?, "
+				   + "	 password = ? "
+				   + "WHERE id = ? ";
+
+		if (personParameters.getLastname() != null && !personParameters.getLastname().isBlank()
+				&& personParameters.getFirstname() != null && !personParameters.getFirstname().isBlank()
+				&& personParameters.getLogin() != null && !personParameters.getLogin().isBlank()
+				&& personParameters.getPassword() != null && !personParameters.getPassword().isBlank()) {
+			try (Connection connection = createConnection();
+					PreparedStatement pstatement = connection.prepareStatement(sql)) {
+
+				connection.setAutoCommit(true);
+				pstatement.setString(1, personParameters.getFirstname());
+				pstatement.setString(2, personParameters.getLastname());
+				pstatement.setString(3, personParameters.getLogin());
+				pstatement.setString(4, personParameters.getPassword());
+				pstatement.setInt(5, id);
+				pstatement.executeUpdate();
+
+			} catch (SQLException sqle) {
+				throw new RuntimeException(sqle);
+			}
+		}
+
+	}
+
+	public Person findOnePersonById(int id) {
+		Person person = null;
+		String sql = "SELECT * " + "FROM person " + "WHERE id = ? ";
+
+		try (Connection connection = createConnection();
+				PreparedStatement pstatement = connection.prepareStatement(sql)) {
+
+			connection.setAutoCommit(true);
+			pstatement.setInt(1, id);
+
+			try (ResultSet resultSet = pstatement.executeQuery()) {
+
+				if (resultSet.next()) {
+					person = createPerson(resultSet);
+				}
+			}
+		} catch (SQLException sqlException) {
+			throw new RuntimeException(sqlException);
+		}
+
+		return person;
 
 	}
 

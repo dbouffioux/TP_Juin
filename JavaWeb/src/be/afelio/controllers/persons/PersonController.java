@@ -39,6 +39,20 @@ public class PersonController extends jsonGenerator {
 		}
 		list(response);
 	}
+	public void updatePerson(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		String[] parts = request.getPathInfo().split("/");
+		String idPerson = parts[2];
+		System.out.println("PersonController.updatePerson() id : " + idPerson);
+		
+		ObjectMapper mapper = new ObjectMapper();
+		PersonParameters personParameters = mapper.readValue(request.getInputStream(), PersonParameters.class);
+		
+		System.out.println(personParameters.toString());
+		
+		int id = Integer.parseInt(idPerson);
+		repository.updatePersonById(personParameters, id);
+	}
+
 	public void deletePerson(HttpServletRequest request) {
 		int index = request.getPathInfo().lastIndexOf("/");
 		String idPerson = request.getPathInfo().substring(index + 1);
