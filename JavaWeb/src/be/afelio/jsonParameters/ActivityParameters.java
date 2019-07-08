@@ -1,10 +1,18 @@
 package be.afelio.jsonParameters;
 
+import java.time.LocalDateTime;
+
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+
+import utils.LocalDateDeserializer;
+
 public class ActivityParameters {
 	
 	protected String name;
-	protected String begin;
-	protected String finish;
+	@JsonDeserialize(using = LocalDateDeserializer.class)
+	protected LocalDateTime begin;
+	@JsonDeserialize(using = LocalDateDeserializer.class)
+	protected LocalDateTime finish;
 	protected String url;
 	protected String description;
 	protected String event_name;
@@ -14,16 +22,17 @@ public class ActivityParameters {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getBegin() {
+
+	public LocalDateTime getBegin() {
 		return begin;
 	}
-	public void setBegin(String begin) {
+	public void setBegin(LocalDateTime begin) {
 		this.begin = begin;
 	}
-	public String getFinish() {
+	public LocalDateTime getFinish() {
 		return finish;
 	}
-	public void setFinish(String finish) {
+	public void setFinish(LocalDateTime finish) {
 		this.finish = finish;
 	}
 	public String getUrl() {

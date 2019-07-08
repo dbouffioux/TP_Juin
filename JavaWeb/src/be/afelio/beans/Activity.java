@@ -1,11 +1,22 @@
 package be.afelio.beans;
 
+import java.time.LocalDateTime;
+
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import utils.LocalDateDeserializer;
+import utils.LocalDateSerializer;
+
 public class Activity {
 
 	protected Integer id;
 	protected String name;
-	protected String begin;
-	protected String finish;
+	@JsonDeserialize(using = LocalDateDeserializer.class)
+	@JsonSerialize(using = LocalDateSerializer.class)
+	protected LocalDateTime begin;
+	@JsonDeserialize(using = LocalDateDeserializer.class)
+	@JsonSerialize(using = LocalDateSerializer.class)
+	protected LocalDateTime finish;
 	protected String url;
 	protected String description;
 	protected String event_name;
@@ -17,7 +28,7 @@ public class Activity {
 	public void setEvent_name(String event_name) {
 		this.event_name = event_name;
 	}
-	public Activity(Integer id, String name, String begin, String finish, String url, String description,
+	public Activity(Integer id, String name, LocalDateTime begin, LocalDateTime finish, String url, String description,
 			String event_name) {
 		super();
 		this.id = id;
@@ -40,16 +51,17 @@ public class Activity {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getBegin() {
+
+	public LocalDateTime getBegin() {
 		return begin;
 	}
-	public void setBegin(String begin) {
+	public void setBegin(LocalDateTime begin) {
 		this.begin = begin;
 	}
-	public String getFinish() {
+	public LocalDateTime getFinish() {
 		return finish;
 	}
-	public void setFinish(String finish) {
+	public void setFinish(LocalDateTime finish) {
 		this.finish = finish;
 	}
 	public String getUrl() {
