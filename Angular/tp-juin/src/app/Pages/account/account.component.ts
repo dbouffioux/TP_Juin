@@ -7,6 +7,7 @@ import { Event } from 'src/app/models/event.model';
 import { Inscription } from 'src/app/models/inscription.model';
 import { InscriptionService } from 'src/app/services/inscription.service';
 import { PersonService } from 'src/app/services/person.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-account',
@@ -19,17 +20,15 @@ export class AccountComponent implements OnInit {
   public activity: Activity;
   public person: Person;
   public persons: Person[];
-  public event: Event;
   public events: Event[];
   public inscriptions: Inscription[];
 
   constructor(private activitiesService: ActivitiesService,
               private eventService: EventService,
               private personService: PersonService,
-              private inscriptionService: InscriptionService) {
+              private inscriptionService: InscriptionService,
+              private router: Router) {
     this.activity = new Activity();
-    this.event = new Event();
-
   }
 
   ngOnInit() {
@@ -42,9 +41,10 @@ export class AccountComponent implements OnInit {
                             console.log(this.events);
       });
   }
-  public onCreateActivity(event: Activity) {
-    this.activitiesService.createActivity(event).subscribe(() => {
+  public onCreateActivity(activity: Activity, event: Event) {
+    this.activitiesService.createActivity(activity).subscribe(() => {
       console.log('OK');
+      this.router.navigate(['/account']);
     }, error => {
       console.log(error);
     });

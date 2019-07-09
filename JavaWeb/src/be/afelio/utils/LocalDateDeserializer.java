@@ -1,4 +1,4 @@
-package utils;
+package be.afelio.utils;
 
 
 

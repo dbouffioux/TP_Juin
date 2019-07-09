@@ -46,3 +46,8 @@ Mise en place de l'update
 Ajouter une inscription fonctionne
 Ajout du delete pour un profil
 Mise en place des dates dans Java et la DB
+
+Rapport 09_07:
+Mise en place datePicker
+mise en place des jUnitTest
+début de la gestion de l'overlaps pour l'inscription

@@ -1,4 +1,4 @@
-package utils;
+package be.afelio.utils;
 
 import java.io.IOException;
 import java.time.LocalDateTime;

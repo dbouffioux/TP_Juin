@@ -15,27 +15,5 @@
     <td>{{activity.description}}</td>
     <td><a href="{{activity.url}}" target="_blank">{{activity.url}}</a></td>
   </tr>
-  <tr>
-    <td>
-
-  <select name="event_name"
-  [(ngModel)]="activity.event_name">
-
-      <option *ngFor="let event of events" value="{{event.name}}">{{event.name}}</option>
-
-
-  </select></td>
-    <td> <input name= "name" type="text"  [(ngModel)]="activity.name" ></td>
-    <td> <input name="begin" type="text" [(ngModel)]="activity.begin"></td>
-    <td> <input name="finish" type="text" [(ngModel)]="activity.finish"></td>
-    <td> <input name="description" type="text" [(ngModel)]="activity.description"></td>
-    <td> <input name="url" type="text" [(ngModel)]="activity.url"></td>
-
-  </tr>
 </table>
-<app-activity-form
-(create)="onCreate($event)" [activity]="activity"
-></app-activity-form>
-
-
-
+<ul *ngFor="let event of events"><li  *ngFor="let activity of event.activities"> {{activity.name}}</li></ul>

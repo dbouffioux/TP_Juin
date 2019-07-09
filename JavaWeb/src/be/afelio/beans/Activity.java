@@ -4,8 +4,9 @@ import java.time.LocalDateTime;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import utils.LocalDateDeserializer;
-import utils.LocalDateSerializer;
+
+import be.afelio.utils.LocalDateDeserializer;
+import be.afelio.utils.LocalDateSerializer;
 
 public class Activity {
 

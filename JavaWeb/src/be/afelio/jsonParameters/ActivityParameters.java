@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
-import utils.LocalDateDeserializer;
+import be.afelio.utils.LocalDateDeserializer;
 
 public class ActivityParameters {
 	

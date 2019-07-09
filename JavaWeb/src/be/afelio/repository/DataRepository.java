@@ -271,7 +271,7 @@ public class DataRepository {
 
 	public List<Event> findAllEventsByPersonId(int id) {
 		List<Event> list = new ArrayList<>();
-		String sql = "SELECT * FROM event WHERE person_id = ?";
+		String sql = "SELECT id FROM event WHERE person_id = ?";
 
 		try (Connection connection = createConnection();
 				PreparedStatement pstatement = connection.prepareStatement(sql)) {
@@ -279,7 +279,8 @@ public class DataRepository {
 
 			try (ResultSet resultSet = pstatement.executeQuery()) {
 				while (resultSet.next()) {
-					Event event = createEvent(resultSet);
+					int event_id = resultSet.getInt("id");
+					Event event = getOneEventWithActivities(event_id);
 					list.add(event);
 				}
 			}
@@ -485,6 +486,36 @@ public class DataRepository {
 
 		return person;
 
+	}
+
+	public boolean validateInscription(Activity activity, int person_id) {
+		boolean isValid = false;
+		String sql = "SELECT (begin, finish) Overlaps ( ? , ? ) " + 
+				"FROM activity as act " + 
+				"JOIN inscription as insc ON act.id = insc.activity_id " + 
+				"WHERE person_id = ? " ;
+
+		try (Connection connection = createConnection();
+				PreparedStatement pstatement = connection.prepareStatement(sql)) {
+
+			connection.setAutoCommit(true);
+			pstatement.setTimestamp(1, Timestamp.valueOf(activity.getBegin()));
+			pstatement.setTimestamp(2, Timestamp.valueOf(activity.getFinish()));
+			pstatement.setInt(3, person_id);
+			try (ResultSet resultSet = pstatement.executeQuery()) {
+
+				while (resultSet.next() && !isValid) {
+					if (resultSet.getBoolean(1)) {
+						isValid = true;
+					}
+				}
+			}
+		} catch (SQLException sqlException) {
+			throw new RuntimeException(sqlException);
+		}
+
+		return isValid;
+		
 	}
 
 	/*
