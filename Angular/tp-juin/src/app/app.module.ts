@@ -1,6 +1,10 @@
 import { BrowserModule } from '@angular/platform-browser';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { HttpClientModule, HttpParams } from '@angular/common/http';
+import { FormsModule, NgControl, ReactiveFormsModule } from '@angular/forms';
+
+import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -13,7 +17,6 @@ import { EventService } from './services/event.service';
 import { InscriptionComponent } from './Components/inscription/inscription.component';
 import { InscriptionService } from './services/inscription.service';
 import { ActivityFormComponent } from './Components/activity-form/activity-form.component';
-import { FormsModule, NgControl, ReactiveFormsModule } from '@angular/forms';
 import { PersonFormComponent } from './Components/person-form/person-form.component';
 import { EventFormComponent } from './Components/event-form/event-form.component';
 import { InscriptionFormComponent } from './Components/inscription-form/inscription-form.component';
@@ -47,10 +50,13 @@ import { UpdateAccountComponent } from './Pages/updateAccount/updateAccount.comp
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     HttpClientModule,
     AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    OwlDateTimeModule,
+    OwlNativeDateTimeModule
   ],
   providers: [
     ActivitiesService,
