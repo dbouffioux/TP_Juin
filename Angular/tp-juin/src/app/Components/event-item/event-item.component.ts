@@ -36,10 +36,10 @@ export class EventItemComponent implements OnInit {
     this.route.params.subscribe(params => {
       const id = params.id;
       console.log(id);
-      this.eventService.getEventWithAllActivitiesById(id).subscribe(event => this.event = event);
-      this.person = JSON.parse(localStorage.getItem('Person'));
-      this.activitiesService.getActivitiesByPerson(this.person)
-      .subscribe(activities => this.activities = activities);
+      this.eventService.getEventWithAllActivitiesById(id).subscribe(event => {this.event = event; console.log('dans le getEvent'); });
+      // this.person = JSON.parse(localStorage.getItem('Person'));
+      // this.activitiesService.getActivitiesByPerson(this.person)
+      // .subscribe(activities => this.activities = activities);
 
     });
 
@@ -60,6 +60,14 @@ export class EventItemComponent implements OnInit {
       console.log(error);
     });
   }
+
+  public getPerson(): boolean {
+    if (localStorage.getItem('Person') !== '') {
+      return true;
+    } else {
+      return false;
+    }
   }
+}
 
 

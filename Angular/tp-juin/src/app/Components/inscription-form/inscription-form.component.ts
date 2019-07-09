@@ -6,6 +6,7 @@ import { Person } from 'src/app/models/person.models';
 import { InscriptionService } from 'src/app/services/inscription.service';
 import { EventService } from 'src/app/services/event.service';
 import { Event } from 'src/app/models/event.model';
+import { eraseStyles } from '@angular/animations/browser/src/util';
 
 @Component({
   selector: 'app-inscription-form',
@@ -29,7 +30,12 @@ export class InscriptionFormComponent implements OnInit {
    }
 
   ngOnInit() {
-    this.person = JSON.parse(localStorage.getItem('Person'));
+    if (this.getPerson()) {
+      this.person = JSON.parse(localStorage.getItem('Person'));
+    } else {
+      this.person = null;
+    }
+
     console.log(this.person);
     this.eventService.getEventByPersonId(this.person.id)
       .subscribe(events => {
@@ -45,6 +51,14 @@ export class InscriptionFormComponent implements OnInit {
     console.log(this.inscription);
 
     this.create.emit(this.inscription);
+  }
+
+  public getPerson(): boolean {
+    if (localStorage.getItem('Person') !== '') {
+      return true;
+    } else {
+      return false;
+    }
   }
 
 }

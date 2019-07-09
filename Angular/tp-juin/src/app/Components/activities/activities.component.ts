@@ -24,7 +24,8 @@ export class ActivitiesComponent implements OnInit {
    }
 
   ngOnInit() {
-    this.activitiesService.getActivities().subscribe(activities => this.activities = activities);
+    this.activitiesService.getActivities().subscribe(activities => {this.activities = activities; console.log('dans le getActivities');
+    });
     this.eventService.getAllEvents().subscribe(event => this.events = event);
   }
   public onCreate(event: Activity) {
