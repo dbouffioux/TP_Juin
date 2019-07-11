@@ -46,6 +46,7 @@ export class AccountComponent implements OnInit {
     this.activitiesService.createActivity(activity).subscribe(() => {
       console.log('dans le oncreateActivity de subscribe');
       this.refreshActivities();
+
     }, error => {
       console.log(error);
     });

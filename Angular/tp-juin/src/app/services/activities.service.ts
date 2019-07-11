@@ -29,5 +29,12 @@ export class ActivitiesService {
     {withCredentials: true})
       .pipe(catchError((error: any) => throwError(error.json())));
   }
+  public deleteActivity(activityId: number): Observable<boolean> {
+    return this.http
+    .delete<boolean>(`${environment.baseUrl}/activity/${activityId}`,
+    {headers: new HttpHeaders().set('Authorization', localStorage.getItem('Authorization')),
+     withCredentials: true})
+    .pipe(catchError((error: any) => throwError(error.json())));
+  }
 
 }

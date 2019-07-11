@@ -11,6 +11,7 @@ import { Person } from 'src/app/models/person.models';
 export class InscriptionComponent implements OnInit {
 
   public inscriptions: Inscription[];
+  public isDeleted: boolean;
   @Input()
   public inscription: Inscription;
   public person: Person;
@@ -30,6 +31,7 @@ export class InscriptionComponent implements OnInit {
   public deleteInscription(idInscription: number) {
     this.inscriptionService.deleteInscription(idInscription).subscribe(() => {
       console.log('OK');
+      this.isDeleted = true;
     }, error => {
       console.log(error);
     });

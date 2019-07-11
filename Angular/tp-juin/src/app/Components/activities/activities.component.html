@@ -6,6 +6,7 @@
     <th>Heure de fin</th>
     <th>Description</th>
     <th>URL</th>
+    <th>Suppression</th>
   </tr>
   <tr *ngFor="let activity of activities">
     <td>{{activity.event_name}}</td>
@@ -14,6 +15,9 @@
     <td>{{activity.finish}}</td>
     <td>{{activity.description}}</td>
     <td><a href="{{activity.url}}" target="_blank">{{activity.url}}</a></td>
+    <td><button (click)= "deleteActivity(activity.id)">supression</button></td>
   </tr>
 </table>
+<div id= deleted *ngIf="isDeleted">Votre activité a été supprimée de la base de données</div>
+<div id= create *ngIf="isCreate">Votre activité a été créée</div>
 <ul *ngFor="let event of events"><li  *ngFor="let activity of event.activities"> {{activity.name}}</li></ul>
