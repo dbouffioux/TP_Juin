@@ -1,4 +1,22 @@
 <h2>Voici la liste de toutes les inscriptions: </h2>
-<!-- <div *ngFor="let inscription of inscriptions">{{inscription.activity.name}}</div>
+<table >
+  <tr>
+    <td>Nom de l'évènement</td>
+    <td>Nom de l'activité</td>
+    <td>Début de l'activité</td>
+    <td>Fin de l'activité</td>
+    <td>Description</td>
+    <td>Supprimer inscription</td>
 
- -->
+  </tr>
+  <tr *ngFor="let inscription of inscriptions">
+    <td>{{inscription.activity.event_name}}</td>
+    <td>{{inscription.activity.name}} </td>
+    <td>{{inscription.activity.begin}}</td>
+    <td>{{inscription.activity.finish}}</td>
+    <td>{{inscription.activity.description}}</td>
+    <td><button (click)= "deleteInscription(inscription.id)">supression</button></td>
+  </tr>
+</table>
+
+

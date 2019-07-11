@@ -7,7 +7,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -327,6 +326,7 @@ public class DataRepository {
 				pstatement.setInt(1, activity_id);
 				pstatement.setInt(2, person_id);
 				pstatement.executeUpdate();
+				System.out.println("DataRepository.addInscription()");
 
 			} catch (SQLException sqlException) {
 				throw new RuntimeException(sqlException);
@@ -350,6 +350,30 @@ public class DataRepository {
 		} catch (SQLException sqlException) {
 			throw new RuntimeException(sqlException);
 		}
+		return list;
+	}
+
+	public List<Inscription> getAllInscriptionsForOnePerson(int person_id) {
+		List<Inscription> list = new ArrayList<>();
+		String sql = "SELECT * FROM inscription " + 
+				"WHERE person_id = ?";
+		try (Connection connection = createConnection();
+				PreparedStatement pstatement = connection.prepareStatement(sql)) {
+			pstatement.setInt(1, person_id);
+
+			try (ResultSet resultSet = pstatement.executeQuery()) {
+
+				while (resultSet.next()) {
+					Inscription inscription = createInscription(resultSet);
+					Activity activity = findOneActivitybyId(inscription.getActivity().getId());
+					inscription.setActivity(activity);
+					list.add(inscription);
+				}
+			}
+		} catch (SQLException sqlException) {
+			throw new RuntimeException(sqlException);
+		}
+
 		return list;
 	}
 
@@ -489,7 +513,8 @@ public class DataRepository {
 	}
 
 	public boolean validateInscription(Activity activity, int person_id) {
-		boolean isValid = false;
+		System.out.println("DataRepository.validateInscription()"+activity.getBegin()+" "+ activity.getFinish()+" "+ person_id);
+		boolean isOverlaps = true;
 		String sql = "SELECT (begin, finish) Overlaps ( ? , ? ) " + 
 				"FROM activity as act " + 
 				"JOIN inscription as insc ON act.id = insc.activity_id " + 
@@ -504,17 +529,17 @@ public class DataRepository {
 			pstatement.setInt(3, person_id);
 			try (ResultSet resultSet = pstatement.executeQuery()) {
 
-				while (resultSet.next() && !isValid) {
-					if (resultSet.getBoolean(1)) {
-						isValid = true;
-					}
+				while (resultSet.next() && isOverlaps) {
+					isOverlaps = resultSet.getBoolean(1);
+						
+					System.out.println("DataRepository.validateInscription() dans le while"+ isOverlaps);
 				}
 			}
 		} catch (SQLException sqlException) {
 			throw new RuntimeException(sqlException);
 		}
 
-		return isValid;
+		return !isOverlaps;
 		
 	}
 

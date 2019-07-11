@@ -34,6 +34,7 @@ export class AccountComponent implements OnInit {
   ngOnInit() {
     this.person = JSON.parse(localStorage.getItem('Person'));
     console.log(this.person);
+    // Extract service calls in other fonction tu be reusable
     this.activitiesService.getActivitiesByPerson(this.person)
       .subscribe(activities => this.activities = activities);
     this.eventService.getEventByPersonId(this.person.id)
@@ -43,8 +44,8 @@ export class AccountComponent implements OnInit {
   }
   public onCreateActivity(activity: Activity, event: Event) {
     this.activitiesService.createActivity(activity).subscribe(() => {
-      console.log('OK');
-      this.router.navigate(['/account']);
+      console.log('dans le oncreateActivity de subscribe');
+      this.refreshActivities();
     }, error => {
       console.log(error);
     });
@@ -56,6 +57,14 @@ export class AccountComponent implements OnInit {
       console.log(error);
     });
   }
+  public refreshActivities() {
+  this.activitiesService.getActivitiesByPerson(this.person)
+      .subscribe(activities => this.activities = activities);
+  this.eventService.getEventByPersonId(this.person.id)
+      .subscribe(events => {this.events = events;
+                            console.log(this.events);
+      });
+ }
 
   public deleteProfile() {
     this.person = JSON.parse(localStorage.getItem('Person'));

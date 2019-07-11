@@ -17,10 +17,9 @@ export class ActivitiesComponent implements OnInit {
   public activity: Activity ;
   public events: Event[];
   public event1: Event;
-  public router: Router;
   public person: Person;
 
-  constructor(private activitiesService: ActivitiesService, private eventService: EventService) {
+  constructor(private router: Router, private activitiesService: ActivitiesService, private eventService: EventService) {
     this.activity = new Activity();
     this.event1 = new Event();
     this.person = JSON.parse(localStorage.getItem('Person'));
@@ -40,7 +39,9 @@ export class ActivitiesComponent implements OnInit {
   public onCreate(event: Activity) {
     this.activitiesService.createActivity(event).subscribe(() => {
       console.log('OK');
-      this.router.navigate(['/']);
+      setTimeout(() => {
+        this.router.navigate(['/account']);
+    }, 0);
     }, error => {
       console.log(error);
     });

@@ -5,7 +5,14 @@ public class Inscription {
 	protected Integer id;
 	protected Activity activity;
 	protected Integer person_id;
+	protected Integer activity_id;
 	
+	public Integer getActivity_id() {
+		return activity_id;
+	}
+	public void setActivity_id(Integer activity_id) {
+		this.activity_id = activity_id;
+	}
 	public Inscription(Integer id, Activity activity, Integer person_id) {
 		super();
 		this.id = id;

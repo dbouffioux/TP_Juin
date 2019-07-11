@@ -95,6 +95,8 @@ public class FrontController extends HttpServlet {
 			if (pathInfo.startsWith("/event/")) {
 				System.out.println("FrontController.doGet()dans le if event");
 				activitiesController.listForOneEventById(response, request);
+			}else if (pathInfo.startsWith("/inscriptions/")) {
+				inscriptionsController.getAllInscriptionsForOnePerson(request, response);
 			}
 
 			System.out.println("FrontController.doGet().default");

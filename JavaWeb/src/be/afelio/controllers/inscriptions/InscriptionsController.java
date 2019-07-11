@@ -25,14 +25,16 @@ public class InscriptionsController extends jsonGenerator{
 	}
 
 	public void add(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		
 		ObjectMapper mapper = new ObjectMapper();
 		try {
 			InscriptionParameters inscriptionParameters= mapper.readValue(request.getInputStream(), InscriptionParameters.class );
-			System.out.println("FrontController.doPost()");
 			Activity activity = repository.findOneActivitybyId(inscriptionParameters.getActivity_id());
+		System.out.println("InscriptionsController.add()"+ inscriptionParameters.getActivity_id() + inscriptionParameters.getPerson_id());
 			if (inscriptionParameters.getActivity_id() != null
 					&& inscriptionParameters.getPerson_id() != null
 					&& validateInscription(activity, inscriptionParameters.getPerson_id())) {
+				System.out.println("InscriptionsController.add()");
 				repository.addInscription(inscriptionParameters.getActivity_id(),inscriptionParameters.getPerson_id());
 			}
 			list(response);
@@ -45,10 +47,16 @@ public class InscriptionsController extends jsonGenerator{
 		
 	}
 	public boolean validateInscription(Activity activity, int person_id) {
-		boolean isValid = false;
-		repository.validateInscription(activity, person_id);
+		System.out.println("InscriptionsController.validateInscription()");
+		return repository.validateInscription(activity, person_id);
 		
-		return isValid;
+	}
+	public void getAllInscriptionsForOnePerson(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		String pathInfoString=request.getPathInfo();
+		String[] parts = pathInfoString.split("/");
+		int id = Integer.parseInt(parts[2]);
+		List<Inscription> listInscriptions = repository.getAllInscriptionsForOnePerson(id);
+		jsonGenerate(response, listInscriptions);
 	}
 
 	public void list(HttpServletResponse response) throws IOException {
