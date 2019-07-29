@@ -42,6 +42,7 @@ export class ActivitiesComponent implements OnInit {
   public onCreate(event: Activity) {
     this.activitiesService.createActivity(event).subscribe(() => {
       console.log('OK');
+      this.eventService.getEventByPersonId(this.person.id).subscribe(event => this.fillActivities(event));
       this.isCreate = true;
     }, error => {
       console.log(error);

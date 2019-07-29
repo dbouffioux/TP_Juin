@@ -517,7 +517,7 @@ public class DataRepository {
 		boolean isOverlaps = true;
 		String sql = "SELECT (begin, finish) Overlaps ( ? , ? ) " + 
 				"FROM activity as act " + 
-				"JOIN inscription as insc ON act.id = insc.activity_id " + 
+				"RIGHT JOIN inscription as insc ON act.id = insc.activity_id " + 
 				"WHERE person_id = ? " ;
 
 		try (Connection connection = createConnection();
