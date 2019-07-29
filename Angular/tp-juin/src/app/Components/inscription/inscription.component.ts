@@ -22,18 +22,23 @@ export class InscriptionComponent implements OnInit {
 
   ngOnInit() {
     this.person = JSON.parse(localStorage.getItem('Person'));
-    this.inscriptionService.getAllInscriptionsForOnePerson(this.person.id).subscribe(inscription =>
-      {this.inscriptions = inscription,
-        console.log(this.inscriptions);
-
-    });
+    this.getListInscription();
   }
   public deleteInscription(idInscription: number) {
     this.inscriptionService.deleteInscription(idInscription).subscribe(() => {
       console.log('OK');
       this.isDeleted = true;
+      this.getListInscription();
     }, error => {
+      this.isDeleted = false;
       console.log(error);
     });
   }
+ public getListInscription() {
+  this.inscriptionService.getAllInscriptionsForOnePerson(this.person.id).subscribe(inscription => {
+      this.inscriptions = inscription,
+      console.log(this.inscriptions);
+
+  });
+ }
 }

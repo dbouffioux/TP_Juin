@@ -48,7 +48,13 @@ public class InscriptionsController extends jsonGenerator{
 	}
 	public boolean validateInscription(Activity activity, int person_id) {
 		System.out.println("InscriptionsController.validateInscription()");
-		return repository.validateInscription(activity, person_id);
+		if (repository.getAllInscriptionsForOnePerson(person_id).isEmpty()) {
+			return true;
+		}
+		else {
+			return !repository.validateInscriptionOverlaps(activity, person_id);
+		}
+		
 		
 	}
 	public void getAllInscriptionsForOnePerson(HttpServletRequest request, HttpServletResponse response) throws IOException {
