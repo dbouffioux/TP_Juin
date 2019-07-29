@@ -21,10 +21,7 @@
       </tr>
 
       </table>
-<button>
+<button *ngIf="getPerson()">
 <a [routerLink]="['/account']">Gérer vos activités</a>
 
-</button>
-<button>
-  <a [routerLink]="['/home']"  >Home</a>
 </button>

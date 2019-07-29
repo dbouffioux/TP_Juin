@@ -517,10 +517,12 @@ public class DataRepository {
 
 	public boolean validateInscription(Activity activity, int person_id) {
 		System.out.println("DataRepository.validateInscription()"+activity.getBegin()+" "+ activity.getFinish()+" "+ person_id);
-		boolean isOverlaps = true;
-		String sql = "SELECT (begin, finish) Overlaps ( ? , ? ) " + 
+		boolean isOverlaps = false;
+		if(!findAllActivitiesForOneEventById(person_id).isEmpty()) {
+			System.out.println("DataRepository.validateInscription() dans la condition");
+			String sql = "SELECT (begin, finish) Overlaps ( ? , ? ) " + 
 				"FROM activity as act " + 
-				"JOIN inscription as insc ON act.id = insc.activity_id " + 
+				"RIGHT JOIN inscription as insc ON act.id = insc.activity_id " + 
 				"WHERE person_id = ? " ;
 
 		try (Connection connection = createConnection();
@@ -541,6 +543,8 @@ public class DataRepository {
 		} catch (SQLException sqlException) {
 			throw new RuntimeException(sqlException);
 		}
+		}
+		
 
 		return !isOverlaps;
 		

@@ -30,7 +30,7 @@ public class InscriptionsController extends jsonGenerator{
 		try {
 			InscriptionParameters inscriptionParameters= mapper.readValue(request.getInputStream(), InscriptionParameters.class );
 			Activity activity = repository.findOneActivitybyId(inscriptionParameters.getActivity_id());
-		System.out.println("InscriptionsController.add()"+ inscriptionParameters.getActivity_id() + inscriptionParameters.getPerson_id());
+		System.out.println("InscriptionsController.add() act-id " + inscriptionParameters.getActivity_id() +" person id " +inscriptionParameters.getPerson_id());
 			if (inscriptionParameters.getActivity_id() != null
 					&& inscriptionParameters.getPerson_id() != null
 					&& validateInscription(activity, inscriptionParameters.getPerson_id())) {

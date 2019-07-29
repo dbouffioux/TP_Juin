@@ -17,6 +17,7 @@ export class InscriptionFormComponent implements OnInit {
 
   public person: Person;
   public events: Event[];
+  public inscriptionCreated: boolean;
 
   @Input() private inscription: Inscription;
   @Output()
@@ -45,7 +46,7 @@ export class InscriptionFormComponent implements OnInit {
   public createInscription() {
     this.person = JSON.parse(localStorage.getItem('Person'));
     console.log(this.person);
-
+    this.inscriptionCreated = true;
     this.inscription.person_id = this.person.id;
     this.inscription.activity_id = this.activity.id; // Number.parseInt(localStorage.getItem('activityId'), 0);
     console.log(this.inscription);
