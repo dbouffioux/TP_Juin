@@ -29,7 +29,7 @@ public class PersonController extends jsonGenerator {
 	public void add(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		ObjectMapper mapper = new ObjectMapper();
 		PersonParameters personParameters = mapper.readValue(request.getInputStream(), PersonParameters.class);
-		System.out.println("FrontController.doPost()");
+		System.out.println("PersonController.doPost()");
 		if (personParameters.getFirstname() != null && !personParameters.getFirstname().isBlank()
 				&& personParameters.getLastname() != null && !personParameters.getLastname().isBlank()
 				&& personParameters.getLogin() != null && !personParameters.getLogin().isBlank()
