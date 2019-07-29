@@ -1,28 +1,25 @@
-﻿login unique
-gérer les doublons en mettant un message d'erreur à la personne
-rafraichissement partout où il y a une modifiation
-mettre un message de succès ou d'erreur lors des modifications
-mettre plusieurs admin pour un évent
-refactor le data repository: compartimenter en métier et utils
-retirer de la liste lors de la suppression d'une inscription
-faire du lazy loading
-rafraichir lors de la création d'un nouvel évènenement
-rafraichir lors de l'ajout d'une activité (le message de confirmation d'ajout ne fonctionne pas)
-problème d'inscription à une activité lorsque la personne n'a encore aucune inscription
-mettre du style 
-bouton home dans le profil
-suppression des event si pas d'activités
+﻿voir les personnes qui sont déjà inscrites à l'activité nb puis les noms si on clique dessus (org vs participant)
+proposer de forcer l'ajout à l'inscrption si chevauchement max de 15 min si sur meme site
 
-
-
-
-
-
-améliorer la DB:
-	- faire les différentes tables:
-		- une avec les activités :id,heure début, heure fin, lien avec participants (id), descriptif, url, lien organisateur
-		- une avec les participants: id, name, fisrtname
+DB:
+	- ajouter unique dans le login
+	-suppression des event si pas d'activités
+	
 angular: 
+	- envoyer message erreur si l'inscription est déjà faite ou si l'inscription est overlaps (ajouter dans validate inscription la vérif de la double inscription)
+	- bouton home dans le profil
+	- mettre du style 
+	- rafraichir lors de l'ajout d'une activité (le message de confirmation d'ajout ne fonctionne pas)
+	- vérifier login unique
+	- mettre un message d'erreur à l'utilisateur et proposer de mettre un nouveau login
+	- rafraichissement partout où il y a une modifiation
+	- mettre un message de succès ou d'erreur lors des modifications
+	- retirer de la liste lors de la suppression d'une inscription
+	- faire du lazy loading (des activités et de l'account)
+	- rafraichir lors de la création d'un nouvel évènenement
+	- suppression des event si pas d'activités
+	- si pas log, depuis home,event, activity, gérer vos activités, il propose de se loguer mais une fois loguer, pas de bouton home, pas de liste d'activités 
+
 	pour l'organisateur:
 	- autoriser l'accès à la page de modification de la db pour les activités
 	- donner la possiblité d'ajouter/modifier/supprimer  activités , descriptif de l'activité, lien vers URL
@@ -37,9 +34,16 @@ angular:
 	
 	
 javaWeb:
+	- problème d'inscription à une activité lorsque la personne n'a encore aucune inscription
+	- vérifier si le login est unique 
+	- exception qui génère du json qui renvoit le type d'erreur (login existant)
+	- gérer les erreurs et renvoyer les messages json correspondants
+	- refactor le data repository: compartimenter en métier et utils
 	- modifier l'activité
 	- ajouter concert, scène
 	- ajouter participant
+	- suppression des event si pas d'activités
+	- envoyer message erreur si l'inscription est déjà faite ou si l'inscription est overlaps (ajouter dans validate inscription la vérif de la double inscription)
 
 option amélioration:
 	- s'inscrire à un groupe d'activités
