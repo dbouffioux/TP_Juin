@@ -1,10 +1,10 @@
+<h1>Compte</h1>
 <p *ngFor="let event of events">
     <a [routerLink]="['/event', event.id]">
       {{event.name}}
     </a></p>
     <app-event-form (create)="onCreateEvent($event)"></app-event-form>
 <app-activity-form (create)="onCreateActivity($event)" [activity]="activity"></app-activity-form>
-<button (click)= "deleteProfile()">Delete Account</button>
 <button><a [routerLink]="['/updateAccount']" routerLinkActive="router-link-active" >Modifier Profile</a></button>
 <app-activities></app-activities>
 <app-inscription></app-inscription>

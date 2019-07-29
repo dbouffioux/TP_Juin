@@ -28,4 +28,12 @@ export class UpdateAccountComponent implements OnInit {
     });
   }
 
+  public deleteProfile() {
+    this.person = JSON.parse(localStorage.getItem('Person'));
+    this.personService.deleteProfile(this.person.id).subscribe(() => {
+      console.log('OK');
+    }, error => {
+      console.log(error);
+    });
+  }
 }
