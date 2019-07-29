@@ -1,7 +1,18 @@
-<button>
-    <a [routerLink]="['/home']"  >Home</a>
-</button>
-<app-login></app-login>
-<app-logout></app-logout>
-<router-outlet></router-outlet>
-
+<section id="container">
+  <button>
+      <a [routerLink]="['/home']"  >Home</a>
+  </button>
+  <app-login></app-login>
+  <app-logout></app-logout>
+  <router-outlet></router-outlet>
+</section>
+<footer>
+  <div>
+    <section id="logo">
+      <img alt="logo" src="assets/img/Logo The_Offspring.png"/>
+    </section>
+    <section id="copyright">
+        <p>Offspring - Copyright 2019 ™</p>
+    </section>
+  </div>
+</footer>
