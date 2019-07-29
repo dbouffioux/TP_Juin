@@ -1,4 +1,24 @@
-﻿améliorer la DB:
+﻿login unique
+gérer les doublons en mettant un message d'erreur à la personne
+rafraichissement partout où il y a une modifiation
+mettre un message de succès ou d'erreur lors des modifications
+mettre plusieurs admin pour un évent
+refactor le data repository: compartimenter en métier et utils
+retirer de la liste lors de la suppression d'une inscription
+faire du lazy loading
+rafraichir lors de la création d'un nouvel évènenement
+rafraichir lors de l'ajout d'une activité (le message de confirmation d'ajout ne fonctionne pas)
+problème d'inscription à une activité lorsque la personne n'a encore aucune inscription
+mettre du style 
+bouton home dans le profil
+suppression des event si pas d'activités
+
+
+
+
+
+
+améliorer la DB:
 	- faire les différentes tables:
 		- une avec les activités :id,heure début, heure fin, lien avec participants (id), descriptif, url, lien organisateur
 		- une avec les participants: id, name, fisrtname
