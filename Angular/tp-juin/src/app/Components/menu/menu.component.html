@@ -1,0 +1,18 @@
+<nav>
+  <ul>
+    <li>
+      <button>
+          <a [routerLink]="['/home']"  >Home</a>
+      </button>
+    </li>
+    <li *ngIf="!isLogged()">
+        <app-login></app-login>
+    </li>
+    <li *ngIf="isLogged()">
+        <app-logout></app-logout>
+    </li>
+  </ul>
+</nav>
+<div *ngIf="getPerson()?.firstname !== '' && isLogged()">
+  Bienvenue : {{ getPerson().firstname }}
+</div>

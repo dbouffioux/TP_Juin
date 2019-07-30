@@ -11,7 +11,6 @@ import { Person } from '../models/person.models';
 })
 export class LoginService {
 
-
   public payload: string;
   private params: HttpParams;
 

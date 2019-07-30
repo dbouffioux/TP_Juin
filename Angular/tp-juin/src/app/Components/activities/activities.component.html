@@ -11,8 +11,8 @@
   <tr *ngFor="let activity of activities">
     <td>{{activity.event_name}}</td>
     <td>{{activity.name}} </td>
-    <td>{{activity.begin}}</td>
-    <td>{{activity.finish}}</td>
+    <td>{{activity.begin | date : 'dd/MM/yy HH:mm'}}</td>
+    <td>{{activity.finish  | date : 'dd/MM/yy HH:mm'}}</td>
     <td>{{activity.description}}</td>
     <td><a href="{{activity.url}}" target="_blank">{{activity.url}}</a></td>
     <td><button (click)= "deleteActivity(activity.id)">supression</button></td>

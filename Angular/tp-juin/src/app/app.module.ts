@@ -29,6 +29,8 @@ import { LogoutComponent } from './Components/logout/logout.component';
 import { ListActivitiesComponent } from './Pages/listActivities/listActivities.component';
 import { UpdateAccountComponent } from './Pages/updateAccount/updateAccount.component';
 import { AccountButtonComponent } from './Components/account-button/account-button.component';
+import { MenuComponent } from './Components/menu/menu.component';
+import { AuthenticationService } from './services/authentication.service';
 
 @NgModule({
   declarations: [
@@ -48,7 +50,8 @@ import { AccountButtonComponent } from './Components/account-button/account-butt
     LogoutComponent,
     ListActivitiesComponent,
     UpdateAccountComponent,
-    AccountButtonComponent
+    AccountButtonComponent,
+    MenuComponent
   ],
   imports: [
     BrowserModule,
@@ -65,7 +68,8 @@ import { AccountButtonComponent } from './Components/account-button/account-butt
     PersonService,
     EventService,
     InscriptionService,
-    LoginService
+    LoginService,
+    AuthenticationService
   ],
   bootstrap: [AppComponent]
 })

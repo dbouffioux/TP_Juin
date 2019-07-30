@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthenticationService } from 'src/app/services/authentication.service';
 
 @Component({
   selector: 'app-account-button',
@@ -7,19 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AccountButtonComponent implements OnInit {
 
-  private auth: boolean;
-
-  constructor() { }
+  constructor(private authService: AuthenticationService) {
+  }
 
   ngOnInit() {
   }
 
-  public getLocalStorage(): boolean {
-    if (localStorage.getItem('Authorization') === 'true') {
-      this.auth = true;
-    } else {
-      this.auth = false;
-    }
-    return this.auth;
+  showAccountButton() {
+    return this.authService.isLogged();
   }
 }

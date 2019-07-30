@@ -1,7 +1,6 @@
 package be.afelio.repository;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -15,16 +14,19 @@ import be.afelio.beans.Event;
 
 public class DataRepositoryActivity {
 	private DataRepositoryEvent dataRepositoryEvent;
+<<<<<<< HEAD
 	private DataRepositoryInscription dataRepositoryInscription;
 	private String url;
 	private String password;
 	private String user;
+=======
+	private DataRepositoryConnection dataRepositoryConnection;
+
+>>>>>>> origin/master
 
 	public DataRepositoryActivity(String url, String user, String password) {
 		super();
-		this.url = url;
-		this.user = user;
-		this.password = password;
+		dataRepositoryConnection = new DataRepositoryConnection(url, user, password);
 	}
 	
 	public DataRepositoryEvent getDataRepositoryEvent() {
@@ -35,6 +37,7 @@ public class DataRepositoryActivity {
 		this.dataRepositoryEvent = dataRepositoryEvent;
 	}
 
+<<<<<<< HEAD
 	public DataRepositoryInscription getDataRepositoryInscription() {
 		return dataRepositoryInscription;
 	}
@@ -45,6 +48,18 @@ public class DataRepositoryActivity {
 
 	protected Connection createConnection() throws SQLException {
 		return DriverManager.getConnection(url, user, password);
+=======
+	private Activity createActivity(ResultSet resultSet) throws SQLException {
+		Integer id = resultSet.getInt("id");
+		String name = resultSet.getString("name");
+		Timestamp begin = resultSet.getTimestamp("begin");
+		Timestamp finish = resultSet.getTimestamp("finish");
+		String description = resultSet.getString("description");
+		String url = resultSet.getString("url");
+		String event_name = resultSet.getString("event_name");
+		Activity activity = new Activity(id, name, begin.toLocalDateTime(), finish.toLocalDateTime(), url, description, event_name);
+		return activity;
+>>>>>>> origin/master
 	}
 
 	public Activity addActivity(Activity activity) {
@@ -52,7 +67,7 @@ public class DataRepositoryActivity {
 		if (event_id != null) {
 			String sql = "insert into activity (name, begin, finish, url, description, event_id)"
 					+ " values (?, ?, ?, ?, ?, ?)";
-			try (Connection connection = createConnection();
+			try (Connection connection = dataRepositoryConnection.createConnection();
 					PreparedStatement pstatement = connection.prepareStatement(sql)) {
 	
 				connection.setAutoCommit(true);
@@ -79,7 +94,7 @@ public class DataRepositoryActivity {
 		String sql = "SELECT a.id,a.name, a.begin, a.finish , a.url , a.description , e.name as event_name "
 				+ "FROM activity as a " + "JOIN event as e " + "on a.event_id = e.id";
 	
-		try (Connection connection = createConnection();
+		try (Connection connection = dataRepositoryConnection.createConnection();
 				Statement statement = connection.createStatement();
 				ResultSet resultSet = statement.executeQuery(sql)) {
 	
@@ -98,7 +113,7 @@ public class DataRepositoryActivity {
 		String sql = "SELECT a.id,a.name, a.begin, a.finish , a.url , a.description , e.name as event_name "
 				+ "FROM activity as a " + "JOIN event as e " + "on a.event_id = e.id " + "WHERE e.id = (?)";
 	
-		try (Connection connection = createConnection();
+		try (Connection connection = dataRepositoryConnection.createConnection();
 				PreparedStatement pstatement = connection.prepareStatement(sql)) {
 			pstatement.setInt(1, id);
 	
@@ -118,12 +133,33 @@ public class DataRepositoryActivity {
 		return list;
 	}
 
+	public Activity findOneActivitybyId(int id) {
+		Activity activity = null;
+		String sql = "SELECT a.id,a.name, a.begin, a.finish , a.url , a.description , e.name as event_name "
+				+ "FROM activity as a " + "JOIN event as e " + "on a.event_id = e.id " + "WHERE a.id = (?)";
+	
+		try (Connection connection = dataRepositoryConnection.createConnection();
+				PreparedStatement pstatement = connection.prepareStatement(sql)) {
+			pstatement.setInt(1, id);
+	
+			try (ResultSet resultSet = pstatement.executeQuery()) {
+	
+				while (resultSet.next()) {
+					activity = createActivity(resultSet);
+				}
+			}
+		} catch (SQLException sqlException) {
+			throw new RuntimeException(sqlException);
+		}
+		return activity;
+	}
+
 	public Event getListActivitiesByPersonId(int id) {
 		Event event = null;
 		String sql = "SELECT e.id as id " + "FROM activity as a " + "JOIN event as e ON a.event_id = e.id "
 				+ "JOIN person as p ON e.person_id = p.id " + "WHERE p.id = ? ";
 	
-		try (Connection connection = createConnection();
+		try (Connection connection = dataRepositoryConnection.createConnection();
 				PreparedStatement pstatement = connection.prepareStatement(sql)) {
 			pstatement.setInt(1, id);
 	
@@ -140,42 +176,9 @@ public class DataRepositoryActivity {
 		return event;
 	}
 
-	public Activity findOneActivitybyId(int id) {
-		Activity activity = null;
-		String sql = "SELECT a.id,a.name, a.begin, a.finish , a.url , a.description , e.name as event_name "
-				+ "FROM activity as a " + "JOIN event as e " + "on a.event_id = e.id " + "WHERE a.id = (?)";
-	
-		try (Connection connection = createConnection();
-				PreparedStatement pstatement = connection.prepareStatement(sql)) {
-			pstatement.setInt(1, id);
-	
-			try (ResultSet resultSet = pstatement.executeQuery()) {
-	
-				while (resultSet.next()) {
-					activity = createActivity(resultSet);
-				}
-			}
-		} catch (SQLException sqlException) {
-			throw new RuntimeException(sqlException);
-		}
-		return activity;
-	}
-
-	private Activity createActivity(ResultSet resultSet) throws SQLException {
-		Integer id = resultSet.getInt("id");
-		String name = resultSet.getString("name");
-		Timestamp begin = resultSet.getTimestamp("begin");
-		Timestamp finish = resultSet.getTimestamp("finish");
-		String description = resultSet.getString("description");
-		String url = resultSet.getString("url");
-		String event_name = resultSet.getString("event_name");
-		Activity activity = new Activity(id, name, begin.toLocalDateTime(), finish.toLocalDateTime(), url, description, event_name);
-		return activity;
-	}
-
 	public void deleteActivityById(int id) {
 		String sql = "DELETE FROM activity WHERE id = ?";
-		try (Connection connection = createConnection();
+		try (Connection connection = dataRepositoryConnection.createConnection();
 				PreparedStatement statement = connection.prepareStatement(sql);) {
 			connection.setAutoCommit(true);
 			statement.setInt(1, id);
