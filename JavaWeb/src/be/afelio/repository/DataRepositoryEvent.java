@@ -140,7 +140,6 @@ public class DataRepositoryEvent {
 	}
 
 	public void deleteEventById(int id) {
-		if (dataRepositoryActivity.findAllActivitiesForOneEventById(id).isEmpty()) {
 			String sql = "DELETE FROM event WHERE id = ?";
 			try (Connection connection = dataRepositoryConnection.createConnection();
 					PreparedStatement statement = connection.prepareStatement(sql);) {
@@ -152,5 +151,5 @@ public class DataRepositoryEvent {
 			}
 		}
 		
-	}
+	
 }
