@@ -37,4 +37,13 @@ public createEvent(event: Event): Observable<Event> {
   .pipe(catchError((error: any) => throwError(error.json())));
 }
 
+public deleteEvent(personId: number): Observable<boolean> {
+  return this.http
+  .delete<boolean>(`${environment.baseUrl}/person/ ${personId}`,
+  {headers: new HttpHeaders().set('Authorization',
+  localStorage.getItem('Authorization')),
+  withCredentials: true})
+  .pipe(catchError((error: any) => throwError(error.json())));
+}
+
 }

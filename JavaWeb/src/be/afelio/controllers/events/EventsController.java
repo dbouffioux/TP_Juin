@@ -58,7 +58,6 @@ public class EventsController extends jsonGenerator{
 		String idEv = request.getPathInfo().substring(index + 1);
 		int id = Integer.parseInt(idEv);
 		repository.deleteEventById(id);
-		
 	}
 
 }
