@@ -422,18 +422,15 @@ public class DataRepository {
 	}
 
 	public void deleteEventById(int id) {
-		if (findAllActivitiesForOneEventById(id).isEmpty()) {
-			String sql = "DELETE FROM event WHERE id = ?";
-			try (Connection connection = createConnection();
-					PreparedStatement statement = connection.prepareStatement(sql);) {
-				connection.setAutoCommit(true);
-				statement.setInt(1, id);
-				statement.executeUpdate();
-			} catch (SQLException sqle) {
-				throw new RuntimeException(sqle);
-			}
+		String sql = "DELETE FROM event WHERE id = ?";
+		try (Connection connection = createConnection();
+				PreparedStatement statement = connection.prepareStatement(sql);) {
+			connection.setAutoCommit(true);
+			statement.setInt(1, id);
+			statement.executeUpdate();
+		} catch (SQLException sqle) {
+			throw new RuntimeException(sqle);
 		}
-		
 	}
 
 	public void deletePersonById(int id) {

@@ -51,3 +51,9 @@ Rapport 09_07:
 Mise en place datePicker
 mise en place des jUnitTest
 début de la gestion de l'overlaps pour l'inscription
+
+Rapport 29_07:
+Mise en place de Jira + SCRUM
+Ajout de style
+Travail sur bug de l'inscription
+Suppression event
