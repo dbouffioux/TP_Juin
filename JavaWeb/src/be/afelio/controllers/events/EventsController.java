@@ -56,6 +56,9 @@ public class EventsController extends jsonGenerator{
 	public void deleteEvent(HttpServletRequest request) {
 		int index = request.getPathInfo().lastIndexOf("/");
 		String idEv = request.getPathInfo().substring(index + 1);
+		System.out.println("EventsController.deleteEvent()");
+		//Integer id = Integer.parseInt(idEv);
+		repositoryEvent.deleteEventById(Integer.parseInt(idEv));
 		int id = Integer.parseInt(idEv);
 		repositoryEvent.deleteEventById(id);
 		

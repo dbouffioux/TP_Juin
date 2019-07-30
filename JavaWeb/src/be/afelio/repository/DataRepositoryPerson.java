@@ -1,7 +1,6 @@
 package be.afelio.repository;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -13,26 +12,28 @@ import be.afelio.beans.Person;
 import be.afelio.jsonParameters.PersonParameters;
 
 public class DataRepositoryPerson {
-	private String url;
-	private String password;
-	private String user;
+	private DataRepositoryConnection dataRepositoryConnection;
 
 	public DataRepositoryPerson(String url, String user, String password) {
 		super();
-		this.url = url;
-		this.user = user;
-		this.password = password;
+		dataRepositoryConnection = new DataRepositoryConnection(url, user, password);
 	}
 
-	protected Connection createConnection() throws SQLException {
-		return DriverManager.getConnection(url, user, password);
+	private Person createPerson(ResultSet resultSet) throws SQLException {
+		int id = resultSet.getInt("id");
+		String firstname = resultSet.getString("firstname");
+		String lastname = resultSet.getString("lastname");
+		String login = resultSet.getString("login");
+		String password = resultSet.getString("password");
+		Person person = new Person(id, firstname, lastname, login, password);
+		return person;
 	}
 
 	public void addPerson(String lastname, String firstname, String login, String password) {
 		if (lastname != null && !lastname.isBlank() && firstname != null && !firstname.isBlank() && login != null
 				&& !login.isBlank() && password != null && !password.isBlank()) {
 			String sql = "insert into person(lastname, firstname, login, password) values (?, ?, ?, ?)";
-			try (Connection connection = createConnection();
+			try (Connection connection = dataRepositoryConnection.createConnection();
 					PreparedStatement pstatement = connection.prepareStatement(sql)) {
 	
 				connection.setAutoCommit(true);
@@ -52,7 +53,7 @@ public class DataRepositoryPerson {
 		List<Person> list = new ArrayList<>();
 		String sql = "SELECT * FROM person";
 	
-		try (Connection connection = createConnection();
+		try (Connection connection = dataRepositoryConnection.createConnection();
 				Statement statement = connection.createStatement();
 				ResultSet resultSet = statement.executeQuery(sql)) {
 	
@@ -70,7 +71,7 @@ public class DataRepositoryPerson {
 		Person person = null;
 		String sql = "SELECT * " + "FROM person " + "WHERE id = ? ";
 	
-		try (Connection connection = createConnection();
+		try (Connection connection = dataRepositoryConnection.createConnection();
 				PreparedStatement pstatement = connection.prepareStatement(sql)) {
 	
 			connection.setAutoCommit(true);
@@ -102,7 +103,7 @@ public class DataRepositoryPerson {
 				&& personParameters.getFirstname() != null && !personParameters.getFirstname().isBlank()
 				&& personParameters.getLogin() != null && !personParameters.getLogin().isBlank()
 				&& personParameters.getPassword() != null && !personParameters.getPassword().isBlank()) {
-			try (Connection connection = createConnection();
+			try (Connection connection = dataRepositoryConnection.createConnection();
 					PreparedStatement pstatement = connection.prepareStatement(sql)) {
 	
 				connection.setAutoCommit(true);
@@ -122,7 +123,7 @@ public class DataRepositoryPerson {
 
 	public void deletePersonById(int id) {
 		String sql = "DELETE FROM person WHERE id = ?";
-		try (Connection connection = createConnection();
+		try (Connection connection = dataRepositoryConnection.createConnection();
 				PreparedStatement statement = connection.prepareStatement(sql);) {
 			connection.setAutoCommit(true);
 			statement.setInt(1, id);
@@ -132,20 +133,10 @@ public class DataRepositoryPerson {
 		}
 	}
 
-	private Person createPerson(ResultSet resultSet) throws SQLException {
-		int id = resultSet.getInt("id");
-		String firstname = resultSet.getString("firstname");
-		String lastname = resultSet.getString("lastname");
-		String login = resultSet.getString("login");
-		String password = resultSet.getString("password");
-		Person person = new Person(id, firstname, lastname, login, password);
-		return person;
-	}
-
 	public Person getConnectionAccount(String login, String password) {
 		Person person = null;
 		String sql = "SELECT * FROM person " + "WHERE login = ? AND password = ?";
-		try (Connection connection = createConnection();
+		try (Connection connection = dataRepositoryConnection.createConnection();
 				PreparedStatement pstatement = connection.prepareStatement(sql)) {
 	
 			connection.setAutoCommit(true);

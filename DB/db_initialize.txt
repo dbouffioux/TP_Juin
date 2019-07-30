@@ -21,7 +21,7 @@ CREATE TABLE activity(
 	url varchar,
 	description varchar,
 	event_id int NOT NULL
-	CONSTRAINT FK_event_id REFERENCES event (id)
+	CONSTRAINT FK_event_id REFERENCES event (id) ON delete CASCADE
 );
 
 
@@ -31,7 +31,7 @@ CREATE TABLE inscription(
 	person_id int NOT NULL
 	CONSTRAINT FK_person_id REFERENCES person (id),
 	activity_id int NOT NULL
-	CONSTRAINT FK_activity_id REFERENCES activity (id)
+	CONSTRAINT FK_activity_id REFERENCES activity (id) ON delete CASCADE
 );
 
 
