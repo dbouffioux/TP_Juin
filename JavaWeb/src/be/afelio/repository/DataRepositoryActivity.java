@@ -15,6 +15,7 @@ import be.afelio.beans.Event;
 
 public class DataRepositoryActivity {
 	private DataRepositoryEvent dataRepositoryEvent;
+	private DataRepositoryInscription dataRepositoryInscription;
 	private String url;
 	private String password;
 	private String user;
@@ -30,10 +31,16 @@ public class DataRepositoryActivity {
 		return dataRepositoryEvent;
 	}
 
-
-
 	public void setDataRepositoryEvent(DataRepositoryEvent dataRepositoryEvent) {
 		this.dataRepositoryEvent = dataRepositoryEvent;
+	}
+
+	public DataRepositoryInscription getDataRepositoryInscription() {
+		return dataRepositoryInscription;
+	}
+
+	public void setDataRepositoryInscription(DataRepositoryInscription dataRepositoryInscription) {
+		this.dataRepositoryInscription = dataRepositoryInscription;
 	}
 
 	protected Connection createConnection() throws SQLException {
@@ -99,7 +106,9 @@ public class DataRepositoryActivity {
 	
 				while (resultSet.next()) {
 					Activity activity = createActivity(resultSet);
+					activity.setInscriptions(dataRepositoryInscription.findAllInscriptionsByActivityId(activity.getId()));
 					list.add(activity);
+					
 				}
 			}
 		} catch (SQLException sqlException) {

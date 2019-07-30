@@ -1,6 +1,7 @@
 package be.afelio.beans;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -21,8 +22,15 @@ public class Activity {
 	protected String url;
 	protected String description;
 	protected String event_name;
+	protected List<Inscription> inscriptions;
 	
 	
+	public List<Inscription> getInscriptions() {
+		return inscriptions;
+	}
+	public void setInscriptions(List<Inscription> list) {
+		this.inscriptions = list;
+	}
 	public String getEvent_name() {
 		return event_name;
 	}

@@ -1,5 +1,5 @@
 <div>
-  <button *ngIf="inscription.person_id == null"
+  <button *ngIf="!isParticipantValue"
     type="button"
     (click)="createInscription()">
     Inscription
@@ -7,7 +7,7 @@
 </div>
 
 <div>
-    <button *ngIf="inscription.person_id == person.id"
+    <button *ngIf="isParticipantValue"
       type="button"
       (click)="deleteInscription()">
       Désinscription
