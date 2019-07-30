@@ -1,5 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~ng-pick-datetime/assets/style/picker.min.css";
+@import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
 
 * {
   margin: 0;
@@ -14,17 +15,17 @@ html {
 
 body
 {
-  background-color: antiquewhite;
+  background-color: #b4f7fd;
   margin: 0;
   padding: 0;
   border-bottom: 0;
+  font-family: 'Roboto', sans-serif;
 }
 
 h1
 {
-  text-align: center;
+  text-align: left;
   font-weight: bold;
-  font-size: 80px;
-  color: maroon;
-  border-style: solid;
+  font-size: 90px;
+  color: white;
 }

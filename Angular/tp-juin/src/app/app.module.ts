@@ -28,6 +28,7 @@ import { AccountComponent } from './Pages/account/account.component';
 import { LogoutComponent } from './Components/logout/logout.component';
 import { ListActivitiesComponent } from './Pages/listActivities/listActivities.component';
 import { UpdateAccountComponent } from './Pages/updateAccount/updateAccount.component';
+import { AccountButtonComponent } from './Components/account-button/account-button.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { UpdateAccountComponent } from './Pages/updateAccount/updateAccount.comp
     AccountComponent,
     LogoutComponent,
     ListActivitiesComponent,
-    UpdateAccountComponent
+    UpdateAccountComponent,
+    AccountButtonComponent
   ],
   imports: [
     BrowserModule,

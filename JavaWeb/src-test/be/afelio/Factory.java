@@ -1,6 +1,6 @@
 package be.afelio;
 
-import be.afelio.repository.DataRepository;
+import be.afelio.repository.DataRepositoryActivity;
 
 public class Factory {
 
@@ -20,7 +20,7 @@ public class Factory {
         return databasePassword;
     }
 
-    public static DataRepository repository () {
+    public static DataRepositoryActivity repository () {
         return new DataRepositoryImplementation(databaseUrl, databaseUser, databasePassword);
     }
 }

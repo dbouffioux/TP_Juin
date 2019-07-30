@@ -6,15 +6,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import be.afelio.beans.Person;
 import be.afelio.controllers.jsonGenerator;
-import be.afelio.repository.DataRepository;
+import be.afelio.repository.DataRepositoryPerson;
 
 public class LoginController extends jsonGenerator {
 
-	protected DataRepository repository;
+	protected DataRepositoryPerson repositoryPerson;
 
-	public  LoginController (DataRepository repository) {
+	public  LoginController (DataRepositoryPerson repositoryPerson) {
 		super();
-		this.repository = repository;
+		this.repositoryPerson = repositoryPerson;
 	}
 	
 	public boolean getConnection(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -36,7 +36,7 @@ public class LoginController extends jsonGenerator {
 				&& !login.isBlank()
 				&& password != null
 				&& !password.isBlank()) {
-			Person person = repository.getConnection(login, password);
+			Person person = repositoryPerson.getConnectionAccount(login, password);
 			if(person != null) {
 				passwordValid=true;
 				request.getSession().setAttribute("id", person.getId() );
