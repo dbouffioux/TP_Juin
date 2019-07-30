@@ -8,13 +8,13 @@ import org.junit.jupiter.api.Test;
 
 import be.afelio.Factory;
 import be.afelio.beans.Activity;
-import be.afelio.repository.DataRepository;
+import be.afelio.repository.DataRepositoryActivity;
 
 public class _01_ActivityExist {
 	
 	@Test
 	void testFindOneActivity() throws Exception {
-		DataRepository repository = Factory.repository();
+		DataRepositoryActivity repository = Factory.repository();
 		assertNotNull(repository);
 		
 		Activity expected = new Activity(1, "Pink",

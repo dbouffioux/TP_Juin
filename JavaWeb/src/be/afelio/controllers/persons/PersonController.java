@@ -10,19 +10,19 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import be.afelio.beans.Person;
 import be.afelio.controllers.jsonGenerator;
 import be.afelio.jsonParameters.PersonParameters;
-import be.afelio.repository.DataRepository;
+import be.afelio.repository.DataRepositoryPerson;
 
 public class PersonController extends jsonGenerator {
 
-	protected DataRepository repository;
+	protected DataRepositoryPerson repositoryPerson;
 
-	public PersonController(DataRepository repository) {
+	public PersonController(DataRepositoryPerson repositoryPerson) {
 		super();
-		this.repository = repository;
+		this.repositoryPerson = repositoryPerson;
 	}
 
 	public void list(HttpServletResponse response) throws IOException {
-		List<Person> listPersons = repository.findAllPersons();
+		List<Person> listPersons = repositoryPerson.findAllPersons();
 		jsonGenerate(response, listPersons);
 	}
 
@@ -34,7 +34,7 @@ public class PersonController extends jsonGenerator {
 				&& personParameters.getLastname() != null && !personParameters.getLastname().isBlank()
 				&& personParameters.getLogin() != null && !personParameters.getLogin().isBlank()
 				&& personParameters.getPassword() != null && !personParameters.getPassword().isBlank()) {
-			repository.addPerson(personParameters.getLastname(), personParameters.getFirstname(),
+			repositoryPerson.addPerson(personParameters.getLastname(), personParameters.getFirstname(),
 					personParameters.getLogin(), personParameters.getPassword());
 		}
 		list(response);
@@ -50,14 +50,14 @@ public class PersonController extends jsonGenerator {
 		System.out.println(personParameters.toString());
 		
 		int id = Integer.parseInt(idPerson);
-		repository.updatePersonById(personParameters, id);
+		repositoryPerson.updatePersonById(personParameters, id);
 	}
 
 	public void deletePerson(HttpServletRequest request) {
 		int index = request.getPathInfo().lastIndexOf("/");
 		String idPerson = request.getPathInfo().substring(index + 1);
 		int id = Integer.parseInt(idPerson);
-		repository.deletePersonById(id);
+		repositoryPerson.deletePersonById(id);
 		
 	}
 }

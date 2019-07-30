@@ -13,27 +13,30 @@ import be.afelio.beans.Event;
 import be.afelio.controllers.jsonGenerator;
 import be.afelio.jsonParameters.ActivityParameters;
 import be.afelio.jsonParameters.PersonParameters;
-import be.afelio.repository.DataRepository;
+import be.afelio.repository.DataRepositoryActivity;
+import be.afelio.repository.DataRepositoryEvent;
 
 
 public class ActivitiesController extends jsonGenerator {
 
-	protected DataRepository repository;
+	protected DataRepositoryActivity repositoryActivity;
+	protected DataRepositoryEvent repositoryEvent;
 
-	public ActivitiesController(DataRepository repository) {
+	public ActivitiesController(DataRepositoryActivity repositoryActivity, DataRepositoryEvent repositoryEvent) {
 		super();
-		this.repository = repository;
+		this.repositoryActivity = repositoryActivity;
+		this.repositoryEvent = repositoryEvent;
 	}
 
 	public void list(HttpServletResponse response) throws IOException {
-		List<Activity> listActivities = repository.findAllActivities();
+		List<Activity> listActivities = repositoryActivity.findAllActivities();
 		jsonGenerate(response, listActivities);
 	}
 	public void listForOneEventById(HttpServletResponse response, HttpServletRequest request) throws IOException {
 		String pathInfoString=request.getPathInfo();
 		String[] parts = pathInfoString.split("/");
 		int id = Integer.parseInt(parts[2]);
-		Event event = repository.getOneEventWithActivities(id);
+		Event event = repositoryEvent.getOneEventWithActivities(id);
 		jsonGenerate(response, event);
 		
 	}
@@ -48,7 +51,7 @@ public class ActivitiesController extends jsonGenerator {
 				&& personParameters.getLogin() != null && !personParameters.getLogin().isBlank()
 				&& personParameters.getPassword() != null && !personParameters.getPassword().isBlank()) {
 			int id = personParameters.getId();
-		Event event = repository.getListActivitiesByPersonId(id);
+		Event event = repositoryActivity.getListActivitiesByPersonId(id);
 		jsonGenerate(response, event);
 		}
 	}
@@ -69,7 +72,7 @@ public class ActivitiesController extends jsonGenerator {
 					activityParameters.getUrl(),
 					activityParameters.getDescription(),
 					activityParameters.getEvent_name());
-			repository.addActivity(activity);
+			repositoryActivity.addActivity(activity);
 		}
 		//list(response);
 		
@@ -81,7 +84,7 @@ public class ActivitiesController extends jsonGenerator {
 		int index = request.getPathInfo().lastIndexOf("/");
 		String idActivity = request.getPathInfo().substring(index + 1);
 		int id = Integer.parseInt(idActivity);
-		repository.deleteActivityById(id);
+		repositoryActivity.deleteActivityById(id);
 		
 	}
 }

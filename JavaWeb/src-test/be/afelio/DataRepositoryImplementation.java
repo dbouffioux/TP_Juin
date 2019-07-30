@@ -1,8 +1,8 @@
 package be.afelio;
 
-import be.afelio.repository.DataRepository;
+import be.afelio.repository.DataRepositoryActivity;
 
-public class DataRepositoryImplementation  extends DataRepository{
+public class DataRepositoryImplementation  extends DataRepositoryActivity{
 	private String url;
 	private String password;
 	private String user;
