@@ -5,6 +5,10 @@
     </a></p>
     <app-event-form (create)="onCreateEvent($event)"></app-event-form>
 <app-activity-form (create)="onCreateActivity($event)" [activity]="activity"></app-activity-form>
-<button><a [routerLink]="['/updateAccount']" routerLinkActive="router-link-active" >Modifier Profile</a></button>
+<button>
+  <a [routerLink]="['/updateAccount']" routerLinkActive="router-link-active" >
+    Modifier Profil
+  </a>
+</button>
 <app-activities></app-activities>
 <app-inscription></app-inscription>

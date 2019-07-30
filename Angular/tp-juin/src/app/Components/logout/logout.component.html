@@ -1,4 +1,4 @@
-<button *ngIf="getLocalStorage()"
+<button *ngIf="isLogged()"
         type="button"
         (click)="logout()"
         [routerLink]="['/home']"

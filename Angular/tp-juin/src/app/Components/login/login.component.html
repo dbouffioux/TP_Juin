@@ -1,23 +1,20 @@
-<form [formGroup]="loginForm" *ngIf="!getLocalStorage()">
-  <div>
-    <label for="login">login : </label>
-    <input formControlName="login" name="login" type="text" [(ngModel)]="person.login">
+<section id="login">
+  <form [formGroup]="loginForm">
+    <div>
+      <label for="login">login : </label>
+      <input formControlName="login" name="login" type="text" [(ngModel)]="person.login">
 
-    <label for="password">password : </label>
-    <input formControlName="password" name="password" type="password" [(ngModel)]="person.password" >
+      <label for="password">password : </label>
+      <input formControlName="password" name="password" type="password" [(ngModel)]="person.password" >
 
-   <button type="button"
-          (click)="getConnection(person.login, person.password)"
-          [disabled]="!loginForm.valid">Login</button>
-  </div>
-  <button>
+      <button type="button"
+            (click)="getConnection(person.login, person.password)"
+            [disabled]="!loginForm.valid">
+            Login
+      </button>
+    </div>
+    <button>
       <a [routerLink]="['/inscription']">inscription</a>
-  </button>
-</form>
-
-
-<div *ngIf="person.firstname !== '' && getLocalStorage()">
- Bienvenue : {{getPerson().firstname}}
-</div>
-
-
+    </button>
+  </form>
+</section>
