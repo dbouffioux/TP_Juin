@@ -1,7 +1,6 @@
 package be.afelio.repository;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -15,15 +14,11 @@ import be.afelio.beans.Inscription;
 
 public class DataRepositoryInscription {
 	private DataRepositoryActivity dataRepositoryActivity;
-	private String url;
-	private String password;
-	private String user;
+	private DataRepositoryConnection dataRepositoryConnection;
 
 	public DataRepositoryInscription(String url, String user, String password) {
 		super();
-		this.url = url;
-		this.user = user;
-		this.password = password;
+		dataRepositoryConnection = new DataRepositoryConnection(url, user, password);
 	}
 
 	public DataRepositoryActivity getDataRepositoryActivity() {
@@ -34,14 +29,19 @@ public class DataRepositoryInscription {
 		this.dataRepositoryActivity = dataRepositoryActivity;
 	}
 
-	protected Connection createConnection() throws SQLException {
-		return DriverManager.getConnection(url, user, password);
+	private Inscription createInscription(ResultSet resultSet) throws SQLException {
+		int id = resultSet.getInt("id");
+		int person_id = resultSet.getInt("person_id");
+		int activity_id = resultSet.getInt("activity_id");
+		Activity activity = dataRepositoryActivity.findOneActivitybyId(activity_id);
+		Inscription inscription = new Inscription(id, activity, person_id);
+		return inscription;
 	}
 
 	public void addInscription(Integer activity_id, Integer person_id) {
 		if (activity_id != null && person_id != null) {
 			String sql = "insert into inscription (activity_id, person_id) values (?, ?)";
-			try (Connection connection = createConnection();
+			try (Connection connection = dataRepositoryConnection.createConnection();
 					PreparedStatement pstatement = connection.prepareStatement(sql)) {
 	
 				connection.setAutoCommit(true);
@@ -61,7 +61,7 @@ public class DataRepositoryInscription {
 		List<Inscription> list = new ArrayList<>();
 		String sql = "SELECT * FROM inscription";
 	
-		try (Connection connection = createConnection();
+		try (Connection connection = dataRepositoryConnection.createConnection();
 				Statement statement = connection.createStatement();
 				ResultSet resultSet = statement.executeQuery(sql)) {
 	
@@ -79,7 +79,7 @@ public class DataRepositoryInscription {
 		List<Inscription> list = new ArrayList<>();
 		String sql = "SELECT * FROM inscription " + 
 				"WHERE person_id = ?";
-		try (Connection connection = createConnection();
+		try (Connection connection = dataRepositoryConnection.createConnection();
 				PreparedStatement pstatement = connection.prepareStatement(sql)) {
 			pstatement.setInt(1, person_id);
 	
@@ -99,18 +99,9 @@ public class DataRepositoryInscription {
 		return list;
 	}
 
-	private Inscription createInscription(ResultSet resultSet) throws SQLException {
-		int id = resultSet.getInt("id");
-		int person_id = resultSet.getInt("person_id");
-		int activity_id = resultSet.getInt("activity_id");
-		Activity activity = dataRepositoryActivity.findOneActivitybyId(activity_id);
-		Inscription inscription = new Inscription(id, activity, person_id);
-		return inscription;
-	}
-
 	public void deleteInscriptionById(int idIns) {
 		String sql = "DELETE FROM inscription WHERE id = ?";
-		try (Connection connection = createConnection();
+		try (Connection connection = dataRepositoryConnection.createConnection();
 				PreparedStatement statement = connection.prepareStatement(sql);) {
 			connection.setAutoCommit(true);
 			statement.setInt(1, idIns);
@@ -131,7 +122,7 @@ public class DataRepositoryInscription {
 			"RIGHT JOIN inscription as insc ON act.id = insc.activity_id " + 
 			"WHERE person_id = ? " ;
 	
-		try (Connection connection = createConnection();
+		try (Connection connection = dataRepositoryConnection.createConnection();
 				PreparedStatement pstatement = connection.prepareStatement(sql)) {
 	
 			connection.setAutoCommit(true);
