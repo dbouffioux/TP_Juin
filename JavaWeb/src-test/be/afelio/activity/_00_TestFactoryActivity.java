@@ -7,9 +7,9 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 
 import be.afelio.Factory;
-import be.afelio.repository.DataRepository;
+import be.afelio.repository.DataRepositoryActivity;
 
-class _00_TestFactory {
+class _00_TestFactoryActivity {
 
 	@Test
 	void testConnectionParameters() throws Exception {
@@ -23,7 +23,7 @@ class _00_TestFactory {
 
 	@Test
 	void testRepositoryCreation() {
-		DataRepository repository = Factory.repository();
+		DataRepositoryActivity repository = Factory.repository();
 		assertNotNull(repository);
 	}
 }

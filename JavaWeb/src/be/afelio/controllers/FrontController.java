@@ -10,7 +10,10 @@ import be.afelio.controllers.events.EventsController;
 import be.afelio.controllers.inscriptions.InscriptionsController;
 import be.afelio.controllers.login.LoginController;
 import be.afelio.controllers.persons.PersonController;
-import be.afelio.repository.DataRepository;
+import be.afelio.repository.DataRepositoryActivity;
+import be.afelio.repository.DataRepositoryEvent;
+import be.afelio.repository.DataRepositoryInscription;
+import be.afelio.repository.DataRepositoryPerson;
 
 /**
  * Servlet implementation class FrontController
@@ -18,8 +21,12 @@ import be.afelio.repository.DataRepository;
 @WebServlet("/FrontController")
 public class FrontController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	DataRepository repository;
-
+	
+	protected DataRepositoryInscription repositoryInscription;
+	protected DataRepositoryActivity repositoryActivity;
+	protected DataRepositoryPerson repositoryPerson;
+	protected DataRepositoryEvent repositoryEvent;
+	
 	protected ActivitiesController activitiesController;
 	protected PersonController personController;
 	protected EventsController eventsController;
@@ -53,12 +60,18 @@ public class FrontController extends HttpServlet {
 			String url = config.getInitParameter("database.url");
 			String user = config.getInitParameter("database.user");
 			String password = config.getInitParameter("database.password");
-			repository = new DataRepository(url, user, password);
-			activitiesController = new ActivitiesController(repository);
-			personController = new PersonController(repository);
-			eventsController = new EventsController(repository);
-			inscriptionsController = new InscriptionsController(repository);
-			loginController = new LoginController(repository);
+			repositoryActivity = new DataRepositoryActivity(url, user, password);
+			repositoryEvent = new DataRepositoryEvent(url, user, password);
+			repositoryPerson = new DataRepositoryPerson(url, user, password);
+			repositoryInscription= new DataRepositoryInscription(url, user, password);
+			repositoryActivity.setDataRepositoryEvent(repositoryEvent);
+			repositoryEvent.setDataRepositoryActivities(repositoryActivity);
+			repositoryInscription.setDataRepositoryActivity(repositoryActivity);
+			activitiesController = new ActivitiesController(repositoryActivity, repositoryEvent);
+			personController = new PersonController(repositoryPerson);
+			eventsController = new EventsController(repositoryEvent);
+			inscriptionsController = new InscriptionsController(repositoryInscription, repositoryActivity);
+			loginController = new LoginController(repositoryPerson);
 		} catch (Exception e) {
 			throw new ServletException(e);
 		}
