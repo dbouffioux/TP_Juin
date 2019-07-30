@@ -60,33 +60,32 @@ public class DataRepository {
 	}
 
 	public Activity addActivity(Activity activity) {
-			Integer event_id = findOneEventByName(activity.getEvent_name());
-			if (event_id != null) {
-				String sql = "insert into activity (name, begin, finish, url, description, event_id)"
-						+ " values (?, ?, ?, ?, ?, ?)";
-				try (Connection connection = createConnection();
-						PreparedStatement pstatement = connection.prepareStatement(sql)) {
+		Integer event_id = findOneEventByName(activity.getEvent_name());
+		if (event_id != null) {
+			String sql = "insert into activity (name, begin, finish, url, description, event_id)"
+					+ " values (?, ?, ?, ?, ?, ?)";
+			try (Connection connection = createConnection();
+					PreparedStatement pstatement = connection.prepareStatement(sql)) {
 
-					connection.setAutoCommit(true);
-					pstatement.setString(1, activity.getName());
-					pstatement.setTimestamp(2 , Timestamp.valueOf(activity.getBegin()));
-					pstatement.setTimestamp(3, Timestamp.valueOf(activity.getFinish()));
-					pstatement.setString(4, activity.getUrl());
-					pstatement.setString(5, activity.getDescription());
-					pstatement.setInt(6, event_id);
-					pstatement.executeUpdate();
-					try (ResultSet rSet = pstatement.getGeneratedKeys()) {
-						if(rSet.next()) {
-							activity.setId(rSet.getInt(1));
-						}
+				connection.setAutoCommit(true);
+				pstatement.setString(1, activity.getName());
+				pstatement.setTimestamp(2, Timestamp.valueOf(activity.getBegin()));
+				pstatement.setTimestamp(3, Timestamp.valueOf(activity.getFinish()));
+				pstatement.setString(4, activity.getUrl());
+				pstatement.setString(5, activity.getDescription());
+				pstatement.setInt(6, event_id);
+				pstatement.executeUpdate();
+				try (ResultSet rSet = pstatement.getGeneratedKeys()) {
+					if (rSet.next()) {
+						activity.setId(rSet.getInt(1));
 					}
-				} catch (SQLException sqlException) {
-					throw new RuntimeException(sqlException);
 				}
-			}return activity;
+			} catch (SQLException sqlException) {
+				throw new RuntimeException(sqlException);
+			}
 		}
-		
-	
+		return activity;
+	}
 
 	public List<Activity> findAllActivities() {
 		List<Activity> list = new ArrayList<>();
@@ -181,7 +180,8 @@ public class DataRepository {
 		String description = resultSet.getString("description");
 		String url = resultSet.getString("url");
 		String event_name = resultSet.getString("event_name");
-		Activity activity = new Activity(id, name, begin.toLocalDateTime(), finish.toLocalDateTime(), url, description, event_name);
+		Activity activity = new Activity(id, name, begin.toLocalDateTime(), finish.toLocalDateTime(), url, description,
+				event_name);
 		return activity;
 	}
 
@@ -355,8 +355,7 @@ public class DataRepository {
 
 	public List<Inscription> getAllInscriptionsForOnePerson(int person_id) {
 		List<Inscription> list = new ArrayList<>();
-		String sql = "SELECT * FROM inscription " + 
-				"WHERE person_id = ?";
+		String sql = "SELECT * FROM inscription " + "WHERE person_id = ?";
 		try (Connection connection = createConnection();
 				PreparedStatement pstatement = connection.prepareStatement(sql)) {
 			pstatement.setInt(1, person_id);
@@ -422,18 +421,19 @@ public class DataRepository {
 	}
 
 	public void deleteEventById(int id) {
-		if (findAllActivitiesForOneEventById(id).isEmpty()) {
-			String sql = "DELETE FROM event WHERE id = ?";
-			try (Connection connection = createConnection();
-					PreparedStatement statement = connection.prepareStatement(sql);) {
-				connection.setAutoCommit(true);
-				statement.setInt(1, id);
-				statement.executeUpdate();
-			} catch (SQLException sqle) {
-				throw new RuntimeException(sqle);
-			}
+		System.out.println("DataRepository.deleteEventById() " + id);
+		String sql = "DELETE FROM event WHERE id = ?";
+		try (Connection connection = createConnection();
+				PreparedStatement statement = connection.prepareStatement(sql);) {
+			connection.setAutoCommit(true);
+			statement.setInt(1, id);
+			statement.executeUpdate();
+			int updatedRows = statement.getUpdateCount();
+			System.out.println("DataRepository.deleteEventById() rows : " + updatedRows);
+		} catch (SQLException sqle) {
+			throw new RuntimeException(sqle);
 		}
-		
+
 	}
 
 	public void deletePersonById(int id) {
@@ -462,12 +462,8 @@ public class DataRepository {
 	}
 
 	public void updatePersonById(PersonParameters personParameters, int id) {
-		String sql = "UPDATE person "
-				   + "SET firstname = ?, "
-				   + "	 lastname = ?, "
-				   + "	 login = ?, "
-				   + "	 password = ? "
-				   + "WHERE id = ? ";
+		String sql = "UPDATE person " + "SET firstname = ?, " + "	 lastname = ?, " + "	 login = ?, "
+				+ "	 password = ? " + "WHERE id = ? ";
 
 		if (personParameters.getLastname() != null && !personParameters.getLastname().isBlank()
 				&& personParameters.getFirstname() != null && !personParameters.getFirstname().isBlank()
@@ -516,38 +512,36 @@ public class DataRepository {
 	}
 
 	public boolean validateInscription(Activity activity, int person_id) {
-		System.out.println("DataRepository.validateInscription()"+activity.getBegin()+" "+ activity.getFinish()+" "+ person_id);
+		System.out.println("DataRepository.validateInscription()" + activity.getBegin() + " " + activity.getFinish()
+				+ " " + person_id);
 		boolean isOverlaps = false;
-		if(!findAllActivitiesForOneEventById(person_id).isEmpty()) {
+		if (!findAllActivitiesForOneEventById(person_id).isEmpty()) {
 			System.out.println("DataRepository.validateInscription() dans la condition");
-			String sql = "SELECT (begin, finish) Overlaps ( ? , ? ) " + 
-				"FROM activity as act " + 
-				"RIGHT JOIN inscription as insc ON act.id = insc.activity_id " + 
-				"WHERE person_id = ? " ;
+			String sql = "SELECT (begin, finish) Overlaps ( ? , ? ) " + "FROM activity as act "
+					+ "RIGHT JOIN inscription as insc ON act.id = insc.activity_id " + "WHERE person_id = ? ";
 
-		try (Connection connection = createConnection();
-				PreparedStatement pstatement = connection.prepareStatement(sql)) {
+			try (Connection connection = createConnection();
+					PreparedStatement pstatement = connection.prepareStatement(sql)) {
 
-			connection.setAutoCommit(true);
-			pstatement.setTimestamp(1, Timestamp.valueOf(activity.getBegin()));
-			pstatement.setTimestamp(2, Timestamp.valueOf(activity.getFinish()));
-			pstatement.setInt(3, person_id);
-			try (ResultSet resultSet = pstatement.executeQuery()) {
+				connection.setAutoCommit(true);
+				pstatement.setTimestamp(1, Timestamp.valueOf(activity.getBegin()));
+				pstatement.setTimestamp(2, Timestamp.valueOf(activity.getFinish()));
+				pstatement.setInt(3, person_id);
+				try (ResultSet resultSet = pstatement.executeQuery()) {
 
-				while (resultSet.next() && isOverlaps) {
-					isOverlaps = resultSet.getBoolean(1);
-						
-					System.out.println("DataRepository.validateInscription() dans le while"+ isOverlaps);
+					while (resultSet.next() && isOverlaps) {
+						isOverlaps = resultSet.getBoolean(1);
+
+						System.out.println("DataRepository.validateInscription() dans le while" + isOverlaps);
+					}
 				}
+			} catch (SQLException sqlException) {
+				throw new RuntimeException(sqlException);
 			}
-		} catch (SQLException sqlException) {
-			throw new RuntimeException(sqlException);
 		}
-		}
-		
 
 		return !isOverlaps;
-		
+
 	}
 
 	/*

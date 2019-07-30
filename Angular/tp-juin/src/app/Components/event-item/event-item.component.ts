@@ -20,6 +20,7 @@ export class EventItemComponent implements OnInit {
   public activity: Activity ;
   public person: Person;
   public inscription: Inscription;
+  public isDeleted: boolean;
 
   constructor(
     private eventService: EventService,
@@ -68,8 +69,14 @@ export class EventItemComponent implements OnInit {
       return false;
     }
   }
+
+  public deleteEvent() {
+    this.eventService.deleteEvent(this.event.id).subscribe(() => {
+      console.log('OK');
+      this.isDeleted = true;
+      this.router.navigate(['/home']);
+    }, error => {
+      console.log(error);
+    });
+  }
 }
-
-
-
-

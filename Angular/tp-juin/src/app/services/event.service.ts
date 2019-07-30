@@ -38,8 +38,9 @@ public createEvent(event: Event): Observable<Event> {
 }
 
 public deleteEvent(personId: number): Observable<boolean> {
+  console.log('dans le service de suppression d ev ' +  localStorage.getItem('Authorization') + 'nb : ' + personId);
   return this.http
-  .delete<boolean>(`${environment.baseUrl}/person/ ${personId}`,
+  .delete<boolean>(`${environment.baseUrl}/event/${personId}`,
   {headers: new HttpHeaders().set('Authorization',
   localStorage.getItem('Authorization')),
   withCredentials: true})
