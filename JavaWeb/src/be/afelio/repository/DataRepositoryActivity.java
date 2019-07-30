@@ -1,6 +1,7 @@
 package be.afelio.repository;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -14,15 +15,13 @@ import be.afelio.beans.Event;
 
 public class DataRepositoryActivity {
 	private DataRepositoryEvent dataRepositoryEvent;
-<<<<<<< HEAD
 	private DataRepositoryInscription dataRepositoryInscription;
 	private String url;
 	private String password;
 	private String user;
-=======
 	private DataRepositoryConnection dataRepositoryConnection;
 
->>>>>>> origin/master
+
 
 	public DataRepositoryActivity(String url, String user, String password) {
 		super();
@@ -37,7 +36,6 @@ public class DataRepositoryActivity {
 		this.dataRepositoryEvent = dataRepositoryEvent;
 	}
 
-<<<<<<< HEAD
 	public DataRepositoryInscription getDataRepositoryInscription() {
 		return dataRepositoryInscription;
 	}
@@ -48,7 +46,7 @@ public class DataRepositoryActivity {
 
 	protected Connection createConnection() throws SQLException {
 		return DriverManager.getConnection(url, user, password);
-=======
+	}
 	private Activity createActivity(ResultSet resultSet) throws SQLException {
 		Integer id = resultSet.getInt("id");
 		String name = resultSet.getString("name");
@@ -59,8 +57,8 @@ public class DataRepositoryActivity {
 		String event_name = resultSet.getString("event_name");
 		Activity activity = new Activity(id, name, begin.toLocalDateTime(), finish.toLocalDateTime(), url, description, event_name);
 		return activity;
->>>>>>> origin/master
 	}
+	
 
 	public Activity addActivity(Activity activity) {
 		Integer event_id = dataRepositoryEvent.findOneEventByName(activity.getEvent_name());

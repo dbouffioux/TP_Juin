@@ -68,13 +68,6 @@ export class InscriptionFormComponent implements OnInit {
     );
   }
 
-  // this.activityService.getInscriptionIdByPersonId(Number(this.authenticationService.getLoggedInUser())).subscribe(
-  //   registrations => {
-  //     const reg = registrations.find(registration => registration.activityId === this.activityId);
-  //     this.registrationId = reg.id;
-  //     this.activityService.desinscription(Number(this.registrationId)).subscribe();
-  //     location.reload();
-
   public deleteInscription() {
     this.inscriptionService.getAllInscriptionsForOnePerson(this.person.id).subscribe(
       inscriptions => {

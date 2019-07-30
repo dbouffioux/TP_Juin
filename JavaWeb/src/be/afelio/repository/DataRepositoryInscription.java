@@ -59,13 +59,8 @@ public class DataRepositoryInscription {
 	public List<Inscription> findAllInscriptions() {
 		List<Inscription> list = new ArrayList<>();
 		String sql = "SELECT * FROM inscription";
-<<<<<<< HEAD
-
-		try (Connection connection = createConnection();
-=======
 	
 		try (Connection connection = dataRepositoryConnection.createConnection();
->>>>>>> origin/master
 				Statement statement = connection.createStatement();
 				ResultSet resultSet = statement.executeQuery(sql)) {
 
@@ -83,7 +78,7 @@ public class DataRepositoryInscription {
 		List<Inscription> list = new ArrayList<>();
 		String sql = "SELECT * FROM inscription " + "WHERE activity_id = ?";
 
-		try (Connection connection = createConnection();
+		try (Connection connection = dataRepositoryConnection.createConnection();
 				PreparedStatement pstatement = connection.prepareStatement(sql)) {
 			pstatement.setInt(1, activity_id);
 
@@ -102,14 +97,11 @@ public class DataRepositoryInscription {
 
 	public List<Inscription> getAllInscriptionsForOnePerson(int person_id) {
 		List<Inscription> list = new ArrayList<>();
-<<<<<<< HEAD
-		String sql = "SELECT * FROM inscription " + "WHERE person_id = ?";
-		try (Connection connection = createConnection();
-=======
+
 		String sql = "SELECT * FROM inscription " + 
 				"WHERE person_id = ?";
+		
 		try (Connection connection = dataRepositoryConnection.createConnection();
->>>>>>> origin/master
 				PreparedStatement pstatement = connection.prepareStatement(sql)) {
 			pstatement.setInt(1, person_id);
 
@@ -148,19 +140,13 @@ public class DataRepositoryInscription {
 		boolean isOverlaps = false;
 
 		System.out.println("DataRepository.validateInscription() dans la condition");
-<<<<<<< HEAD
-		String sql = "SELECT (begin, finish) Overlaps ( ? , ? ) " + "FROM activity as act "
-				+ "RIGHT JOIN inscription as insc ON act.id = insc.activity_id " + "WHERE person_id = ? ";
-
-		try (Connection connection = createConnection();
-=======
+		
 		String sql = "SELECT (begin, finish) Overlaps ( ? , ? ) " + 
 			"FROM activity as act " + 
 			"RIGHT JOIN inscription as insc ON act.id = insc.activity_id " + 
 			"WHERE person_id = ? " ;
 	
 		try (Connection connection = dataRepositoryConnection.createConnection();
->>>>>>> origin/master
 				PreparedStatement pstatement = connection.prepareStatement(sql)) {
 
 			connection.setAutoCommit(true);
