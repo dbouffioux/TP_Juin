@@ -19,7 +19,7 @@ export class InscriptionFormComponent implements OnInit {
   public events: Event[];
   public subscriptionBtnClicked = false;
 
-  @Input() private inscription: Inscription;
+  @Input() public inscription: Inscription;
   @Input() success: boolean;
   @Output()
   private create = new EventEmitter<Inscription>();
@@ -29,7 +29,7 @@ export class InscriptionFormComponent implements OnInit {
   constructor(private inscriptionService: InscriptionService, private eventService: EventService) {
     this.person = new Person();
     this.inscription = new Inscription();
-   }
+  }
 
   ngOnInit() {
     if (this.getPerson()) {
@@ -41,7 +41,7 @@ export class InscriptionFormComponent implements OnInit {
     console.log(this.person);
     this.eventService.getEventByPersonId(this.person.id)
       .subscribe(events => {
-      this.events = events;
+        this.events = events;
       });
   }
   public createInscription() {
@@ -55,6 +55,15 @@ export class InscriptionFormComponent implements OnInit {
     this.create.emit(this.inscription);
   }
 
+  public deleteInscription(idInscription: number) {
+    this.inscriptionService.deleteInscription(idInscription).subscribe(() => {
+      console.log('OK');
+      this.success = true;
+    }, error => {
+      this.success = false;
+      console.log(error);
+    });
+  }
   public getPerson(): boolean {
     if (localStorage.getItem('Person') !== '') {
       return true;

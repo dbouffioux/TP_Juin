@@ -1,14 +1,23 @@
 <div>
-  <button
+  <button *ngIf="inscription.person_id != person.id"
     type="button"
     (click)="createInscription()">
     Inscription
   </button>
 </div>
-<ng-container *ngIf="subscriptionBtnClicked">
+
+<div>
+    <button *ngIf="inscription.person_id == person.id"
+      type="button"
+      (click)="deleteInscription()">
+      Désinscription
+    </button>
+  </div>
+
+<!-- <ng-container *ngIf="subscriptionBtnClicked">
     <div *ngIf="success; else notSubscribed">Vous êtes inscrit !</div>
     <ng-template #notSubscribed>
       <div *ngIf="!success">Vous n'êtes pas inscrit !</div>
     </ng-template>
 </ng-container>
-
+ -->

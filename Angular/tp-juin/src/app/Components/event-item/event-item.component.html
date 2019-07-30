@@ -15,8 +15,7 @@
         <td>{{activity.description}}</td>
         <td><a href="{{activity.url}}" target="_blank">{{activity.url}}</a></td>
         <td *ngIf="getPerson()">
-          <app-inscription-form
-          (create) = "onCreateInscription(inscription)" [activity]="activity" [inscription]="inscription"></app-inscription-form>
+              <app-inscription-form></app-inscription-form>
         </td>
       </tr>
 
