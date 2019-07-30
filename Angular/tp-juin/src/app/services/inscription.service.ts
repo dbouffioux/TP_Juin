@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { Inscription } from '../models/inscription.model';
 import { Observable, throwError } from 'rxjs';
 import { environment } from 'src/environments/environment';
@@ -23,8 +23,7 @@ public getAllInscriptionsForOnePerson( person_id: number): Observable<Inscriptio
 }
 public createInscription(inscription: Inscription): Observable<Inscription> {
   return this.http
-    .post<Inscription>(`${environment.baseUrl}/inscription/add`, inscription, {withCredentials: true})
-    .pipe(catchError((error: any) => throwError(error.json())));
+    .post<Inscription>(`${environment.baseUrl}/inscription/add`, inscription, {withCredentials: true});
 }
 
 public deleteInscription(inscriptionId: number): Observable<boolean> {

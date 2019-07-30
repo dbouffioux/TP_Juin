@@ -5,4 +5,10 @@
     Inscription
   </button>
 </div>
-<div *ngIf="inscriptionCreated">Vous êtes inscrit !</div>
+<ng-container *ngIf="subscriptionBtnClicked">
+    <div *ngIf="success; else notSubscribed">Vous êtes inscrit !</div>
+    <ng-template #notSubscribed>
+      <div *ngIf="!success">Vous n'êtes pas inscrit !</div>
+    </ng-template>
+</ng-container>
+
