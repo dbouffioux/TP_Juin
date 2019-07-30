@@ -49,10 +49,15 @@ export class InscriptionFormComponent implements OnInit {
     this.person = JSON.parse(localStorage.getItem('Person'));
     console.log(this.person);
     this.inscription.person_id = this.person.id;
+    console.log(this.inscription.person_id);
+
     this.inscription.activity_id = this.activity.id; // Number.parseInt(localStorage.getItem('activityId'), 0);
     console.log(this.inscription);
 
-    this.create.emit(this.inscription);
+    this.inscriptionService.createInscription(this.inscription).subscribe(() => {
+      console.log('ok');
+    }
+    );
   }
 
   public deleteInscription(idInscription: number) {

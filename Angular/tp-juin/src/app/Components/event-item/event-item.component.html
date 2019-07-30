@@ -15,7 +15,8 @@
         <td>{{activity.description}}</td>
         <td><a href="{{activity.url}}" target="_blank">{{activity.url}}</a></td>
         <td *ngIf="getPerson()">
-              <app-inscription-form></app-inscription-form>
+              <app-inscription-form
+              [activity]=activity></app-inscription-form>
         </td>
       </tr>
 

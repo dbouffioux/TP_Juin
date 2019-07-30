@@ -1,5 +1,5 @@
 <div>
-  <button *ngIf="inscription.person_id != person.id"
+  <button *ngIf="inscription.person_id == null"
     type="button"
     (click)="createInscription()">
     Inscription
