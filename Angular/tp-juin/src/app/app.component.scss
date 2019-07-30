@@ -1,9 +1,8 @@
 #container{
-  padding: 0px 50px;
+  padding: 50px 0;
   width: 70%;
   margin: 0 auto;
   min-height: 60vh;
-  margin-top: 50px;
 }
 
 /* Footer */
@@ -11,11 +10,9 @@ footer{
   clear: both;
   height: 10vh;
   padding: 100px 200px;
-  margin-top: 50px;
   margin-bottom: 0;
-  background: #444444;
+  background: #1f2833;
   color: white;
-
   div{
     display: flex;
     flex-direction: row;
