@@ -17,9 +17,10 @@ export class InscriptionFormComponent implements OnInit {
 
   public person: Person;
   public events: Event[];
-  public inscriptionCreated: boolean;
+  public subscriptionBtnClicked = false;
 
   @Input() private inscription: Inscription;
+  @Input() success: boolean;
   @Output()
   private create = new EventEmitter<Inscription>();
 
@@ -44,9 +45,9 @@ export class InscriptionFormComponent implements OnInit {
       });
   }
   public createInscription() {
+    this.subscriptionBtnClicked = true;
     this.person = JSON.parse(localStorage.getItem('Person'));
     console.log(this.person);
-    this.inscriptionCreated = true;
     this.inscription.person_id = this.person.id;
     this.inscription.activity_id = this.activity.id; // Number.parseInt(localStorage.getItem('activityId'), 0);
     console.log(this.inscription);

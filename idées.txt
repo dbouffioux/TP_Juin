@@ -20,17 +20,7 @@ angular:
 	- suppression des event si pas d'activités
 	- si pas log, depuis home,event, activity, gérer vos activités, il propose de se loguer mais une fois loguer, pas de bouton home, pas de liste d'activités 
 
-	pour l'organisateur:
-	- autoriser l'accès à la page de modification de la db pour les activités
-	- donner la possiblité d'ajouter/modifier/supprimer  activités , descriptif de l'activité, lien vers URL
-	
-	pour l'utilisateur:
-	- possiblité de s'inscrire
-	- s'inscrire à une activité
-	- créer un compte qui retrouve ses préférences
-	- surveiller le choix des plages horaire
-	- utilisateur peut être organisateur
-	-évènement: ensemble d'activités
+
 	
 	
 javaWeb:
@@ -40,8 +30,8 @@ javaWeb:
 	- gérer les erreurs et renvoyer les messages json correspondants
 	- refactor le data repository: compartimenter en métier et utils
 	- modifier l'activité
-	- ajouter concert, scène
-	- ajouter participant
+
+	
 	- suppression des event si pas d'activités
 	- envoyer message erreur si l'inscription est déjà faite ou si l'inscription est overlaps (ajouter dans validate inscription la vérif de la double inscription)
 

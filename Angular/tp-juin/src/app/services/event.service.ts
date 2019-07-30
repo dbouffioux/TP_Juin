@@ -24,7 +24,7 @@ public getEventWithAllActivitiesById(id: number): Observable<Event> {
 public getEventByPersonId(id: number): Observable<Event[]> {
   console.log(id);
 
-  return this.http.post<Event[]>(`${environment.baseUrl}/eventsByPersonId`, {'person_id': id},
+  return this.http.post<Event[]>(`${environment.baseUrl}/eventsByPersonId`, {person_id: id},
   {
     withCredentials: true,
     headers: new HttpHeaders().set('Authorization', localStorage.getItem('Authorization'))})

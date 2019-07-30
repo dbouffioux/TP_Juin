@@ -11,19 +11,19 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import be.afelio.beans.Event;
 import be.afelio.controllers.jsonGenerator;
 import be.afelio.jsonParameters.EventParameters;
-import be.afelio.repository.DataRepository;
+import be.afelio.repository.DataRepositoryEvent;
 
 public class EventsController extends jsonGenerator{
 
-	protected DataRepository repository;
+	protected DataRepositoryEvent repositoryEvent;
 
-	public EventsController(DataRepository repository) {
+	public EventsController(DataRepositoryEvent repository) {
 		super();
-		this.repository = repository;
+		this.repositoryEvent = repository;
 	}
 
 	public void list(HttpServletResponse response) throws IOException {
-		List<Event> listEvents = repository.findAllEvents();
+		List<Event> listEvents = repositoryEvent.findAllEvents();
 		jsonGenerate(response, listEvents);
 	}
 
@@ -32,7 +32,7 @@ public class EventsController extends jsonGenerator{
 		EventParameters eventParameters;
 		try {
 			eventParameters = mapper.readValue(request.getInputStream(), EventParameters.class);
-			List<Event> listEvents = repository.findAllEventsByPersonId(eventParameters.getPerson_id());
+			List<Event> listEvents = repositoryEvent.findAllEventsByPersonId(eventParameters.getPerson_id());
 			jsonGenerate(response, listEvents);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -47,7 +47,7 @@ public class EventsController extends jsonGenerator{
 		if ( eventParameters.getName()!= null
 				&& !eventParameters.getName().isBlank() 
 				&& eventParameters.getPerson_id() != null ) {
-			repository.addEvent(eventParameters.getName(),eventParameters.getPerson_id() );
+			repositoryEvent.addEvent(eventParameters.getName(),eventParameters.getPerson_id() );
 		}
 		list(response);
 		
@@ -57,7 +57,10 @@ public class EventsController extends jsonGenerator{
 		int index = request.getPathInfo().lastIndexOf("/");
 		String idEv = request.getPathInfo().substring(index + 1);
 		//Integer id = Integer.parseInt(idEv);
-		repository.deleteEventById(Integer.parseInt(idEv));
+		repositoryEvent.deleteEventById(Integer.parseInt(idEv));
+		int id = Integer.parseInt(idEv);
+		repositoryEvent.deleteEventById(id);
+		
 	}
 
 }

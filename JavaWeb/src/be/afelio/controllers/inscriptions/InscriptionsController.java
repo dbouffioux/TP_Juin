@@ -12,16 +12,18 @@ import be.afelio.beans.Activity;
 import be.afelio.beans.Inscription;
 import be.afelio.controllers.jsonGenerator;
 import be.afelio.jsonParameters.InscriptionParameters;
-import be.afelio.jsonParameters.PersonParameters;
-import be.afelio.repository.DataRepository;
+import be.afelio.repository.DataRepositoryActivity;
+import be.afelio.repository.DataRepositoryInscription;
 
 public class InscriptionsController extends jsonGenerator{
 	
-	protected DataRepository repository;
+	protected DataRepositoryInscription repositoryInscription;
+	protected DataRepositoryActivity repositoryActivity;
 
-	public InscriptionsController(DataRepository repository) {
+	public InscriptionsController(DataRepositoryInscription repositoryInscription, DataRepositoryActivity repositoryActivity) {
 		super();
-		this.repository = repository;
+		this.repositoryInscription = repositoryInscription;
+		this.repositoryActivity = repositoryActivity;
 	}
 
 	public void add(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -29,13 +31,13 @@ public class InscriptionsController extends jsonGenerator{
 		ObjectMapper mapper = new ObjectMapper();
 		try {
 			InscriptionParameters inscriptionParameters= mapper.readValue(request.getInputStream(), InscriptionParameters.class );
-			Activity activity = repository.findOneActivitybyId(inscriptionParameters.getActivity_id());
+			Activity activity = repositoryActivity.findOneActivitybyId(inscriptionParameters.getActivity_id());
 		System.out.println("InscriptionsController.add() act-id " + inscriptionParameters.getActivity_id() +" person id " +inscriptionParameters.getPerson_id());
 			if (inscriptionParameters.getActivity_id() != null
 					&& inscriptionParameters.getPerson_id() != null
 					&& validateInscription(activity, inscriptionParameters.getPerson_id())) {
 				System.out.println("InscriptionsController.add()");
-				repository.addInscription(inscriptionParameters.getActivity_id(),inscriptionParameters.getPerson_id());
+				repositoryInscription.addInscription(inscriptionParameters.getActivity_id(),inscriptionParameters.getPerson_id());
 			}
 			list(response);
 			
@@ -48,19 +50,25 @@ public class InscriptionsController extends jsonGenerator{
 	}
 	public boolean validateInscription(Activity activity, int person_id) {
 		System.out.println("InscriptionsController.validateInscription()");
-		return repository.validateInscription(activity, person_id);
+		if (repositoryInscription.getAllInscriptionsForOnePerson(person_id).isEmpty()) {
+			return true;
+		}
+		else {
+			return !repositoryInscription.validateInscriptionOverlaps(activity, person_id);
+		}
+		
 		
 	}
 	public void getAllInscriptionsForOnePerson(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		String pathInfoString=request.getPathInfo();
 		String[] parts = pathInfoString.split("/");
 		int id = Integer.parseInt(parts[2]);
-		List<Inscription> listInscriptions = repository.getAllInscriptionsForOnePerson(id);
+		List<Inscription> listInscriptions = repositoryInscription.getAllInscriptionsForOnePerson(id);
 		jsonGenerate(response, listInscriptions);
 	}
 
 	public void list(HttpServletResponse response) throws IOException {
-		List<Inscription> listInscriptions = repository.findAllInscriptions();
+		List<Inscription> listInscriptions = repositoryInscription.findAllInscriptions();
 		jsonGenerate(response, listInscriptions);
 	}
 
@@ -68,7 +76,7 @@ public class InscriptionsController extends jsonGenerator{
 		int index = request.getPathInfo().lastIndexOf("/");
 		String id = request.getPathInfo().substring(index + 1);
 		int idIns = Integer.parseInt(id);
-		repository.deleteInscriptionById(idIns);
+		repositoryInscription.deleteInscriptionById(idIns);
 		
 	}
 	
