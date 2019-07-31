@@ -1,4 +1,4 @@
-import {  OnInit, Component } from '@angular/core';
+import {  OnInit, Component, Input } from '@angular/core';
 import { ActivitiesService } from 'src/app/services/activities.service';
 import { Activity } from 'src/app/models/activity.model';
 import { EventService } from 'src/app/services/event.service';
@@ -13,6 +13,7 @@ import { Person } from 'src/app/models/person.models';
 
 export class ActivityListComponent implements OnInit {
 
+  @Input()
   public activities: Activity[];
   public activity: Activity ;
   public events: Event[];
@@ -28,7 +29,7 @@ export class ActivityListComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.eventService.getEventByPersonId(this.person.id).subscribe(event => this.fillActivities(event));
+    // this.eventService.getEventByPersonId(this.person.id).subscribe(event => this.fillActivities(event));
   }
 
   private fillActivities(eventArray: Event[]) {

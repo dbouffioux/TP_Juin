@@ -4,11 +4,14 @@
       {{event.name}}
     </a><button (click)="deleteEvent(event)">Delete</button></p>
     <app-event-form (create)="onCreateEvent($event)"></app-event-form>
-<app-activity-form (create)="onCreateActivity($event)" [activity]="activity"></app-activity-form>
+<app-activity-form
+  (create)="createActivity($event)"
+  [events]="events"
+  [activity]="activity"></app-activity-form>
 <button>
   <a [routerLink]="['/updateAccount']" routerLinkActive="router-link-active" >
     Modifier Profil
   </a>
 </button>
-<app-activity-list></app-activity-list>
+<app-activity-list [activities]="activities"></app-activity-list>
 <app-inscription></app-inscription>

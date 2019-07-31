@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, Input } from '@angular/core';
 import { ActivitiesService } from 'src/app/services/activities.service';
 import { Activity } from 'src/app/models/activity.model';
 import { Person } from 'src/app/models/person.models';
@@ -38,9 +38,12 @@ export class AccountComponent implements OnInit {
   }
 
   public initActivities() {
-    console.log(this.person);
+    console.log('initactivbities');
     this.activitiesService.getActivitiesByPerson(this.person)
-      .subscribe(activities => this.activities = activities);
+      .subscribe(activities => {
+        this.activities = activities;
+        console.log(this.activities);
+      });
     }
 
   public initEvents() {
@@ -51,8 +54,8 @@ export class AccountComponent implements OnInit {
     });
   }
 
-  public createActivity() {
-   this.activitiesService.createActivity(this.activity).subscribe(() => {
+  public createActivity(activity: Activity) {
+   this.activitiesService.createActivity(activity).subscribe(() => {
       console.log('dans le oncreateActivity');
       this.initActivities();
 

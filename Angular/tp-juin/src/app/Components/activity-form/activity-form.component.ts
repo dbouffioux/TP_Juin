@@ -17,6 +17,7 @@ public activities: Activity[];
 public person: Person;
 public persons: Person[];
 public event: Event;
+@Input()
 public events: Event[];
 
   @Input()
@@ -35,18 +36,11 @@ public events: Event[];
   ngOnInit() {
     this.person = JSON.parse(localStorage.getItem('Person'));
     console.log(this.person);
-    this.activitiesService.getActivitiesByPerson(this.person)
-      .subscribe(activities => this.activities = activities);
-    this.eventService.getEventByPersonId(this.person.id)
-      .subscribe(events => {
-        this.events = events;
-        console.log(this.events);
-      });
     }
 
   public createActivity() {
     console.log(this.activity);
     this.create.emit(this.activity);
-    this.refreshActivities.emit();
+    //this.refreshActivities.emit();
   }
 }
