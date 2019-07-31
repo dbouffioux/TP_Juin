@@ -43,18 +43,17 @@ public class DataRepositoryInscription {
 			String sql = "insert into inscription (activity_id, person_id) values (?, ?)";
 			try (Connection connection = dataRepositoryConnection.createConnection();
 					PreparedStatement pstatement = connection.prepareStatement(sql)) {
-	
+
 				connection.setAutoCommit(true);
 				pstatement.setInt(1, activity_id);
 				pstatement.setInt(2, person_id);
 				pstatement.executeUpdate();
 				System.out.println("DataRepository.addInscription()");
-	
+				
 			} catch (SQLException sqlException) {
 				throw new RuntimeException(sqlException);
 			}
 		}
-	
 	}
 
 	public List<Inscription> findAllInscriptions() {
@@ -64,7 +63,7 @@ public class DataRepositoryInscription {
 		try (Connection connection = dataRepositoryConnection.createConnection();
 				Statement statement = connection.createStatement();
 				ResultSet resultSet = statement.executeQuery(sql)) {
-	
+
 			while (resultSet.next()) {
 				Inscription inscription = createInscription(resultSet);
 				list.add(inscription);
@@ -75,16 +74,39 @@ public class DataRepositoryInscription {
 		return list;
 	}
 
+	public List<Inscription> findAllInscriptionsByActivityId(Integer activity_id) {
+		List<Inscription> list = new ArrayList<>();
+		String sql = "SELECT * FROM inscription " + "WHERE activity_id = ?";
+
+		try (Connection connection = dataRepositoryConnection.createConnection();
+				PreparedStatement pstatement = connection.prepareStatement(sql)) {
+			pstatement.setInt(1, activity_id);
+
+			try (ResultSet resultSet = pstatement.executeQuery()) {
+
+				while (resultSet.next()) {
+					Inscription inscription = createInscription(resultSet);
+					list.add(inscription);
+				}
+			}
+		} catch (SQLException sqlException) {
+			throw new RuntimeException(sqlException);
+		}
+		return list;
+	}
+
 	public List<Inscription> getAllInscriptionsForOnePerson(int person_id) {
 		List<Inscription> list = new ArrayList<>();
+
 		String sql = "SELECT * FROM inscription " + 
 				"WHERE person_id = ?";
+		
 		try (Connection connection = dataRepositoryConnection.createConnection();
 				PreparedStatement pstatement = connection.prepareStatement(sql)) {
 			pstatement.setInt(1, person_id);
-	
+
 			try (ResultSet resultSet = pstatement.executeQuery()) {
-	
+
 				while (resultSet.next()) {
 					Inscription inscription = createInscription(resultSet);
 					Activity activity = dataRepositoryActivity.findOneActivitybyId(inscription.getActivity().getId());
@@ -95,7 +117,7 @@ public class DataRepositoryInscription {
 		} catch (SQLException sqlException) {
 			throw new RuntimeException(sqlException);
 		}
-	
+
 		return list;
 	}
 
@@ -109,14 +131,16 @@ public class DataRepositoryInscription {
 		} catch (SQLException sqle) {
 			throw new RuntimeException(sqle);
 		}
-	
+
 	}
 
 	public boolean validateInscriptionOverlaps(Activity activity, int person_id) {
-		System.out.println("DataRepository.validateInscription()"+activity.getBegin()+" "+ activity.getFinish()+" "+ person_id);
+		System.out.println("DataRepository.validateInscription()" + activity.getBegin() + " " + activity.getFinish()
+				+ " " + person_id);
 		boolean isOverlaps = false;
-		
+
 		System.out.println("DataRepository.validateInscription() dans la condition");
+		
 		String sql = "SELECT (begin, finish) Overlaps ( ? , ? ) " + 
 			"FROM activity as act " + 
 			"RIGHT JOIN inscription as insc ON act.id = insc.activity_id " + 
@@ -124,22 +148,22 @@ public class DataRepositoryInscription {
 	
 		try (Connection connection = dataRepositoryConnection.createConnection();
 				PreparedStatement pstatement = connection.prepareStatement(sql)) {
-	
+
 			connection.setAutoCommit(true);
 			pstatement.setTimestamp(1, Timestamp.valueOf(activity.getBegin()));
 			pstatement.setTimestamp(2, Timestamp.valueOf(activity.getFinish()));
 			pstatement.setInt(3, person_id);
 			try (ResultSet resultSet = pstatement.executeQuery()) {
-	
+
 				while (resultSet.next() && !isOverlaps) {
 					isOverlaps = resultSet.getBoolean(1);
-						
-					System.out.println("DataRepository.validateInscription() dans le while"+ isOverlaps);
+
+					System.out.println("DataRepository.validateInscription() dans le while" + isOverlaps);
 				}
 			}
 		} catch (SQLException sqlException) {
 			throw new RuntimeException(sqlException);
 		}
-		return isOverlaps;	
+		return isOverlaps;
 	}
 }

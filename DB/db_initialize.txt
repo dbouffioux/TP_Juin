@@ -21,7 +21,7 @@ CREATE TABLE activity(
 	url varchar,
 	description varchar,
 	event_id int NOT NULL
-	CONSTRAINT FK_event_id REFERENCES event (id) ON delete CASCADE
+	CONSTRAINT FK_event_id REFERENCES event (id) ON DELETE CASCADE
 );
 
 
