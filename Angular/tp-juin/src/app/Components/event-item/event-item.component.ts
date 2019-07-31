@@ -36,6 +36,11 @@ export class EventItemComponent implements OnInit {
 
   ngOnInit() {
 
+    this.refreshActivities();
+
+  }
+
+  public refreshActivities() {
     this.route.params.subscribe(params => {
       const id = params.id;
       console.log(id);
@@ -44,7 +49,6 @@ export class EventItemComponent implements OnInit {
       // this.activitiesService.getActivitiesByPerson(this.person)
       // .subscribe(activities => this.activities = activities);
     });
-
   }
 
   public onCreate(event: Event) {
@@ -84,5 +88,9 @@ export class EventItemComponent implements OnInit {
       this.success = false;
       console.log(error);
     });
+  }
+  public refresh(eventId: number){
+    this.eventService.getEventWithAllActivitiesById(eventId)
+    .subscribe(event => { this.event = event; console.log('dans le getEvent refresh'); });
   }
 }

@@ -37,7 +37,7 @@ public class InscriptionsController extends jsonGenerator{
 					&& inscriptionParameters.getPerson_id() != null
 					&& validateInscription(activity, inscriptionParameters.getPerson_id())) {
 				System.out.println("InscriptionsController.add()");
-				repositoryInscription.addInscription(inscriptionParameters.getActivity_id(),inscriptionParameters.getPerson_id());
+			repositoryInscription.addInscription(inscriptionParameters.getActivity_id(),inscriptionParameters.getPerson_id());
 			}
 			list(response);
 			

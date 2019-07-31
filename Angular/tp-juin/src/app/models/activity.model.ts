@@ -1,3 +1,5 @@
+import { Inscription } from './inscription.model';
+
 export class Activity {
 id?: number;
 name?: string;
@@ -6,6 +8,7 @@ finish?: Date;
 description?: string;
 url?: string;
 event_name?: string;
+inscriptions?: Inscription[];
 
  public constructor() {
    this.name = '';
@@ -14,5 +17,6 @@ event_name?: string;
    this.description = '';
    this.url = '';
    this.event_name = '';
+   this.inscriptions = null;
  }
 }

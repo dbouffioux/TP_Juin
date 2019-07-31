@@ -64,9 +64,12 @@ public class FrontController extends HttpServlet {
 			repositoryEvent = new DataRepositoryEvent(url, user, password);
 			repositoryPerson = new DataRepositoryPerson(url, user, password);
 			repositoryInscription= new DataRepositoryInscription(url, user, password);
+			
 			repositoryActivity.setDataRepositoryEvent(repositoryEvent);
+			repositoryActivity.setDataRepositoryInscription(repositoryInscription);
 			repositoryEvent.setDataRepositoryActivities(repositoryActivity);
 			repositoryInscription.setDataRepositoryActivity(repositoryActivity);
+			
 			activitiesController = new ActivitiesController(repositoryActivity, repositoryEvent);
 			personController = new PersonController(repositoryPerson);
 			eventsController = new EventsController(repositoryEvent);

@@ -1,6 +1,7 @@
 package be.afelio.repository;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -14,7 +15,12 @@ import be.afelio.beans.Event;
 
 public class DataRepositoryActivity {
 	private DataRepositoryEvent dataRepositoryEvent;
+	private DataRepositoryInscription dataRepositoryInscription;
+	private String url;
+	private String password;
+	private String user;
 	private DataRepositoryConnection dataRepositoryConnection;
+
 
 
 	public DataRepositoryActivity(String url, String user, String password) {
@@ -26,12 +32,21 @@ public class DataRepositoryActivity {
 		return dataRepositoryEvent;
 	}
 
-
-
 	public void setDataRepositoryEvent(DataRepositoryEvent dataRepositoryEvent) {
 		this.dataRepositoryEvent = dataRepositoryEvent;
 	}
 
+	public DataRepositoryInscription getDataRepositoryInscription() {
+		return dataRepositoryInscription;
+	}
+
+	public void setDataRepositoryInscription(DataRepositoryInscription dataRepositoryInscription) {
+		this.dataRepositoryInscription = dataRepositoryInscription;
+	}
+
+	protected Connection createConnection() throws SQLException {
+		return DriverManager.getConnection(url, user, password);
+	}
 	private Activity createActivity(ResultSet resultSet) throws SQLException {
 		Integer id = resultSet.getInt("id");
 		String name = resultSet.getString("name");
@@ -43,6 +58,7 @@ public class DataRepositoryActivity {
 		Activity activity = new Activity(id, name, begin.toLocalDateTime(), finish.toLocalDateTime(), url, description, event_name);
 		return activity;
 	}
+	
 
 	public Activity addActivity(Activity activity) {
 		Integer event_id = dataRepositoryEvent.findOneEventByName(activity.getEvent_name());
@@ -103,7 +119,9 @@ public class DataRepositoryActivity {
 	
 				while (resultSet.next()) {
 					Activity activity = createActivity(resultSet);
+					activity.setInscriptions(dataRepositoryInscription.findAllInscriptionsByActivityId(activity.getId()));
 					list.add(activity);
+					
 				}
 			}
 		} catch (SQLException sqlException) {

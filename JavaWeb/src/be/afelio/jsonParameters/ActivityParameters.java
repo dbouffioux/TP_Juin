@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
+import be.afelio.beans.Inscription;
 import be.afelio.utils.LocalDateDeserializer;
 
 public class ActivityParameters {
@@ -16,6 +17,14 @@ public class ActivityParameters {
 	protected String url;
 	protected String description;
 	protected String event_name;
+	protected Inscription inscriptions;
+	
+	public Inscription getInscriptions() {
+		return inscriptions;
+	}
+	public void setInscriptions(Inscription inscriptions) {
+		this.inscriptions = inscriptions;
+	}
 	public String getName() {
 		return name;
 	}
