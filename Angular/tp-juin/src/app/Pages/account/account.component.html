@@ -2,7 +2,7 @@
 <p *ngFor="let event of events">
     <a [routerLink]="['/event', event.id]">
       {{event.name}}
-    </a></p>
+    </a><button (click)="deleteEvent(event)">Delete</button></p>
     <app-event-form (create)="onCreateEvent($event)"></app-event-form>
 <app-activity-form (create)="onCreateActivity($event)" [activity]="activity"></app-activity-form>
 <button>

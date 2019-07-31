@@ -6,8 +6,8 @@ import { ActivitiesService } from 'src/app/services/activities.service';
 import { Activity } from 'src/app/models/activity.model';
 import { Person } from 'src/app/models/person.models';
 import { Inscription } from 'src/app/models/inscription.model';
-import { InscriptionService } from 'src/app/services/inscription.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { InscriptionService } from 'src/app/services/inscription.service';
 
 @Component({
   selector: 'app-event-item',
@@ -70,15 +70,6 @@ export class EventItemComponent implements OnInit {
     });
   }
 
-  public deleteInscription(idInscription: number) {
-    this.inscriptionService.deleteInscription(idInscription).subscribe(() => {
-      console.log('OK');
-      this.success = true;
-    }, error => {
-      this.success = false;
-      console.log(error);
-    });
-  }
   public getPerson(): boolean {
     if (localStorage.getItem('Person') !== '') {
       return true;
@@ -87,12 +78,14 @@ export class EventItemComponent implements OnInit {
     }
   }
 
-  public deleteEvent() {
-    this.eventService.deleteEvent(this.event.id).subscribe(() => {
+
+
+  public deleteInscription(idInscription: number) {
+    this.inscriptionService.deleteInscription(idInscription).subscribe(() => {
       console.log('OK');
-      this.isDeleted = true;
-      this.router.navigate(['/home']);
+      this.success = true;
     }, error => {
+      this.success = false;
       console.log(error);
     });
   }
