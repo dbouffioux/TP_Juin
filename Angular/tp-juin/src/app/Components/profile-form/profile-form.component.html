@@ -18,7 +18,12 @@
     <input name="password" type="text" [(ngModel)]="person.password" >
   </div>
 </form>
-<app-person-form
-(create)="onCreate($event)" [person]="person"
-></app-person-form>
+
 <div *ngIf="isCreate">Votre profil est créé</div>
+<div>
+  <button
+  type="button"
+  (click)="onCreate()">
+  S'inscrire
+</button>
+</div>

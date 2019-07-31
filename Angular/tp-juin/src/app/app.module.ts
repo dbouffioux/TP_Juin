@@ -3,21 +3,15 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { HttpClientModule, HttpParams } from '@angular/common/http';
 import { FormsModule, NgControl, ReactiveFormsModule } from '@angular/forms';
-
 import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ActivitiesComponent } from 'src/app/Components/activities/activities.component';
 import { ActivitiesService } from './services/activities.service';
-import { PersonComponent } from './Components/person/person.component';
 import { PersonService } from './services/person.service';
-import { EventComponent } from './Components/event/event.component';
 import { EventService } from './services/event.service';
 import { InscriptionComponent } from './Components/inscription/inscription.component';
 import { InscriptionService } from './services/inscription.service';
 import { ActivityFormComponent } from './Components/activity-form/activity-form.component';
-import { PersonFormComponent } from './Components/person-form/person-form.component';
 import { EventFormComponent } from './Components/event-form/event-form.component';
 import { InscriptionFormComponent } from './Components/inscription-form/inscription-form.component';
 import { HomeComponent } from './Pages/home/home.component';
@@ -32,16 +26,16 @@ import { AccountButtonComponent } from './Components/account-button/account-butt
 import { MenuComponent } from './Components/menu/menu.component';
 import { AuthenticationService } from './services/authentication.service';
 import { UpdateActivityComponent } from './Pages/updateActivity/updateActivity.component';
+import { ActivityListComponent } from './components/activity-list/activity-list.component';
+import { EventListComponent } from './components/event-list/event-list.component';
+import { ProfileFormComponent } from './components/profile-form/profile-form.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ActivitiesComponent,
-    PersonComponent,
-    EventComponent,
+    EventListComponent,
     InscriptionComponent,
     ActivityFormComponent,
-    PersonFormComponent,
     EventFormComponent,
     InscriptionFormComponent,
     HomeComponent,
@@ -53,7 +47,9 @@ import { UpdateActivityComponent } from './Pages/updateActivity/updateActivity.c
     UpdateAccountComponent,
     AccountButtonComponent,
     MenuComponent,
-    UpdateActivityComponent
+    UpdateActivityComponent,
+    ActivityListComponent,
+    ProfileFormComponent
   ],
   imports: [
     BrowserModule,
