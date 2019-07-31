@@ -25,6 +25,8 @@
   </tr>
 </table>
 <app-activity-form
-(create)="onCreate($event)" [activity]="activity"
+(create)="onCreate($event)"
+(refresh)="initActivities()"
+[activity]="activity"
 ></app-activity-form>
 

@@ -7,12 +7,12 @@ import { Event } from 'src/app/models/event.model';
 import { Inscription } from 'src/app/models/inscription.model';
 import { Router } from '@angular/router';
 
-
 @Component({
   selector: 'app-account',
   templateUrl: './account.component.html',
   styleUrls: ['./account.component.css']
 })
+
 export class AccountComponent implements OnInit {
 
   public activities: Activity[];
@@ -37,31 +37,30 @@ export class AccountComponent implements OnInit {
     this.initEvents();
   }
 
-  public initActivities(){
+  public initActivities() {
     console.log(this.person);
-    // Extract service calls in other fonction tu be reusable
     this.activitiesService.getActivitiesByPerson(this.person)
       .subscribe(activities => this.activities = activities);
-
     }
 
-    public initEvents() {
-      this.eventService.getEventByPersonId(this.person.id)
-      .subscribe(events => {this.events = events;
-                            console.log(this.events);
-      });
-    }
+  public initEvents() {
+    this.eventService.getEventByPersonId(this.person.id)
+    .subscribe(events => {
+      this.events = events;
+      console.log(this.events);
+    });
+  }
 
-
-  public onCreateActivity(activity: Activity, event: Event) {
-    this.activitiesService.createActivity(activity).subscribe(() => {
-      console.log('dans le oncreateActivity de subscribe');
+  public createActivity() {
+   this.activitiesService.createActivity(this.activity).subscribe(() => {
+      console.log('dans le oncreateActivity');
       this.initActivities();
 
     }, error => {
       console.log(error);
     });
   }
+
   public onCreateEvent(event: Event) {
     this.eventService.createEvent(event).subscribe(() => {
       console.log('OK');
@@ -70,10 +69,10 @@ export class AccountComponent implements OnInit {
       console.log(error);
     });
   }
-    public deleteEvent(event: Event) {
+
+  public deleteEvent(event: Event) {
     console.log(event.id);
     this.eventService.deleteEvent(event.id).subscribe(() => {
-
       this.isDeleted = true;
       this.initEvents();
     }, error => {
