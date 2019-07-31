@@ -1,5 +1,51 @@
-#menu_top{
-    position: relative;
-    top: 0;
-    right: 0;
+@import '../../../style/color';
+
+#menu_container{position: absolute; top:0; right:0;
+  #menu_top{
+    margin-top: 7px;
+    float: left;
+    ul{
+      list-style-type: none;
+      li{
+        float: left;
+      }
+      .menu_item{
+        margin: 10px;
+        background-color: $button-background-color;
+        &:hover{
+          background-color: $button-hover-background-color;
+        }
+      }
+    }
+    button{
+      background: none;
+      border: none;
+      a{
+        text-decoration: none;
+        padding: 10px 20px;
+        display: inline-block;
+        border: 1px solid;
+      }
+    }
+  }
+
+  #user{
+    float: right;
+    margin: 10px;
+    #user_round{
+      float: left;
+      height: 50px;
+      width: 50px;
+      border-radius: 50%;
+      background: #B3FFAB;
+      background: -webkit-linear-gradient(to right, #12FFF7, #B3FFAB);
+      background: linear-gradient(to right, #12FFF7, #B3FFAB);
+    }
+    #user_name{
+      float: left;
+      margin: 15px;
+    }
+  }
 }
+
+

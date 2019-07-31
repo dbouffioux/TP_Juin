@@ -22,10 +22,10 @@ import { AccountComponent } from './Pages/account/account.component';
 import { LogoutComponent } from './Components/logout/logout.component';
 import { ListActivitiesComponent } from './Pages/listActivities/listActivities.component';
 import { UpdateAccountComponent } from './Pages/updateAccount/updateAccount.component';
-import { AccountButtonComponent } from './Components/account-button/account-button.component';
 import { MenuComponent } from './Components/menu/menu.component';
 import { AuthenticationService } from './services/authentication.service';
 import { UpdateActivityComponent } from './Pages/updateActivity/updateActivity.component';
+import { LoginFormComponent } from './Components/login-form/login-form.component';
 import { ActivityListComponent } from './components/activity-list/activity-list.component';
 import { EventListComponent } from './components/event-list/event-list.component';
 import { ProfileFormComponent } from './components/profile-form/profile-form.component';
@@ -48,9 +48,9 @@ import { HomeContainerComponent } from './containers/home-container/home-contain
     LogoutComponent,
     ListActivitiesComponent,
     UpdateAccountComponent,
-    AccountButtonComponent,
     MenuComponent,
     UpdateActivityComponent,
+    LoginFormComponent,
     ActivityListComponent,
     ProfileFormComponent,
     AccountContainerComponent,

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output} from '@angular/core';
 import { Person } from 'src/app/models/person.models';
 import { LoginService } from 'src/app/services/login.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
@@ -13,10 +13,9 @@ import { AuthenticationService } from 'src/app/services/authentication.service';
 export class LoginComponent implements OnInit {
 
   public loginForm: FormGroup;
-  private auth: boolean;
   public person: Person;
-
-  @Output() private connection = new EventEmitter<Person>();
+  @Input()
+  public showPopup: boolean;
 
   constructor(private loginService: LoginService, private fb: FormBuilder, private authService: AuthenticationService) {
     this.person = new Person();
@@ -24,47 +23,22 @@ export class LoginComponent implements OnInit {
       login: this.fb.control('', [Validators.required]),
       password: this.fb.control('', [Validators.required])
     });
+    // init popup state
+    this.showPopup = false;
   }
 
   ngOnInit() {
   }
+
   public getConnection() {
     this.loginService.getConnection(this.person.login , this.person.password).subscribe((personFound) => {
-      this.person = personFound;
-      this.setLocalStorage();
+      this.authService.setLoggin(personFound);
     }, error => {
       console.log(error);
-    })
+    });
   }
 
-/*   public submitForm() {
-    const formValues = this.loginForm.value;
-    this.loginService.getConnection(
-      formValues.login,
-      formValues.password)
-      .subscribe(
-        (personFound) => {
-          console.log(personFound);
-          this.authService.setLoggin(personFound);
-        }, error => {
-          console.log(error);
-    }, );
-  } */
-
-  private setLocalStorage() {
-    if (this.person !== null) {
-      localStorage.setItem('Authorization', 'true');
-      localStorage.setItem('Person', JSON.stringify(this.person ));
-    } else {
-      localStorage.setItem('Authorization', 'false');
-    }
-  }
-
-  public isLogged(): boolean {
-    return this.authService.isLogged();
-  }
-
-  public getPerson(): Person {
-    return this.authService.getPerson();
+  public togglePopupState() {
+    this.showPopup = !this.showPopup;
   }
 }

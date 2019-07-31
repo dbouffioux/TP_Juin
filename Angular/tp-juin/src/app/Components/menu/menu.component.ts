@@ -10,6 +10,7 @@ import { Person } from 'src/app/models/person.models';
 
 export class MenuComponent implements OnInit {
 
+
   constructor(private authService: AuthenticationService) { }
 
   ngOnInit() {
