@@ -1,17 +1,9 @@
 <section id="login">
-  <form [formGroup]="loginForm"  (ngSubmit)="submitForm()">
-    <label for="login">login : </label>
-    <input formControlName="login" name="login" type="text">
-
-    <label for="password">password : </label>
-    <input formControlName="password" name="password" type="password">
-
-    <button type="submit" [disabled]="!loginForm.valid">
-      Login
-    </button>
-  </form>
-  <!-- EN FAIRE UN COMPOSANT -->
-  <button>
+  <button class="menu_item">
+    <a>Login</a>
+  </button>
+  <button class="menu_item">
     <a [routerLink]="['/inscription']">inscription</a>
   </button>
+  <app-login-form></app-login-form>
 </section>

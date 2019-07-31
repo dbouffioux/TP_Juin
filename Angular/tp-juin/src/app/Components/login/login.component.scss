@@ -1,4 +1,24 @@
-label
-{
-width: 10%;
+@import '../../../style/color';
+
+#login{
+  display: flex;
+  .menu_item{
+    cursor: pointer;
+    float: left;
+    margin: 10px;
+    background-color: $button-background-color;
+    &:hover{
+      background-color: $button-hover-background-color;
+    }
+  }
+  button{
+    background: none;
+    border: none;
+    border: 1px solid;
+    a{
+      text-decoration: none;
+      padding: 10px 20px;
+      display: inline-block;
+    }
+  }
 }

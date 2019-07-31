@@ -32,6 +32,7 @@ import { AccountButtonComponent } from './Components/account-button/account-butt
 import { MenuComponent } from './Components/menu/menu.component';
 import { AuthenticationService } from './services/authentication.service';
 import { UpdateActivityComponent } from './Pages/updateActivity/updateActivity.component';
+import { LoginFormComponent } from './Components/login-form/login-form.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,8 @@ import { UpdateActivityComponent } from './Pages/updateActivity/updateActivity.c
     UpdateAccountComponent,
     AccountButtonComponent,
     MenuComponent,
-    UpdateActivityComponent
+    UpdateActivityComponent,
+    LoginFormComponent
   ],
   imports: [
     BrowserModule,

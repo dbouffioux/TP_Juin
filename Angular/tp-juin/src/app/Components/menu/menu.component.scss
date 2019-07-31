@@ -1,3 +1,30 @@
-#main_menu{
+@import '../../../style/color';
 
+#menu_top{
+  position: absolute;
+  right: 0;
+  top: 0;
+  ul{
+    list-style-type: none;
+    li{
+      float: left;
+    }
+    .menu_item{
+      margin: 10px;
+      background-color: $button-background-color;
+      &:hover{
+        background-color: $button-hover-background-color;
+      }
+    }
+  }
+  button{
+    background: none;
+    border: none;
+    a{
+      text-decoration: none;
+      padding: 10px 20px;
+      display: inline-block;
+      border: 1px solid;
+    }
+  }
 }
