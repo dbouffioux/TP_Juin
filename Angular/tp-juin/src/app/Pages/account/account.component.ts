@@ -25,27 +25,38 @@ export class AccountComponent implements OnInit {
   public isDeleted: boolean;
 
   constructor(
-              private activitiesService: ActivitiesService,
-              private eventService: EventService,
-              private router: Router) {
+    private activitiesService: ActivitiesService,
+    private eventService: EventService,
+    private router: Router) {
     this.activity = new Activity();
   }
 
   ngOnInit() {
     this.person = JSON.parse(localStorage.getItem('Person'));
+    this.initActivities();
+    this.initEvents();
+  }
+
+  public initActivities(){
     console.log(this.person);
     // Extract service calls in other fonction tu be reusable
     this.activitiesService.getActivitiesByPerson(this.person)
       .subscribe(activities => this.activities = activities);
-    this.eventService.getEventByPersonId(this.person.id)
+
+    }
+
+    public initEvents() {
+      this.eventService.getEventByPersonId(this.person.id)
       .subscribe(events => {this.events = events;
                             console.log(this.events);
       });
-  }
+    }
+
+
   public onCreateActivity(activity: Activity, event: Event) {
     this.activitiesService.createActivity(activity).subscribe(() => {
       console.log('dans le oncreateActivity de subscribe');
-      this.refreshActivities();
+      this.initActivities();
 
     }, error => {
       console.log(error);
@@ -54,30 +65,19 @@ export class AccountComponent implements OnInit {
   public onCreateEvent(event: Event) {
     this.eventService.createEvent(event).subscribe(() => {
       console.log('OK');
+      this.initEvents();
     }, error => {
       console.log(error);
     });
   }
-  public refreshActivities() {
-  this.activitiesService.getActivitiesByPerson(this.person)
-      .subscribe(activities => this.activities = activities);
-  this.eventService.getEventByPersonId(this.person.id)
-      .subscribe(
-        events => {
-          this.events = events;
-          console.log(this.events);
-        }
-      );
-  }
-  public deleteEvent(event: Event) {
+    public deleteEvent(event: Event) {
     console.log(event.id);
     this.eventService.deleteEvent(event.id).subscribe(() => {
 
       this.isDeleted = true;
-      this.router.navigate(['/account']);
+      this.initEvents();
     }, error => {
       console.log(error);
     });
   }
-
 }

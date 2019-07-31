@@ -1,18 +1,24 @@
-<nav id="menu_top">
-  <ul>
-    <li>
-      <button class="menu_item">
-        <a [routerLink]="['/home']">Home</a>
-      </button>
-    </li>
-    <li *ngIf="!isLogged()">
-      <app-login></app-login>
-    </li>
-    <li *ngIf="isLogged()">
-      <app-logout></app-logout>
-    </li>
-  </ul>
-</nav>
-<div *ngIf="getPerson()?.firstname !== '' && isLogged()">
-  Bienvenue : {{ getPerson().firstname }}
-</div>
+<section id="menu_container">
+  <nav id="menu_top">
+    <ul>
+      <li>
+        <button class="menu_item">
+          <a [routerLink]="['/home']">Home</a>
+        </button>
+      </li>
+      <li *ngIf="!isLogged()">
+        <app-login></app-login>
+      </li>
+      <li *ngIf="isLogged()">
+        <app-logout></app-logout>
+      </li>
+    </ul>
+  </nav>
+  <section id="user" *ngIf="getPerson()?.firstname !== '' && isLogged()">
+      <div id="user_name">
+          Bienvenue <b>{{ getPerson().firstname }}</b>
+      </div>
+      <div id="user_round"></div>
+  </section>
+</section>
+

@@ -8,22 +8,25 @@ import { Person } from 'src/app/models/person.models';
   templateUrl: './inscription.component.html',
   styleUrls: ['./inscription.component.css']
 })
+
 export class InscriptionComponent implements OnInit {
 
   public inscriptions: Inscription[];
   public isDeleted: boolean;
+  public person: Person;
+
   @Input()
   public inscription: Inscription;
-  public person: Person;
 
   constructor(private inscriptionService: InscriptionService) {
     this.inscription = new Inscription();
-   }
+  }
 
   ngOnInit() {
     this.person = JSON.parse(localStorage.getItem('Person'));
     this.getListInscription();
   }
+
   public deleteInscription(idInscription: number) {
     this.inscriptionService.deleteInscription(idInscription).subscribe(() => {
       console.log('OK');
@@ -34,6 +37,7 @@ export class InscriptionComponent implements OnInit {
       console.log(error);
     });
   }
+
  public getListInscription() {
   this.inscriptionService.getAllInscriptionsForOnePerson(this.person.id).subscribe(inscription => {
       this.inscriptions = inscription,

@@ -1,30 +1,53 @@
 @import '../../../style/color';
 
-#menu_top{
+#menu_container{
   position: absolute;
   right: 0;
   top: 0;
-  ul{
-    list-style-type: none;
-    li{
-      float: left;
+  #menu_top{
+    float: left;
+    ul{
+      list-style-type: none;
+      li{
+        float: left;
+      }
+      .menu_item{
+        margin: 10px;
+        background-color: $button-background-color;
+        &:hover{
+          background-color: $button-hover-background-color;
+        }
+      }
     }
-    .menu_item{
-      margin: 10px;
-      background-color: $button-background-color;
-      &:hover{
-        background-color: $button-hover-background-color;
+    button{
+      background: none;
+      border: none;
+      a{
+        text-decoration: none;
+        padding: 10px 20px;
+        display: inline-block;
+        border: 1px solid;
       }
     }
   }
-  button{
-    background: none;
-    border: none;
-    a{
-      text-decoration: none;
-      padding: 10px 20px;
-      display: inline-block;
-      border: 1px solid;
+
+  #user{
+     float: left;
+    margin: 10px;
+    #user_round{
+      float: left;
+      height: 50px;
+      width: 50px;
+      border-radius: 50%;
+      background: #B3FFAB;  /* fallback for old browsers */
+      background: -webkit-linear-gradient(to right, #12FFF7, #B3FFAB);  /* Chrome 10-25, Safari 5.1-6 */
+      background: linear-gradient(to right, #12FFF7, #B3FFAB); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    }
+    #user_name{
+      float: left;
+      margin: 15px;
     }
   }
 }
+
+

@@ -6,7 +6,6 @@ import { environment } from 'src/environments/environment';
 import { catchError } from 'rxjs/operators';
 import { Person } from '../models/person.models';
 
-
 @Injectable()
 export class ActivitiesService {
 
@@ -24,11 +23,13 @@ export class ActivitiesService {
       .post<Activity>(`${environment.baseUrl}/activity/add`, activity, {withCredentials: true})
       .pipe(catchError((error: any) => throwError(error.json())));
   }
+
   public getActivitiesByPerson(person: Person): Observable<Activity[]> {
     return this.http.post<Activity[]>(`${environment.baseUrl}/account/listActivities`, person,
     {withCredentials: true})
       .pipe(catchError((error: any) => throwError(error.json())));
   }
+
   public deleteActivity(activityId: number): Observable<boolean> {
     return this.http
     .delete<boolean>(`${environment.baseUrl}/activity/${activityId}`,
@@ -36,5 +37,4 @@ export class ActivitiesService {
      withCredentials: true})
     .pipe(catchError((error: any) => throwError(error.json())));
   }
-
 }

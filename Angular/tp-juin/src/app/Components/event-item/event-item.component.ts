@@ -14,6 +14,7 @@ import { InscriptionService } from 'src/app/services/inscription.service';
   templateUrl: './event-item.component.html',
   styleUrls: ['./event-item.component.scss']
 })
+
 export class EventItemComponent implements OnInit {
 
   public event: Event;
@@ -35,9 +36,7 @@ export class EventItemComponent implements OnInit {
   }
 
   ngOnInit() {
-
     this.refreshActivities();
-
   }
 
   public refreshActivities() {
@@ -58,6 +57,7 @@ export class EventItemComponent implements OnInit {
       console.log(error);
     });
   }
+
   public onCreateInscription(inscription: Inscription) {
     console.log(this.inscription);
 
@@ -78,8 +78,6 @@ export class EventItemComponent implements OnInit {
     }
   }
 
-
-
   public deleteInscription(idInscription: number) {
     this.inscriptionService.deleteInscription(idInscription).subscribe(() => {
       console.log('OK');
@@ -89,6 +87,7 @@ export class EventItemComponent implements OnInit {
       console.log(error);
     });
   }
+
   public refresh(eventId: number){
     this.eventService.getEventWithAllActivitiesById(eventId)
     .subscribe(event => { this.event = event; console.log('dans le getEvent refresh'); });

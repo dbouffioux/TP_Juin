@@ -9,6 +9,7 @@ import { Person } from '../models/person.models';
 @Injectable({
   providedIn: 'root'
 })
+
 export class LoginService {
 
   public payload: string;
@@ -21,6 +22,7 @@ export class LoginService {
     return this.http.post<Person>(`${environment.baseUrl}/connection`, this.params, { withCredentials: true })
       .pipe(catchError((error: any) => throwError(error.json())));
   }
+
   public closeConnection() {
     return this.http.get(`${environment.baseUrl}/logout`, { withCredentials: true })
       .pipe(catchError((error: any) => throwError(error.json())));

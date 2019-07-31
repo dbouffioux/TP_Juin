@@ -1,18 +1,21 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit , Input, Output, EventEmitter } from '@angular/core';
 import { Person } from 'src/app/models/person.models';
 import { PersonService } from 'src/app/services/person.service';
 import { Router } from '@angular/router';
 import { LoginService } from 'src/app/services/login.service';
 
-
 @Component({
-  selector: 'app-person',
-  templateUrl: './person.component.html',
-  styleUrls: ['./person.component.css']
+  selector: 'app-profile-form',
+  templateUrl: './profile-form.component.html',
+  styleUrls: ['./profile-form.component.css']
 })
-export class PersonComponent implements OnInit {
+
+export class ProfileFormComponent implements OnInit {
+
+  @Input() public person: Person;
+  @Output() private create = new EventEmitter<Person>();
+
   public persons: Person[];
-  public person: Person;
   public isCreate: boolean;
 
 
@@ -21,17 +24,19 @@ export class PersonComponent implements OnInit {
   ngOnInit() {
     this.personService.getPersons().subscribe(person => this.persons = person);
   }
-  public onCreate(personCreate: Person) {
-    this.personService.createPerson(personCreate).subscribe(() => {
+
+  public onCreate() {
+    this.personService.createPerson(this.person).subscribe(() => {
       console.log('OK');
       this.isCreate = true;
       this.setLocalStorage();
-      this.login.getConnection(personCreate.login, personCreate.password).subscribe();
+      this.login.getConnection(this.person.login, this.person.password).subscribe();
       this.router.navigate(['/home']);
     }, error => {
       console.log(error);
     });
   }
+
   private setLocalStorage() {
     if (this.person !== null) {
       localStorage.setItem('Authorization', 'true');
@@ -44,4 +49,8 @@ export class PersonComponent implements OnInit {
     }
   }
 
+  public createPerson() {
+    console.log(this.person);
+    this.create.emit(this.person);
+  }
 }

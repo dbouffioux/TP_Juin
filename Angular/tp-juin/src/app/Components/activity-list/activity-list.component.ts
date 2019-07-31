@@ -6,11 +6,12 @@ import { Event } from 'src/app/models/event.model';
 import { Person } from 'src/app/models/person.models';
 
 @Component({
-  selector: 'app-activities',
-  templateUrl: './activities.component.html',
-  styleUrls: ['./activities.component.scss']
+  selector: 'app-activity-list',
+  templateUrl: './activity-list.component.html',
+  styleUrls: ['./activity-list.component.css']
 })
-export class ActivitiesComponent implements OnInit {
+
+export class ActivityListComponent implements OnInit {
 
   public activities: Activity[];
   public activity: Activity ;
@@ -38,6 +39,7 @@ export class ActivitiesComponent implements OnInit {
       }
     }
   }
+
   public onCreate(acvitity: Activity) {
     this.activitiesService.createActivity(acvitity).subscribe(() => {
       this.eventService.getEventByPersonId(this.person.id).subscribe(event => this.fillActivities(event));
@@ -46,6 +48,7 @@ export class ActivitiesComponent implements OnInit {
       console.log(error);
     });
   }
+
   public deleteActivity(idActivity: number) {
     this.activitiesService.deleteActivity(idActivity).subscribe(() => {
       this.eventService.getEventByPersonId(this.person.id).subscribe(event => this.fillActivities(event));

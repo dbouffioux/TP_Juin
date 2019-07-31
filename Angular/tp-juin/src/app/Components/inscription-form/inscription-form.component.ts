@@ -1,13 +1,11 @@
 import { Component, OnInit, Input, EventEmitter, Output, SimpleChanges, OnChanges } from '@angular/core';
 import { Inscription } from 'src/app/models/inscription.model';
 import { Activity } from 'src/app/models/activity.model';
-import { ActivatedRoute } from '@angular/router';
 import { Person } from 'src/app/models/person.models';
 import { InscriptionService } from 'src/app/services/inscription.service';
 import { EventService } from 'src/app/services/event.service';
 import { Event } from 'src/app/models/event.model';
 import { ActivitiesService } from 'src/app/services/activities.service';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 
 @Component({
@@ -15,6 +13,7 @@ import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
   templateUrl: './inscription-form.component.html',
   styleUrls: ['./inscription-form.component.css']
 })
+
 export class InscriptionFormComponent implements OnInit, OnChanges {
 
   public person: Person;
@@ -25,14 +24,11 @@ export class InscriptionFormComponent implements OnInit, OnChanges {
   public inscriptionID: number;
 
   @Input() public inscription: Inscription;
-  @Input() success: boolean;
-  @Output()
-  private create = new EventEmitter<Inscription>();
-  @Output()
-  private refresh = new EventEmitter<void>();
-
+  @Input() public success: boolean;
   @Input() private activity: Activity;
   @Input() public eventID: number;
+  @Output() private create = new EventEmitter<Inscription>();
+  @Output() private refresh = new EventEmitter<void>();
 
   constructor(private inscriptionService: InscriptionService,
     private eventService: EventService,
@@ -56,6 +52,7 @@ export class InscriptionFormComponent implements OnInit, OnChanges {
         this.events = events;
       });
   }
+
   public createInscription() {
     this.subscriptionBtnClicked = true;
     this.person = JSON.parse(localStorage.getItem('Person'));
@@ -68,7 +65,6 @@ export class InscriptionFormComponent implements OnInit, OnChanges {
     this.inscriptionService.createInscription(this.inscription).subscribe(() => {
       console.log('ok');
       this.refresh.emit();
-      // this.refresh(this.eventID);
     }
     );
   }
@@ -83,7 +79,6 @@ export class InscriptionFormComponent implements OnInit, OnChanges {
         console.log(this.inscriptionID);
         this.inscriptionService.deleteInscription(this.inscriptionID).subscribe(() => {
           console.log('OK');
-          // this.refresh(this.eventID);
           this.success = true;
           this.refresh.emit();
         }, error => {
@@ -92,8 +87,8 @@ export class InscriptionFormComponent implements OnInit, OnChanges {
         });
       }
     );
-
   }
+
   public getPerson(): boolean {
     if (localStorage.getItem('Person') !== '') {
       return true;
@@ -101,6 +96,7 @@ export class InscriptionFormComponent implements OnInit, OnChanges {
       return false;
     }
   }
+
   public getListInscription() {
     this.inscriptionService.getAllInscriptionsForOnePerson(this.person.id).subscribe(inscription => {
       this.inscriptions = inscription,
@@ -108,6 +104,7 @@ export class InscriptionFormComponent implements OnInit, OnChanges {
 
     });
   }
+
   public isParticipant() {
     this.activity.inscriptions.map((participant) => {
 
@@ -120,6 +117,7 @@ export class InscriptionFormComponent implements OnInit, OnChanges {
       }
     });
   }
+
   private getActivities() {
     this.activityService.getActivities().subscribe(
       activities => {
@@ -128,11 +126,10 @@ export class InscriptionFormComponent implements OnInit, OnChanges {
       }
     );
   }
-  ngOnChanges(changes: SimpleChanges): void {
 
+  ngOnChanges(changes: SimpleChanges): void {
   }
 
   public onChanges() {
-
   }
 }
