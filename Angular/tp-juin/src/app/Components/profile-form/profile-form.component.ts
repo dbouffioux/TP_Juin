@@ -9,12 +9,11 @@ import { LoginService } from 'src/app/services/login.service';
   templateUrl: './profile-form.component.html',
   styleUrls: ['./profile-form.component.css']
 })
+
 export class ProfileFormComponent implements OnInit {
 
-  @Input()
-  public person: Person;
-  @Output()
-  private create = new EventEmitter<Person>();
+  @Input() public person: Person;
+  @Output() private create = new EventEmitter<Person>();
 
   public persons: Person[];
   public isCreate: boolean;
@@ -25,6 +24,7 @@ export class ProfileFormComponent implements OnInit {
   ngOnInit() {
     this.personService.getPersons().subscribe(person => this.persons = person);
   }
+
   public onCreate() {
     this.personService.createPerson(this.person).subscribe(() => {
       console.log('OK');
@@ -36,6 +36,7 @@ export class ProfileFormComponent implements OnInit {
       console.log(error);
     });
   }
+
   private setLocalStorage() {
     if (this.person !== null) {
       localStorage.setItem('Authorization', 'true');
@@ -52,5 +53,4 @@ export class ProfileFormComponent implements OnInit {
     console.log(this.person);
     this.create.emit(this.person);
   }
-
 }

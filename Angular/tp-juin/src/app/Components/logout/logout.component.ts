@@ -6,6 +6,7 @@ import { AuthenticationService } from 'src/app/services/authentication.service';
   templateUrl: './logout.component.html',
   styleUrls: ['./logout.component.css']
 })
+
 export class LogoutComponent implements OnInit {
 
   private auth: boolean;
@@ -18,6 +19,7 @@ export class LogoutComponent implements OnInit {
   private logout() {
     this.authService.logout();
   }
+
   public isLogged(): boolean {
    return this.authService.isLogged();
   }

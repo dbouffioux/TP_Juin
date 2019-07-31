@@ -29,6 +29,9 @@ import { UpdateActivityComponent } from './Pages/updateActivity/updateActivity.c
 import { ActivityListComponent } from './components/activity-list/activity-list.component';
 import { EventListComponent } from './components/event-list/event-list.component';
 import { ProfileFormComponent } from './components/profile-form/profile-form.component';
+import { AccountContainerComponent } from './containers/account-container/account-container.component';
+import { ActivityItemContainerComponent } from './containers/activity-item-container/activity-item-container.component';
+import { HomeContainerComponent } from './containers/home-container/home-container.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +52,10 @@ import { ProfileFormComponent } from './components/profile-form/profile-form.com
     MenuComponent,
     UpdateActivityComponent,
     ActivityListComponent,
-    ProfileFormComponent
+    ProfileFormComponent,
+    AccountContainerComponent,
+    ActivityItemContainerComponent,
+    HomeContainerComponent
   ],
   imports: [
     BrowserModule,

@@ -8,7 +8,7 @@
       <input formControlName="password" name="password" type="password" [(ngModel)]="person.password" >
 
       <button type="button"
-            (click)="getConnection(person.login, person.password)"
+            (click)="getConnection()"
             [disabled]="!loginForm.valid">
             Login
       </button>

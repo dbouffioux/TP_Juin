@@ -5,6 +5,7 @@ import { LoginService } from './login.service';
 @Injectable({
   providedIn: 'root'
 })
+
 export class AuthenticationService {
 
   public person: Person;

@@ -10,6 +10,7 @@ import { Person } from 'src/app/models/person.models';
   templateUrl: './activity-list.component.html',
   styleUrls: ['./activity-list.component.css']
 })
+
 export class ActivityListComponent implements OnInit {
 
   public activities: Activity[];
@@ -38,6 +39,7 @@ export class ActivityListComponent implements OnInit {
       }
     }
   }
+
   public onCreate(acvitity: Activity) {
     this.activitiesService.createActivity(acvitity).subscribe(() => {
       this.eventService.getEventByPersonId(this.person.id).subscribe(event => this.fillActivities(event));
@@ -46,6 +48,7 @@ export class ActivityListComponent implements OnInit {
       console.log(error);
     });
   }
+
   public deleteActivity(idActivity: number) {
     this.activitiesService.deleteActivity(idActivity).subscribe(() => {
       this.eventService.getEventByPersonId(this.person.id).subscribe(event => this.fillActivities(event));
@@ -64,5 +67,4 @@ export class ActivityListComponent implements OnInit {
       console.log(error);
     });
   }
-
 }

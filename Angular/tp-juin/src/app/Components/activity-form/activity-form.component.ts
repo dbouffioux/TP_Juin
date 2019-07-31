@@ -39,24 +39,15 @@ public events: Event[];
     this.activitiesService.getActivitiesByPerson(this.person)
       .subscribe(activities => this.activities = activities);
     this.eventService.getEventByPersonId(this.person.id)
-      .subscribe(events => {this.events = events;
-                            console.log(this.events);
+      .subscribe(events => {
+        this.events = events;
+        console.log(this.events);
       });
     }
 
   public createActivity() {
     console.log(this.activity);
-
     this.create.emit(this.activity);
     this.refreshActivities.emit();
   }
-
-
 }
-
-
-
-
-
-
-
