@@ -16,9 +16,6 @@ import be.afelio.beans.Event;
 public class DataRepositoryActivity {
 	private DataRepositoryEvent dataRepositoryEvent;
 	private DataRepositoryInscription dataRepositoryInscription;
-	private String url;
-	private String password;
-	private String user;
 	private DataRepositoryConnection dataRepositoryConnection;
 
 
@@ -44,9 +41,6 @@ public class DataRepositoryActivity {
 		this.dataRepositoryInscription = dataRepositoryInscription;
 	}
 
-	protected Connection createConnection() throws SQLException {
-		return DriverManager.getConnection(url, user, password);
-	}
 	private Activity createActivity(ResultSet resultSet) throws SQLException {
 		Integer id = resultSet.getInt("id");
 		String name = resultSet.getString("name");
