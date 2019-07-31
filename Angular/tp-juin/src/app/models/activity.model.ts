@@ -8,7 +8,7 @@ finish?: Date;
 description?: string;
 url?: string;
 event_name?: string;
-inscriptions: Inscription[];
+inscriptions?: Inscription[];
 
  public constructor() {
    this.name = '';

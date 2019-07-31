@@ -17,13 +17,13 @@ public class ActivityParameters {
 	protected String url;
 	protected String description;
 	protected String event_name;
-	protected Inscription[] inscritpions;
+	protected Inscription inscriptions;
 	
-	public Inscription[] getInscritpions() {
-		return inscritpions;
+	public Inscription getInscriptions() {
+		return inscriptions;
 	}
-	public void setInscritpions(Inscription[] inscritpions) {
-		this.inscritpions = inscritpions;
+	public void setInscriptions(Inscription inscriptions) {
+		this.inscriptions = inscriptions;
 	}
 	public String getName() {
 		return name;
