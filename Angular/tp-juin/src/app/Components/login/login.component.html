@@ -1,20 +1,17 @@
 <section id="login">
-  <form [formGroup]="loginForm">
-    <div>
-      <label for="login">login : </label>
-      <input formControlName="login" name="login" type="text" [(ngModel)]="person.login">
+  <form [formGroup]="loginForm"  (ngSubmit)="submitForm()">
+    <label for="login">login : </label>
+    <input formControlName="login" name="login" type="text">
 
-      <label for="password">password : </label>
-      <input formControlName="password" name="password" type="password" [(ngModel)]="person.password" >
+    <label for="password">password : </label>
+    <input formControlName="password" name="password" type="password">
 
-      <button type="button"
-            (click)="getConnection(person.login, person.password)"
-            [disabled]="!loginForm.valid">
-            Login
-      </button>
-    </div>
-    <button>
-      <a [routerLink]="['/inscription']">inscription</a>
+    <button type="submit" [disabled]="!loginForm.valid">
+      Login
     </button>
   </form>
+  <!-- EN FAIRE UN COMPOSANT -->
+  <button>
+    <a [routerLink]="['/inscription']">inscription</a>
+  </button>
 </section>

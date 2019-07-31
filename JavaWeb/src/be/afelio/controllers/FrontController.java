@@ -129,7 +129,6 @@ public class FrontController extends HttpServlet {
 		System.out.println("FrontController.doPost()" + pathInfo);
 		setHeaders(response);
 		boolean authorization = false;
-		
 		if (null == session.getAttribute("id")) {
 			session.setAttribute("Authorization", false);
 			System.out.println(

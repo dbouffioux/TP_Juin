@@ -14,11 +14,22 @@ export class AuthenticationService {
   public isLogged(): boolean {
     return localStorage.getItem('Authorization') === 'true' ? true : false;
   }
+
+  public setLoggin(person?: Person): void {
+    if (person !== null) {
+      localStorage.setItem('Authorization', 'true');
+      localStorage.setItem('Person', JSON.stringify(person));
+    } else {
+      localStorage.setItem('Authorization', 'false');
+    }
+  }
+
   public getPerson(): Person {
     return this.person = localStorage.getItem('Person') !== '' ?
       JSON.parse(localStorage.getItem('Person'))
       : '';
   }
+
   public logout(): any {
     localStorage.setItem('Authorization', 'false');
     localStorage.setItem('Person', '');

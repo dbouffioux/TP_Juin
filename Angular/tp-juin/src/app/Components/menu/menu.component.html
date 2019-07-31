@@ -1,15 +1,15 @@
-<nav>
+<nav id="main_menu">
   <ul>
     <li>
       <button>
-          <a [routerLink]="['/home']"  >Home</a>
+        <a [routerLink]="['/home']">Home</a>
       </button>
     </li>
     <li *ngIf="!isLogged()">
-        <app-login></app-login>
+      <app-login></app-login>
     </li>
     <li *ngIf="isLogged()">
-        <app-logout></app-logout>
+      <app-logout></app-logout>
     </li>
   </ul>
 </nav>
