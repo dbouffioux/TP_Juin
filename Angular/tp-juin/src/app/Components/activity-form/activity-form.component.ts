@@ -24,7 +24,7 @@ public events: Event[];
   @Output()
   private create = new EventEmitter<Activity>();
   @Output()
-  private refresh = new EventEmitter<void>();
+  private refreshActivities = new EventEmitter<void>();
 
   constructor(private activitiesService: ActivitiesService, private eventService: EventService) {
     this.activity = new Activity();
@@ -47,6 +47,6 @@ public events: Event[];
   public createActivity() {
     console.log(this.activity);
     this.create.emit(this.activity);
-    this.refresh.emit();
+    this.refreshActivities.emit();
   }
 }
