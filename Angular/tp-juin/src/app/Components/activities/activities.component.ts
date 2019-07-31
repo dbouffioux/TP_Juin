@@ -55,4 +55,13 @@ export class ActivitiesComponent implements OnInit {
       console.log(error);
     });
   }
+
+  public updateActivity(idActivity: number) {
+    this.activitiesService.deleteActivity(idActivity).subscribe(() => {
+      this.eventService.getEventByPersonId(this.person.id).subscribe(event => this.fillActivities(event));
+      this.isDeleted = true;
+    }, error => {
+      console.log(error);
+    });
+  }
 }

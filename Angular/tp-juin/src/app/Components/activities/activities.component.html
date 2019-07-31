@@ -6,6 +6,7 @@
     <th>Heure de fin</th>
     <th>Description</th>
     <th>URL</th>
+    <th>Modification</th>
     <th>Suppression</th>
   </tr>
   <tr *ngFor="let activity of activities">
@@ -15,6 +16,7 @@
     <td>{{activity.finish  | date : 'dd/MM/yy HH:mm'}}</td>
     <td>{{activity.description}}</td>
     <td><a href="{{activity.url}}" target="_blank">{{activity.url}}</a></td>
+    <td><a href="updateActivity/${activity.id}"><button>modification</button></a></td>
     <td><button (click)= "deleteActivity(activity.id)">supression</button></td>
   </tr>
 </table>

@@ -5,6 +5,8 @@ import { Person } from 'src/app/models/person.models';
 import { EventService } from 'src/app/services/event.service';
 import { Event } from 'src/app/models/event.model';
 import { Inscription } from 'src/app/models/inscription.model';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-account',
@@ -17,11 +19,15 @@ export class AccountComponent implements OnInit {
   public activity: Activity;
   public person: Person;
   public persons: Person[];
+  public event: Event;
   public events: Event[];
   public inscriptions: Inscription[];
+  public isDeleted: boolean;
 
-  constructor(private activitiesService: ActivitiesService,
-              private eventService: EventService) {
+  constructor(
+              private activitiesService: ActivitiesService,
+              private eventService: EventService,
+              private router: Router) {
     this.activity = new Activity();
   }
 
@@ -63,4 +69,15 @@ export class AccountComponent implements OnInit {
         }
       );
   }
+  public deleteEvent(event: Event) {
+    console.log(event.id);
+    this.eventService.deleteEvent(event.id).subscribe(() => {
+
+      this.isDeleted = true;
+      this.router.navigate(['/account']);
+    }, error => {
+      console.log(error);
+    });
+  }
+
 }

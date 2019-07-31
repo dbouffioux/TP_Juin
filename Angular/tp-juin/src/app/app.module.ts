@@ -31,6 +31,7 @@ import { UpdateAccountComponent } from './Pages/updateAccount/updateAccount.comp
 import { AccountButtonComponent } from './Components/account-button/account-button.component';
 import { MenuComponent } from './Components/menu/menu.component';
 import { AuthenticationService } from './services/authentication.service';
+import { UpdateActivityComponent } from './Pages/updateActivity/updateActivity.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,8 @@ import { AuthenticationService } from './services/authentication.service';
     ListActivitiesComponent,
     UpdateAccountComponent,
     AccountButtonComponent,
-    MenuComponent
+    MenuComponent,
+    UpdateActivityComponent
   ],
   imports: [
     BrowserModule,

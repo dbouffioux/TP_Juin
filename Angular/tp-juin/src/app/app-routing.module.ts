@@ -10,6 +10,7 @@ import { InscriptionFormComponent } from './Components/inscription-form/inscript
 import { InscriptionComponent } from './Components/inscription/inscription.component';
 import { PersonComponent } from './Components/person/person.component';
 import { UpdateAccountComponent } from './Pages/updateAccount/updateAccount.component';
+import { UpdateActivityComponent } from './Pages/updateActivity/updateActivity.component';
 
 const routes: Routes = [
   {path: '', redirectTo: '/home', pathMatch: 'full'},
@@ -21,6 +22,7 @@ const routes: Routes = [
   {path: 'account/listActivities', component: ListActivitiesComponent},
   {path: 'inscription', component: PersonComponent},
   {path: 'updateAccount', component: UpdateAccountComponent},
+  {path: 'updateActivity/:id', component: UpdateActivityComponent},
   {path: '**', redirectTo: '/home'}
 ];
 
