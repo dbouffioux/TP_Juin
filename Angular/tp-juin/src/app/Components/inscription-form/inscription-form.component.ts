@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output, SimpleChanges, OnChanges } from '@angular/core';
 import { Inscription } from 'src/app/models/inscription.model';
 import { Activity } from 'src/app/models/activity.model';
 import { ActivatedRoute } from '@angular/router';
@@ -15,7 +15,7 @@ import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
   templateUrl: './inscription-form.component.html',
   styleUrls: ['./inscription-form.component.css']
 })
-export class InscriptionFormComponent implements OnInit {
+export class InscriptionFormComponent implements OnInit, OnChanges {
 
   public person: Person;
   public events: Event[];
@@ -28,12 +28,15 @@ export class InscriptionFormComponent implements OnInit {
   @Input() success: boolean;
   @Output()
   private create = new EventEmitter<Inscription>();
+  @Output()
+  private refresh = new EventEmitter<void>();
 
   @Input() private activity: Activity;
+  @Input() public eventID: number;
 
   constructor(private inscriptionService: InscriptionService,
-              private eventService: EventService,
-              private activityService: ActivitiesService) {
+    private eventService: EventService,
+    private activityService: ActivitiesService) {
     this.person = new Person();
     this.inscription = new Inscription();
 
@@ -64,6 +67,8 @@ export class InscriptionFormComponent implements OnInit {
     console.log(this.inscription);
     this.inscriptionService.createInscription(this.inscription).subscribe(() => {
       console.log('ok');
+      this.refresh.emit();
+      // this.refresh(this.eventID);
     }
     );
   }
@@ -71,13 +76,16 @@ export class InscriptionFormComponent implements OnInit {
   public deleteInscription() {
     this.inscriptionService.getAllInscriptionsForOnePerson(this.person.id).subscribe(
       inscriptions => {
-        const inscription = inscriptions.find( inscription1 => {
-          return inscription1.activity.id === this.activity.id; });
+        const inscription = inscriptions.find(inscription1 => {
+          return inscription1.activity.id === this.activity.id;
+        });
         this.inscriptionID = inscription.id;
         console.log(this.inscriptionID);
         this.inscriptionService.deleteInscription(this.inscriptionID).subscribe(() => {
           console.log('OK');
+          // this.refresh(this.eventID);
           this.success = true;
+          this.refresh.emit();
         }, error => {
           this.success = false;
           console.log(error);
@@ -119,5 +127,12 @@ export class InscriptionFormComponent implements OnInit {
         this.isParticipant();
       }
     );
+  }
+  ngOnChanges(changes: SimpleChanges): void {
+
+  }
+
+  public onChanges() {
+
   }
 }
