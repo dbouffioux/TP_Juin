@@ -42,13 +42,14 @@ export class AccountComponent implements OnInit {
     // Extract service calls in other fonction tu be reusable
     this.activitiesService.getActivitiesByPerson(this.person)
       .subscribe(activities => this.activities = activities);
+    console.log('dans le initActivities');
 
     }
 
     public initEvents() {
       this.eventService.getEventByPersonId(this.person.id)
       .subscribe(events => {this.events = events;
-                            console.log(this.events);
+                            console.log('dans le initEvents');
       });
     }
 
