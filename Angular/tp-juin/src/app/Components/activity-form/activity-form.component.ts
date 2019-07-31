@@ -24,6 +24,8 @@ public events: Event[];
   public activity: Activity;
   @Output()
   private create = new EventEmitter<Activity>();
+  @Output()
+  private refresh = new EventEmitter<void>();
 
   constructor(private activitiesService: ActivitiesService, private eventService: EventService) {
     this.activity = new Activity();
@@ -37,23 +39,15 @@ public events: Event[];
     this.activitiesService.getActivitiesByPerson(this.person)
       .subscribe(activities => this.activities = activities);
     this.eventService.getEventByPersonId(this.person.id)
-      .subscribe(events => {this.events = events;
-                            console.log(this.events);
+      .subscribe(events => {
+        this.events = events;
+        console.log(this.events);
       });
     }
 
   public createActivity() {
     console.log(this.activity);
-
     this.create.emit(this.activity);
+    this.refresh.emit();
   }
-
-
 }
-
-
-
-
-
-
-

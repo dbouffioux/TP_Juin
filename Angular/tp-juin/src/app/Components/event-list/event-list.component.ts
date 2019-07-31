@@ -8,6 +8,7 @@ import { EventService } from 'src/app/services/event.service';
   templateUrl: './event-list.component.html',
   styleUrls: ['./event-list.component.css']
 })
+
 export class EventListComponent implements OnInit {
 
   public events: Event[];
@@ -20,6 +21,7 @@ export class EventListComponent implements OnInit {
   ngOnInit() {
     this.eventService.getAllEvents().subscribe(event => this.events = event);
   }
+
   public onCreate(event: Event) {
     this.eventService.createEvent(event).subscribe(() => {
       console.log('OK');
@@ -27,5 +29,4 @@ export class EventListComponent implements OnInit {
       console.log(error);
     });
   }
-
 }

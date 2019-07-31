@@ -7,6 +7,7 @@ import { Person } from 'src/app/models/person.models';
   templateUrl: './event-form.component.html',
   styleUrls: ['./event-form.component.css']
 })
+
 export class EventFormComponent implements OnInit {
   public person: Person;
   @Input()
@@ -25,6 +26,7 @@ export class EventFormComponent implements OnInit {
     this.person = JSON.parse(localStorage.getItem('Person'));
     console.log(this.person, 'dans le init');
   }
+
   public createEvent() {
     console.log(this.event);
     this.create.emit(this.event);

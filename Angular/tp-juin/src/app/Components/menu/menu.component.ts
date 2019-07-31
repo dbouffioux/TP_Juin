@@ -7,6 +7,7 @@ import { Person } from 'src/app/models/person.models';
   templateUrl: './menu.component.html',
   styleUrls: ['./menu.component.scss']
 })
+
 export class MenuComponent implements OnInit {
 
   constructor(private authService: AuthenticationService) { }

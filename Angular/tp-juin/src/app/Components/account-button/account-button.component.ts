@@ -6,6 +6,7 @@ import { AuthenticationService } from 'src/app/services/authentication.service';
   templateUrl: './account-button.component.html',
   styleUrls: ['./account-button.component.scss']
 })
+
 export class AccountButtonComponent implements OnInit {
 
   constructor(private authService: AuthenticationService) {

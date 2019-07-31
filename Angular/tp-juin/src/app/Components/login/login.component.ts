@@ -9,24 +9,35 @@ import { AuthenticationService } from 'src/app/services/authentication.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
+
 export class LoginComponent implements OnInit {
 
   public loginForm: FormGroup;
   private auth: boolean;
-  @Output()
-  private connection = new EventEmitter<Person>();
+  public person: Person;
+
+  @Output() private connection = new EventEmitter<Person>();
 
   constructor(private loginService: LoginService, private fb: FormBuilder, private authService: AuthenticationService) {
+    this.person = new Person();
     this.loginForm = this.fb.group({
       login: this.fb.control('', [Validators.required]),
       password: this.fb.control('', [Validators.required])
     });
-   }
+  }
 
   ngOnInit() {
   }
+  public getConnection() {
+    this.loginService.getConnection(this.person.login , this.person.password).subscribe((personFound) => {
+      this.person = personFound;
+      this.setLocalStorage();
+    }, error => {
+      console.log(error);
+    })
+  }
 
-  public submitForm() {
+/*   public submitForm() {
     const formValues = this.loginForm.value;
     this.loginService.getConnection(
       formValues.login,
@@ -38,6 +49,15 @@ export class LoginComponent implements OnInit {
         }, error => {
           console.log(error);
     }, );
+  } */
+
+  private setLocalStorage() {
+    if (this.person !== null) {
+      localStorage.setItem('Authorization', 'true');
+      localStorage.setItem('Person', JSON.stringify(this.person ));
+    } else {
+      localStorage.setItem('Authorization', 'false');
+    }
   }
 
   public isLogged(): boolean {

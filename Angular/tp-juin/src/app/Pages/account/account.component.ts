@@ -25,9 +25,9 @@ export class AccountComponent implements OnInit {
   public isDeleted: boolean;
 
   constructor(
-              private activitiesService: ActivitiesService,
-              private eventService: EventService,
-              private router: Router) {
+    private activitiesService: ActivitiesService,
+    private eventService: EventService,
+    private router: Router) {
     this.activity = new Activity();
   }
 
