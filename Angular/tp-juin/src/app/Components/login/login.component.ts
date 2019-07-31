@@ -39,6 +39,6 @@ export class LoginComponent implements OnInit {
   }
 
   public togglePopupState() {
-    this.showPopup = this.showPopup ? false : true;
+    this.showPopup = !this.showPopup;
   }
 }

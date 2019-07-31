@@ -1,10 +1,8 @@
 @import '../../../style/color';
 
-#menu_container{
-  position: absolute;
-  right: 0;
-  top: 0;
+#menu_container{position: absolute; top:0; right:0;
   #menu_top{
+    margin-top: 7px;
     float: left;
     ul{
       list-style-type: none;
@@ -32,16 +30,16 @@
   }
 
   #user{
-     float: left;
+    float: right;
     margin: 10px;
     #user_round{
       float: left;
       height: 50px;
       width: 50px;
       border-radius: 50%;
-      background: #B3FFAB;  /* fallback for old browsers */
-      background: -webkit-linear-gradient(to right, #12FFF7, #B3FFAB);  /* Chrome 10-25, Safari 5.1-6 */
-      background: linear-gradient(to right, #12FFF7, #B3FFAB); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+      background: #B3FFAB;
+      background: -webkit-linear-gradient(to right, #12FFF7, #B3FFAB);
+      background: linear-gradient(to right, #12FFF7, #B3FFAB);
     }
     #user_name{
       float: left;

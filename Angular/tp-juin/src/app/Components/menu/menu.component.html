@@ -18,7 +18,10 @@
       <div id="user_name">
           Bienvenue <b>{{ getPerson().firstname }}</b>
       </div>
-      <div id="user_round"></div>
+      <a [routerLink]="['/account']">
+        <div id="user_round">
+        </div>
+      </a>
   </section>
 </section>
 

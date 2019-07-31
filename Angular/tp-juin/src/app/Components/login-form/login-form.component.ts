@@ -50,7 +50,7 @@ export class LoginFormComponent implements OnInit {
   }
 
   public hidePopup() {
-    this.togglePopupStateInParent.emit(true);
+    this.resetPopupInParent.emit(true);
     this.showPopup = false;
   }
 }
