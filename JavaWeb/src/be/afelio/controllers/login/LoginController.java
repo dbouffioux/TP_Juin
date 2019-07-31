@@ -25,8 +25,8 @@ public class LoginController extends jsonGenerator {
 		
 		byte[] decodedBtoa = Base64.getDecoder().decode(btoa);
 		String btoaString= new String(decodedBtoa);
-		
 		String[] parts = btoaString.split(":");
+
 		String login = parts[0];
 		String password = parts[1];
 
