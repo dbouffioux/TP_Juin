@@ -13,6 +13,8 @@ export class EventFormComponent implements OnInit {
   public event: Event;
   @Output()
   private create = new EventEmitter<Event>();
+  @Output()
+  private refresh = new EventEmitter<void>();
 
   constructor() {
     this.event = new Event();
@@ -26,6 +28,8 @@ export class EventFormComponent implements OnInit {
   public createEvent() {
     console.log(this.event);
     this.create.emit(this.event);
+    this.refresh.emit();
+
   }
 }
 

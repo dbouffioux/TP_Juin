@@ -68,7 +68,6 @@ export class InscriptionFormComponent implements OnInit, OnChanges {
     this.inscriptionService.createInscription(this.inscription).subscribe(() => {
       console.log('ok');
       this.refresh.emit();
-      // this.refresh(this.eventID);
     }
     );
   }
@@ -83,7 +82,6 @@ export class InscriptionFormComponent implements OnInit, OnChanges {
         console.log(this.inscriptionID);
         this.inscriptionService.deleteInscription(this.inscriptionID).subscribe(() => {
           console.log('OK');
-          // this.refresh(this.eventID);
           this.success = true;
           this.refresh.emit();
         }, error => {
