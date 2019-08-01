@@ -24,14 +24,11 @@ export class EventFormComponent implements OnInit {
 
   ngOnInit() {
     this.person = JSON.parse(localStorage.getItem('Person'));
-    console.log(this.person, 'dans le init');
   }
 
   public createEvent() {
-    console.log(this.event);
     this.create.emit(this.event);
     this.refresh.emit();
-
   }
 }
 

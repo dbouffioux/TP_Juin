@@ -4,9 +4,6 @@
     <a [routerLink]="['/event', event.id]" routerLinkActive="router-link-active">
       {{event.name}}
     </a>
+    <button *ngIf="isManagement" (click)="onDelete(event)">Delete</button>
   </li>
 </ul>
-
-
-<!-- <app-event-form (create)="onCreate($event)" [event]="event">
-</app-event-form> -->

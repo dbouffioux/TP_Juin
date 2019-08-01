@@ -29,7 +29,6 @@ export class InscriptionComponent implements OnInit {
 
   public deleteInscription(idInscription: number) {
     this.inscriptionService.deleteInscription(idInscription).subscribe(() => {
-      console.log('OK');
       this.isDeleted = true;
       this.getListInscription();
     }, error => {
@@ -39,10 +38,8 @@ export class InscriptionComponent implements OnInit {
   }
 
  public getListInscription() {
-  this.inscriptionService.getAllInscriptionsForOnePerson(this.person.id).subscribe(inscription => {
-      this.inscriptions = inscription,
-      console.log(this.inscriptions);
-
-  });
- }
+  this.inscriptionService.getAllInscriptionsForOnePerson(this.person.id).subscribe(
+      inscription => {this.inscriptions = inscription; }
+    );
+  }
 }

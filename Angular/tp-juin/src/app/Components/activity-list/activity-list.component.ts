@@ -18,7 +18,6 @@ export class ActivityListComponent implements OnInit {
   public activities: Activity[];
   public activity: Activity ;
   public events: Event[];
-  public event1: Event;
   public person: Person;
   public isDeleted: boolean;
   public isCreate: boolean;
@@ -28,12 +27,10 @@ export class ActivityListComponent implements OnInit {
     private eventService: EventService,
     private authService: AuthenticationService) {
     this.activity = new Activity();
-    this.event1 = new Event();
-    this.person = JSON.parse(localStorage.getItem('Person'));
+    this.person = this.authService.getPerson();
   }
 
   ngOnInit() {
-    // this.eventService.getEventByPersonId(this.person.id).subscribe(event => this.fillActivities(event));
   }
 
   private fillActivities(eventArray: Event[]) {

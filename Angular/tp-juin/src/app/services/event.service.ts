@@ -24,7 +24,6 @@ export class EventService {
   }
 
   public getEventByPersonId(id: number): Observable<Event[]> {
-    console.log(id);
 
     return this.http.post<Event[]>(`${environment.baseUrl}/eventsByPersonId`, {person_id: id},
     {
@@ -40,12 +39,10 @@ export class EventService {
   }
 
   public deleteEvent(personId: number): Observable<boolean> {
-    console.log('dans le service de suppression d ev ' +  localStorage.getItem('Authorization') + 'nb : ' + personId);
     return this.http
     .delete<boolean>(`${environment.baseUrl}/event/${personId}`,
     {headers: new HttpHeaders().set('Authorization',
     localStorage.getItem('Authorization')),
     withCredentials: true});
-    // .pipe(catchError((error: any) => throwError(error.json())));
   }
 }
