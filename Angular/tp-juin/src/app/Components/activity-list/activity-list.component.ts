@@ -1,4 +1,4 @@
-import {  OnInit, Component, Input } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { ActivitiesService } from 'src/app/services/activities.service';
 import { Activity } from 'src/app/models/activity.model';
 import { EventService } from 'src/app/services/event.service';
@@ -18,19 +18,24 @@ export class ActivityListComponent implements OnInit {
   public activities: Activity[];
   public activity: Activity ;
   public events: Event[];
+  public event1: Event;
   public person: Person;
   public isDeleted: boolean;
   public isCreate: boolean;
+  @Output()
+  private delete = new EventEmitter<Activity>();
 
   constructor(
     private activitiesService: ActivitiesService,
     private eventService: EventService,
     private authService: AuthenticationService) {
     this.activity = new Activity();
-    this.person = this.authService.getPerson();
+    this.event1 = new Event();
+    this.person = JSON.parse(localStorage.getItem('Person'));
   }
 
   ngOnInit() {
+    // this.eventService.getEventByPersonId(this.person.id).subscribe(event => this.fillActivities(event));
   }
 
   private fillActivities(eventArray: Event[]) {
@@ -50,16 +55,11 @@ export class ActivityListComponent implements OnInit {
       console.log(error);
     });
   }
-
-  public deleteActivity(idActivity: number) {
-    this.activitiesService.deleteActivity(idActivity).subscribe(() => {
-      this.eventService.getEventByPersonId(this.person.id).subscribe(event => this.fillActivities(event));
-      this.isDeleted = true;
-
-    }, error => {
-      console.log(error);
-    });
+  public deleteActivity(activity: Activity){
+    console.log('deleteActivity ' + activity.id);
+    this.delete.emit(activity);
   }
+
 
   public updateActivity(idActivity: number) {
     this.activitiesService.deleteActivity(idActivity).subscribe(() => {

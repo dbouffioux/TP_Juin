@@ -24,19 +24,22 @@ public events: Event[];
   public activity: Activity;
   @Output()
   private create = new EventEmitter<Activity>();
-  @Output()
-  private refreshActivities = new EventEmitter<void>();
+
 
   constructor(private activitiesService: ActivitiesService, private eventService: EventService) {
     this.activity = new Activity();
     this.event = new Event();
+
   }
 
   ngOnInit() {
     this.person = JSON.parse(localStorage.getItem('Person'));
-  }
+    console.log(this.person);
+    }
 
   public createActivity() {
+    console.log(this.activity);
     this.create.emit(this.activity);
+    // this.refreshActivities.emit();
   }
 }

@@ -11,6 +11,7 @@ import { Person } from 'src/app/models/person.models';
 
 export class InscriptionComponent implements OnInit {
 
+  @Input()
   public inscriptions: Inscription[];
   public isDeleted: boolean;
   public person: Person;
@@ -18,28 +19,14 @@ export class InscriptionComponent implements OnInit {
   @Input()
   public inscription: Inscription;
 
-  constructor(private inscriptionService: InscriptionService) {
+  constructor() {
     this.inscription = new Inscription();
   }
 
   ngOnInit() {
     this.person = JSON.parse(localStorage.getItem('Person'));
-    this.getListInscription();
   }
 
-  public deleteInscription(idInscription: number) {
-    this.inscriptionService.deleteInscription(idInscription).subscribe(() => {
-      this.isDeleted = true;
-      this.getListInscription();
-    }, error => {
-      this.isDeleted = false;
-      console.log(error);
-    });
-  }
 
- public getListInscription() {
-  this.inscriptionService.getAllInscriptionsForOnePerson(this.person.id).subscribe(
-      inscription => {this.inscriptions = inscription; }
-    );
-  }
+
 }

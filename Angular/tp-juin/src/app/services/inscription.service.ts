@@ -14,18 +14,22 @@ export class InscriptionService {
   constructor(private http: HttpClient) { }
 
   public getAllInscriptions(): Observable<Inscription[]> {
-    return this.http.get<Inscription[]>(`${environment.baseUrl}/inscriptions/all`)
+    return this.http.get<Inscription[]>(`${environment.baseUrl}/inscriptions/all`,
+    {withCredentials: true})
     .pipe(catchError((error: any) => throwError(error.json())));
   }
 
-  public getAllInscriptionsForOnePerson( person_id: number): Observable<Inscription[]> {
-    return this.http.get<Inscription[]>(`${environment.baseUrl}/inscriptions/${person_id}`)
+  public getAllInscriptionsForOnePerson( personId: number): Observable<Inscription[]> {
+    return this.http.get<Inscription[]>(`${environment.baseUrl}/inscriptions/${personId}`,
+    {withCredentials: true})
     .pipe(catchError((error: any) => throwError(error.json())));
   }
 
   public createInscription(inscription: Inscription): Observable<Inscription> {
     return this.http
-      .post<Inscription>(`${environment.baseUrl}/inscription/add`, inscription, {withCredentials: true});
+      .post<Inscription>(`${environment.baseUrl}/inscription/add`, inscription,
+      {withCredentials: true})
+     .pipe(catchError((error: any) => throwError(error.json())));
   }
 
   public deleteInscription(inscriptionId: number): Observable<boolean> {
