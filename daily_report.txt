@@ -57,3 +57,17 @@ Mise en place de Jira + SCRUM
 Ajout de style
 Travail sur bug de l'inscription
 Suppression event
+
+Rapport 30_07:
+Bouton inscription/désincription qui fonctionne
+Faire la suppression de l'évent
+Refactoring de la DataRepository
+Css et authentification en Angular stabiliser
+Changer un formulaire en FormBuilder
+
+Rapport 31_07:
+Analyse de Angular pour commencer le refactoring
+Mise en place du refactoring
+Changement de la méthode post getActivitiesByPerson en get
+CSS: ajout d'un popup pour le login et amélioration du visuel
+

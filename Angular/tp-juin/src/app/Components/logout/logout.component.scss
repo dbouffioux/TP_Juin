@@ -7,14 +7,16 @@
     float: left;
     margin: 10px;
     background-color: $button-background-color;
+    color: $button-text-color;
+    font-weight: bold;
     &:hover{
       background-color: $button-hover-background-color;
+      color: $button-text-hover-color;
     }
   }
   button{
     background: none;
     border: none;
-    border: 1px solid;
     padding: 10px 20px;
   }
 }
