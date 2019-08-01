@@ -33,9 +33,9 @@ public events: Event[];
   }
 
   ngOnInit() {
-    this.person = JSON.parse(localStorage.getItem('Person'));
-    console.log(this.person);
-    }
+  this.person = JSON.parse(localStorage.getItem('Person'));
+  console.log(this.person);
+  }
 
   public createActivity() {
     console.log(this.activity);
