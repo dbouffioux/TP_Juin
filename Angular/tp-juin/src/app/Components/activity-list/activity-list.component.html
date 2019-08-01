@@ -1,25 +1,8 @@
-<table>
-  <tr>
-    <th>Nom de l'évènement</th>
-    <th>Nom de l'activité</th>
-    <th>Heure de début</th>
-    <th>Heure de fin</th>
-    <th>Description</th>
-    <th>URL</th>
-    <th>Modification</th>
-    <th>Suppression</th>
-  </tr>
-  <tr *ngFor="let activity of activities">
-    <td>{{activity.event_name}}</td>
-    <td>{{activity.name}} </td>
-    <td>{{activity.begin | date : 'dd/MM/yy HH:mm'}}</td>
-    <td>{{activity.finish  | date : 'dd/MM/yy HH:mm'}}</td>
-    <td>{{activity.description}}</td>
-    <td><a href="{{activity.url}}" target="_blank">{{activity.url}}</a></td>
-    <td><a href="updateActivity/${activity.id}"><button>modification</button></a></td>
-    <td><button (click)= "deleteActivity(activity)">supression</button></td>
-  </tr>
-</table>
-<div id= deleted *ngIf="isDeleted">Votre activité a été supprimée de la base de données</div>
-<div id= create *ngIf="isCreate">Votre activité a été créée</div>
-<ul *ngFor="let event of events"><li  *ngFor="let activity of event.activities"> {{activity.name}}</li></ul>
+<h2>Activity</h2>
+  <section
+  *ngFor="let activity of activities"
+  (click)= "toggleActivityPopup(activity)"
+  >
+    <div>{{activity.name}} </div>
+    <div>{{activity.begin | date : 'dd/MM/yy'}}</div>
+  </section>
