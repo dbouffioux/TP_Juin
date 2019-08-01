@@ -14,13 +14,15 @@ export class ActivitiesService {
 
   public getActivities(): Observable<Activity[]> {
 
-    return this.http.get<Activity[]>(`${environment.baseUrl}/activity/all`)
+    return this.http.get<Activity[]>(`${environment.baseUrl}/activity/all`,
+    {withCredentials: true})
       .pipe(catchError((error: any) => throwError(error.json())));
   }
 
   public createActivity(activity: Activity): Observable<Activity> {
     return this.http
-      .post<Activity>(`${environment.baseUrl}/activity/add`, activity, {withCredentials: true})
+      .post<Activity>(`${environment.baseUrl}/activity/add`, activity,
+      {withCredentials: true})
       .pipe(catchError((error: any) => throwError(error.json())));
   }
   public getAllActivitiesToManage(personId: number): Observable<Activity[]> {

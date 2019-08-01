@@ -17,7 +17,7 @@
     <td>{{activity.description}}</td>
     <td><a href="{{activity.url}}" target="_blank">{{activity.url}}</a></td>
     <td><a href="updateActivity/${activity.id}"><button>modification</button></a></td>
-    <td><button (click)= "deleteActivity(activity.id)">supression</button></td>
+    <td><button (click)= "deleteActivity(activity)">supression</button></td>
   </tr>
 </table>
 <div id= deleted *ngIf="isDeleted">Votre activité a été supprimée de la base de données</div>

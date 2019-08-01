@@ -19,12 +19,14 @@ export class LoginService {
 
   public getConnection(login: string, password: string): Observable<Person> {
     this.params = new HttpParams().set('btoa', btoa(`${login}:${password}`));
-    return this.http.post<Person>(`${environment.baseUrl}/connection`, this.params, { withCredentials: true })
+    return this.http.post<Person>(`${environment.baseUrl}/connection`, this.params,
+    { withCredentials: true })
       .pipe(catchError((error: any) => throwError(error.json())));
   }
 
   public closeConnection() {
-    return this.http.get(`${environment.baseUrl}/logout`, { withCredentials: true })
+    return this.http.get(`${environment.baseUrl}/logout`,
+    { withCredentials: true })
       .pipe(catchError((error: any) => throwError(error.json())));
   }
 }

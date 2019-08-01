@@ -6,6 +6,7 @@ import { EventService } from 'src/app/services/event.service';
 import { Event } from 'src/app/models/event.model';
 import { Inscription } from 'src/app/models/inscription.model';
 import { AuthenticationService } from 'src/app/services/authentication.service';
+import { InscriptionService } from 'src/app/services/inscription.service';
 
 @Component({
   selector: 'app-account-container',
@@ -27,7 +28,8 @@ export class AccountContainerComponent implements OnInit {
   constructor(
     private activitiesService: ActivitiesService,
     private eventService: EventService,
-    private authService: AuthenticationService) {
+    private authService: AuthenticationService,
+    private inscriptionService: InscriptionService) {
       this.activity = new Activity();
   }
 
@@ -35,6 +37,7 @@ export class AccountContainerComponent implements OnInit {
     this.person = this.authService.getPerson();
     this.initActivities();
     this.initEvents();
+    this.initInscriptions();
   }
 
   public initActivities() {
@@ -49,6 +52,13 @@ export class AccountContainerComponent implements OnInit {
     .subscribe(events => {
       this.events = events;
     });
+  }
+
+  public initInscriptions(){
+      this.inscriptionService.getAllInscriptionsForOnePerson(this.person.id).subscribe(inscription => {
+          this.inscriptions = inscription,
+          console.log(this.inscriptions);
+      });
   }
 
   public createActivity(activity: Activity) {
@@ -76,6 +86,28 @@ export class AccountContainerComponent implements OnInit {
       this.isDeleted = true;
       this.initEvents();
     }, error => {
+      console.log(error);
+    });
+  }
+  public deleteActivity(activity: Activity) {
+    console.log('deleteActivity avant Service ' + activity);
+
+    this.activitiesService.deleteActivity(activity.id).subscribe(() => {
+      this.initActivities();
+      this.isDeleted = true;
+      console.log('dans le deleteActivity');
+    }, error => {
+      console.log(error);
+    });
+  }
+
+  public deleteInscription(idInscription: number) {
+    this.inscriptionService.deleteInscription(idInscription).subscribe(() => {
+      console.log('OK');
+      this.isDeleted = true;
+      this.initInscriptions();
+    }, error => {
+      this.isDeleted = false;
       console.log(error);
     });
   }
