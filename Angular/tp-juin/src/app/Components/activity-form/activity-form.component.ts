@@ -41,6 +41,6 @@ public events: Event[];
   public createActivity() {
     console.log(this.activity);
     this.create.emit(this.activity);
-    //this.refreshActivities.emit();
+    // this.refreshActivities.emit();
   }
 }

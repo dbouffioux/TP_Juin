@@ -39,7 +39,7 @@ export class AccountComponent implements OnInit {
 
   public initActivities() {
     console.log('initactivbities');
-    this.activitiesService.getActivitiesByPerson(this.person)
+    this.activitiesService.getAllActivitiesToManage(this.person.id)
       .subscribe(activities => {
         this.activities = activities;
         console.log(this.activities);

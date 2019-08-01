@@ -32,6 +32,14 @@ public class ActivitiesController extends jsonGenerator {
 		List<Activity> listActivities = repositoryActivity.findAllActivities();
 		jsonGenerate(response, listActivities);
 	}
+	public void getActivitiesToManage(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		String pathInfoString=request.getPathInfo();
+		String[] parts = pathInfoString.split("/");
+		int id = Integer.parseInt(parts[2]);
+		List<Activity> listActivities = repositoryActivity.findAllActivitiesForOneEventById(id);
+		jsonGenerate(response, listActivities);
+	}
+
 	public void listForOneEventById(HttpServletResponse response, HttpServletRequest request) throws IOException {
 		String pathInfoString=request.getPathInfo();
 		String[] parts = pathInfoString.split("/");

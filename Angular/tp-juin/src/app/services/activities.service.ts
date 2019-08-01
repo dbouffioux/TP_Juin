@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
+import { Observable, throwError, VirtualTimeScheduler } from 'rxjs';
 import { Activity } from '../models/activity.model';
 import { environment } from 'src/environments/environment';
 import { catchError } from 'rxjs/operators';
@@ -22,6 +22,12 @@ export class ActivitiesService {
     return this.http
       .post<Activity>(`${environment.baseUrl}/activity/add`, activity, {withCredentials: true})
       .pipe(catchError((error: any) => throwError(error.json())));
+  }
+  public getAllActivitiesToManage(personId: number): Observable<Activity[]> {
+    return this.http
+    .get<Activity[]>(`${environment.baseUrl}/activity//${personId}`,
+    {withCredentials: true})
+    .pipe(catchError((error: any) => throwError(error.json())));
   }
 
   public getActivitiesByPerson(person: Person): Observable<Activity[]> {
