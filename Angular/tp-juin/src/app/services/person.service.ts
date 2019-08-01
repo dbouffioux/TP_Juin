@@ -14,7 +14,8 @@ export class PersonService {
 constructor(private http: HttpClient) { }
 
   public getPersons(): Observable<Person[]> {
-    return this.http.get<Person[]>(`${environment.baseUrl}/person/all`)
+    return this.http.get<Person[]>(`${environment.baseUrl}/person/all`,
+    {withCredentials: true})
     .pipe(catchError((error: any) => throwError(error.json())));
   }
 

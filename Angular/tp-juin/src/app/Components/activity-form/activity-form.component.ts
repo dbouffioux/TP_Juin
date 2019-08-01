@@ -24,8 +24,7 @@ public events: Event[];
   public activity: Activity;
   @Output()
   private create = new EventEmitter<Activity>();
-  @Output()
-  private refreshActivities = new EventEmitter<void>();
+
 
   constructor(private activitiesService: ActivitiesService, private eventService: EventService) {
     this.activity = new Activity();

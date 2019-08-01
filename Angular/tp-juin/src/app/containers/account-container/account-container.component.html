@@ -17,5 +17,10 @@
     Modifier Profil
   </a>
 </button>
-<app-activity-list [activities]="activities"></app-activity-list>
-<app-inscription></app-inscription>
+
+<app-activity-list
+  (delete)="deleteActivity($event)"
+  [activities]="activities"></app-activity-list>
+
+<app-inscription
+  [inscriptions]="inscriptions"></app-inscription>

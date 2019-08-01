@@ -14,12 +14,14 @@ export class EventService {
   constructor(private http: HttpClient) { }
 
   public getAllEvents(): Observable<Event[]> {
-    return this.http.get<Event[]>(`${environment.baseUrl}/events/all`, {withCredentials: true})
+    return this.http.get<Event[]>(`${environment.baseUrl}/events/all`,
+    {withCredentials: true})
     .pipe(catchError((error: any) => throwError(error.json())));
   }
 
   public getEventWithAllActivitiesById(id: number): Observable<Event> {
-    return this.http.get<Event>(`${environment.baseUrl}/event/${id}`, {withCredentials: true})
+    return this.http.get<Event>(`${environment.baseUrl}/event/${id}`,
+    {withCredentials: true})
       .pipe(catchError((error: any) => throwError(error.json())));
   }
 
@@ -35,7 +37,8 @@ export class EventService {
 
   public createEvent(event: Event): Observable<Event> {
     return this.http
-    .post<Event>(`${environment.baseUrl}/event/add`, event, {withCredentials: true})
+    .post<Event>(`${environment.baseUrl}/event/add`, event,
+    {withCredentials: true})
     .pipe(catchError((error: any) => throwError(error.json())));
   }
 
