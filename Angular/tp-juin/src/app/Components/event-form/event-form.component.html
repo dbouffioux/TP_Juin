@@ -1,4 +1,5 @@
-<table>
+<section class="popup" *ngIf="showPopup">
+  <table>
     <tr>
       <th>Nom du gestionnaire</th>
       <th>Nom de l'évènement</th>
@@ -12,12 +13,10 @@
       <td> <input name= "name" type="text"  [(ngModel)]="event.name" ></td>
     </tr>
   </table>
-
-<div>
-    <button
+  <button
     type="button"
     (click)="createEvent()"
     (refresh)="initEvents()">
     Ajouter un nouvel évènement
   </button>
-</div>
+</section>

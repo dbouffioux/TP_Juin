@@ -14,6 +14,10 @@ export class EventListComponent implements OnInit {
   @Input()
   public events: Event[];
   public event: Event;
+  public person: Person;
+  @Input()
+  public isManagement: boolean;
+  public showCreateEventPopup: boolean;
 
   constructor() {
     this.event = new Event();
