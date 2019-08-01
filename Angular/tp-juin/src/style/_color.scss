@@ -3,9 +3,11 @@ $app-background-color: #f5ffbf;
 $popup-background: rgba(20,20,20,0.8);
 
 // button colors
-$button-background-color: white;
-$button-hover-background-color: rgb(252, 255, 105);
+$button-background-color: #f85a5a;
+$button-hover-background-color:white;
+$button-text-color: white;
+$button-text-hover-color: #515151;
 
 // link
 $link-color: #697869;
-$link-color-hover: white;
+$link-color-hover: $button-background-color;

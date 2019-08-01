@@ -18,7 +18,6 @@ import { HomeComponent } from './Pages/home/home.component';
 import { EventItemComponent } from './Components/event-item/event-item.component';
 import { LoginComponent } from './Components/login/login.component';
 import { LoginService } from './services/login.service';
-import { AccountComponent } from './Pages/account/account.component';
 import { LogoutComponent } from './Components/logout/logout.component';
 import { ListActivitiesComponent } from './Pages/listActivities/listActivities.component';
 import { UpdateAccountComponent } from './Pages/updateAccount/updateAccount.component';
@@ -44,7 +43,6 @@ import { HomeContainerComponent } from './containers/home-container/home-contain
     HomeComponent,
     EventItemComponent,
     LoginComponent,
-    AccountComponent,
     LogoutComponent,
     ListActivitiesComponent,
     UpdateAccountComponent,

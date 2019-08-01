@@ -4,6 +4,7 @@ import { Activity } from 'src/app/models/activity.model';
 import { EventService } from 'src/app/services/event.service';
 import { Event } from 'src/app/models/event.model';
 import { Person } from 'src/app/models/person.models';
+import { AuthenticationService } from 'src/app/services/authentication.service';
 
 @Component({
   selector: 'app-activity-list',
@@ -22,7 +23,10 @@ export class ActivityListComponent implements OnInit {
   public isDeleted: boolean;
   public isCreate: boolean;
 
-  constructor(private activitiesService: ActivitiesService, private eventService: EventService) {
+  constructor(
+    private activitiesService: ActivitiesService,
+    private eventService: EventService,
+    private authService: AuthenticationService) {
     this.activity = new Activity();
     this.event1 = new Event();
     this.person = JSON.parse(localStorage.getItem('Person'));

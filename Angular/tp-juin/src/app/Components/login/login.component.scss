@@ -14,11 +14,15 @@
   button{
     background: none;
     border: none;
-    border: 1px solid;
     a{
+      font-weight: bold;
       text-decoration: none;
       padding: 10px 20px;
       display: inline-block;
+      color: $button-text-color;
+        &:hover{
+          color: $button-text-hover-color;
+        }
     }
   }
 }
