@@ -37,6 +37,7 @@
     float: right;
     margin: 10px;
     #user_round{
+      cursor: pointer;
       float: left;
       height: 50px;
       width: 50px;
@@ -50,8 +51,8 @@
       margin: 15px;
     }
     #menu_profil {
-      -webkit-animation: slide-bottom 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
-      animation: slide-bottom 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+      -webkit-animation: slide-top 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+      animation: slide-top 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
       display: none;
       #triangle {
         width: 0;
@@ -104,21 +105,48 @@
   0% {
     -webkit-transform: translateY(0);
             transform: translateY(0);
+            opacity: 0;
   }
   100% {
     -webkit-transform: translateY(100px);
             transform: translateY(100px);
+            opacity: 1;
   }
 }
 @keyframes slide-bottom {
   0% {
     -webkit-transform: translateY(0);
             transform: translateY(0);
+            opacity: 0;
   }
   100% {
     -webkit-transform: translateY(100px);
             transform: translateY(100px);
+            opacity: 1;
   }
 }
 
-
+@-webkit-keyframes slide-top {
+  0% {
+    -webkit-transform: translateY(100px);
+            transform: translateY(100px);
+            opacity: 1;
+  }
+  100% {
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+            opacity: 0;
+  }
+}
+@keyframes slide-top {
+  0% {
+    -webkit-transform: translateY(100px);
+            transform: translateY(100px);
+            opacity: 1;
+  }
+  100% {
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+            opacity: 0;
+  }
+}
