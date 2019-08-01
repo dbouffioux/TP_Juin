@@ -1,0 +1,9 @@
+@import '../../../style/color';
+
+.test {
+  display: block;
+  background-color: $app-background-color;
+  width: 75%;
+  height: 50%;
+  margin: 10%;
+}

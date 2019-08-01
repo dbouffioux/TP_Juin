@@ -1,0 +1,19 @@
+<section class="popup" *ngIf="showActivityPopup">
+    <div class="close" (click)="hidePopup()">Х</div>
+    <ul class="test">
+      <li><h2>{{activity.event_name}}</h2></li>
+      <li><h3>{{activity.name}} </h3></li>
+      <li><label>Date de l'activité : </label>
+      <span>{{activity.begin | date : 'dd/MM/yy'}}</span></li>
+      <li><label>Plage horaire : </label>
+      <span>de {{activity.begin | date : 'HH:mm'}} à {{activity.finish  | date : 'HH:mm'}}</span></li>
+      <li><label>Description : </label>
+      <span>{{activity.description}}</span></li>
+      <li><label>URL</label>
+      <span><a href="{{activity.url}}" target="_blank">{{activity.url}}</a></span></li>
+      <li><span><a href="updateActivity/${activity.id}"><button>modification</button></a></span></li>
+      <li><span><button (click)= "deleteActivity(activity)">supression</button></span></li>
+    </ul>
+</section>
+<!-- <div id= deleted *ngIf="isDeleted">Votre activité a été supprimée de la base de données</div>
+<div id= create *ngIf="isCreate">Votre activité a été créée</div> -->

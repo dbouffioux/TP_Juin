@@ -13,6 +13,13 @@
       &:hover{
         border-bottom: 5px solid $link-color-hover;
       }
+      &:active{
+        border-bottom: 5px solid $link-color-hover;
+      }
     }
   }
+}
+#events_list li a:active {
+  border-bottom: 5px solid $link-color-hover;
+
 }

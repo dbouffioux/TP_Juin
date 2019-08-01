@@ -14,7 +14,6 @@ import { InscriptionService } from './services/inscription.service';
 import { ActivityFormComponent } from './Components/activity-form/activity-form.component';
 import { EventFormComponent } from './Components/event-form/event-form.component';
 import { InscriptionFormComponent } from './Components/inscription-form/inscription-form.component';
-import { HomeComponent } from './Pages/home/home.component';
 import { EventItemComponent } from './Components/event-item/event-item.component';
 import { LoginComponent } from './Components/login/login.component';
 import { LoginService } from './services/login.service';
@@ -29,8 +28,8 @@ import { ActivityListComponent } from './components/activity-list/activity-list.
 import { EventListComponent } from './components/event-list/event-list.component';
 import { ProfileFormComponent } from './components/profile-form/profile-form.component';
 import { AccountContainerComponent } from './containers/account-container/account-container.component';
-import { ActivityItemContainerComponent } from './containers/activity-item-container/activity-item-container.component';
 import { HomeContainerComponent } from './containers/home-container/home-container.component';
+import { ActivityItemComponent } from './components/activity-item/activity-item.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +39,6 @@ import { HomeContainerComponent } from './containers/home-container/home-contain
     ActivityFormComponent,
     EventFormComponent,
     InscriptionFormComponent,
-    HomeComponent,
     EventItemComponent,
     LoginComponent,
     LogoutComponent,
@@ -52,8 +50,8 @@ import { HomeContainerComponent } from './containers/home-container/home-contain
     ActivityListComponent,
     ProfileFormComponent,
     AccountContainerComponent,
-    ActivityItemContainerComponent,
-    HomeContainerComponent
+    HomeContainerComponent,
+    ActivityItemComponent
   ],
   imports: [
     BrowserModule,
