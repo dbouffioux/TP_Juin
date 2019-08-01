@@ -1,9 +1,27 @@
 @import '../../../style/color';
 
-.test {
-  display: block;
+label {
+  width: 120px;
+}
+section {
+  margin: auto;
+}
+
+ul {
+  vertical-align: middle;
+
   background-color: $app-background-color;
   width: 75%;
   height: 50%;
   margin: 10%;
+  list-style: none;
+  text-align: center;
+}
+
+li {
+  padding: 5px;
+}
+
+#rightButton {
+  margin-left: 10px;
 }
