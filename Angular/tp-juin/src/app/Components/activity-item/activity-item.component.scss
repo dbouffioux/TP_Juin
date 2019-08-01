@@ -7,13 +7,18 @@ section {
   margin: auto;
 }
 
-ul {
-  vertical-align: middle;
-  display: inline-block;
+#wrapper {
   background-color: $app-background-color;
   width: 75%;
   height: 50%;
   margin: 10%;
+  vertical-align: middle;
+  padding-top: 50px;
+}
+
+ul {
+  vertical-align: middle;
+
   list-style: none;
   text-align: center;
 }
