@@ -8,10 +8,7 @@
 
 
 
-<app-activity-form
-  (create)="createActivity($event)"
-  [events]="events"
-  [activity]="activity"></app-activity-form>
+
 <button>
   <a [routerLink]="['/updateAccount']" routerLinkActive="router-link-active" >
     Modifier Profil
@@ -24,3 +21,9 @@
 
 <app-inscription
   [inscriptions]="inscriptions"></app-inscription>
+
+
+  <app-activity-form
+  (create)="createActivity($event)"
+  [events]="events"
+  [activity]="activity"></app-activity-form>
