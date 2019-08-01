@@ -87,3 +87,24 @@ h1
     }
   }
 }
+
+.management-button, .button{
+  background-color: $button-background-color;
+  border: none;
+  cursor: pointer;
+  color: $button-text-color;
+  font-weight: bold;
+  &:hover{
+    background-color: $button-hover-background-color;
+    color: $button-text-hover-color;
+  }
+  margin-top: 10px;
+}
+
+.management-button.add, .management-button.delete {
+  padding: 5px 10px;
+}
+
+.management-button.delete {
+  margin-left: 20px;
+}

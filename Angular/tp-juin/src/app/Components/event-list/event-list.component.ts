@@ -17,11 +17,13 @@ export class EventListComponent implements OnInit {
   public person: Person;
   @Input()
   public isManagement: boolean;
+  public showCreateEventPopup: boolean;
 
   constructor(
     private eventService: EventService,
     private authService: AuthenticationService) {
       this.event = new Event();
+      this.showCreateEventPopup = false;
   }
 
   ngOnInit() {
@@ -45,7 +47,7 @@ export class EventListComponent implements OnInit {
   public onCreate(event: Event) {
     if (this.isManagement) {
       this.eventService.createEvent(event).subscribe(() => {
-        console.log('OK');
+        this.initEvents();
       }, error => {
         console.log(error);
       });
@@ -60,5 +62,9 @@ export class EventListComponent implements OnInit {
         console.log(error);
       });
     }
+  }
+
+  public toggleShowCreateEventPopup() {
+    this.showCreateEventPopup = !this.showCreateEventPopup;
   }
 }
