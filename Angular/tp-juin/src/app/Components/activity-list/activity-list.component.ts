@@ -47,14 +47,6 @@ export class ActivityListComponent implements OnInit {
     }
   }
 
-  public onCreate(acvitity: Activity) {
-    this.activitiesService.createActivity(acvitity).subscribe(() => {
-      this.eventService.getEventByPersonId(this.person.id).subscribe(event => this.fillActivities(event));
-      this.isCreate = true;
-    }, error => {
-      console.log(error);
-    });
-  }
   public deleteActivity(activity: Activity){
     console.log('deleteActivity ' + activity.id);
     this.delete.emit(activity);
