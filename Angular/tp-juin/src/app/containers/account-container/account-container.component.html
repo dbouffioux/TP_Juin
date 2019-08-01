@@ -1,5 +1,8 @@
 <h1>Compte / Gestion</h1>
-<app-event-list></app-event-list>
+<app-event-list
+[events]="events"
+(delete)="deleteEvent($event)"
+[isManagement]="true"></app-event-list>
 <app-activity-list></app-activity-list>
 
 
