@@ -3,6 +3,7 @@
 <app-event-list id="events_list"
 [events]="events"
 (getActivityList)="initActivitiesList($event)"
+[activeEventId]="activeEvent"
 ></app-event-list>
 
 <app-activity-list

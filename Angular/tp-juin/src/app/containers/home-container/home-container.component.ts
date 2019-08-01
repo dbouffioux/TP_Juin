@@ -15,9 +15,11 @@ export class HomeContainerComponent implements OnInit {
   public activities: Activity[];
   public showActivityPopup: boolean;
   public activityToShow: Activity;
+  public activeEvent: number;
   constructor(private eventService: EventService) {
     this.activities = [];
     this.showActivityPopup = false;
+    this.activeEvent = 0;
    }
 
   ngOnInit() {
@@ -37,6 +39,7 @@ export class HomeContainerComponent implements OnInit {
         this.activities.push(activity);
       });
     });
+    this.activeEvent = eventId;
   }
 
   public toggleActivityItem(activity: Activity) {
