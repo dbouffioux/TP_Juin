@@ -3,27 +3,16 @@
 [events]="events"
 (delete)="deleteEvent($event)"
 [isManagement]="true"></app-event-list>
-<app-activity-list></app-activity-list>
-
-
-
-
-
-<button>
-  <a [routerLink]="['/updateAccount']" routerLinkActive="router-link-active" >
-    Modifier Profil
-  </a>
-</button>
 
 <app-activity-list
   (delete)="deleteActivity($event)"
   [activities]="activities"></app-activity-list>
 
 <app-inscription
+(delete)="deleteInscription($event)"
   [inscriptions]="inscriptions"></app-inscription>
 
 
   <app-activity-form
   (create)="createActivity($event)"
-  [events]="events"
   [activity]="activity"></app-activity-form>

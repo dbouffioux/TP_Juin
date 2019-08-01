@@ -99,8 +99,8 @@ export class AccountContainerComponent implements OnInit {
     });
   }
 
-  public deleteInscription(idInscription: number) {
-    this.inscriptionService.deleteInscription(idInscription).subscribe(() => {
+  public deleteInscription(inscription: Inscription) {
+    this.inscriptionService.deleteInscription(inscription.id).subscribe(() => {
       console.log('OK');
       this.isDeleted = true;
       this.initInscriptions();
