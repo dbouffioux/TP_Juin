@@ -18,10 +18,19 @@
       <div id="user_name">
           Bienvenue <b>{{ getPerson().firstname }}</b>
       </div>
-      <a [routerLink]="['/account']">
+      <a (click)="toggleMenuProfile()">
         <div id="user_round">
         </div>
       </a>
+      <section id="menu_profil" [ngClass]="{'active': showMenuProfile}">
+          <div id="popover">
+            <div id="triangle"></div>
+            <ul (click)="toggleMenuProfile()">
+              <li><a [routerLink]="['/account']">Account</a></li>
+              <li><a [routerLink]="['/updateAccount']">Update profile</a></li>
+            </ul>
+          </div>
+        </section>
   </section>
 </section>
 

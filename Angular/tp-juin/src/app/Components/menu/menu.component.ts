@@ -10,8 +10,11 @@ import { Person } from 'src/app/models/person.models';
 
 export class MenuComponent implements OnInit {
 
+  public showMenuProfile:boolean;
 
-  constructor(private authService: AuthenticationService) { }
+  constructor(private authService: AuthenticationService) {
+    this.showMenuProfile = false;
+   }
 
   ngOnInit() {
   }
@@ -22,5 +25,9 @@ export class MenuComponent implements OnInit {
 
   public getPerson(): Person {
     return this.authService.getPerson();
+  }
+
+  public toggleMenuProfile(){
+    this.showMenuProfile = !this.showMenuProfile;
   }
 }
