@@ -71,3 +71,8 @@ Mise en place du refactoring
 Changement de la méthode post getActivitiesByPerson en get
 CSS: ajout d'un popup pour le login et amélioration du visuel
 
+Rapport 01_08:
+Refactoring angular 
+Css Account
+
+
