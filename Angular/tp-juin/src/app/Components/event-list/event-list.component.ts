@@ -1,7 +1,8 @@
-import { Component, OnInit, Input} from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Event } from 'src/app/models/event.model';
 import { EventService } from 'src/app/services/event.service';
-import { Input } from '@angular/core';
+import { Person } from 'src/app/models/person.models';
+import { AuthenticationService } from 'src/app/services/authentication.service';
 
 
 @Component({
@@ -18,11 +19,26 @@ export class EventListComponent implements OnInit {
   @Input()
   public isManagement: boolean;
   public showCreateEventPopup: boolean;
+  @Output() private delete = new EventEmitter<number>();
+  @Output() private create = new EventEmitter<Event>();
 
   constructor() {
     this.event = new Event();
    }
 
   ngOnInit() {
+
+  }
+
+  public onCreate(event: Event) {
+    this.create.emit(event);
+  }
+
+  public onDelete(id: number) {
+    this.delete.emit(id);
+  }
+
+  public toggleShowCreateEventPopup() {
+    this.showCreateEventPopup = !this.showCreateEventPopup;
   }
 }

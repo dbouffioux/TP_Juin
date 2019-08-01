@@ -73,16 +73,14 @@ export class AccountContainerComponent implements OnInit {
 
   public createEvent(event: Event) {
     this.eventService.createEvent(event).subscribe(() => {
-      console.log('OK');
       this.initEvents();
     }, error => {
       console.log(error);
     });
   }
 
-  public deleteEvent(event: Event) {
-    console.log(event.id);
-    this.eventService.deleteEvent(event.id).subscribe(() => {
+  public deleteEvent(eventId: number) {
+    this.eventService.deleteEvent(eventId).subscribe(() => {
       this.isDeleted = true;
       this.initEvents();
     }, error => {
