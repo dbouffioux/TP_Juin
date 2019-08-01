@@ -50,7 +50,6 @@ export class ProfileFormComponent implements OnInit {
   }
 
   public createPerson() {
-    console.log(this.person);
     this.create.emit(this.person);
   }
 }

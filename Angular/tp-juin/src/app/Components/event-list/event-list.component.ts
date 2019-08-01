@@ -1,7 +1,8 @@
-import { Component, OnInit, Input} from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Event } from 'src/app/models/event.model';
 import { EventService } from 'src/app/services/event.service';
-import { Input } from '@angular/core';
+import { Person } from 'src/app/models/person.models';
+import { AuthenticationService } from 'src/app/services/authentication.service';
 
 
 @Component({
@@ -24,5 +25,45 @@ export class EventListComponent implements OnInit {
    }
 
   ngOnInit() {
+    this.person = this.authService.getPerson();
+    this.initEvents();
+  }
+
+  public initEvents() {
+    if (this.isManagement) {
+      this.eventService.getEventByPersonId(this.person.id)
+      .subscribe(events => {
+        this.events = events;
+      });
+    } else {
+      this.eventService.getAllEvents().subscribe(
+        events => this.events = events
+      );
+    }
+    this.eventService.getAllEvents().subscribe(event => this.events = event);
+  }
+
+  public onCreate(event: Event) {
+    if (this.isManagement) {
+      this.eventService.createEvent(event).subscribe(() => {
+        this.initEvents();
+      }, error => {
+        console.log(error);
+      });
+    }
+  }
+
+  public onDelete(event: Event) {
+    if (this.isManagement) {
+      this.eventService.deleteEvent(event.id).subscribe(() => {
+        this.initEvents();
+      }, error => {
+        console.log(error);
+      });
+    }
+  }
+
+  public toggleShowCreateEventPopup() {
+    this.showCreateEventPopup = !this.showCreateEventPopup;
   }
 }

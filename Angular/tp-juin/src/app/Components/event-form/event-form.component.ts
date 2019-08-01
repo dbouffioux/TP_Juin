@@ -1,6 +1,7 @@
 import { Component, OnInit , Input, Output, EventEmitter} from '@angular/core';
 import { Event } from 'src/app/models/event.model';
 import { Person } from 'src/app/models/person.models';
+import { AuthenticationService } from 'src/app/services/authentication.service';
 
 @Component({
   selector: 'app-event-form',
@@ -16,19 +17,19 @@ export class EventFormComponent implements OnInit {
   private create = new EventEmitter<Event>();
   @Output()
   private refresh = new EventEmitter<void>();
+  @Input()
+  private showCreateEventPopup: boolean;
 
-  constructor() {
+  constructor(private authService: AuthenticationService) {
     this.event = new Event();
     this.person = new Person();
    }
 
   ngOnInit() {
-    this.person = JSON.parse(localStorage.getItem('Person'));
-    console.log(this.person, 'dans le init');
+    this.person = this.authService.getPerson();
   }
 
   public createEvent() {
-    console.log(this.event);
     this.create.emit(this.event);
     this.refresh.emit();
 
