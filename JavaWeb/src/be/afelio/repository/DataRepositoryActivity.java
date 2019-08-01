@@ -146,6 +146,21 @@ public class DataRepositoryActivity {
 		return activity;
 	}
 
+	public List<Activity> findActivitiesByPersonId(Integer id) {
+		List<Activity> list = new ArrayList<Activity>();
+		List<Event> events = dataRepositoryEvent.findAllEventsByPersonId(id);
+		List<Activity> temp = new ArrayList<Activity>();
+		
+		for (Event event : events) {
+			temp = event.getActivities();
+			for (Activity activity : temp) {
+				list.add(activity);
+			}			
+		}
+		
+		return list;
+	}
+
 	public Event getListActivitiesByPersonId(int id) {
 		Event event = null;
 		String sql = "SELECT e.id as id " + "FROM activity as a " + "JOIN event as e ON a.event_id = e.id "
@@ -178,20 +193,5 @@ public class DataRepositoryActivity {
 		} catch (SQLException sqle) {
 			throw new RuntimeException(sqle);
 		}
-	}
-
-	public List<Activity> findActivitiesByPersonId(Integer id) {
-		List<Activity> list = new ArrayList<Activity>();
-		List<Event> events = dataRepositoryEvent.findAllEventsByPersonId(id);
-		List<Activity> temp = new ArrayList<Activity>();
-		
-		for (Event event : events) {
-			temp = event.getActivities();
-			for (Activity activity : temp) {
-				list.add(activity);
-			}			
-		}
-		
-		return list;
 	}
 }

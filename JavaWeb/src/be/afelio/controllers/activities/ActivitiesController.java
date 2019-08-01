@@ -36,7 +36,8 @@ public class ActivitiesController extends jsonGenerator {
 		String pathInfoString=request.getPathInfo();
 		String[] parts = pathInfoString.split("/");
 		int id = Integer.parseInt(parts[2]);
-		List<Activity> listActivities = repositoryActivity.findAllActivitiesForOneEventById(id);
+		System.out.println("ActivitiesController.getActivitiesToManage() "+id);
+		List<Activity> listActivities = repositoryActivity.findActivitiesByPersonId(id);
 		jsonGenerate(response, listActivities);
 	}
 

@@ -25,7 +25,7 @@ export class ActivitiesService {
   }
   public getAllActivitiesToManage(personId: number): Observable<Activity[]> {
     return this.http
-    .get<Activity[]>(`${environment.baseUrl}/activity//${personId}`,
+    .get<Activity[]>(`${environment.baseUrl}/activity/${personId}`,
     {withCredentials: true})
     .pipe(catchError((error: any) => throwError(error.json())));
   }
