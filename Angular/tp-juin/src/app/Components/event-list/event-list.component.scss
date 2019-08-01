@@ -5,6 +5,9 @@
   list-style-type: none;
   li{
     padding-bottom: 20px;
+    .active{
+      border-bottom: 5px solid $link-color-hover;
+    }
     a{
       font-size: 20px;
       color: $link-color;
@@ -13,13 +16,13 @@
       &:hover{
         border-bottom: 5px solid $link-color-hover;
       }
-      &:active{
-        border-bottom: 5px solid $link-color-hover;
-      }
+
     }
   }
-}
-#events_list li a:active {
-  border-bottom: 5px solid $link-color-hover;
 
 }
+// #events_list li a:active {
+//   border-bottom: 5px solid $link-color-hover;
+
+// }
+

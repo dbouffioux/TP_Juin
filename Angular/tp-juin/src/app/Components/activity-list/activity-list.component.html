@@ -1,8 +1,11 @@
-<h2>Activity</h2>
-  <section
+<h2 class="title">Activity</h2>
+<section>
+  <div
   *ngFor="let activity of activities"
   (click)= "toggleActivityPopup(activity)"
+  class="activity_list--item"
   >
-    <div>{{activity.name}} </div>
-    <div>{{activity.begin | date : 'dd/MM/yy'}}</div>
-  </section>
+    <div>{{activity.name}} le {{activity.begin | date : 'dd/MM/yy'}}</div>
+  </div>
+</section>
+

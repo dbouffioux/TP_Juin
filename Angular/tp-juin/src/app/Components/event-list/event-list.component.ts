@@ -22,6 +22,7 @@ export class EventListComponent implements OnInit {
   @Output() private delete = new EventEmitter<number>();
   @Output() private create = new EventEmitter<Event>();
   @Output() private getActivityList = new EventEmitter<number>();
+  @Input() public activeEventId: number;
 
   constructor() {
     this.event = new Event();
