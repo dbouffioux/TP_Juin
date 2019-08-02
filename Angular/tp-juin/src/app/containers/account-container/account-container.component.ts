@@ -30,6 +30,7 @@ export class AccountContainerComponent implements OnInit {
   public showInfoTab: boolean;
   public showAccountUpdateForm: boolean;
   public tabsStatuses: any;
+  public tabActive: any;
 
   constructor(
     private activitiesService: ActivitiesService,
@@ -41,6 +42,7 @@ export class AccountContainerComponent implements OnInit {
       this.activity = new Activity();
       // set default tabs status
       this.showInfoTab = true;
+      this.tabActive = 'info';
       this.showAccountUpdateForm = false;
   }
 
@@ -142,7 +144,28 @@ export class AccountContainerComponent implements OnInit {
   }
 
   public toggleTab(tab: string) {
-    this.showInfoTab = !this.showInfoTab;
-    this.showAccountUpdateForm = !this.showAccountUpdateForm;
+    this.resetTab(this.tabActive);
+    // switch tab status
+    switch (tab) {
+      case 'info':
+        this.showInfoTab = true;
+        this.tabActive = tab;
+        break;
+      case 'account-update-form':
+        this.showAccountUpdateForm = true;
+        this.tabActive = tab;
+        break;
+    }
+  }
+
+  public resetTab(tabActive: string) {
+    switch (tabActive) {
+      case 'info':
+        this.showInfoTab = false;
+        break;
+      case 'account-update-form':
+        this.showAccountUpdateForm = false;
+        break;
+    }
   }
 }

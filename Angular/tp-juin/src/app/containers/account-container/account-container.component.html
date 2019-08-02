@@ -1,9 +1,9 @@
 <section class="menu_tab">
-  <h2 (click)="toggleTab('info')">Compte / Gestion</h2>
-  <h2 (click)="toggleTab('account-update-form')">Modification compte</h2>
+  <h2 (click)="toggleTab('info')" [ngClass]="{'active': showInfoTab}">Compte / Gestion</h2>
+  <h2 (click)="toggleTab('account-update-form')" [ngClass]="{'active': showAccountUpdateForm}">Modification compte</h2>
 </section>
 <section class="choices_tab">
-  <div class="info">
+  <div class="tab" *ngIf="showInfoTab" [ngClass]="{'tab-active': showInfoTab}">
     <app-event-list
       id="events_list"
       [events]="events"
@@ -25,7 +25,7 @@
       [activity]="activity"
       [events]="events"></app-activity-form>
   </div>
-  <div class="account-update-form">
+  <div class="tab" *ngIf="showAccountUpdateForm" [ngClass]="{'tab-active': showAccountUpdateForm}">
     <app-account-form
       (delete)="deleteProfile()"
       (emitter)="updateProfile($event)"
