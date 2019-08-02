@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { Person } from 'src/app/models/person.models';
 
@@ -10,11 +10,11 @@ import { Person } from 'src/app/models/person.models';
 
 export class MenuContainerComponent implements OnInit {
 
-  public showMenuProfile:boolean;
-  @Output() public create = new EventEmitter<void>();
-
+  public showMenuProfile: boolean;
+  public showPopupProfile: boolean;
   constructor(private authService: AuthenticationService) {
     this.showMenuProfile = false;
+    this.showPopupProfile = false;
    }
 
   ngOnInit() {
@@ -30,6 +30,12 @@ export class MenuContainerComponent implements OnInit {
 
   public toggleMenuProfile(){
     this.showMenuProfile = !this.showMenuProfile;
+  }
+
+  public togglePopupProfile() {
+    console.log('togglePopupProfile');
+
+    this.showPopupProfile = !this.showPopupProfile;
   }
 
   public logout() {

@@ -13,6 +13,8 @@ import { LoginService } from 'src/app/services/login.service';
 export class ProfileFormComponent implements OnInit {
 
   @Input() public person: Person;
+  @Input() public showPopupProfile: boolean;
+  @Output() private resetPopupProfileStateInParent = new EventEmitter<void>();
   @Output() private create = new EventEmitter<Person>();
 
   public persons: Person[];
@@ -47,6 +49,10 @@ export class ProfileFormComponent implements OnInit {
       localStorage.setItem('Authorization', 'false');
       console.log(localStorage.getItem('Authorization'));
     }
+  }
+
+  public hidePopup() {
+    this.resetPopupProfileStateInParent.emit();
   }
 
   public createPerson() {

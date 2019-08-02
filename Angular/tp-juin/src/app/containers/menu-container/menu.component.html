@@ -7,7 +7,9 @@
         </button>
       </li>
       <li *ngIf="!isLogged()">
-        <app-login></app-login>
+        <app-login
+        (showSubscription)="togglePopupProfile()"
+        ></app-login>
       </li>
     </ul>
   </nav>
@@ -20,14 +22,20 @@
         </div>
       </a>
       <section id="menu_profil" [ngClass]="{'active': showMenuProfile}">
-          <div id="popover">
-            <div id="triangle"></div>
-            <ul (click)="toggleMenuProfile()">
-              <li><a [routerLink]="['/account']">Account</a></li>
-              <li><a (click)="logout()" [routerLink]="['/home']">Logout</a></li>
-            </ul>
-          </div>
-        </section>
+        <div id="popover">
+          <div id="triangle"></div>
+          <ul (click)="toggleMenuProfile()">
+            <li><a [routerLink]="['/account']">Account</a></li>
+            <li><a (click)="logout()" [routerLink]="['/home']">Logout</a></li>
+          </ul>
+        </div>
+
+      </section>
   </section>
+
+  <app-profile-form
+  [showPopupProfile]="showPopupProfile"
+  (resetPopupProfileStateInParent)="togglePopupProfile()"
+  ></app-profile-form>
 </section>
 
