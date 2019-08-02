@@ -9,10 +9,4 @@ import { ActivitiesService } from './services/activities.service';
 })
 export class AppComponent {
   title = 'tp-juin';
-
-  @Input() public showCreateProfilePopup: boolean;
-
-  public createProfile() {
-    this.showCreateProfilePopup = true;
-  }
 }

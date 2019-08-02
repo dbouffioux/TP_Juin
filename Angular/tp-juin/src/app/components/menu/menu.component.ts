@@ -35,8 +35,4 @@ export class MenuComponent implements OnInit {
   private logout() {
     this.authService.logout();
   }
-
-  public createProfile() {
-    this.create.emit();
-  }
 }

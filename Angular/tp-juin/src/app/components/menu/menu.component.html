@@ -7,9 +7,7 @@
         </button>
       </li>
       <li *ngIf="!isLogged()">
-        <app-login
-        (emitter)="createProfile()"
-        ></app-login>
+        <app-login></app-login>
       </li>
     </ul>
   </nav>
