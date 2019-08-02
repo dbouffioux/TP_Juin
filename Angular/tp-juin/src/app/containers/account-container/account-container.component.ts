@@ -9,7 +9,6 @@ import { AuthenticationService } from 'src/app/services/authentication.service';
 import { InscriptionService } from 'src/app/services/inscription.service';
 import { PersonService } from '../../services/person.service';
 import { Router } from '@angular/router';
-import { LoginService } from '../../services/login.service';
 
 @Component({
   selector: 'app-account-container',
@@ -27,6 +26,10 @@ export class AccountContainerComponent implements OnInit {
   public events: Event[];
   public inscriptions: Inscription[];
   public isDeleted: boolean;
+  // tabs
+  public showInfoTab: boolean;
+  public showAccountUpdateForm: boolean;
+  public tabsStatuses: any;
 
   constructor(
     private activitiesService: ActivitiesService,
@@ -36,6 +39,9 @@ export class AccountContainerComponent implements OnInit {
     private personService: PersonService,
     private router: Router) {
       this.activity = new Activity();
+      // set default tabs status
+      this.showInfoTab = true;
+      this.showAccountUpdateForm = false;
   }
 
   ngOnInit() {
@@ -59,10 +65,9 @@ export class AccountContainerComponent implements OnInit {
     });
   }
 
-  public initInscriptions(){
+  public initInscriptions() {
       this.inscriptionService.getAllInscriptionsForOnePerson(this.person.id).subscribe(inscription => {
-          this.inscriptions = inscription,
-          console.log(this.inscriptions);
+          this.inscriptions = inscription;
       });
   }
 
@@ -129,7 +134,6 @@ export class AccountContainerComponent implements OnInit {
   public deleteProfile() {
     this.person = JSON.parse(localStorage.getItem('Person'));
     this.personService.deleteProfile(this.person.id).subscribe(() => {
-      console.log('OK');
       this.authService.logout();
       this.router.navigate(['/home']);
     }, error => {
@@ -137,5 +141,8 @@ export class AccountContainerComponent implements OnInit {
     });
   }
 
+  public toggleTab(tab: string) {
+    this.showInfoTab = !this.showInfoTab;
+    this.showAccountUpdateForm = !this.showAccountUpdateForm;
+  }
 }
-

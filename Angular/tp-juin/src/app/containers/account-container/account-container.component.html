@@ -1,27 +1,34 @@
-<h1>Compte / Gestion</h1>
+<section class="menu_tab">
+  <h2 (click)="toggleTab('info')">Compte / Gestion</h2>
+  <h2 (click)="toggleTab('account-update-form')">Modification compte</h2>
+</section>
+<section class="choices_tab">
+  <div class="info">
+    <app-event-list
+      id="events_list"
+      [events]="events"
+      (delete)="deleteEvent($event)"
+      [isManagement]="true"></app-event-list>
 
-<app-event-list
-  id="events_list"
-  [events]="events"
-  (delete)="deleteEvent($event)"
-  [isManagement]="true"></app-event-list>
+    <app-activity-list
+      id="activities_list"
+      (delete)="deleteActivity($event)"
+      [activities]="activities"></app-activity-list>
 
-<app-activity-list
-  id="activities_list"
-  (delete)="deleteActivity($event)"
-  [activities]="activities"></app-activity-list>
+    <app-inscription
+      id="inscriptions_list"
+      (delete)="deleteInscription($event)"
+      [inscriptions]="inscriptions"></app-inscription>
 
-<app-inscription
-  id="inscriptions_list"
-  (delete)="deleteInscription($event)"
-  [inscriptions]="inscriptions"></app-inscription>
-
-<app-activity-form
-  (create)="createActivity($event)"
-  [activity]="activity"
-  [events]="events"></app-activity-form>
-
-<app-account-form
-  (delete)="deleteProfile()"
-  (emitter)="updateProfile($event)"
-  [person]="person"></app-account-form>
+    <app-activity-form
+      (create)="createActivity($event)"
+      [activity]="activity"
+      [events]="events"></app-activity-form>
+  </div>
+  <div class="account-update-form">
+    <app-account-form
+      (delete)="deleteProfile()"
+      (emitter)="updateProfile($event)"
+      [person]="person"></app-account-form>
+  </div>
+</section>
