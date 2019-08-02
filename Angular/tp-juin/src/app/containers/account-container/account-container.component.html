@@ -18,8 +18,11 @@ id="inscriptions_list"
 
   <app-activity-form
   (create)="createActivity($event)"
-  [activity]="activity"></app-activity-form>
+  [activity]="activity"
+  [events]="events"></app-activity-form>
 <app-account-form
+(delete)="deleteProfile()"
+(emitter)="updateProfile($event)"
 [person]="person"
 >
 
