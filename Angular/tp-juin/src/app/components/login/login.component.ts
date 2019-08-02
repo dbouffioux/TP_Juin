@@ -14,8 +14,7 @@ export class LoginComponent implements OnInit {
 
   public loginForm: FormGroup;
   public person: Person;
-  @Input()
-  public showPopup: boolean;
+  public showLoginFormPopup: boolean;
 
   constructor(private loginService: LoginService, private fb: FormBuilder, private authService: AuthenticationService) {
     this.person = new Person();
@@ -24,7 +23,7 @@ export class LoginComponent implements OnInit {
       password: this.fb.control('', [Validators.required])
     });
     // init popup state
-    this.showPopup = false;
+    this.showLoginFormPopup = false;
   }
 
   ngOnInit() {
@@ -38,8 +37,7 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  public togglePopupState() {
-    this.showPopup = !this.showPopup;
+  public toggleLoginFormPopupState() {
+    this.showLoginFormPopup = !this.showLoginFormPopup;
   }
-
 }
