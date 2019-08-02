@@ -16,6 +16,7 @@ export class HomeContainerComponent implements OnInit {
   public showActivityPopup: boolean;
   public activityToShow: Activity;
   public activeEvent: number;
+
   constructor(private eventService: EventService) {
     this.activities = [];
     this.showActivityPopup = false;
@@ -40,6 +41,9 @@ export class HomeContainerComponent implements OnInit {
       });
     });
     this.activeEvent = eventId;
+  }
+  public initActivityItem() {
+
   }
 
   public toggleActivityItem(activity: Activity) {

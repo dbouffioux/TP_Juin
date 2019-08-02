@@ -37,20 +37,15 @@ export class ActivityListComponent implements OnInit {
     this.showActivityPopup = false;
   }
 
-/*   private fillActivities(eventArray: Event[]) {
-    if (eventArray !== null) {
-      this.activities = new Array();
-      for ( const event of eventArray) {
-          this.activities = this.activities.concat(event.activities);
-      }
-    }
-  } */
-
   public deleteActivity(activity: Activity){
     console.log('deleteActivity ' + activity.id);
     this.delete.emit(activity);
   }
 
+  public toggleActivityPopup(activity: Activity) {
+    this.showActivityItem.emit(activity);
+  }
+}
 
 /*   public updateActivity(idActivity: number) {
     this.activitiesService.deleteActivity(idActivity).subscribe(() => {
@@ -61,7 +56,11 @@ export class ActivityListComponent implements OnInit {
     });
   } */
 
-  public toggleActivityPopup(activity: Activity) {
-    this.showActivityItem.emit(activity);
-  }
-}
+  /*   private fillActivities(eventArray: Event[]) {
+    if (eventArray !== null) {
+      this.activities = new Array();
+      for ( const event of eventArray) {
+          this.activities = this.activities.concat(event.activities);
+      }
+    }
+  } */
