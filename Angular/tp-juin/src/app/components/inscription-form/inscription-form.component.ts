@@ -25,10 +25,10 @@ export class InscriptionFormComponent implements OnInit {
 
   @Input() public inscription: Inscription;
   @Input() public success: boolean;
-  @Input() private activity: Activity;
+  @Input() public activity: Activity;
   @Input() public eventID: number;
-  @Output() private create = new EventEmitter<Inscription>();
-  @Output() private refresh = new EventEmitter<void>();
+  @Output() public create = new EventEmitter<Event>();
+  @Output() public refresh = new EventEmitter<void>();
 
   constructor(
     private eventService: EventService,
@@ -54,13 +54,14 @@ export class InscriptionFormComponent implements OnInit {
       });
   }
 
-  public createInscription() {
+  public createInscription(event: Event) {
     this.subscriptionBtnClicked = true;
     this.person = JSON.parse(localStorage.getItem('Person'));
     this.inscription.person_id = this.person.id;
     this.inscription.activity_id = this.activity.id;
     console.log(this.inscription);
-    this.create.emit(this.inscription);
+    // this.create.emit(this.inscription);
+    this.create.emit(event);
   }
 
   public deleteInscription() {
