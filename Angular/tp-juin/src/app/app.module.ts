@@ -29,6 +29,7 @@ import { ProfileFormComponent } from './components/profile-form/profile-form.com
 import { AccountContainerComponent } from './containers/account-container/account-container.component';
 import { HomeContainerComponent } from './containers/home-container/home-container.component';
 import { ActivityItemComponent } from './components/activity-item/activity-item.component';
+import { AccountFormComponent } from './components/account-form/account-form.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,8 @@ import { ActivityItemComponent } from './components/activity-item/activity-item.
     ProfileFormComponent,
     AccountContainerComponent,
     HomeContainerComponent,
-    ActivityItemComponent
+    ActivityItemComponent,
+    AccountFormComponent
   ],
   imports: [
     BrowserModule,

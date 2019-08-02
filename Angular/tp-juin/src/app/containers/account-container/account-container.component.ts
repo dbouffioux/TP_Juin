@@ -11,7 +11,7 @@ import { InscriptionService } from 'src/app/services/inscription.service';
 @Component({
   selector: 'app-account-container',
   templateUrl: './account-container.component.html',
-  styleUrls: ['./account-container.component.css']
+  styleUrls: ['./account-container.component.scss']
 })
 
 export class AccountContainerComponent implements OnInit {
