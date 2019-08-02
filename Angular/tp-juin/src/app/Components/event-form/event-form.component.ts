@@ -31,8 +31,6 @@ export class EventFormComponent implements OnInit {
 
   public createEvent() {
     this.create.emit(this.event);
-    this.refresh.emit();
-
   }
 }
 

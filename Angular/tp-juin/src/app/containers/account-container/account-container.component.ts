@@ -85,6 +85,7 @@ export class AccountContainerComponent implements OnInit {
     this.eventService.deleteEvent(eventId).subscribe(() => {
       this.isDeleted = true;
       this.initEvents();
+      this.initActivities();
     }, error => {
       console.log(error);
     });
