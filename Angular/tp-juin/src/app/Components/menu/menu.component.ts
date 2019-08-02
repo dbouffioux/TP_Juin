@@ -31,7 +31,7 @@ export class MenuComponent implements OnInit {
     this.showMenuProfile = !this.showMenuProfile;
   }
 
-  private logout() {
+  public logout() {
     this.authService.logout();
   }
 }

@@ -1,9 +1,10 @@
 <h1>Compte / Gestion</h1>
+
 <app-event-list
-id="events_list"
-[events]="events"
-(delete)="deleteEvent($event)"
-[isManagement]="true"></app-event-list>
+  id="events_list"
+  [events]="events"
+  (delete)="deleteEvent($event)"
+  [isManagement]="true"></app-event-list>
 
 <app-activity-list
   id="activities_list"
@@ -11,19 +12,16 @@ id="events_list"
   [activities]="activities"></app-activity-list>
 
 <app-inscription
-id="inscriptions_list"
-(delete)="deleteInscription($event)"
+  id="inscriptions_list"
+  (delete)="deleteInscription($event)"
   [inscriptions]="inscriptions"></app-inscription>
 
-
-  <app-activity-form
+<app-activity-form
   (create)="createActivity($event)"
   [activity]="activity"
   [events]="events"></app-activity-form>
-<app-account-form
-(delete)="deleteProfile()"
-(emitter)="updateProfile($event)"
-[person]="person"
->
 
-</app-account-form>
+<app-account-form
+  (delete)="deleteProfile()"
+  (emitter)="updateProfile($event)"
+  [person]="person"></app-account-form>
