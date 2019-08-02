@@ -1,5 +1,5 @@
 <section id="login">
-  <button (click)="togglePopupState()" class="menu_item">
+  <button (click)="toggleLoginFormPopupState()" class="menu_item">
     <a>Login</a>
   </button>
   <button class="menu_item">
@@ -7,6 +7,6 @@
   </button>
 </section>
 <app-login-form
-  [showPopup]="showPopup"
-  (resetPopupStateInParent)="togglePopupState($event)">
+  [showLoginFormPopup]="showLoginFormPopup"
+  (resetLoginFormPopupStateInParent)="toggleLoginFormPopupState($event)">
 </app-login-form>

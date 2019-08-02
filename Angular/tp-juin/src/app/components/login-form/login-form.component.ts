@@ -13,9 +13,9 @@ export class LoginFormComponent implements OnInit {
 
   public loginForm: FormGroup;
   @Input()
-  public showPopup: boolean;
+  public showLoginFormPopup: boolean;
   @Output()
-  public resetPopupStateInParent = new EventEmitter<boolean>();
+  public resetLoginFormPopupStateInParent = new EventEmitter<void>();
 
   constructor(private loginService: LoginService, private fb: FormBuilder, private authService: AuthenticationService) {
     this.loginForm = this.fb.group({
@@ -48,8 +48,7 @@ export class LoginFormComponent implements OnInit {
     return this.authService.getPerson();
   }
 
-  public hidePopup() {
-    this.resetPopupStateInParent.emit(true);
-    this.showPopup = false;
+  public hideLoginFormPopup() {
+    this.resetLoginFormPopupStateInParent.emit();
   }
 }
