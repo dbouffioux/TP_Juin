@@ -5,6 +5,8 @@ import { Activity } from 'src/app/models/activity.model';
 import { Inscription } from 'src/app/models/inscription.model';
 import { InscriptionService } from 'src/app/services/inscription.service';
 import { ActivitiesService } from 'src/app/services/activities.service';
+import { AuthenticationService } from 'src/app/services/authentication.service';
+import { Person } from 'src/app/models/person.models';
 
 @Component({
   selector: 'app-home-container',
@@ -20,14 +22,19 @@ export class HomeContainerComponent implements OnInit {
   public activityToShow: Activity;
   public activeEvent: number;
   public activity: Activity;
+  public inscription: Inscription;
+  public person: Person;
 
   constructor(
     private eventService: EventService,
     private inscriptionService: InscriptionService,
-    private activityService: ActivitiesService) {
+    private activityService: ActivitiesService,
+    private authService: AuthenticationService) {
     this.activities = [];
     this.showActivityPopup = false;
     this.activeEvent = 0;
+    this.person = this.authService.getPerson();
+    this.inscription = new Inscription();
    }
 
   ngOnInit() {
@@ -49,12 +56,14 @@ export class HomeContainerComponent implements OnInit {
     });
     this.activeEvent = eventId;
   }
-  public createInscription(inscription: Inscription) {
+  public createInscription(activityId: number) {
     console.log('createInscription');
+    this.inscription.activity_id = activityId;
+    this.inscription.person_id = this.person.id;
 
-    this.inscriptionService.createInscription(inscription).subscribe(() => {
+    this.inscriptionService.createInscription(this.inscription).subscribe(() => {
       console.log('ok');
-      this.refreshActivity(inscription.activity_id);
+      this.refreshActivity(this.inscription.activity_id);
     }
     );
   }

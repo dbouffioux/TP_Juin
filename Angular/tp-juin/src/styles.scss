@@ -122,3 +122,34 @@ h1
 #inscriptions_list{
   display: inline-block;
 }
+
+// tab management
+
+.menu_tab{
+  h2{
+    float: left;
+    font-weight: normal;
+    padding: 15px;
+    cursor: pointer;
+    &:hover{
+      font-weight: bold;
+    }
+  }
+  .active{
+    font-weight: bold;
+    border-top: 1px solid;
+    border-left: 1px solid;
+    border-right: 1px solid;
+  }
+}
+.choices_tab{
+  margin-top: 50px;
+  .tab{
+    display: none;
+  }
+  .tab.tab-active{
+    display: inline-block;
+    border: 1px solid;
+    padding: 30px 50px;
+  }
+}

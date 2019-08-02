@@ -14,42 +14,39 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 export class ActivityFormComponent implements OnInit {
 
-public activityForm: FormGroup;
-public activities: Activity[];
+public event: Event;
 public person: Person;
 public persons: Person[];
-public event: Event;
-@Input()
-public events: Event[];
+public activities: Activity[];
+public activityForm: FormGroup;
 
-  @Input()
-  public activity: Activity;
-  @Output()
-  private create = new EventEmitter<Activity>();
+@Input() public events: Event[];
+@Input() public activity: Activity;
+@Output() private create = new EventEmitter<Activity>();
 
 
-  constructor(private activitiesService: ActivitiesService, private eventService: EventService, private fb: FormBuilder) {
-    this.activityForm = this.fb.group({
-      event_name: this.fb.control('', [Validators.required]),
-      activity_name: this.fb.control('', [Validators.required]),
-      begin: this.fb.control('', [Validators.required]),
-      finish: this.fb.control('', [Validators.required]),
-      description: this.fb.control(''),
-      url: this.fb.control('')
+constructor(private activitiesService: ActivitiesService, private eventService: EventService, private fb: FormBuilder) {
+  this.activityForm = this.fb.group({
+    event_name: this.fb.control('', [Validators.required]),
+    activity_name: this.fb.control('', [Validators.required]),
+    begin: this.fb.control('', [Validators.required]),
+    finish: this.fb.control('', [Validators.required]),
+    description: this.fb.control(''),
+    url: this.fb.control('')
   });
 }
 
-  ngOnInit() {}
+ngOnInit() {}
 
-  public createActivity(activity: Activity) {
-    const formValues = this.activityForm.value;
-    activity.event_name = formValues.event_name;
-    activity.name = formValues.activity_name;
-    activity.begin = formValues.begin;
-    activity.finish = formValues.finish;
-    activity.description = formValues.description;
-    activity.url = formValues.url;
-    console.log(activity);
-    this.create.emit(activity);
+public createActivity(activity: Activity) {
+  const formValues = this.activityForm.value;
+  activity.event_name = formValues.event_name;
+  activity.name = formValues.activity_name;
+  activity.begin = formValues.begin;
+  activity.finish = formValues.finish;
+  activity.description = formValues.description;
+  activity.url = formValues.url;
+  console.log(activity);
+  this.create.emit(activity);
   }
 }
