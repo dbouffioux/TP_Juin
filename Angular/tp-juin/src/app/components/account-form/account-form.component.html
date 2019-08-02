@@ -1,0 +1,41 @@
+<h1>Modification compte</h1>
+<form class="form" [formGroup]="accountForm" (ngSubmit)="onSubmit(accountForm)">
+
+    <div class="form_input">
+      <div class="label">
+          <label for="firstname">Prénom : </label>
+      </div>
+      <input formControlName="firstname" name="firstanme" type="text">
+    </div>
+
+    <div class="form_input">
+      <div class="label">
+          <label for="lastname">Nom : </label>
+      </div>
+      <input formControlName="lastname" name="lastname" type="text">
+    </div>
+
+    <div class="form_input">
+      <div class="label">
+          <label for="login">Login : </label>
+      </div>
+      <input formControlName="login" name="login" type="text">
+    </div>
+
+    <div class="form_input">
+      <div class="label">
+          <label for="password">Mot de passe : </label>
+      </div>
+      <input formControlName="password" name="password" type="password">
+    </div>
+
+    <div class="form_button">
+      <button type="submit" [disabled]="!accountForm.valid">
+        Valider
+      </button>
+    </div>
+</form>
+<button
+*ngIf="isLogged"
+(click)= "deleteProfile()"
+>Supprimer profil</button>
