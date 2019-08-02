@@ -24,11 +24,11 @@ export class ActivityItemComponent implements OnInit {
   private delete = new EventEmitter<Activity>();
   @Input()
   public showActivityPopup: boolean;
-  @Input()
-  public canManage: boolean;
+  @Output()
+  private refreshButton = new EventEmitter<void>();
 
-  constructor(
-    private authService: AuthenticationService) {
+
+  constructor(private authService: AuthenticationService) {
     this.event = new Event();
     this.person = this.authService.getPerson();
   }
@@ -38,6 +38,7 @@ export class ActivityItemComponent implements OnInit {
 
   public deleteActivity(activity: Activity){
     this.delete.emit(activity);
+    this.refreshButton.emit();
   }
 
   public hidePopup() {

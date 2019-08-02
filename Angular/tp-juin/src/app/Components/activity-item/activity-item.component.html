@@ -12,18 +12,22 @@
         <span>{{activity.description}}</span></li>
         <li><label>URL : </label>
         <span><a href="{{activity.url}}" target="_blank">{{activity.url}}</a></span></li>
-        <li><span><a href="updateActivity/${activity.id}"><button class="management-button update">modification</button></a></span>
-          <span id="rightButton"><button (click)= "deleteActivity(activity)" class="management-button delete">supression</button></span></li>
+
+        <ng-container *ngIf="isManagement">
+            <li><span><a href="updateActivity/${activity.id}"><button class="management-button update">modification</button></a></span>
+              <span id="rightButton"><button (click)= "deleteActivity(activity)" class="management-button delete">supression</button></span></li>
+
+
+        </ng-container>
+
 
         </ul>
         <span *ngIf="isLogged()">
           <app-inscription-form
           [activity]=activity
           [eventID]= event.id
-          (refresh)="refreshActivities()"></app-inscription-form>
+          (refreshButton)= "refreshButton"></app-inscription-form>
           </span>
     </div>
 
 </section>
-<!-- <div id= deleted *ngIf="isDeleted">Votre activité a été supprimée de la base de données</div>
-<div id= create *ngIf="isCreate">Votre activité a été créée</div> -->
