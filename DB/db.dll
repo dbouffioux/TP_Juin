@@ -1,4 +1,9 @@
-REATE TABLE person (
+DROP TABLE inscription;
+DROP TABLE activity;
+DROP TABLE event;
+DROP TABLE person;
+
+CREATE TABLE person (
 	id SERIAL PRIMARY KEY,
 	firstname VARCHAR(100) ,
 	lastname VARCHAR(100) ,
@@ -25,8 +30,6 @@ CREATE TABLE activity(
 	event_id int NOT NULL
 	CONSTRAINT FK_event_id REFERENCES event (id) ON DELETE CASCADE
 );
-
-
 
 CREATE TABLE inscription(
 	id  SERIAL PRIMARY KEY ,
