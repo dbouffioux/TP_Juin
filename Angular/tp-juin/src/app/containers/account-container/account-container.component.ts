@@ -74,6 +74,7 @@ export class AccountContainerComponent implements OnInit {
   public createEvent(event: Event) {
     this.eventService.createEvent(event).subscribe(() => {
       this.initEvents();
+      this.initActivities();
     }, error => {
       console.log(error);
     });
