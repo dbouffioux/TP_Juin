@@ -74,7 +74,6 @@ export class AccountContainerComponent implements OnInit {
   public createEvent(event: Event) {
     this.eventService.createEvent(event).subscribe(() => {
       this.initEvents();
-      this.initActivities();
     }, error => {
       console.log(error);
     });
@@ -84,6 +83,7 @@ export class AccountContainerComponent implements OnInit {
     this.eventService.deleteEvent(eventId).subscribe(() => {
       this.isDeleted = true;
       this.initEvents();
+      this.initActivities();
     }, error => {
       console.log(error);
     });
