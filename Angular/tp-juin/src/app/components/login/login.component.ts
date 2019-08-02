@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output} from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
 import { Person } from 'src/app/models/person.models';
 import { LoginService } from 'src/app/services/login.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
@@ -41,4 +41,5 @@ export class LoginComponent implements OnInit {
   public togglePopupState() {
     this.showPopup = !this.showPopup;
   }
+
 }
