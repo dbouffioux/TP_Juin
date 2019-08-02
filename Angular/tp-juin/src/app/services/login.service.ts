@@ -25,6 +25,7 @@ export class LoginService {
   }
 
   public closeConnection() {
+
     return this.http.get(`${environment.baseUrl}/logout`,
     { withCredentials: true })
       .pipe(catchError((error: any) => throwError(error.json())));
