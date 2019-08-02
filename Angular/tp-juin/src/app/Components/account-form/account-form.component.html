@@ -30,10 +30,9 @@
     </div>
 
     <div class="form_button">
-      <button type="submit" [disabled]="!loginForm.valid">
+      <button type="submit" [disabled]="!accountForm.valid">
         Valider
       </button>
     </div>
 </form>
-<button (click)= "deleteProfile()">Supprimer profil</button>
-<div>{{person | json}}</div>
+<button (click)= "deleteProfil()">Supprimer profil</button>
