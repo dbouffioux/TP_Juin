@@ -75,19 +75,25 @@
         ul{
           list-style-type: none;
           display: inline-block;
-          a{
-            font-weight: bold;
-            display: block;
-            margin-bottom: 10px;
-            background-color:  $button-hover-background-color;
-            color: $button-text-hover-color;
-            text-decoration: none;
-            padding: 10px 20px;
-            &:hover{
-              background: #B3FFAB;
-              background: -webkit-gradient(linear, left top, right top, from(#12FFF7), to(#B3FFAB));
-              background: linear-gradient(to right, #12FFF7, #B3FFAB);
-              color: $button-text-color;
+          width: 100%;
+          li{
+            width: 100%;
+            display: flex;
+            a{
+              font-weight: bold;
+              display: block;
+              margin-bottom: 10px;
+              background-color:  $button-hover-background-color;
+              color: $button-text-hover-color;
+              text-decoration: none;
+              padding: 10px 20px;
+              width: 100%;
+              &:hover{
+                background: #B3FFAB;
+                background: -webkit-gradient(linear, left top, right top, from(#12FFF7), to(#B3FFAB));
+                background: linear-gradient(to right, #12FFF7, #B3FFAB);
+                color: $button-text-color;
+              }
             }
           }
         }

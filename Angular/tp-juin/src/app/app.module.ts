@@ -19,7 +19,7 @@ import { LoginComponent } from './Components/login/login.component';
 import { LoginService } from './services/login.service';
 import { ListActivitiesComponent } from './Pages/listActivities/listActivities.component';
 import { UpdateAccountComponent } from './Pages/updateAccount/updateAccount.component';
-import { MenuComponent } from './Components/menu/menu.component';
+import { MenuContainerComponent } from './containers/menu-container/menu.component';
 import { AuthenticationService } from './services/authentication.service';
 import { UpdateActivityComponent } from './Pages/updateActivity/updateActivity.component';
 import { LoginFormComponent } from './Components/login-form/login-form.component';
@@ -43,7 +43,7 @@ import { AccountFormComponent } from './components/account-form/account-form.com
     LoginComponent,
     ListActivitiesComponent,
     UpdateAccountComponent,
-    MenuComponent,
+    MenuContainerComponent,
     UpdateActivityComponent,
     LoginFormComponent,
     ActivityListComponent,

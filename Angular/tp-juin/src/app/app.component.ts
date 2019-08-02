@@ -1,6 +1,4 @@
-import { Component, Input } from '@angular/core';
-import { Activity } from './models/activity.model';
-import { ActivitiesService } from './services/activities.service';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -9,4 +7,6 @@ import { ActivitiesService } from './services/activities.service';
 })
 export class AppComponent {
   title = 'tp-juin';
+
+
 }
