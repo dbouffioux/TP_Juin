@@ -10,7 +10,7 @@
     <button
       class="delete management-button"
       *ngIf="isManagement"
-      (click)="onDelete(event.id)">Supprimer</button>
+      (click)="onDelete(event.id)">X</button>
   </li>
   <li *ngIf="isManagement">
     <button (click)="toggleShowCreateEventPopup()" class="add management-button">+</button>

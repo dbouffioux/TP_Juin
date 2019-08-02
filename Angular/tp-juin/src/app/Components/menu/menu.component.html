@@ -9,9 +9,6 @@
       <li *ngIf="!isLogged()">
         <app-login></app-login>
       </li>
-      <li *ngIf="isLogged()">
-        <app-logout></app-logout>
-      </li>
     </ul>
   </nav>
   <section id="user" *ngIf="getPerson()?.firstname !== '' && isLogged()">
@@ -28,6 +25,7 @@
             <ul (click)="toggleMenuProfile()">
               <li><a [routerLink]="['/account']">Account</a></li>
               <li><a [routerLink]="['/updateAccount']">Update profile</a></li>
+              <li><a (click)="logout()" [routerLink]="['/home']">Logout</a></li>
             </ul>
           </div>
         </section>

@@ -30,4 +30,8 @@ export class MenuComponent implements OnInit {
   public toggleMenuProfile(){
     this.showMenuProfile = !this.showMenuProfile;
   }
+
+  private logout() {
+    this.authService.logout();
+  }
 }

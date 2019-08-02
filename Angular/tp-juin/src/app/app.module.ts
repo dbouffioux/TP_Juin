@@ -17,7 +17,6 @@ import { InscriptionFormComponent } from './Components/inscription-form/inscript
 import { EventItemComponent } from './Components/event-item/event-item.component';
 import { LoginComponent } from './Components/login/login.component';
 import { LoginService } from './services/login.service';
-import { LogoutComponent } from './Components/logout/logout.component';
 import { ListActivitiesComponent } from './Pages/listActivities/listActivities.component';
 import { UpdateAccountComponent } from './Pages/updateAccount/updateAccount.component';
 import { MenuComponent } from './Components/menu/menu.component';
@@ -41,7 +40,6 @@ import { ActivityItemComponent } from './components/activity-item/activity-item.
     InscriptionFormComponent,
     EventItemComponent,
     LoginComponent,
-    LogoutComponent,
     ListActivitiesComponent,
     UpdateAccountComponent,
     MenuComponent,

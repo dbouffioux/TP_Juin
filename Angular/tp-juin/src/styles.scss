@@ -108,3 +108,17 @@ h1
 .management-button.delete {
   margin-left: 20px;
 }
+
+#events_list,
+#activities_list{
+  float: left;
+  width: 50%;
+}
+
+#activities_list {
+  width: 50%;
+}
+
+#inscriptions_list{
+  display: inline-block;
+}
