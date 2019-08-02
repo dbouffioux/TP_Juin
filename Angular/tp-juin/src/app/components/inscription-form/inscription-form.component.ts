@@ -14,7 +14,7 @@ import { ActivitiesService } from 'src/app/services/activities.service';
   styleUrls: ['./inscription-form.component.css']
 })
 
-export class InscriptionFormComponent implements OnInit, OnChanges {
+export class InscriptionFormComponent implements OnInit {
 
   public person: Person;
   public events: Event[];
@@ -30,9 +30,10 @@ export class InscriptionFormComponent implements OnInit, OnChanges {
   @Output() private create = new EventEmitter<Inscription>();
   @Output() private refresh = new EventEmitter<void>();
 
-  constructor(private inscriptionService: InscriptionService,
+  constructor(
     private eventService: EventService,
-    private activityService: ActivitiesService) {
+    private activityService: ActivitiesService,
+    private inscriptionService: InscriptionService) {
     this.person = new Person();
     this.inscription = new Inscription();
 
@@ -56,17 +57,10 @@ export class InscriptionFormComponent implements OnInit, OnChanges {
   public createInscription() {
     this.subscriptionBtnClicked = true;
     this.person = JSON.parse(localStorage.getItem('Person'));
-    console.log(this.person);
     this.inscription.person_id = this.person.id;
-    console.log(this.inscription.person_id);
-
-    this.inscription.activity_id = this.activity.id; // Number.parseInt(localStorage.getItem('activityId'), 0);
+    this.inscription.activity_id = this.activity.id;
     console.log(this.inscription);
-    this.inscriptionService.createInscription(this.inscription).subscribe(() => {
-      console.log('ok');
-      this.refresh.emit();
-    }
-    );
+    this.create.emit(this.inscription);
   }
 
   public deleteInscription() {
@@ -127,9 +121,4 @@ export class InscriptionFormComponent implements OnInit, OnChanges {
     );
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
-  }
-
-  public onChanges() {
-  }
 }

@@ -22,11 +22,12 @@
 
 
         </ul>
-        <span *ngIf="isLogged()">
+        <span *ngIf="isLogged()"
+              (click)="createNewInscription(inscription)">
           <app-inscription-form
           [activity]=activity
           [eventID]= event.id
-          (refreshButton)= "refreshButton"></app-inscription-form>
+          (createInscription)="createNewInscription($event)"></app-inscription-form>
           </span>
     </div>
 
