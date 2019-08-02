@@ -8,6 +8,8 @@ import { Inscription } from 'src/app/models/inscription.model';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { InscriptionService } from 'src/app/services/inscription.service';
 import { PersonService } from '../../services/person.service';
+import { Router } from '@angular/router';
+import { LoginService } from '../../services/login.service';
 
 @Component({
   selector: 'app-account-container',
@@ -31,7 +33,8 @@ export class AccountContainerComponent implements OnInit {
     private eventService: EventService,
     private authService: AuthenticationService,
     private inscriptionService: InscriptionService,
-    private personService: PersonService) {
+    private personService: PersonService,
+    private router: Router) {
       this.activity = new Activity();
   }
 
@@ -127,6 +130,8 @@ export class AccountContainerComponent implements OnInit {
     this.person = JSON.parse(localStorage.getItem('Person'));
     this.personService.deleteProfile(this.person.id).subscribe(() => {
       console.log('OK');
+      this.authService.logout();
+      this.router.navigate(['/home']);
     }, error => {
       console.log(error);
     });

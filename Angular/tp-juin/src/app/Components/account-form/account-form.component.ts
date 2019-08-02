@@ -48,7 +48,7 @@ export class AccountFormComponent implements OnInit {
     this.emitter.emit(this.newPerson);
   }
 
-  public deleteProfil() {
+  public deleteProfile() {
     this.delete.emit();
   }
 
