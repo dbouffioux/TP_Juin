@@ -16,7 +16,7 @@
           <span id="rightButton"><button (click)= "deleteActivity(activity)" class="management-button delete">supression</button></span></li>
 
         </ul>
-        <span *ngIf="getPerson()">
+        <span *ngIf="isLogged()">
           <app-inscription-form
           [activity]=activity
           [eventID]= event.id
