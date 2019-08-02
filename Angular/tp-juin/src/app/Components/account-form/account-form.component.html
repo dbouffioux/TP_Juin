@@ -35,4 +35,7 @@
       </button>
     </div>
 </form>
-<button (click)= "deleteProfil()">Supprimer profil</button>
+<button
+*ngIf="isLogged"
+(click)= "deleteProfile()"
+>Supprimer profil</button>

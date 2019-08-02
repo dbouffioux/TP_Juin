@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Activity } from './models/activity.model';
 import { ActivitiesService } from './services/activities.service';
 
@@ -9,4 +9,10 @@ import { ActivitiesService } from './services/activities.service';
 })
 export class AppComponent {
   title = 'tp-juin';
+
+  @Input() public showCreateProfilePopup: boolean;
+
+  public createProfile() {
+    this.showCreateProfilePopup = true;
+  }
 }

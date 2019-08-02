@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Person } from 'src/app/models/person.models';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { AuthenticationService } from '../../services/authentication.service';
 
 @Component({
   selector: 'app-account-form',
@@ -10,13 +11,15 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 export class AccountFormComponent implements OnInit {
 
   @Input() public person: Person;
+  public isLogged: boolean;
   public newPerson: Person;
   public accountForm: FormGroup;
   @Output() public emitter = new EventEmitter<Person>();
   @Output() public delete = new EventEmitter<void>();
 
   constructor(
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private authService: AuthenticationService
   ) {
 
 
@@ -24,7 +27,7 @@ export class AccountFormComponent implements OnInit {
 
   ngOnInit() {
     this.person = JSON.parse(localStorage.getItem('Person'));
-
+    this.isLogged = this.authService.isLogged();
     this.accountForm = this.fb.group({
       firstname: this.fb.control(this.person.firstname, [Validators.required]),
       lastname: this.fb.control(this.person.lastname, [Validators.required]),
