@@ -3,6 +3,7 @@ import { Activity } from 'src/app/models/activity.model';
 import { Event } from 'src/app/models/event.model';
 import { Person } from 'src/app/models/person.models';
 import { AuthenticationService } from 'src/app/services/authentication.service';
+import { Inscription } from 'src/app/models/inscription.model';
 
 @Component({
   selector: 'app-activity-item',
@@ -15,6 +16,8 @@ export class ActivityItemComponent implements OnInit {
   public activities: Activity[];
   @Input()
   public activity: Activity ;
+  @Output()
+  public inscription: Inscription;
   public events: Event[];
   public event: Event;
   public person: Person;
@@ -26,6 +29,7 @@ export class ActivityItemComponent implements OnInit {
   public showActivityPopup: boolean;
   @Output()
   private refreshButton = new EventEmitter<void>();
+  @Output() private createInscription = new EventEmitter<Inscription>();
 
 
   constructor(private authService: AuthenticationService) {
@@ -34,6 +38,11 @@ export class ActivityItemComponent implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  public createNewInscription(inscription: Inscription){
+    console.log(inscription);
+    this.createInscription.emit(inscription);
   }
 
   public deleteActivity(activity: Activity){

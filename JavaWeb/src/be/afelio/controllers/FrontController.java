@@ -118,7 +118,11 @@ public class FrontController extends HttpServlet {
 				} else if (pathInfo.startsWith("/activity/")) {
 					System.out.println("FrontController.doGet() dans le elesif default activity");
 					activitiesController.getActivitiesToManage(request, response);
+				}else if (pathInfo.startsWith("/getactivity/")) {
+					System.out.println("FrontController.doGet() dans le elesif default getactivity");
+					activitiesController.getActivityByActivityId(request, response);
 				}
+				
 			}
 			System.out.println("FrontController.doGet().default");
 			break;
