@@ -55,6 +55,7 @@ public class DataRepositoryActivity {
 	
 
 	public Activity addActivity(Activity activity) {
+		System.out.println("DataRepositoryActivity.addActivity()");
 		Integer event_id = dataRepositoryEvent.findOneEventByName(activity.getEvent_name());
 		if (event_id != null) {
 			String sql = "insert into activity (name, begin, finish, url, description, event_id)"

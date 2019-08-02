@@ -1,49 +1,37 @@
-<table>
-  <tr>
-    <th>Nom de l'évènement</th>
-    <th>Nom de l'activité</th>
-    <th>Heure de début</th>
-    <th>Heure de fin</th>
-    <th>Description</th>
-    <th>URL</th>
-  </tr>
-
-  <tr>
-    <td>
-
-  <select name="event_name"
-  [(ngModel)]="activity.event_name">
-
+<form class="form" id="activity_form" [formGroup]="activityForm"  (ngSubmit)="submitForm()">
+  <ul>
+    <li><label for="event_name">Nom de l'évènement : </label>
+    <select formControlName="event_name" name="event_name" type="text">
       <option *ngFor="let event of events" value="{{event.name}}">{{event.name}}</option>
+    </select>
+    <li><label for="activity_name">Nom de l'activité : </label>
+      <input formControlName="activity_name" name="activity_name" type="text">
+      <li>
+          <label>Début de l'activité : </label>
+          <input placeholder="Date Time:"
+          formControlName="begin"
+          name="begin"
+          [owlDateTimeTrigger]="dtb" [owlDateTime]="dtb">
+          <owl-date-time #dtb></owl-date-time></li>
+      <li>
+        <label>Fin de l'activité : </label>
+        <input placeholder="Date Time:"
+        formControlName="finish"
+        name="finish"
+        [owlDateTimeTrigger]="dtf" [owlDateTime]="dtf">
+        <owl-date-time #dtf></owl-date-time></li>
+    <li><label>Description : </label>
+      <input formControlName="description" name="description" type="text">
+    <li><label>URL : </label>
+      <input formControlName="url" name="url" type="text">
+    </ul>
 
-
-  </select></td>
-    <td> <input name= "name" type="text"  [(ngModel)]="activity.name" ></td>
-    <td> <label class="example-input-wrapper">
-      <input placeholder="Date Time:"
-             [(ngModel)]="activity.begin"
-             [owlDateTimeTrigger]="dtb" [owlDateTime]="dtb">
-      <owl-date-time #dtb></owl-date-time>
-    </label>
-    </td>
-    <td> <label class="example-input-wrapper">
-      <input placeholder="Date Time:"
-             [(ngModel)]="activity.finish"
-             [owlDateTimeTrigger]="dtf" [owlDateTime]="dtf">
-      <owl-date-time #dtf></owl-date-time>
-    </label>
-    </td>
-    <td> <input name="description" type="text" [(ngModel)]="activity.description"></td>
-    <td> <input name="url" type="text" [(ngModel)]="activity.url"></td>
-
-  </tr>
-</table>
 
 
 <div>
   <button
     type="button"
-    (click)="createActivity()">
+    (click)="createActivity(activity)">
     Create a new activity
   </button>
 </div>
