@@ -7,11 +7,12 @@ import { Event } from 'src/app/models/event.model';
 import { Inscription } from 'src/app/models/inscription.model';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { InscriptionService } from 'src/app/services/inscription.service';
+import { PersonService } from '../../services/person.service';
 
 @Component({
   selector: 'app-account-container',
   templateUrl: './account-container.component.html',
-  styleUrls: ['./account-container.component.css']
+  styleUrls: ['./account-container.component.scss']
 })
 
 export class AccountContainerComponent implements OnInit {
@@ -29,7 +30,8 @@ export class AccountContainerComponent implements OnInit {
     private activitiesService: ActivitiesService,
     private eventService: EventService,
     private authService: AuthenticationService,
-    private inscriptionService: InscriptionService) {
+    private inscriptionService: InscriptionService,
+    private personService: PersonService) {
       this.activity = new Activity();
   }
 
@@ -83,6 +85,7 @@ export class AccountContainerComponent implements OnInit {
     this.eventService.deleteEvent(eventId).subscribe(() => {
       this.isDeleted = true;
       this.initEvents();
+      this.initActivities();
     }, error => {
       console.log(error);
     });
@@ -109,5 +112,25 @@ export class AccountContainerComponent implements OnInit {
       console.log(error);
     });
   }
+  public updateProfile(personUpdated: Person) {
+    console.log('container  : ' + personUpdated.firstname);
+
+    this.personService.updatePerson(personUpdated).subscribe(() => {
+      console.log('OK');
+      localStorage.setItem('Person', JSON.stringify(personUpdated));
+    }, error => {
+      console.log(error);
+    });
+  }
+
+  public deleteProfile() {
+    this.person = JSON.parse(localStorage.getItem('Person'));
+    this.personService.deleteProfile(this.person.id).subscribe(() => {
+      console.log('OK');
+    }, error => {
+      console.log(error);
+    });
+  }
+
 }
 

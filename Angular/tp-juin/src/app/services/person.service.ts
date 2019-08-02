@@ -39,7 +39,7 @@ constructor(private http: HttpClient) { }
   }
 
   public updatePerson(personUpdated: Person) {
-    console.log(personUpdated);
+    console.log('service : ' + personUpdated.id);
 
     return this.http.put(`${environment.baseUrl}/person/${personUpdated.id}`, personUpdated,
     {headers: new HttpHeaders().set('Authorization', localStorage.getItem('Authorization')),

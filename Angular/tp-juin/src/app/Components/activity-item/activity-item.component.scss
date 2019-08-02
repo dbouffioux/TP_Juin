@@ -9,18 +9,15 @@ section {
 
 #wrapper {
   background-color: $app-background-color;
-  width: 75%;
-  height: 50%;
-  margin: 10%;
+  width: 30%;
+  margin: 150px auto;
   vertical-align: middle;
-  padding-top: 50px;
+  padding: 50px 100px;
 }
 
 ul {
   vertical-align: middle;
-
   list-style: none;
-  text-align: center;
 }
 
 li {
