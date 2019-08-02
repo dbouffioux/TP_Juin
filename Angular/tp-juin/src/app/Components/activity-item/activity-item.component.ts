@@ -16,7 +16,7 @@ export class ActivityItemComponent implements OnInit {
   @Input()
   public activity: Activity ;
   public events: Event[];
-  public event1: Event;
+  public event: Event;
   public person: Person;
   public isDeleted: boolean;
   public isCreate: boolean;
@@ -29,19 +29,22 @@ export class ActivityItemComponent implements OnInit {
 
   constructor(
     private authService: AuthenticationService) {
-    /* this.activity = new Activity(); */
-    this.event1 = new Event();
+    this.event = new Event();
     this.person = this.authService.getPerson();
   }
 
   ngOnInit() {
   }
+
   public deleteActivity(activity: Activity){
-    console.log('deleteActivity ' + activity.id);
     this.delete.emit(activity);
   }
 
   public hidePopup() {
     this.showActivityPopup = false;
+  }
+
+  public isLogged(): boolean {
+    return this.authService.isLogged();
   }
 }
