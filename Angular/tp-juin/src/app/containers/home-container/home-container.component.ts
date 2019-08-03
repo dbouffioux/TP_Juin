@@ -74,40 +74,35 @@ export class HomeContainerComponent implements OnInit {
     console.log(activity.id);
     this.showActivityPopup = !this.showActivityPopup;
     this.activityToShow = activity;
+    this.isParticipantValue = false;
     this.isParticipant(activity);
   }
 
   public deleteInscription(activityId: number) {
     console.log('delete');
-
     this.inscriptionService.getAllInscriptionsForOnePerson(this.person.id).subscribe(
-      inscriptions => {
-        inscriptions.forEach( (inscription1, i) => {
-          console.log(inscription1);
-
-          if (inscription1.activity_id === activityId) {
-
-            this.inscriptionID = inscription1.id;
-          }
-        });
-        this.inscriptionService.deleteInscription(this.inscriptionID).subscribe(() => {
-          console.log('OK');
-          this.isParticipantValue = false;
-        }, error => {
-          console.log(error);
-        });
-      }
-    );
+        inscriptions => {
+          const inscription = inscriptions.find(inscription1 => {
+            return inscription1.activity.id === activityId;
+          });
+          this.inscriptionID = inscription.id;
+          console.log(this.inscriptionID);
+          this.inscriptionService.deleteInscription(this.inscriptionID).subscribe(() => {
+            console.log('OK');
+            this.isParticipantValue = false;
+          }, error => {
+            console.log(error);
+          });
+        }
+      );
   }
     public isParticipant(activity: Activity) {
-    activity.inscriptions.map((participant) => {
+    activity.inscriptions.find((participant) => {
+      console.log(participant.person_id);
 
       if (participant.person_id === this.person.id) {
         console.log('is Participant');
         this.isParticipantValue = true;
-      } else {
-        console.log('is not Participant' + participant.person_id + this.person.id);
-        this.isParticipantValue = false;
       }
     });
   }
