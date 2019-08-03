@@ -26,6 +26,9 @@ export class AccountContainerComponent implements OnInit {
   public events: Event[];
   public inscriptions: Inscription[];
   public isDeleted: boolean;
+  public showActivityPopup: boolean;
+  public activityToShow: Activity;
+  public isManagement: boolean;
   // tabs
   public showInfoTab: boolean;
   public showAccountUpdateForm: boolean;
@@ -105,7 +108,7 @@ export class AccountContainerComponent implements OnInit {
 
     this.activitiesService.deleteActivity(activity.id).subscribe(() => {
       this.initActivities();
-      this.isDeleted = true;
+      this.showActivityPopup = false;
       console.log('dans le deleteActivity');
     }, error => {
       console.log(error);
@@ -167,5 +170,11 @@ export class AccountContainerComponent implements OnInit {
         this.showAccountUpdateForm = false;
         break;
     }
+  }
+  public toggleActivityItem(activity: Activity) {
+    console.log(activity.id);
+    this.showActivityPopup = !this.showActivityPopup;
+    this.activityToShow = activity;
+    this.isManagement = true;
   }
 }
