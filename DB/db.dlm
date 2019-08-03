@@ -1,3 +1,6 @@
+DELETE FROM event;
+DELETE FROM person;
+
 INSERT INTO person
 	VALUES (DEFAULT, 'Mélissa', 'Schyns',
 	LOWER(SUBSTRING('Mélissa' from 1 for 3) || SUBSTRING('Schyns' from 1 for 3) || 1), 'test123');
@@ -42,13 +45,13 @@ INSERT INTO person
 
 INSERT INTO event
 	VALUES (DEFAULT, 'Francofolies', 3,
-	'2019-08-03T18:30:00Z', '2019-08-03T23:30:00Z',);
+	'2019-08-03T18:30:00Z', '2019-08-03T23:30:00Z');
 INSERT INTO event
 	VALUES (DEFAULT, 'Rock Wechter', 5,
-	'2019-08-01T22:30:00Z', '2019-08-02T23:30:00Z',);
+	'2019-08-01T22:30:00Z', '2019-08-02T23:30:00Z');
 INSERT INTO event
 	VALUES (DEFAULT, 'Tomorrow Land', 8,
-	'2019-08-02T18:30:00Z', '2019-08-03T20:30:00Z',);
+	'2019-08-02T18:30:00Z', '2019-08-03T20:30:00Z');
 
 
 
@@ -87,7 +90,7 @@ INSERT INTO activity
 	'pop/rap');
 INSERT INTO activity
 	VALUES (DEFAULT,
-	'David Ghetta',
+	'David Guetta',
 	'2019-08-03T18:30:00Z', 
 	'2019-08-03T20:30:00Z',
 	3,
@@ -95,7 +98,7 @@ INSERT INTO activity
 	'electro');
 INSERT INTO activity
 	VALUES (DEFAULT,
-	'Mortin Solveig',
+	'Martin Solveig',
 	'2019-08-02T18:30:00Z', 
 	'2019-08-02T20:30:00Z',
 	3,
