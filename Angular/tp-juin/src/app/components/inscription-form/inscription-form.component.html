@@ -1,18 +1,4 @@
-<div>
-  <button *ngIf="!isParticipantValue"
-    type="button"
-    (click)="createInscription($event)" >
-    Inscription
-  </button>
-</div>
 
-<div>
-    <button *ngIf="isParticipantValue"
-      type="button"
-      (click)="deleteInscription()">
-      Désinscription
-    </button>
-  </div>
 
 <!-- <ng-container *ngIf="subscriptionBtnClicked">
     <div *ngIf="success; else notSubscribed">Vous êtes inscrit !</div>

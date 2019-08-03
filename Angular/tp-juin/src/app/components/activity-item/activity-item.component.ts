@@ -17,21 +17,32 @@ export class ActivityItemComponent implements OnInit {
   public events: Event[];
   public isDeleted: boolean;
   public isCreate: boolean;
+  public isManagement: boolean;
 
-  @Input() public activity: Activity ;
+  @Input() public isParticipantValue: boolean;
+  @Input() public activity: Activity;
   @Input() public activities: Activity[];
   @Input() public showActivityPopup: boolean;
   @Output() private delete = new EventEmitter<Activity>();
   @Output() private refreshButton = new EventEmitter<void>();
   @Output() public createInscription = new EventEmitter<number>();
+  @Output() public deleteTheInscription = new EventEmitter<number>();
+
 
 
   constructor(private authService: AuthenticationService) {
+    this.isManagement = false;
     this.event = new Event();
     this.person = this.authService.getPerson();
   }
 
   ngOnInit() {
+    this.isManagement = false;
+    if (this.getPerson()) {
+      this.person = JSON.parse(localStorage.getItem('Person'));
+    } else {
+      this.person = null;
+    }
   }
 
   public createNewInscription(event: Event) {
@@ -46,6 +57,10 @@ export class ActivityItemComponent implements OnInit {
       this.createInscription.emit(this.activity.id);
     }
   }
+  public deleteInscription(event: Event) {
+    console.log('deleteInscription');
+    this.deleteTheInscription.emit(this.activity.id);
+  }
 
   public deleteActivity(activity: Activity) {
     this.delete.emit(activity);
@@ -58,5 +73,13 @@ export class ActivityItemComponent implements OnInit {
 
   public isLogged(): boolean {
     return this.authService.isLogged();
+  }
+
+  public getPerson(): boolean {
+    if (localStorage.getItem('Person') !== '') {
+      return true;
+    } else {
+      return false;
+    }
   }
 }

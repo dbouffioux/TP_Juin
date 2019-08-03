@@ -8,12 +8,13 @@
 
 <app-activity-list
   (showActivityItem)="toggleActivityItem($event)"
-  id="activities_list"
   [activities]="activities"
 ></app-activity-list>
 
 <app-activity-item
   [showActivityPopup]="showActivityPopup"
+  [isParticipantValue]="isParticipantValue"
   [activity]="activityToShow"
   (createInscription)="createInscription($event)"
+  (deleteInscription)="deleteInscription($event)"
 ></app-activity-item>

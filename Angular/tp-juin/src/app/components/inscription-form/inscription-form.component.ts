@@ -28,7 +28,9 @@ export class InscriptionFormComponent implements OnInit {
   @Input() public activity: Activity;
   @Input() public eventID: number;
   @Output() public create = new EventEmitter<Event>();
+  @Output() public delete = new EventEmitter<Event>();
   @Output() public refresh = new EventEmitter<void>();
+
 
   constructor(
     private eventService: EventService,
@@ -38,88 +40,60 @@ export class InscriptionFormComponent implements OnInit {
     this.inscription = new Inscription();
 
   }
-
-  ngOnInit() {
-    if (this.getPerson()) {
-      this.person = JSON.parse(localStorage.getItem('Person'));
-      this.isParticipant();
-    } else {
-      this.person = null;
-    }
-
-    console.log(this.person);
-    this.eventService.getEventByPersonId(this.person.id)
-      .subscribe(events => {
-        this.events = events;
-      });
-  }
-
-  public createInscription(event: Event) {
-    this.subscriptionBtnClicked = true;
-    this.person = JSON.parse(localStorage.getItem('Person'));
-    this.inscription.person_id = this.person.id;
-    this.inscription.activity_id = this.activity.id;
-    console.log(this.inscription);
-    // this.create.emit(this.inscription);
-    this.create.emit(event);
-  }
-
-  public deleteInscription() {
-    this.inscriptionService.getAllInscriptionsForOnePerson(this.person.id).subscribe(
-      inscriptions => {
-        const inscription = inscriptions.find(inscription1 => {
-          return inscription1.activity.id === this.activity.id;
-        });
-        this.inscriptionID = inscription.id;
-        console.log(this.inscriptionID);
-        this.inscriptionService.deleteInscription(this.inscriptionID).subscribe(() => {
-          console.log('OK');
-          this.success = true;
-          this.refresh.emit();
-        }, error => {
-          this.success = false;
-          console.log(error);
-        });
-      }
-    );
-  }
-
-  public getPerson(): boolean {
-    if (localStorage.getItem('Person') !== '') {
-      return true;
-    } else {
-      return false;
-    }
-  }
-
-  public getListInscription() {
-    this.inscriptionService.getAllInscriptionsForOnePerson(this.person.id).subscribe(inscription => {
-      this.inscriptions = inscription,
-        console.log(this.inscriptions);
-
-    });
-  }
-
-  public isParticipant() {
-    this.activity.inscriptions.map((participant) => {
-
-      if (participant.person_id === this.person.id) {
-        console.log('is Participant');
-        this.isParticipantValue = true;
-      } else {
-        console.log('is not Participant' + participant.person_id + this.person.id);
-        this.isParticipantValue = false;
-      }
-    });
-  }
-
-  private getActivities() {
-    this.activityService.getActivities().subscribe(
-      activities => {
-        this.activity = activities.find(activity => activity.id === this.activity.id);
-        this.isParticipant();
-      }
-    );
-  }
-
+  ngOnInit() {}
 }
+//   ngOnInit() {
+//     if (this.getPerson()) {
+//       this.person = JSON.parse(localStorage.getItem('Person'));
+//       this.isParticipant();
+//     } else {
+//       this.person = null;
+//     }
+
+//     console.log(this.person);
+//     this.eventService.getEventByPersonId(this.person.id)
+//       .subscribe(events => {
+//         this.events = events;
+//       });
+//   }
+
+//   public createInscription(event: Event) {
+//     this.subscriptionBtnClicked = true;
+//     this.create.emit(event);
+//   }
+
+//   public deleteInscription(event : Event) {
+//     console.log('delete');
+
+//     this.delete.emit(event);
+//   }
+
+//   public getPerson(): boolean {
+//     if (localStorage.getItem('Person') !== '') {
+//       return true;
+//     } else {
+//       return false;
+//     }
+//   }
+
+//   public getListInscription() {
+//     this.inscriptionService.getAllInscriptionsForOnePerson(this.person.id).subscribe(inscription => {
+//       this.inscriptions = inscription,
+//         console.log(this.inscriptions);
+
+//     });
+//   }
+
+
+//   }
+
+//   private getActivities() {
+//     this.activityService.getActivities().subscribe(
+//       activities => {
+//         this.activity = activities.find(activity => activity.id === this.activity.id);
+//         this.isParticipant();
+//       }
+//     );
+//   }
+
+// }
