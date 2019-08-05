@@ -17,7 +17,7 @@ export class ActivityItemComponent implements OnInit {
   public events: Event[];
   public isDeleted: boolean;
   public isCreate: boolean;
-  public isManagement: boolean;
+  @Input() public isManagement: boolean;
 
   @Input() public isParticipantValue: boolean;
   @Input() public activity: Activity;
