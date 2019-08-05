@@ -10,10 +10,22 @@
       (delete)="deleteEvent($event)"
       [isManagement]="true"></app-event-list>
 
+    <app-event-form
+    [showCreateEventPopup]=showCreateEventPopup
+    (create)="createEvent($event)"
+    ></app-event-form>
+
     <app-activity-list
       id="activities_list"
       (delete)="deleteActivity($event)"
       [activities]="activities"></app-activity-list>
+
+    <app-activity-item
+      [showActivityPopup]="showActivityPopup"
+      [activity]="activityToShow"
+      [isManagement]= "isManagement"
+      (delete)="deleteActivity($event)"
+    ></app-activity-item>
 
     <app-inscription
       id="inscriptions_list"

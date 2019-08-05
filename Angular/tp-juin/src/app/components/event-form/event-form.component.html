@@ -1,21 +1,12 @@
-<section class="popup" *ngIf="showPopup">
-  <table>
-    <tr>
-      <th>Nom du gestionnaire</th>
-      <th>Nom de l'évènement</th>
-    </tr>
-    <tr>
-      <td>
-    <select name="event.person_id"
-    [(ngModel)]="event.person_id">
-    <option value="{{person.id}}">{{person.firstname}}</option>
-    </select></td>
-      <td> <input name= "name" type="text"  [(ngModel)]="event.name" ></td>
-    </tr>
-  </table>
+<section class="popup" *ngIf="showCreateEventPopup">
+  <div class="close" (click)="hideLoginFormPopup()">Х</div>
+  <form class="form" id="event_form" [formGroup]="eventForm">
+    <label for="event_name">Nom de l'évènement : </label>
+    <input formControlName="event_name" name="event_name" type="text">
+
   <button
     type="button"
     (click)="createEvent()">
-    Ajouter un nouvel évènement
+    Créer un nouvel évènement
   </button>
-</section>
+

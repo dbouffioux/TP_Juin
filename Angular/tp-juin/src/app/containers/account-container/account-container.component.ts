@@ -31,6 +31,8 @@ export class AccountContainerComponent implements OnInit {
   public showAccountUpdateForm: boolean;
   public tabsStatuses: any;
   public tabActive: any;
+  // event-form pop-up
+  public showCreateEventPopup: boolean;
 
   constructor(
     private activitiesService: ActivitiesService,
@@ -167,5 +169,14 @@ export class AccountContainerComponent implements OnInit {
         this.showAccountUpdateForm = false;
         break;
     }
+  }
+  public toggleActivityItem(activity: Activity) {
+    console.log(activity.id);
+    this.showActivityPopup = !this.showActivityPopup;
+    this.activityToShow = activity;
+    this.isManagement = true;
+  }
+  public toggleCreateEventPopup() {
+    this.showCreateEventPopup = !this.showCreateEventPopup;
   }
 }
