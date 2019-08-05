@@ -11,16 +11,13 @@
         <li><label>Description : </label>
         <span>{{activity.description}}</span></li>
         <li><label>URL : </label>
-        <span><a href="{{activity.url}}" target="_blank">{{activity.url}}</a></span></li>
-
+        <span>
+          <a href="{{activity.url}}" target="_blank">{{activity.url}}</a>
+        </span></li>
         <ng-container *ngIf="isManagement">
             <li><span><a href="updateActivity/${activity.id}"><button class="management-button update">modification</button></a></span>
               <span id="rightButton"><button (click)= "deleteActivity(activity)" class="management-button delete">supression</button></span></li>
-
-
         </ng-container>
-
-
         </ul>
         <ng-container *ngIf="!isManagement">
           <span *ngIf="isLogged()">
@@ -31,7 +28,6 @@
                 Inscription
               </button>
             </div>
-
             <div>
                 <button *ngIf="isParticipantValue" class="management-button subscribe"
                   type="button"
@@ -41,8 +37,5 @@
               </div>
             </span>
         </ng-container>
-
-
     </div>
-
 </section>

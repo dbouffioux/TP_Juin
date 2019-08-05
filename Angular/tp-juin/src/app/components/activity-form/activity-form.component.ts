@@ -9,7 +9,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 @Component({
   selector: 'app-activity-form',
   templateUrl: './activity-form.component.html',
-  styleUrls: ['./activity-form.component.css']
+  styleUrls: ['./activity-form.component.scss']
 })
 
 export class ActivityFormComponent implements OnInit {
@@ -22,6 +22,7 @@ public activityForm: FormGroup;
 
 @Input() public events: Event[];
 @Input() public activity: Activity;
+@Input() public  showCreateActivityPopup: boolean;
 @Output() private create = new EventEmitter<Activity>();
 
 
@@ -49,5 +50,9 @@ public createActivity() {
   activity.url = formValues.url;
   console.log(activity);
   this.create.emit(activity);
+  }
+
+  public hideEventFormPopup() {
+    this.showCreateActivityPopup = !this.showCreateActivityPopup;
   }
 }

@@ -36,6 +36,7 @@ export class AccountContainerComponent implements OnInit {
   public showActivityPopup: boolean;
   public activityToShow: Activity;
   public isManagement: boolean;
+  public showCreateActivityPopup: boolean;
 
   constructor(
     private activitiesService: ActivitiesService,
@@ -49,6 +50,7 @@ export class AccountContainerComponent implements OnInit {
       this.showInfoTab = true;
       this.tabActive = 'info';
       this.showAccountUpdateForm = false;
+      this.showCreateActivityPopup = false;
   }
 
   ngOnInit() {
@@ -184,5 +186,9 @@ export class AccountContainerComponent implements OnInit {
   }
   public toggleCreateEventPopup() {
     this.showCreateEventPopup = !this.showCreateEventPopup;
+  }
+
+  public toggleCreateActivityPopup() {
+    this.showCreateActivityPopup = !this.showCreateActivityPopup;
   }
 }
