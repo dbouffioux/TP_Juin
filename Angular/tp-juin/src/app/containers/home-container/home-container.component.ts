@@ -24,6 +24,8 @@ export class HomeContainerComponent implements OnInit {
   public activity: Activity;
   public inscription: Inscription;
   public person: Person;
+  public inscriptionID: number;
+  public isParticipantValue: boolean;
 
   constructor(
     private eventService: EventService,
@@ -35,7 +37,7 @@ export class HomeContainerComponent implements OnInit {
     this.activeEvent = 0;
     this.person = this.authService.getPerson();
     this.inscription = new Inscription();
-   }
+  }
 
   ngOnInit() {
     this.initEventList();
@@ -63,7 +65,7 @@ export class HomeContainerComponent implements OnInit {
 
     this.inscriptionService.createInscription(this.inscription).subscribe(() => {
       console.log('ok');
-      this.refreshActivity(this.inscription.activity_id);
+      this.isParticipantValue = true;
     }
     );
   }
@@ -72,11 +74,36 @@ export class HomeContainerComponent implements OnInit {
     console.log(activity.id);
     this.showActivityPopup = !this.showActivityPopup;
     this.activityToShow = activity;
-  }
-  public refreshActivity(activityId: number) {
-    this.activityService.getOneActivtyById(activityId).subscribe(activity => {
-      this.activity = activity;
-    });
+    this.isParticipantValue = false;
+    this.isParticipant(activity);
   }
 
+  public deleteInscription(activityId: number) {
+    console.log('delete');
+    this.inscriptionService.getAllInscriptionsForOnePerson(this.person.id).subscribe(
+        inscriptions => {
+          const inscription = inscriptions.find(inscription1 => {
+            return inscription1.activity.id === activityId;
+          });
+          this.inscriptionID = inscription.id;
+          console.log(this.inscriptionID);
+          this.inscriptionService.deleteInscription(this.inscriptionID).subscribe(() => {
+            console.log('OK');
+            this.isParticipantValue = false;
+          }, error => {
+            console.log(error);
+          });
+        }
+      );
+  }
+    public isParticipant(activity: Activity) {
+    activity.inscriptions.find((participant) => {
+      console.log(participant.person_id);
+
+      if (participant.person_id === this.person.id) {
+        console.log('is Participant');
+        this.isParticipantValue = true;
+      }
+    });
+  }
 }

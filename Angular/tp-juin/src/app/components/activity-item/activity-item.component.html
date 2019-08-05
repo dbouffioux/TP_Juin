@@ -22,12 +22,22 @@
 
 
         </ul>
-        <span *ngIf="isLogged()"
-              (click)="createNewInscription(inscription)">
-          <app-inscription-form
-          [activity]=activity
-          [eventID]= event.id
-          (create)="createNewInscription($event)"></app-inscription-form>
+        <span *ngIf="isLogged()">
+          <div>
+            <button *ngIf="!isParticipantValue"
+              type="button"
+              (click)="createNewInscription($event)" >
+              Inscription
+            </button>
+          </div>
+
+          <div>
+              <button *ngIf="isParticipantValue"
+                type="button"
+                (click)="deleteInscription($event)">
+                Désinscription
+              </button>
+            </div>
           </span>
     </div>
 
