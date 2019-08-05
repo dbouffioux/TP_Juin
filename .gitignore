@@ -1,3 +1,6 @@
 ﻿JavaWeb/.classpath
 *.classpath
+.idea
+*.eml
+*.iml
 Angular/.idea
