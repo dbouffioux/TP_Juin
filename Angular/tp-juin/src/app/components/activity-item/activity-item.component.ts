@@ -25,40 +25,26 @@ export class ActivityItemComponent implements OnInit {
   @Input() public showActivityPopup: boolean;
   @Output() private delete = new EventEmitter<Activity>();
   @Output() private refreshButton = new EventEmitter<void>();
-  @Output() public createInscription = new EventEmitter<number>();
-  @Output() public deleteTheInscription = new EventEmitter<number>();
-
-
+  @Output() private createInscription = new EventEmitter<number>();
+  @Output() private deleteTheInscription = new EventEmitter<number>();
+  @Output() public hidePopUpEmitter = new EventEmitter<Activity>();
 
   constructor(private authService: AuthenticationService) {
     this.isManagement = false;
     this.event = new Event();
-    this.person = this.authService.getPerson();
   }
 
   ngOnInit() {
     this.isManagement = false;
-    if (this.getPerson()) {
-      this.person = JSON.parse(localStorage.getItem('Person'));
-    } else {
-      this.person = null;
-    }
+    this.person = this.authService.getPerson();
   }
 
   public createNewInscription(event: Event) {
-
-    // this.createInscription.emit(inscription);
-    // if (event) {
-    //   this.inscription.person_id = this.person.id;
-    //   this.inscription.activity_id = this.activity.id;
-    // }
     if (event) {
-      console.log(event);
       this.createInscription.emit(this.activity.id);
     }
   }
   public deleteInscription(event: Event) {
-    console.log('deleteInscription');
     this.deleteTheInscription.emit(this.activity.id);
   }
 
@@ -70,17 +56,10 @@ export class ActivityItemComponent implements OnInit {
 
   public hidePopup() {
     this.showActivityPopup = false;
+    this.hidePopUpEmitter.emit(this.activity);
   }
 
   public isLogged(): boolean {
     return this.authService.isLogged();
-  }
-
-  public getPerson(): boolean {
-    if (localStorage.getItem('Person') !== '') {
-      return true;
-    } else {
-      return false;
-    }
   }
 }

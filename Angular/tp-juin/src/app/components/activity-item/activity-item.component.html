@@ -22,14 +22,14 @@
         <ng-container *ngIf="!isManagement">
           <span *ngIf="isLogged()">
             <div>
-              <button *ngIf="!isParticipantValue"
+              <button *ngIf="!isParticipantValue" class="management-button subscribe"
                 type="button"
                 (click)="createNewInscription($event)" >
                 Inscription
               </button>
             </div>
             <div>
-                <button *ngIf="isParticipantValue"
+                <button *ngIf="isParticipantValue" class="management-button subscribe"
                   type="button"
                   (click)="deleteInscription($event)">
                   Désinscription
