@@ -1,8 +1,8 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { Person } from 'src/app/models/person.models';
+import { Person } from 'src/app/models/person.model';
 import { LoginService } from 'src/app/services/login.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { AuthenticationService } from 'src/app/services/authentication.service';
+import { AuthenticationsService } from 'src/app/services/authentications.service';
 
 @Component({
   selector: 'app-login',
@@ -19,7 +19,7 @@ export class LoginComponent implements OnInit {
   @Input() public showPopup: boolean;
   @Output() showSubscription = new EventEmitter<void>();
 
-  constructor(private loginService: LoginService, private fb: FormBuilder, private authService: AuthenticationService) {
+  constructor(private loginService: LoginService, private fb: FormBuilder, private authService: AuthenticationsService) {
     this.person = new Person();
     this.loginForm = this.fb.group({
       login: this.fb.control('', [Validators.required]),

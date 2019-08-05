@@ -1,8 +1,8 @@
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { Activity } from 'src/app/models/activity.model';
 import { Event } from 'src/app/models/event.model';
-import { Person } from 'src/app/models/person.models';
-import { AuthenticationService } from 'src/app/services/authentication.service';
+import { Person } from 'src/app/models/person.model';
+import { AuthenticationsService } from 'src/app/services/authentications.service';
 
 @Component({
   selector: 'app-activity-list',
@@ -25,7 +25,7 @@ export class ActivityListComponent implements OnInit {
   @Output() private showActivityItem = new EventEmitter<Activity>();
 
   constructor(
-    private authService: AuthenticationService) {
+    private authService: AuthenticationsService) {
     this.activity = new Activity();
     this.event1 = new Event();
     this.person = this.authService.getPerson();

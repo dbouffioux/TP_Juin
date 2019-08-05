@@ -1,13 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Event } from 'src/app/models/event.model';
-import { EventService } from 'src/app/services/event.service';
+import { EventsService } from 'src/app/services/events.service';
 import { Activity } from 'src/app/models/activity.model';
 import { Inscription } from 'src/app/models/inscription.model';
-import { InscriptionService } from 'src/app/services/inscription.service';
+import { InscriptionsService } from 'src/app/services/inscriptions.service';
 import { ActivitiesService } from 'src/app/services/activities.service';
-import { AuthenticationService } from 'src/app/services/authentication.service';
-import { Person } from 'src/app/models/person.models';
-import { logger } from "codelyzer/util/logger";
+import { AuthenticationsService } from 'src/app/services/authentications.service';
+import { Person } from 'src/app/models/person.model';
 
 @Component({
   selector: 'app-home-container',
@@ -29,10 +28,10 @@ export class HomeContainerComponent implements OnInit {
   public isParticipantValue: boolean;
 
   constructor(
-    private eventService: EventService,
-    private inscriptionService: InscriptionService,
+    private eventService: EventsService,
+    private inscriptionService: InscriptionsService,
     private activityService: ActivitiesService,
-    private authService: AuthenticationService) {
+    private authService: AuthenticationsService) {
     this.activities = [];
     this.showActivityPopup = false;
     this.activeEvent = 0;
@@ -60,8 +59,8 @@ export class HomeContainerComponent implements OnInit {
     this.activeEvent = eventId;
   }
   public createInscription(activityId: number) {
-    this.inscription.activity_id = activityId;
-    this.inscription.person_id = this.person.id;
+    this.inscription.activityId = activityId;
+    this.inscription.personId = this.person.id;
 
     this.inscriptionService.createInscription(this.inscription).subscribe(() => {
       this.isParticipantValue = true;
@@ -95,9 +94,9 @@ export class HomeContainerComponent implements OnInit {
   public isParticipant(activity: Activity) {
     if (this.person.id !== null) {
       const inscription = activity.inscriptions.find((participant) => {
-        return participant.person_id === this.person.id;
+        return participant.personId === this.person.id;
       });
-      this.isParticipantValue = inscription.person_id === this.person.id;
+      this.isParticipantValue = inscription.personId === this.person.id;
     }
   }
 }

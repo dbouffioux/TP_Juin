@@ -1,6 +1,6 @@
 import { Component, OnInit , Input, Output, EventEmitter } from '@angular/core';
-import { Person } from 'src/app/models/person.models';
-import { PersonService } from 'src/app/services/person.service';
+import { Person } from 'src/app/models/person.model';
+import { PersonsService } from 'src/app/services/persons.service';
 import { Router } from '@angular/router';
 import { LoginService } from 'src/app/services/login.service';
 
@@ -20,7 +20,7 @@ export class ProfileFormComponent implements OnInit {
   @Output() private resetPopupProfileStateInParent = new EventEmitter<void>();
 
   constructor(
-    private personService: PersonService,
+    private personService: PersonsService,
     private router: Router,
     private login: LoginService) {
       this.person = new Person();

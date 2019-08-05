@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { Person } from 'src/app/models/person.models';
+import { Person } from 'src/app/models/person.model';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { AuthenticationService } from '../../services/authentication.service';
+import { AuthenticationsService } from '../../services/authentications.service';
 
 @Component({
   selector: 'app-account-form',
@@ -19,7 +19,7 @@ export class AccountFormComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private authService: AuthenticationService
+    private authService: AuthenticationsService
   ) { }
 
   ngOnInit() {

@@ -16,8 +16,6 @@
     <td>{{activity.description}}</td>
     <td><a href="{{activity.url}}" target="_blank">{{activity.url}}</a></td>
     <td *ngIf="getPerson()">
-      <app-inscription-form [activity]=activity [eventID]=event.id (refresh)="refreshActivities()">
-      </app-inscription-form>
     </td>
   </tr>
 </table>

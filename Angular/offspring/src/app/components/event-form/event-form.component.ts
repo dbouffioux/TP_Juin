@@ -1,7 +1,7 @@
 import { Component, OnInit , Input, Output, EventEmitter} from '@angular/core';
 import { Event } from 'src/app/models/event.model';
-import { Person } from 'src/app/models/person.models';
-import { AuthenticationService } from 'src/app/services/authentication.service';
+import { Person } from 'src/app/models/person.model';
+import { AuthenticationsService } from 'src/app/services/authentications.service';
 import { FormGroup, FormBuilder, Validators} from '@angular/forms';
 
 @Component({
@@ -13,14 +13,11 @@ import { FormGroup, FormBuilder, Validators} from '@angular/forms';
 export class EventFormComponent implements OnInit {
   public eventForm: FormGroup;
   public person: Person;
-  @Output()
-  private createEmitter = new EventEmitter<Event>();
-  @Output()
-  private refresh = new EventEmitter<void>();
-  @Input()
-  private showCreateEventPopup: boolean;
+  @Input() private showCreateEventPopup: boolean;
+  @Output() private refresh = new EventEmitter<void>();
+  @Output() private createEmitter = new EventEmitter<Event>();
 
-  constructor(private authService: AuthenticationService, private fb: FormBuilder) {
+  constructor(private authService: AuthenticationsService, private fb: FormBuilder) {
     this.person = new Person();
     this.eventForm = this.fb.group({
       event_name: this.fb.control('', [Validators.required]),

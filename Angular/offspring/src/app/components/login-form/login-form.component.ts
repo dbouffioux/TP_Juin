@@ -1,8 +1,8 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { LoginService } from 'src/app/services/login.service';
-import { AuthenticationService } from 'src/app/services/authentication.service';
-import { Person } from 'src/app/models/person.models';
+import { AuthenticationsService } from 'src/app/services/authentications.service';
+import { Person } from 'src/app/models/person.model';
 
 @Component({
   selector: 'app-login-form',
@@ -15,7 +15,7 @@ export class LoginFormComponent implements OnInit {
   @Input() public showLoginFormPopup: boolean;
   @Output() public resetLoginFormPopupStateInParent = new EventEmitter<void>();
 
-  constructor(private loginService: LoginService, private fb: FormBuilder, private authService: AuthenticationService) {
+  constructor(private loginService: LoginService, private fb: FormBuilder, private authService: AuthenticationsService) {
     this.loginForm = this.fb.group({
       login: this.fb.control('', [Validators.required]),
       password: this.fb.control('', [Validators.required])

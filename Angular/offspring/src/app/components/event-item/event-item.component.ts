@@ -1,13 +1,13 @@
 import { Component, OnInit, Input, Output } from '@angular/core';
-import { EventService } from 'src/app/services/event.service';
+import { EventsService } from 'src/app/services/events.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Event } from 'src/app/models/event.model';
 import { ActivitiesService } from 'src/app/services/activities.service';
 import { Activity } from 'src/app/models/activity.model';
-import { Person } from 'src/app/models/person.models';
+import { Person } from 'src/app/models/person.model';
 import { Inscription } from 'src/app/models/inscription.model';
 import { HttpErrorResponse } from '@angular/common/http';
-import { InscriptionService } from 'src/app/services/inscription.service';
+import { InscriptionsService } from 'src/app/services/inscriptions.service';
 
 @Component({
   selector: 'app-event-item',
@@ -26,11 +26,11 @@ export class EventItemComponent implements OnInit {
   public isDeleted: boolean;
 
   constructor(
-    private eventService: EventService,
+    private eventService: EventsService,
     private route: ActivatedRoute,
     private router: Router,
     private activitiesService: ActivitiesService,
-    private inscriptionService: InscriptionService) {
+    private inscriptionService: InscriptionsService) {
     this.inscription = new Inscription();
     this.person = new Person();
   }
@@ -44,9 +44,6 @@ export class EventItemComponent implements OnInit {
       const id = params.id;
       console.log(id);
       this.eventService.getEventWithAllActivitiesById(id).subscribe(event => { this.event = event; console.log('dans le getEvent'); });
-      // this.person = JSON.parse(localStorage.getItem('Person'));
-      // this.activitiesService.getActivitiesByPerson(this.person)
-      // .subscribe(activities => this.activities = activities);
     });
   }
 

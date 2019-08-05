@@ -1,7 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Inscription } from 'src/app/models/inscription.model';
-import { InscriptionService } from 'src/app/services/inscription.service';
-import { Person } from 'src/app/models/person.models';
+import { Person } from 'src/app/models/person.model';
 
 
 @Component({

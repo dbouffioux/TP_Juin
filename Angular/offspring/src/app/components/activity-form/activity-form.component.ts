@@ -1,8 +1,8 @@
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { Activity } from 'src/app/models/activity.model';
-import { Person } from 'src/app/models/person.models';
+import { Person } from 'src/app/models/person.model';
 import { ActivitiesService } from 'src/app/services/activities.service';
-import { EventService } from 'src/app/services/event.service';
+import { EventsService } from 'src/app/services/events.service';
 import { Event } from 'src/app/models/event.model';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
@@ -26,7 +26,7 @@ export class ActivityFormComponent implements OnInit {
   @Output() private create = new EventEmitter<Activity>();
 
 
-  constructor(private activitiesService: ActivitiesService, private eventService: EventService, private fb: FormBuilder) {
+  constructor(private activitiesService: ActivitiesService, private eventService: EventsService, private fb: FormBuilder) {
     this.activityForm = this.fb.group({
       event_name: this.fb.control('', [Validators.required]),
       activity_name: this.fb.control('', [Validators.required]),
@@ -42,7 +42,7 @@ export class ActivityFormComponent implements OnInit {
   public createActivity() {
     const formValues = this.activityForm.value;
     const activity = new Activity();
-    activity.event_name = formValues.event_name;
+    activity.eventName = formValues.event_name;
     activity.name = formValues.activity_name;
     activity.begin = formValues.begin;
     activity.finish = formValues.finish;

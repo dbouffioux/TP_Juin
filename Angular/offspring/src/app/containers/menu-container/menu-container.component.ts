@@ -1,14 +1,14 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
-import { AuthenticationService } from 'src/app/services/authentication.service';
-import { Person } from 'src/app/models/person.models';
-import { PersonService } from '../../services/person.service';
+import { AuthenticationsService } from 'src/app/services/authentications.service';
+import { Person } from 'src/app/models/person.model';
+import { PersonsService } from '../../services/persons.service';
 import { Router } from '@angular/router';
 import { LoginService } from '../../services/login.service';
 
 @Component({
   selector: 'app-menu-container',
-  templateUrl: './menu.component.html',
-  styleUrls: ['./menu.component.scss']
+  templateUrl: './menu-container.component.html',
+  styleUrls: ['./menu-container.component.scss']
 })
 
 export class MenuContainerComponent implements OnInit {
@@ -21,8 +21,8 @@ export class MenuContainerComponent implements OnInit {
 
   constructor(
     private login: LoginService,
-    private authService: AuthenticationService,
-    private personService: PersonService,
+    private authService: AuthenticationsService,
+    private personService: PersonsService,
     private router: Router) {
     this.showMenuProfile = false;
     this.showPopupProfile = false;

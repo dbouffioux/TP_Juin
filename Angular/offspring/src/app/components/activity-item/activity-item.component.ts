@@ -1,9 +1,8 @@
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { Activity } from 'src/app/models/activity.model';
 import { Event } from 'src/app/models/event.model';
-import { Person } from 'src/app/models/person.models';
-import { AuthenticationService } from 'src/app/services/authentication.service';
-import { Inscription } from 'src/app/models/inscription.model';
+import { Person } from 'src/app/models/person.model';
+import { AuthenticationsService } from 'src/app/services/authentications.service';
 
 @Component({
   selector: 'app-activity-item',
@@ -29,7 +28,7 @@ export class ActivityItemComponent implements OnInit {
   @Output() private createInscription = new EventEmitter<number>();
   @Output() private deleteTheInscription = new EventEmitter<number>();
 
-  constructor(private authService: AuthenticationService) {
+  constructor(private authService: AuthenticationsService) {
     this.isManagement = false;
     this.event = new Event();
   }

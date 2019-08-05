@@ -1,13 +1,13 @@
 import { Component, OnInit, Output, Input } from '@angular/core';
 import { ActivitiesService } from 'src/app/services/activities.service';
 import { Activity } from 'src/app/models/activity.model';
-import { Person } from 'src/app/models/person.models';
-import { EventService } from 'src/app/services/event.service';
+import { Person } from 'src/app/models/person.model';
+import { EventsService } from 'src/app/services/events.service';
 import { Event } from 'src/app/models/event.model';
 import { Inscription } from 'src/app/models/inscription.model';
-import { AuthenticationService } from 'src/app/services/authentication.service';
-import { InscriptionService } from 'src/app/services/inscription.service';
-import { PersonService } from '../../services/person.service';
+import { AuthenticationsService } from 'src/app/services/authentications.service';
+import { InscriptionsService } from 'src/app/services/inscriptions.service';
+import { PersonsService } from '../../services/persons.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -40,10 +40,10 @@ export class AccountContainerComponent implements OnInit {
 
   constructor(
     private activitiesService: ActivitiesService,
-    private eventService: EventService,
-    private authService: AuthenticationService,
-    private inscriptionService: InscriptionService,
-    private personService: PersonService,
+    private eventService: EventsService,
+    private authService: AuthenticationsService,
+    private inscriptionService: InscriptionsService,
+    private personService: PersonsService,
     private router: Router) {
     this.activity = new Activity();
     // set default tabs status
@@ -93,7 +93,7 @@ export class AccountContainerComponent implements OnInit {
   public createEvent(event: Event) {
     console.log('dans container');
     console.log(event.name);
-    event.person_id = this.person.id;
+    event.personId = this.person.id;
     this.eventService.createEvent(event).subscribe(() => {
       this.initEvents();
     }, error => {
