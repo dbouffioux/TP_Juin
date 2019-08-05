@@ -17,6 +17,7 @@ export class LoginComponent implements OnInit {
   @Input()
   public showPopup: boolean;
   @Output() showSubscription = new EventEmitter<void>();
+  public showLoginFormPopup: boolean;
 
   constructor(private loginService: LoginService, private fb: FormBuilder, private authService: AuthenticationService) {
     this.person = new Person();
@@ -25,7 +26,7 @@ export class LoginComponent implements OnInit {
       password: this.fb.control('', [Validators.required])
     });
     // init popup state
-    this.showPopup = false;
+    this.showLoginFormPopup = false;
   }
 
   ngOnInit() {
@@ -39,8 +40,8 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  public togglePopupState() {
-    this.showPopup = !this.showPopup;
+  public toggleLoginFormPopupState() {
+    this.showLoginFormPopup = !this.showLoginFormPopup;
   }
 
   public showSubscriptionPopup() {
