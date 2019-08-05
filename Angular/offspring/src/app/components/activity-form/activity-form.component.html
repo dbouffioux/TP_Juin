@@ -1,0 +1,39 @@
+<section class="popup" *ngIf="showCreateActivityPopup">
+  <div class="close" (click)="hideEventFormPopup()">Х</div>
+
+  <div id="wrapper">
+    <form class="form" id="activity_form" [formGroup]="activityForm">
+      <ul>
+        <li><label for="event_name">Nom de l'évènement : </label>
+          <select formControlName="event_name" name="event_name" type="text">
+            <option *ngFor="let event of events" value="{{event.name}}">
+              {{event.name}}
+            </option>
+          </select>
+        <li><label for="activity_name">Nom de l'activité : </label>
+          <input formControlName="activity_name" name="activity_name" type="text">
+        <li>
+          <label>Début de l'activité : </label>
+          <input placeholder="Date Time:" formControlName="begin" name="begin" [owlDateTimeTrigger]="dtb"
+            [owlDateTime]="dtb">
+          <owl-date-time #dtb></owl-date-time>
+        </li>
+        <li>
+          <label>Fin de l'activité : </label>
+          <input placeholder="Date Time:" formControlName="finish" name="finish" [owlDateTimeTrigger]="dtf"
+            [owlDateTime]="dtf">
+          <owl-date-time #dtf></owl-date-time>
+        </li>
+        <li><label>Description : </label>
+          <input formControlName="description" name="description" type="text">
+        <li><label>URL : </label>
+          <input formControlName="url" name="url" type="text">
+      </ul>
+    </form>
+    <div>
+      <button type="button" (click)="createActivity()">
+        Create a new activity
+      </button>
+    </div>
+  </div>
+</section>

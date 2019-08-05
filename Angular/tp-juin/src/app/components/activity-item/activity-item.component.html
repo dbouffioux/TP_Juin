@@ -1,41 +1,41 @@
 <section class="popup" *ngIf="showActivityPopup">
-    <div class="close" (click)="hidePopup()">Х</div>
-    <div id="wrapper">
-      <ul>
-        <li><h2>{{activity.event_name}}</h2></li>
-        <li><h3>{{activity.name}} </h3></li>
-        <li><label>Date de l'activité : </label>
+  <div class="close" (click)="hidePopup()">Х</div>
+  <div id="wrapper">
+    <ul>
+      <li><h2>{{activity.event_name}}</h2></li>
+      <li><h3>{{activity.name}} </h3></li>
+      <li><label>Date de l'activité : </label>
         <span>{{activity.begin | date : 'dd/MM/yy'}}</span></li>
-        <li><label>Plage horaire : </label>
+      <li><label>Plage horaire : </label>
         <span>de {{activity.begin | date : 'HH:mm'}} à {{activity.finish  | date : 'HH:mm'}}</span></li>
-        <li><label>Description : </label>
+      <li><label>Description : </label>
         <span>{{activity.description}}</span></li>
-        <li><label>URL : </label>
+      <li><label>URL : </label>
         <span>
           <a href="{{activity.url}}" target="_blank">{{activity.url}}</a>
         </span></li>
-        <ng-container *ngIf="isManagement">
-            <li><span><a href="updateActivity/${activity.id}"><button class="management-button update">modification</button></a></span>
-              <span id="rightButton"><button (click)= "deleteActivity(activity)" class="management-button delete">supression</button></span></li>
-        </ng-container>
-        </ul>
-        <ng-container *ngIf="!isManagement">
+      <ng-container *ngIf="isManagement">
+        <li><span><a href="updateActivity/${activity.id}"><button class="management-button update">modification</button></a></span>
+          <span id="rightButton"><button (click)= "deleteActivity(activity)" class="management-button delete">supression</button></span></li>
+      </ng-container>
+    </ul>
+    <ng-container *ngIf="!isManagement">
           <span *ngIf="isLogged()">
             <div>
               <button *ngIf="!isParticipantValue" class="management-button subscribe"
-                type="button"
-                (click)="createNewInscription($event)" >
+                      type="button"
+                      (click)="createNewInscription($event)" >
                 Inscription
               </button>
             </div>
             <div>
                 <button *ngIf="isParticipantValue" class="management-button subscribe"
-                  type="button"
-                  (click)="deleteInscription($event)">
+                        type="button"
+                        (click)="deleteInscription($event)">
                   Désinscription
                 </button>
               </div>
             </span>
-        </ng-container>
-    </div>
+    </ng-container>
+  </div>
 </section>
