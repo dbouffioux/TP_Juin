@@ -14,6 +14,7 @@ export class ActivityListComponent implements OnInit {
 
   @Input()
   public activities: Activity[];
+  @Output()
   public activity: Activity ;
   public events: Event[];
   public event1: Event;
@@ -43,7 +44,9 @@ export class ActivityListComponent implements OnInit {
   }
 
   public toggleActivityPopup(activity: Activity) {
-    this.showActivityItem.emit(activity);
+    console.log('activity-list' + activity.id);
+    this.activity = activity;
+    this.showActivityItem.emit(this.activity);
   }
 }
 

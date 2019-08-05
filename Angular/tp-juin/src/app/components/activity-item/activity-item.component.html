@@ -22,23 +22,27 @@
 
 
         </ul>
-        <span *ngIf="isLogged()">
-          <div>
-            <button *ngIf="!isParticipantValue"
-              type="button"
-              (click)="createNewInscription($event)" >
-              Inscription
-            </button>
-          </div>
-
-          <div>
-              <button *ngIf="isParticipantValue"
+        <ng-container *ngIf="!isManagement">
+          <span *ngIf="isLogged()">
+            <div>
+              <button *ngIf="!isParticipantValue"
                 type="button"
-                (click)="deleteInscription($event)">
-                Désinscription
+                (click)="createNewInscription($event)" >
+                Inscription
               </button>
             </div>
-          </span>
+
+            <div>
+                <button *ngIf="isParticipantValue"
+                  type="button"
+                  (click)="deleteInscription($event)">
+                  Désinscription
+                </button>
+              </div>
+            </span>
+        </ng-container>
+
+
     </div>
 
 </section>

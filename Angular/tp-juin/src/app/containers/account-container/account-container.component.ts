@@ -174,7 +174,7 @@ export class AccountContainerComponent implements OnInit {
     }
   }
   public toggleActivityItem(activity: Activity) {
-    console.log(activity.id);
+    this.isManagement = true;
     this.showActivityPopup = !this.showActivityPopup;
     this.activityToShow = activity;
     this.isManagement = true;
