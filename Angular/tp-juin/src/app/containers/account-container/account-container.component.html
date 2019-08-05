@@ -13,15 +13,8 @@
     <app-activity-list
       id="activities_list"
       (delete)="deleteActivity($event)"
-      (showActivityItem)="toggleActivityItem($event)"
       [activities]="activities"></app-activity-list>
 
-      <app-activity-item
-      [showActivityPopup]="showActivityPopup"
-      [activity]="activityToShow"
-      [isManagement]= "isManagement"
-      (delete)="deleteActivity($event)"
-    ></app-activity-item>
     <app-inscription
       id="inscriptions_list"
       (delete)="deleteInscription($event)"

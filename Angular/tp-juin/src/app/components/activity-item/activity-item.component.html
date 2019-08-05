@@ -22,7 +22,7 @@
 
 
         </ul>
-        <span *ngIf="!isManagement">
+        <span *ngIf="isLogged()">
           <div>
             <button *ngIf="!isParticipantValue"
               type="button"

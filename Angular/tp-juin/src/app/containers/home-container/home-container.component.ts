@@ -97,14 +97,13 @@ export class HomeContainerComponent implements OnInit {
       );
   }
     public isParticipant(activity: Activity) {
-    const inscription = activity.inscriptions.find((participant) => {
+    activity.inscriptions.find((participant) => {
       console.log(participant.person_id);
-      return participant.person_id === this.person.id;
+
+      if (participant.person_id === this.person.id) {
+        console.log('is Participant');
+        this.isParticipantValue = true;
+      }
     });
-    if (inscription.person_id === this.person.id) {
-      this.isParticipantValue = true;
-    } else {
-      this.isParticipantValue = false;
-    }
   }
 }
