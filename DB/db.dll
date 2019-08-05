@@ -1,8 +1,3 @@
-DROP TABLE inscription;
-DROP TABLE activity;
-DROP TABLE event;
-DROP TABLE person;
-
 CREATE TABLE person (
 	id SERIAL PRIMARY KEY,
 	firstname VARCHAR(100) ,
@@ -14,10 +9,10 @@ CREATE TABLE person (
 CREATE TABLE event (
 	id  SERIAL PRIMARY KEY ,
 	name varchar(20) NOT NULL UNIQUE,
-	person_id int NOT NULL,
+	person_id int NOT NULL
+	CONSTRAINT FK_person_id REFERENCES person (id),
 	begin timestamp with time zone NOT NULL,
 	finish timestamp with time zone NOT NULL
-	CONSTRAINT FK_person_id REFERENCES person (id)
 );
 
 CREATE TABLE activity(

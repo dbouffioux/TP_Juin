@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,19 +34,23 @@ public class DataRepositoryEvent {
 		int id = resultSet.getInt("id");
 		String name = resultSet.getString("name");
 		int person_id = resultSet.getInt("person_id");
-		Event event = new Event(id, name, person_id);
+		Timestamp begin = resultSet.getTimestamp("begin");
+		Timestamp finish = resultSet.getTimestamp("finish");
+		Event event = new Event(id, name, person_id, begin.toLocalDateTime(), finish.toLocalDateTime());
 		return event;
 	}
 
-	public void addEvent(String name, Integer person_id) {
-		if (name != null && !name.isBlank() && person_id != null) {
-			String sql = "insert into event (name, person_id) values (?, ?)";
+	public void addEvent(Event event) {
+		if (null != event) {
+			String sql = "INSERT INTO event (name, person_id, begin, finish) values (?, ?, ?, ?)";
 			try (Connection connection = dataRepositoryConnection.createConnection();
 					PreparedStatement pstatement = connection.prepareStatement(sql)) {
 	
 				connection.setAutoCommit(true);
-				pstatement.setString(1, name);
-				pstatement.setInt(2, person_id);
+				pstatement.setString(1, event.getName());
+				pstatement.setInt(2, event.getPerson_id());
+				pstatement.setTimestamp(3, Timestamp.valueOf(event.getBegin()));
+				pstatement.setTimestamp(4, Timestamp.valueOf(event.getFinish()));
 				pstatement.executeUpdate();
 	
 			} catch (SQLException sqlException) {

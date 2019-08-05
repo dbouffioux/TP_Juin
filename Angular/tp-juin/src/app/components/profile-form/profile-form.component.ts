@@ -13,29 +13,24 @@ import { LoginService } from 'src/app/services/login.service';
 export class ProfileFormComponent implements OnInit {
 
   @Input() public person: Person;
+  @Input() public showPopupProfile: boolean;
+  @Output() private resetPopupProfileStateInParent = new EventEmitter<void>();
   @Output() private create = new EventEmitter<Person>();
 
   public persons: Person[];
-  public isCreate: boolean;
 
-
-  constructor(private personService: PersonService, private router: Router, private login: LoginService) { this.person = new Person(); }
+  constructor(
+    private personService: PersonService,
+    private router: Router,
+    private login: LoginService) {
+      this.person = new Person();
+    }
 
   ngOnInit() {
     this.personService.getPersons().subscribe(person => this.persons = person);
   }
 
-  public onCreate() {
-    this.personService.createPerson(this.person).subscribe(() => {
-      console.log('OK');
-      this.isCreate = true;
-      this.setLocalStorage();
-      this.login.getConnection(this.person.login, this.person.password).subscribe();
-      this.router.navigate(['/home']);
-    }, error => {
-      console.log(error);
-    });
-  }
+
 
   private setLocalStorage() {
     if (this.person !== null) {
@@ -47,6 +42,10 @@ export class ProfileFormComponent implements OnInit {
       localStorage.setItem('Authorization', 'false');
       console.log(localStorage.getItem('Authorization'));
     }
+  }
+
+  public hidePopup() {
+    this.resetPopupProfileStateInParent.emit();
   }
 
   public createPerson() {
