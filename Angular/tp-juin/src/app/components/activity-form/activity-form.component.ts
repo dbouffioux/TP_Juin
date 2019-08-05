@@ -9,7 +9,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 @Component({
   selector: 'app-activity-form',
   templateUrl: './activity-form.component.html',
-  styleUrls: ['./activity-form.component.scss']
+  styleUrls: ['./activity-form.component.css']
 })
 
 export class ActivityFormComponent implements OnInit {

@@ -8,7 +8,19 @@ import {Component, OnInit} from '@angular/core';
 export class AppComponent implements OnInit{
   title = 'tp-juin';
   myStyle: object = {};
-  myParams: object = {};
+  myParams: object = {
+    particles: {
+      number: {
+        value: 200,
+      },
+      color: {
+        value: '#111111'
+      },
+      shape: {
+        type: 'triangle',
+      },
+    }
+  };
   width: number = 100;
   height: number = 100;
   ngOnInit() {
@@ -29,7 +41,7 @@ export class AppComponent implements OnInit{
           value: 200,
         },
         color: {
-          value: '#ff0000'
+          value: '#111111'
         },
         shape: {
           type: 'triangle',
