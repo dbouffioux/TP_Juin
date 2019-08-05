@@ -2,32 +2,21 @@
     <div class="close" (click)="hidePopup()">Х</div>
   <h2>Inscription : </h2>
 
-  <form action="">
-    <div>
+  <form class="form" [formGroup]="profileForm">
       <label for="firstname">Prénom : </label>
-      <input name="firstanme" type="text" [(ngModel)]="person.firstname" >
-    </div>
-    <div>
+      <input formControlName="firstname" name="firstname" type="text">
       <label for="lastname">Nom : </label>
-      <input name="lastname" type="text" [(ngModel)]="person.lastname" >
-    </div>
-    <div>
+      <input formControlName="lastname" name="lastname" type="text">
       <label for="login">login : </label>
-      <input name="login" type="text" [(ngModel)]="person.login" >
-    </div>
-    <div>
+      <input formControlName="login" name="login" type="text">
       <label for="password">password : </label>
-      <input name="password" type="text" [(ngModel)]="person.password" >
-    </div>
+      <input formControlName="password" name="password" type="password">
   </form>
-
-  <div *ngIf="isCreate">Votre profil est créé</div>
-  <div>
-    <button
-    type="button"
-    (click)="onCreate()">
-    S'inscrire
+  <button
+  type="button"
+  (click)="createProfile()">
+  S'inscrire
   </button>
-  </div>
+
 </section>
 

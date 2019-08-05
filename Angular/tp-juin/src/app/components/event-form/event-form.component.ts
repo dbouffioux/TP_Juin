@@ -34,11 +34,13 @@ export class EventFormComponent implements OnInit {
   }
 
   public createEvent() {
+
     const val = this.eventForm.value;
     const event = new Event();
     event.name = val.event_name;
     event.begin = val.begin;
     event.finish = val.finish;
+    this.hideEventFormPopup();
     this.createEmitter.emit(event);
     console.log('ok createEvent', event);
   }
