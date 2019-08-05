@@ -8,36 +8,43 @@
       id="events_list"
       [events]="events"
       (delete)="deleteEvent($event)"
-      [isManagement]="true"></app-event-list>
+      [isManagement]="true">
+    </app-event-list>
 
     <button (click)="toggleCreateEventPopup()" class="add management-button">+</button>
     <app-event-form
     [showCreateEventPopup]="showCreateEventPopup"
-    (createEmitter)="createEvent($event)"
-    ></app-event-form>
+    (createEmitter)="createEvent($event)">
+    </app-event-form>
 
     <app-activity-list
       id="activities_list"
       (delete)="deleteActivity($event)"
       [activities]="activities"
-      (showActivityItem)="toggleActivityItem($event)"></app-activity-list>
+      (showActivityItem)="toggleActivityItem($event)">
+    </app-activity-list>
 
     <app-activity-item
       [showActivityPopup]="showActivityPopup"
       [activity]="activityToShow"
       [isManagement]= "isManagement"
-      (delete)="deleteActivity($event)"
-    ></app-activity-item>
+      (delete)="deleteActivity($event)">
+    </app-activity-item>
 
     <app-inscription
       id="inscriptions_list"
       (delete)="deleteInscription($event)"
-      [inscriptions]="inscriptions"></app-inscription>
+      [inscriptions]="inscriptions">
+    </app-inscription>
 
+    <button (click)="toggleCreateActivityPopup()" class="add management-button">+</button>
     <app-activity-form
+      [showCreateActivityPopup]="showCreateActivityPopup"
       (create)="createActivity($event)"
       [activity]="activity"
-      [events]="events"></app-activity-form>
+      [events]="events">
+    </app-activity-form>
+
   </div>
   <div class="tab" *ngIf="showAccountUpdateForm" [ngClass]="{'tab-active': showAccountUpdateForm}">
     <app-account-form
