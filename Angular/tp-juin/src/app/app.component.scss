@@ -1,5 +1,8 @@
 #container{
   position: relative;
+  canvas {
+    position: absolute;
+  }
 }
 
 #content{

@@ -30,6 +30,7 @@ import { AccountContainerComponent } from './containers/account-container/accoun
 import { HomeContainerComponent } from './containers/home-container/home-container.component';
 import { ActivityItemComponent } from './components/activity-item/activity-item.component';
 import { AccountFormComponent } from './components/account-form/account-form.component';
+import {ParticlesModule} from 'angular-particle';
 
 @NgModule({
   declarations: [
@@ -61,7 +62,8 @@ import { AccountFormComponent } from './components/account-form/account-form.com
     FormsModule,
     ReactiveFormsModule,
     OwlDateTimeModule,
-    OwlNativeDateTimeModule
+    OwlNativeDateTimeModule,
+    ParticlesModule
   ],
   providers: [
     ActivitiesService,
