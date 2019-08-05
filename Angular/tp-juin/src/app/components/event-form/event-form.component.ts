@@ -2,14 +2,16 @@ import { Component, OnInit , Input, Output, EventEmitter} from '@angular/core';
 import { Event } from 'src/app/models/event.model';
 import { Person } from 'src/app/models/person.models';
 import { AuthenticationService } from 'src/app/services/authentication.service';
+import { FormGroup, FormBuilder, Validators, Form } from '@angular/forms';
 
 @Component({
   selector: 'app-event-form',
   templateUrl: './event-form.component.html',
-  styleUrls: ['./event-form.component.css']
+  styleUrls: ['./event-form.component.scss']
 })
 
 export class EventFormComponent implements OnInit {
+  public eventForm: FormGroup;
   public person: Person;
   @Input()
   public event: Event;
@@ -20,7 +22,10 @@ export class EventFormComponent implements OnInit {
   @Input()
   private showCreateEventPopup: boolean;
 
-  constructor(private authService: AuthenticationService) {
+  constructor(private authService: AuthenticationService, private fb: FormBuilder ) {
+    this.eventForm = this.fb.group ({
+      event_name : this.fb.control('', [Validators.required])
+    });
     this.event = new Event();
     this.person = new Person();
    }
@@ -31,6 +36,9 @@ export class EventFormComponent implements OnInit {
 
   public createEvent() {
     this.create.emit(this.event);
+  }
+  public hideEventFormPopup() {
+    this.showCreateEventPopup = !this.showCreateEventPopup;
   }
 }
 
