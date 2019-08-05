@@ -95,9 +95,9 @@ public class FrontController extends HttpServlet {
 		case "/activity/all":
 			activitiesController.list(response);
 			break;
-//		case "/person/all":
-//			personController.list(response);
-//			break;
+		case "/person/all":
+			personController.list(response);
+		break;
 		case "/events/all":
 			eventsController.list(response);
 			break;
@@ -224,11 +224,12 @@ public class FrontController extends HttpServlet {
 				}
 			} else if (pathInfo.startsWith("/person/add")) {
 				personController.add(request, response);
-				authorization = Boolean.valueOf((String) session.getAttribute("Authorization"));
+				authorization = (boolean) session.getAttribute("Authorization");
 				System.out.println("FrontController.checkConnection() person add authorization:" + authorization);
 			}
 		} else {
-			authorization = Boolean.valueOf((String) session.getAttribute("Authorization"));
+			System.out.println(session.getAttribute("Authorization"));
+			authorization = (boolean) session.getAttribute("Authorization");
 		}
 		return authorization;
 	}
