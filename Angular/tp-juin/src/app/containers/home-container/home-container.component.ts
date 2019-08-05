@@ -7,6 +7,7 @@ import { InscriptionService } from 'src/app/services/inscription.service';
 import { ActivitiesService } from 'src/app/services/activities.service';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { Person } from 'src/app/models/person.models';
+import {logger} from "codelyzer/util/logger";
 
 @Component({
   selector: 'app-home-container',
@@ -101,13 +102,13 @@ export class HomeContainerComponent implements OnInit {
     if (this.person.id !== null) {
       const inscription = activity.inscriptions.find((participant) => {
         return participant.person_id === this.person.id;
+        if (inscription.person_id === this.person.id) {
+          this.isParticipantValue = true;
+        } else {
+          this.isParticipantValue = false;
+        }
       });
 
-      if (inscription.person_id === this.person.id) {
-        this.isParticipantValue = true;
-      } else {
-        this.isParticipantValue = false;
-      }
     }
   }
 }

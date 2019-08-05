@@ -10,9 +10,10 @@
       (delete)="deleteEvent($event)"
       [isManagement]="true"></app-event-list>
 
+    <button (click)="toggleCreateEventPopup()" class="add management-button">+</button>
     <app-event-form
-    [showCreateEventPopup]=showCreateEventPopup
-    (create)="createEvent($event)"
+    [showCreateEventPopup]="showCreateEventPopup"
+    (createEmitter)="createEvent($event)"
     ></app-event-form>
 
     <app-activity-list

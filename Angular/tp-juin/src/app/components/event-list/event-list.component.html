@@ -12,14 +12,14 @@
       *ngIf="isManagement"
       (click)="onDelete(event.id)">X</button>
   </li>
-  <li *ngIf="isManagement">
+  <!--li *ngIf="isManagement">
     <button (click)="toggleShowCreateEventPopup()" class="add management-button">+</button>
-  </li>
+  </li-->
 </ul>
 
-<app-event-form
+<!--app-event-form
   [showCreateEventPopup]="showCreateEventPopup"
   (resetCreateEventPopupStateInParent)="toggleShowCreateEventPopup($event)"
   (create)="onCreate($event)"
-></app-event-form>
+></app-event-form-->
 

@@ -63,6 +63,7 @@ export class ActivityItemComponent implements OnInit {
   }
 
   public deleteActivity(activity: Activity) {
+    this.showActivityPopup = false;
     this.delete.emit(activity);
     this.refreshButton.emit();
   }

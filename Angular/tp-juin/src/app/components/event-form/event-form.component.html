@@ -1,8 +1,20 @@
 <section class="popup" *ngIf="showCreateEventPopup">
-  <div class="close" (click)="hideLoginFormPopup()">Х</div>
+  <div class="close" (click)="hideEventFormPopup()">Х</div>
   <form class="form" id="event_form" [formGroup]="eventForm">
-    <label for="event_name">Nom de l'évènement : </label>
-    <input formControlName="event_name" name="event_name" type="text">
+  <label>Nom de l'évènement : </label>
+  <input formControlName="event_name" name="event_name" type="text">
+  <label>Début de l'évènement : </label>
+  <input placeholder="Date:"
+         formControlName="begin"
+         name="begin"
+         [owlDateTimeTrigger]="dtb" [owlDateTime]="dtb">
+  <owl-date-time #dtb></owl-date-time>
+  <label>Fin de l'évènement : </label>
+  <input placeholder="Date:"
+         formControlName="finish"
+         name="finish"
+         [owlDateTimeTrigger]="dtf" [owlDateTime]="dtf">
+  <owl-date-time #dtf></owl-date-time>
 
   <button
     type="button"

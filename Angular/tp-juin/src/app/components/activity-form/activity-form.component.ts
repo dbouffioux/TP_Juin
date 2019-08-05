@@ -38,8 +38,9 @@ constructor(private activitiesService: ActivitiesService, private eventService: 
 
 ngOnInit() {}
 
-public createActivity(activity: Activity) {
+public createActivity() {
   const formValues = this.activityForm.value;
+  const activity = new Activity();
   activity.event_name = formValues.event_name;
   activity.name = formValues.activity_name;
   activity.begin = formValues.begin;
