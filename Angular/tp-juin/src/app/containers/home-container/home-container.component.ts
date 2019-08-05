@@ -60,19 +60,16 @@ export class HomeContainerComponent implements OnInit {
     this.activeEvent = eventId;
   }
   public createInscription(activityId: number) {
-    console.log('createInscription');
     this.inscription.activity_id = activityId;
     this.inscription.person_id = this.person.id;
 
     this.inscriptionService.createInscription(this.inscription).subscribe(() => {
-      console.log('ok');
       this.isParticipantValue = true;
     }
     );
   }
 
   public toggleActivityItem(activity: Activity) {
-    console.log(activity.id);
     this.showActivityPopup = !this.showActivityPopup;
     this.activityToShow = activity;
     this.isParticipantValue = false;
@@ -80,16 +77,13 @@ export class HomeContainerComponent implements OnInit {
   }
 
   public deleteInscription(activityId: number) {
-    console.log('delete');
     this.inscriptionService.getAllInscriptionsForOnePerson(this.person.id).subscribe(
         inscriptions => {
           const inscription = inscriptions.find(inscription1 => {
             return inscription1.activity.id === activityId;
           });
           this.inscriptionID = inscription.id;
-          console.log(this.inscriptionID);
           this.inscriptionService.deleteInscription(this.inscriptionID).subscribe(() => {
-            console.log('OK');
             this.isParticipantValue = false;
           }, error => {
             console.log(error);
@@ -102,13 +96,8 @@ export class HomeContainerComponent implements OnInit {
     if (this.person.id !== null) {
       const inscription = activity.inscriptions.find((participant) => {
         return participant.person_id === this.person.id;
-        if (inscription.person_id === this.person.id) {
-          this.isParticipantValue = true;
-        } else {
-          this.isParticipantValue = false;
-        }
       });
-
+      this.isParticipantValue = inscription.person_id === this.person.id;
     }
   }
 }

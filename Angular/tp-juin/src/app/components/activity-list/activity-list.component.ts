@@ -38,32 +38,12 @@ export class ActivityListComponent implements OnInit {
     this.showActivityPopup = false;
   }
 
-  public deleteActivity(activity: Activity){
-    console.log('deleteActivity ' + activity.id);
+  public deleteActivity(activity: Activity) {
     this.delete.emit(activity);
   }
 
   public toggleActivityPopup(activity: Activity) {
-    console.log('activity-list' + activity.id);
     this.activity = activity;
     this.showActivityItem.emit(this.activity);
   }
 }
-
-/*   public updateActivity(idActivity: number) {
-    this.activitiesService.deleteActivity(idActivity).subscribe(() => {
-      this.eventService.getEventByPersonId(this.person.id).subscribe(event => this.fillActivities(event));
-      this.isDeleted = true;
-    }, error => {
-      console.log(error);
-    });
-  } */
-
-  /*   private fillActivities(eventArray: Event[]) {
-    if (eventArray !== null) {
-      this.activities = new Array();
-      for ( const event of eventArray) {
-          this.activities = this.activities.concat(event.activities);
-      }
-    }
-  } */
