@@ -15,6 +15,7 @@
   [showActivityPopup]="showActivityPopup"
   [isParticipantValue]="isParticipantValue"
   [activity]="activityToShow"
+  (hidePopUpEmitter)="toggleActivityItem($event)"
   (createInscription)="createInscription($event)"
   (deleteTheInscription)="deleteInscription($event)"
 ></app-activity-item>
