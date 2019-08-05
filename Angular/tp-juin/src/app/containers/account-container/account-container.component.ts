@@ -33,6 +33,9 @@ export class AccountContainerComponent implements OnInit {
   public tabActive: any;
   // event-form pop-up
   public showCreateEventPopup: boolean;
+  public showActivityPopup: boolean;
+  public activityToShow: Activity;
+  public isManagement: boolean;
 
   constructor(
     private activitiesService: ActivitiesService,

@@ -1,29 +1,33 @@
-<h2>Inscription : </h2>
+<section class="popup" *ngIf="showPopupProfile">
+    <div class="close" (click)="hidePopup()">Х</div>
+  <h2>Inscription : </h2>
 
-<form action="">
-  <div>
-    <label for="firstname">Prénom : </label>
-    <input name="firstanme" type="text" [(ngModel)]="person.firstname" >
-  </div>
-  <div>
-    <label for="lastname">Nom : </label>
-    <input name="lastname" type="text" [(ngModel)]="person.lastname" >
-  </div>
-  <div>
-    <label for="login">login : </label>
-    <input name="login" type="text" [(ngModel)]="person.login" >
-  </div>
-  <div>
-    <label for="password">password : </label>
-    <input name="password" type="text" [(ngModel)]="person.password" >
-  </div>
-</form>
+  <form action="">
+    <div>
+      <label for="firstname">Prénom : </label>
+      <input name="firstanme" type="text" [(ngModel)]="person.firstname" >
+    </div>
+    <div>
+      <label for="lastname">Nom : </label>
+      <input name="lastname" type="text" [(ngModel)]="person.lastname" >
+    </div>
+    <div>
+      <label for="login">login : </label>
+      <input name="login" type="text" [(ngModel)]="person.login" >
+    </div>
+    <div>
+      <label for="password">password : </label>
+      <input name="password" type="text" [(ngModel)]="person.password" >
+    </div>
+  </form>
 
-<div *ngIf="isCreate">Votre profil est créé</div>
-<div>
-  <button
-  type="button"
-  (click)="onCreate()">
-  S'inscrire
-</button>
-</div>
+  <div *ngIf="isCreate">Votre profil est créé</div>
+  <div>
+    <button
+    type="button"
+    (click)="onCreate()">
+    S'inscrire
+  </button>
+  </div>
+</section>
+
