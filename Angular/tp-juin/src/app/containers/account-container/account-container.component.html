@@ -18,7 +18,8 @@
     <app-activity-list
       id="activities_list"
       (delete)="deleteActivity($event)"
-      [activities]="activities"></app-activity-list>
+      [activities]="activities"
+      (showActivityItem)="toggleActivityItem($event)"></app-activity-list>
 
     <app-activity-item
       [showActivityPopup]="showActivityPopup"

@@ -33,6 +33,9 @@ export class AccountContainerComponent implements OnInit {
   public tabActive: any;
   // event-form pop-up
   public showCreateEventPopup: boolean;
+  public showActivityPopup: boolean;
+  public activityToShow: Activity;
+  public isManagement: boolean;
 
   constructor(
     private activitiesService: ActivitiesService,
@@ -171,7 +174,7 @@ export class AccountContainerComponent implements OnInit {
     }
   }
   public toggleActivityItem(activity: Activity) {
-    console.log(activity.id);
+    this.isManagement = true;
     this.showActivityPopup = !this.showActivityPopup;
     this.activityToShow = activity;
     this.isManagement = true;

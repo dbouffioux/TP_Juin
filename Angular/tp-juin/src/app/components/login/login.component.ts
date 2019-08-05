@@ -14,6 +14,9 @@ export class LoginComponent implements OnInit {
 
   public loginForm: FormGroup;
   public person: Person;
+  @Input()
+  public showPopup: boolean;
+  @Output() showSubscription = new EventEmitter<void>();
   public showLoginFormPopup: boolean;
 
   constructor(private loginService: LoginService, private fb: FormBuilder, private authService: AuthenticationService) {
@@ -40,4 +43,11 @@ export class LoginComponent implements OnInit {
   public toggleLoginFormPopupState() {
     this.showLoginFormPopup = !this.showLoginFormPopup;
   }
+
+  public showSubscriptionPopup() {
+    console.log('showSubscriptionMenu');
+
+    this.showSubscription.emit();
+  }
+
 }

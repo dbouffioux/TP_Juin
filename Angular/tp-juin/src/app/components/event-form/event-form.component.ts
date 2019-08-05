@@ -21,7 +21,6 @@ export class EventFormComponent implements OnInit {
   private refresh = new EventEmitter<void>();
   @Input()
   private showCreateEventPopup: boolean;
-  public eventForm: FormGroup;
 
   constructor(private authService: AuthenticationService, private fb: FormBuilder) {
     this.event = new Event();
