@@ -43,11 +43,18 @@ public class EventsController extends jsonGenerator{
 	public void add(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		ObjectMapper mapper = new ObjectMapper();
 		EventParameters eventParameters= mapper.readValue(request.getInputStream(), EventParameters.class );
-		System.out.println("FrontController.doPost()");
+		System.out.println("EventsController.add()");
 		if ( eventParameters.getName()!= null
 				&& !eventParameters.getName().isBlank() 
-				&& eventParameters.getPerson_id() != null ) {
-			repositoryEvent.addEvent(eventParameters.getName(),eventParameters.getPerson_id() );
+				&& eventParameters.getPerson_id() != null
+				&& eventParameters.getBegin()!= null
+				&& eventParameters.getFinish()!= null) {
+			Event event = new Event(null,
+									eventParameters.getName(),
+									eventParameters.getPerson_id(),
+									eventParameters.getBegin(),
+									eventParameters.getFinish());
+			repositoryEvent.addEvent(event);
 		}
 		list(response);
 		
