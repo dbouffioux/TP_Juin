@@ -65,12 +65,13 @@ export class MenuContainerComponent implements OnInit {
     }
   }
 
-  public onCreate() {
-    this.personService.createPerson(this.person).subscribe(() => {
+  public onCreate(person: Person) {
+    this.personService.createPerson(person).subscribe(() => {
       console.log('OK');
       this.isCreate = true;
       this.setLocalStorage();
-      this.login.getConnection(this.person.login, this.person.password).subscribe();
+      this.togglePopupProfile();
+      this.login.getConnection(person.login, person.password).subscribe();
       this.router.navigate(['/home']);
     }, error => {
       console.log(error);

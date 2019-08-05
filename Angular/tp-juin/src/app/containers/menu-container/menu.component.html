@@ -35,7 +35,7 @@
 
   <app-profile-form
   [showPopupProfile]="showPopupProfile"
-  (create)="onCreate()"
+  (create)="onCreate($event)"
   (resetPopupProfileStateInParent)="togglePopupProfile()"
   ></app-profile-form>
 </section>

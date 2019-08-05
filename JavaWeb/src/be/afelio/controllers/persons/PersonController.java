@@ -36,6 +36,7 @@ public class PersonController extends jsonGenerator {
 				&& personParameters.getPassword() != null && !personParameters.getPassword().isBlank()) {
 			repositoryPerson.addPerson(personParameters.getLastname(), personParameters.getFirstname(),
 					personParameters.getLogin(), personParameters.getPassword());
+			request.getSession().setAttribute("Authorization", "true");
 		}
 		list(response);
 	}

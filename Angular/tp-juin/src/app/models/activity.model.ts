@@ -7,7 +7,7 @@ begin?: Date;
 finish?: Date;
 description?: string;
 url?: string;
-event_name?: string;
+eventName?: string;
 inscriptions?: Inscription[];
 
  public constructor() {
@@ -16,7 +16,7 @@ inscriptions?: Inscription[];
    this.finish = null;
    this.description = '';
    this.url = '';
-   this.event_name = '';
+   this.eventName = '';
    this.inscriptions = null;
  }
 }

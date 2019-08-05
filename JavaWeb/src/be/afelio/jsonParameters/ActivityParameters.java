@@ -16,7 +16,7 @@ public class ActivityParameters {
 	protected LocalDateTime finish;
 	protected String url;
 	protected String description;
-	protected String event_name;
+	protected String eventName;
 	protected Inscription inscriptions;
 	
 	public Inscription getInscriptions() {
@@ -56,11 +56,11 @@ public class ActivityParameters {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public String getEvent_name() {
-		return event_name;
+	public String getEventName() {
+		return eventName;
 	}
-	public void setEvent_name(String event_name) {
-		this.event_name = event_name;
+	public void setEventName(String eventName) {
+		this.eventName = eventName;
 	}
 	
 	

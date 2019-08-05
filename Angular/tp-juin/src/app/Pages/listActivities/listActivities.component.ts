@@ -35,7 +35,6 @@ export class ListActivitiesComponent implements OnInit {
 }
 
   public onCreate(activity: Activity) {
-    this.activity.event_name = this.activities[0].event_name;
     this.activitiesService.createActivity(activity).subscribe(() => {
       console.log('OK');
       this.initActivities();

@@ -32,7 +32,7 @@ public class EventsController extends jsonGenerator{
 		EventParameters eventParameters;
 		try {
 			eventParameters = mapper.readValue(request.getInputStream(), EventParameters.class);
-			List<Event> listEvents = repositoryEvent.findAllEventsByPersonId(eventParameters.getPerson_id());
+			List<Event> listEvents = repositoryEvent.findAllEventsByPersonId(eventParameters.getPersonId());
 			jsonGenerate(response, listEvents);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -46,12 +46,12 @@ public class EventsController extends jsonGenerator{
 		System.out.println("EventsController.add()");
 		if ( eventParameters.getName()!= null
 				&& !eventParameters.getName().isBlank() 
-				&& eventParameters.getPerson_id() != null
+				&& eventParameters.getPersonId() != null
 				&& eventParameters.getBegin()!= null
 				&& eventParameters.getFinish()!= null) {
 			Event event = new Event(null,
 									eventParameters.getName(),
-									eventParameters.getPerson_id(),
+									eventParameters.getPersonId(),
 									eventParameters.getBegin(),
 									eventParameters.getFinish());
 			repositoryEvent.addEvent(event);

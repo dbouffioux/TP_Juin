@@ -28,7 +28,7 @@ public activityForm: FormGroup;
 
 constructor(private activitiesService: ActivitiesService, private eventService: EventService, private fb: FormBuilder) {
   this.activityForm = this.fb.group({
-    event_name: this.fb.control('', [Validators.required]),
+    eventName: this.fb.control('', [Validators.required]),
     activity_name: this.fb.control('', [Validators.required]),
     begin: this.fb.control('', [Validators.required]),
     finish: this.fb.control('', [Validators.required]),
@@ -42,7 +42,7 @@ ngOnInit() {}
 public createActivity() {
   const formValues = this.activityForm.value;
   const activity = new Activity();
-  activity.event_name = formValues.event_name;
+  activity.eventName = formValues.eventName;
   activity.name = formValues.activity_name;
   activity.begin = formValues.begin;
   activity.finish = formValues.finish;
@@ -50,9 +50,10 @@ public createActivity() {
   activity.url = formValues.url;
   console.log(activity);
   this.create.emit(activity);
+  this.hideActivityFormPopup();
   }
 
-  public hideEventFormPopup() {
+  public hideActivityFormPopup() {
     this.showCreateActivityPopup = !this.showCreateActivityPopup;
   }
 }
