@@ -31,13 +31,13 @@ public class InscriptionsController extends jsonGenerator{
 		ObjectMapper mapper = new ObjectMapper();
 		try {
 			InscriptionParameters inscriptionParameters= mapper.readValue(request.getInputStream(), InscriptionParameters.class );
-			Activity activity = repositoryActivity.findOneActivitybyId(inscriptionParameters.getActivity_id());
-		System.out.println("InscriptionsController.add() act-id " + inscriptionParameters.getActivity_id() +" person id " +inscriptionParameters.getPerson_id());
-			if (inscriptionParameters.getActivity_id() != null
-					&& inscriptionParameters.getPerson_id() != null
-					&& validateInscription(activity, inscriptionParameters.getPerson_id())) {
+			Activity activity = repositoryActivity.findOneActivitybyId(inscriptionParameters.getActivityId());
+		System.out.println("InscriptionsController.add() act-id " + inscriptionParameters.getActivityId() +" person id " +inscriptionParameters.getPersonId());
+			if (inscriptionParameters.getActivityId() != null
+					&& inscriptionParameters.getPersonId() != null
+					&& validateInscription(activity, inscriptionParameters.getPersonId())) {
 				System.out.println("InscriptionsController.add()");
-			repositoryInscription.addInscription(inscriptionParameters.getActivity_id(),inscriptionParameters.getPerson_id());
+			repositoryInscription.addInscription(inscriptionParameters.getActivityId(),inscriptionParameters.getPersonId());
 			}
 			list(response);
 			
@@ -48,13 +48,13 @@ public class InscriptionsController extends jsonGenerator{
 		}
 		
 	}
-	public boolean validateInscription(Activity activity, int person_id) {
+	public boolean validateInscription(Activity activity, int personId) {
 		System.out.println("InscriptionsController.validateInscription()");
-		if (repositoryInscription.getAllInscriptionsForOnePerson(person_id).isEmpty()) {
+		if (repositoryInscription.getAllInscriptionsForOnePerson(personId).isEmpty()) {
 			return true;
 		}
 		else {
-			return !repositoryInscription.validateInscriptionOverlaps(activity, person_id);
+			return !repositoryInscription.validateInscriptionOverlaps(activity, personId);
 		}
 		
 		

@@ -82,14 +82,14 @@ public class ActivitiesController extends jsonGenerator {
 				&& !activityParameters.getName().isBlank() 
 				&& activityParameters.getBegin() != null
 				&& activityParameters.getFinish() != null
-				&& activityParameters.getEvent_name() != null
-				&& !activityParameters.getEvent_name().isBlank()) {
+				&& activityParameters.getEventName() != null
+				&& !activityParameters.getEventName().isBlank()) {
 			Activity activity= new Activity(null, activityParameters.getName(),
 					activityParameters.getBegin(),
 					activityParameters.getFinish(),
 					activityParameters.getUrl(),
 					activityParameters.getDescription(),
-					activityParameters.getEvent_name());
+					activityParameters.getEventName());
 			repositoryActivity.addActivity(activity);
 		}
 		//list(response);
