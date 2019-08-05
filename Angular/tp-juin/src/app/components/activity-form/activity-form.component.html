@@ -4,8 +4,8 @@
   <div id="wrapper">
     <form class="form" id="activity_form" [formGroup]="activityForm">
       <ul>
-        <li><label for="event_name">Nom de l'évènement : </label>
-          <select formControlName="event_name" name="event_name" type="text">
+        <li><label for="eventName">Nom de l'évènement : </label>
+          <select formControlName="eventName" name="eventName" type="text">
             <option *ngFor="let event of events" value="{{event.name}}">{{event.name}}</option>
           </select>
         <li><label for="activity_name">Nom de l'activité : </label>
