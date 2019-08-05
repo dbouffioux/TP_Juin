@@ -93,7 +93,7 @@ export class AccountContainerComponent implements OnInit {
   public createEvent(event: Event) {
     console.log('dans container');
     console.log(event.name);
-    event.person_id = this.person.id;
+    event.personId = this.person.id;
     this.eventService.createEvent(event).subscribe(() => {
       this.initEvents();
     }, error => {
