@@ -1,0 +1,23 @@
+<h2>{{event?.name}}</h2>
+
+<table>
+  <tr>
+    <th>Nom de l'activité</th>
+    <th>Heure de début</th>
+    <th>Heure de fin</th>
+    <th>Description</th>
+    <th>URL</th>
+    <th *ngIf="getPerson()">Inscription</th>
+  </tr>
+  <tr *ngFor="let activity of event?.activities">
+    <td>{{activity.name}} </td>
+    <td>{{activity.begin | date : 'dd/MM/yy HH:mm'}}</td>
+    <td>{{activity.finish | date : 'dd/MM/yy HH:mm'}}</td>
+    <td>{{activity.description}}</td>
+    <td><a href="{{activity.url}}" target="_blank">{{activity.url}}</a></td>
+    <td *ngIf="getPerson()">
+      <app-inscription-form [activity]=activity [eventID]=event.id (refresh)="refreshActivities()">
+      </app-inscription-form>
+    </td>
+  </tr>
+</table>
