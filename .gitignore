@@ -1,7 +1,5 @@
 ﻿JavaWeb/.classpath
 *.classpath
 .idea
-JavaWeb/.classpath
-JavaWeb/TP_juin.eml
+*.eml
 *.iml
-*.classpath
