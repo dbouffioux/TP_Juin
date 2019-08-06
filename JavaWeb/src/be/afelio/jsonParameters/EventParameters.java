@@ -10,7 +10,7 @@ import be.afelio.utils.LocalDateDeserializer;
 public class EventParameters {
 	protected Integer id;
 	protected String name;
-	protected Integer personId;
+	protected Integer person_id;
 	@JsonDeserialize(using = LocalDateDeserializer.class)
 	protected LocalDateTime begin;
 	@JsonDeserialize(using = LocalDateDeserializer.class)
@@ -37,11 +37,11 @@ public class EventParameters {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public Integer getPersonId() {
-		return personId;
+	public Integer getPerson_id() {
+		return person_id;
 	}
-	public void setPersonId(Integer personId) {
-		this.personId = personId;
+	public void setPerson_id(Integer personId) {
+		this.person_id = personId;
 	}
 	public Integer getId() {
 		return id;

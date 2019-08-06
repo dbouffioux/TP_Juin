@@ -48,16 +48,16 @@ public class DataRepositoryActivity {
 		Timestamp finish = resultSet.getTimestamp("finish");
 		String description = resultSet.getString("description");
 		String url = resultSet.getString("url");
-		String event_name = resultSet.getString("event_name");
-		Activity activity = new Activity(id, name, begin.toLocalDateTime(), finish.toLocalDateTime(), url, description, event_name);
+		String eventName = resultSet.getString("event_name");
+		Activity activity = new Activity(id, name, begin.toLocalDateTime(), finish.toLocalDateTime(), url, description, eventName);
 		return activity;
 	}
 	
 
 	public Activity addActivity(Activity activity) {
 		System.out.println("DataRepositoryActivity.addActivity()");
-		Integer event_id = dataRepositoryEvent.findOneEventByName(activity.getEvent_name());
-		if (event_id != null) {
+		Integer eventId = dataRepositoryEvent.findOneEventByName(activity.getEventName());
+		if (eventId != null) {
 			String sql = "insert into activity (name, begin, finish, url, description, event_id)"
 					+ " values (?, ?, ?, ?, ?, ?)";
 			try (Connection connection = dataRepositoryConnection.createConnection();
@@ -69,7 +69,7 @@ public class DataRepositoryActivity {
 				pstatement.setTimestamp(3, Timestamp.valueOf(activity.getFinish()));
 				pstatement.setString(4, activity.getUrl());
 				pstatement.setString(5, activity.getDescription());
-				pstatement.setInt(6, event_id);
+				pstatement.setInt(6, eventId);
 				pstatement.executeUpdate();
 				try (ResultSet rSet = pstatement.getGeneratedKeys()) {
 					if(rSet.next()) {

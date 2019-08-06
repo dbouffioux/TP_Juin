@@ -21,7 +21,7 @@ public class Activity {
 	protected LocalDateTime finish;
 	protected String url;
 	protected String description;
-	protected String event_name;
+	protected String eventName;
 	protected List<Inscription> inscriptions;
 	
 	
@@ -31,14 +31,14 @@ public class Activity {
 	public void setInscriptions(List<Inscription> list) {
 		this.inscriptions = list;
 	}
-	public String getEvent_name() {
-		return event_name;
+	public String getEventName() {
+		return eventName;
 	}
-	public void setEvent_name(String event_name) {
-		this.event_name = event_name;
+	public void setEventName(String eventName) {
+		this.eventName = eventName;
 	}
 	public Activity(Integer id, String name, LocalDateTime begin, LocalDateTime finish, String url, String description,
-			String event_name) {
+			String eventName) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -46,7 +46,7 @@ public class Activity {
 		this.finish = finish;
 		this.url = url;
 		this.description = description;
-		this.event_name = event_name;
+		this.eventName = eventName;
 	}
 	public Integer getId() {
 		return id;

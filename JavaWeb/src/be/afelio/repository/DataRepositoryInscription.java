@@ -31,22 +31,22 @@ public class DataRepositoryInscription {
 
 	private Inscription createInscription(ResultSet resultSet) throws SQLException {
 		int id = resultSet.getInt("id");
-		int person_id = resultSet.getInt("person_id");
-		int activity_id = resultSet.getInt("activity_id");
-		Activity activity = dataRepositoryActivity.findOneActivitybyId(activity_id);
-		Inscription inscription = new Inscription(id, activity, person_id);
+		int personId = resultSet.getInt("person_id");
+		int activityId = resultSet.getInt("activity_id");
+		Activity activity = dataRepositoryActivity.findOneActivitybyId(activityId);
+		Inscription inscription = new Inscription(id, activity, personId);
 		return inscription;
 	}
 
-	public void addInscription(Integer activity_id, Integer person_id) {
-		if (activity_id != null && person_id != null) {
+	public void addInscription(Integer activityId, Integer personId) {
+		if (activityId != null && personId != null) {
 			String sql = "insert into inscription (activity_id, person_id) values (?, ?)";
 			try (Connection connection = dataRepositoryConnection.createConnection();
 					PreparedStatement pstatement = connection.prepareStatement(sql)) {
 
 				connection.setAutoCommit(true);
-				pstatement.setInt(1, activity_id);
-				pstatement.setInt(2, person_id);
+				pstatement.setInt(1, activityId);
+				pstatement.setInt(2, personId);
 				pstatement.executeUpdate();
 				System.out.println("DataRepository.addInscription()");
 				
@@ -74,13 +74,13 @@ public class DataRepositoryInscription {
 		return list;
 	}
 
-	public List<Inscription> findAllInscriptionsByActivityId(Integer activity_id) {
+	public List<Inscription> findAllInscriptionsByActivityId(Integer activityId) {
 		List<Inscription> list = new ArrayList<>();
 		String sql = "SELECT * FROM inscription " + "WHERE activity_id = ?";
 
 		try (Connection connection = dataRepositoryConnection.createConnection();
 				PreparedStatement pstatement = connection.prepareStatement(sql)) {
-			pstatement.setInt(1, activity_id);
+			pstatement.setInt(1, activityId);
 
 			try (ResultSet resultSet = pstatement.executeQuery()) {
 
@@ -95,15 +95,15 @@ public class DataRepositoryInscription {
 		return list;
 	}
 
-	public List<Inscription> getAllInscriptionsForOnePerson(int person_id) {
+	public List<Inscription> getAllInscriptionsForOnePerson(int personId) {
 		List<Inscription> list = new ArrayList<>();
 
 		String sql = "SELECT * FROM inscription " + 
-				"WHERE person_id = ?";
+				"WHERE personId = ?";
 		
 		try (Connection connection = dataRepositoryConnection.createConnection();
 				PreparedStatement pstatement = connection.prepareStatement(sql)) {
-			pstatement.setInt(1, person_id);
+			pstatement.setInt(1, personId);
 
 			try (ResultSet resultSet = pstatement.executeQuery()) {
 
@@ -134,16 +134,16 @@ public class DataRepositoryInscription {
 
 	}
 
-	public boolean validateInscriptionOverlaps(Activity activity, int person_id) {
+	public boolean validateInscriptionOverlaps(Activity activity, int personId) {
 		System.out.println("DataRepository.validateInscription()" + activity.getBegin() + " " + activity.getFinish()
-				+ " " + person_id);
+				+ " " + personId);
 		boolean isOverlaps = false;
 
 		System.out.println("DataRepository.validateInscription() dans la condition");
 		
 		String sql = "SELECT (begin, finish) Overlaps ( ? , ? ) " + 
 			"FROM activity as act " + 
-			"RIGHT JOIN inscription as insc ON act.id = insc.activity_id " + 
+			"RIGHT JOIN inscription as insc ON act.id = insc.activity_id " +
 			"WHERE person_id = ? " ;
 	
 		try (Connection connection = dataRepositoryConnection.createConnection();
@@ -152,7 +152,7 @@ public class DataRepositoryInscription {
 			connection.setAutoCommit(true);
 			pstatement.setTimestamp(1, Timestamp.valueOf(activity.getBegin()));
 			pstatement.setTimestamp(2, Timestamp.valueOf(activity.getFinish()));
-			pstatement.setInt(3, person_id);
+			pstatement.setInt(3, personId);
 			try (ResultSet resultSet = pstatement.executeQuery()) {
 
 				while (resultSet.next() && !isOverlaps) {

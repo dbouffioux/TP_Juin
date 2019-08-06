@@ -12,7 +12,7 @@ import be.afelio.utils.LocalDateSerializer;
 public class Event {
 	protected Integer id;
 	protected String name;
-	protected Integer person_id;
+	protected Integer personId;
 	@JsonDeserialize(using = LocalDateDeserializer.class)
 	@JsonSerialize(using = LocalDateSerializer.class)
 	protected LocalDateTime begin;
@@ -22,12 +22,12 @@ public class Event {
 	protected List<Activity> activities;
 	
 	
-	public Event(Integer id, String name, Integer person_id
+	public Event(Integer id, String name, Integer personId
 				, LocalDateTime begin, LocalDateTime finish) {
 		super();
 		this.id = id;
 		this.name = name;
-		this.person_id = person_id;
+		this.personId = personId;
 		this.begin = begin;
 		this.finish = finish;
 	}
@@ -43,11 +43,11 @@ public class Event {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public Integer getPerson_id() {
-		return person_id;
+	public Integer getPersonId() {
+		return personId;
 	}
-	public void setPerson_id(Integer person_idInteger) {
-		this.person_id = person_idInteger;
+	public void setPersonId(Integer person_idInteger) {
+		this.personId = person_idInteger;
 	}
 	public LocalDateTime getBegin() {
 		return begin;
