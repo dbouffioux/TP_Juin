@@ -37,6 +37,7 @@ export class AccountContainerComponent implements OnInit {
   public activityToShow: Activity;
   public isManagement: boolean;
   public showCreateActivityPopup: boolean;
+  private showSubscriptions: boolean;
 
   constructor(
     private activitiesService: ActivitiesService,
@@ -155,6 +156,9 @@ export class AccountContainerComponent implements OnInit {
       case 'account-update-form':
         this.showAccountUpdateForm = true;
         break;
+      case 'subscription-list':
+        this.showSubscriptions = true;
+        break;
     }
   }
 
@@ -165,6 +169,9 @@ export class AccountContainerComponent implements OnInit {
         break;
       case 'account-update-form':
         this.showAccountUpdateForm = false;
+        break;
+      case 'subscription-list':
+        this.showSubscriptions = false;
         break;
     }
   }
