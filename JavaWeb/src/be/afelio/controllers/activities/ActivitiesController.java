@@ -16,7 +16,6 @@ import be.afelio.jsonParameters.PersonParameters;
 import be.afelio.repository.DataRepositoryActivity;
 import be.afelio.repository.DataRepositoryEvent;
 
-
 public class ActivitiesController extends jsonGenerator {
 
 	protected DataRepositoryActivity repositoryActivity;
@@ -32,11 +31,11 @@ public class ActivitiesController extends jsonGenerator {
 		List<Activity> listActivities = repositoryActivity.findAllActivities();
 		jsonGenerate(response, listActivities);
 	}
+
 	public void getActivitiesToManage(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		String pathInfoString=request.getPathInfo();
 		String[] parts = pathInfoString.split("/");
 		int id = Integer.parseInt(parts[2]);
-		System.out.println("ActivitiesController.getActivitiesToManage() "+id);
 		List<Activity> listActivities = repositoryActivity.findActivitiesByPersonId(id);
 		jsonGenerate(response, listActivities);
 	}
@@ -45,7 +44,6 @@ public class ActivitiesController extends jsonGenerator {
 		String pathInfoString=request.getPathInfo();
 		String[] parts = pathInfoString.split("/");
 		int id = Integer.parseInt(parts[2]);
-		System.out.println("ActivitiesController.getActivityByActivityId() "+id);
 		Activity activity = repositoryActivity.findOneActivitybyId(id);
 		jsonGenerate(response, activity);
 	}
@@ -62,7 +60,6 @@ public class ActivitiesController extends jsonGenerator {
 	public void listActivitiesByPerson(HttpServletRequest request, HttpServletResponse response)  throws IOException {
 		ObjectMapper mapper = new ObjectMapper();
 		PersonParameters personParameters = mapper.readValue(request.getInputStream(), PersonParameters.class);
-		System.out.println("FrontController.doPost() listActivitiesByPerson");
 		if (personParameters.getId() != null
 				&& personParameters.getFirstname() != null && !personParameters.getFirstname().isBlank()
 				&& personParameters.getLastname() != null && !personParameters.getLastname().isBlank()
@@ -77,7 +74,6 @@ public class ActivitiesController extends jsonGenerator {
 	public void add(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		ObjectMapper mapper = new ObjectMapper();
 		ActivityParameters activityParameters= mapper.readValue(request.getInputStream(), ActivityParameters.class );
-		System.out.println("FrontController.doPost() add Activity");
 		if ( activityParameters.getName()!= null
 				&& !activityParameters.getName().isBlank() 
 				&& activityParameters.getBegin() != null
@@ -92,17 +88,13 @@ public class ActivitiesController extends jsonGenerator {
 					activityParameters.getEventName());
 			repositoryActivity.addActivity(activity);
 		}
-		//list(response);
-		
 	}
 
 
 	public void deleteActivity(HttpServletRequest request) {
-		System.out.println("ActivitiesController.deleteActivity()");
 		int index = request.getPathInfo().lastIndexOf("/");
 		String idActivity = request.getPathInfo().substring(index + 1);
 		int id = Integer.parseInt(idActivity);
 		repositoryActivity.deleteActivityById(id);
-		
 	}
 }

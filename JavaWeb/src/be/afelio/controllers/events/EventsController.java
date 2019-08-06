@@ -37,13 +37,11 @@ public class EventsController extends jsonGenerator{
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
 	}
 
 	public void add(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		ObjectMapper mapper = new ObjectMapper();
 		EventParameters eventParameters= mapper.readValue(request.getInputStream(), EventParameters.class );
-		System.out.println("EventsController.add()");
 		if ( eventParameters.getName()!= null
 				&& !eventParameters.getName().isBlank() 
 				&& eventParameters.getPersonId() != null
@@ -57,18 +55,13 @@ public class EventsController extends jsonGenerator{
 			repositoryEvent.addEvent(event);
 		}
 		list(response);
-		
 	}
 
 	public void deleteEvent(HttpServletRequest request) {
 		int index = request.getPathInfo().lastIndexOf("/");
 		String idEv = request.getPathInfo().substring(index + 1);
-		System.out.println("EventsController.deleteEvent()");
-		//Integer id = Integer.parseInt(idEv);
 		repositoryEvent.deleteEventById(Integer.parseInt(idEv));
 		int id = Integer.parseInt(idEv);
 		repositoryEvent.deleteEventById(id);
-		
 	}
-
 }
