@@ -53,6 +53,7 @@ export class AccountContainerComponent implements OnInit {
     this.tabActive = 'info';
     this.showAccountUpdateForm = false;
     this.showCreateActivityPopup = false;
+    this.showCreateEventPopup = false;
   }
 
   ngOnInit() {

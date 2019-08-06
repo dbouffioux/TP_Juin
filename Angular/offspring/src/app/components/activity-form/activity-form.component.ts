@@ -24,6 +24,7 @@ export class ActivityFormComponent implements OnInit {
   @Input() public activity: Activity;
   @Input() public showCreateActivityPopup: boolean;
   @Output() private create = new EventEmitter<Activity>();
+  @Output() private closeCreateActivityPopupEmitter = new EventEmitter<Activity>();
 
   constructor(private activitiesService: ActivitiesService, private eventService: EventsService, private fb: FormBuilder) {
     this.activityForm = this.fb.group({
@@ -54,6 +55,7 @@ export class ActivityFormComponent implements OnInit {
 
   public hideActivityFormPopup() {
     this.showCreateActivityPopup = !this.showCreateActivityPopup;
+    this.closeCreateActivityPopupEmitter.emit();
   }
 }
 

@@ -16,6 +16,7 @@ export class EventFormComponent implements OnInit {
   @Input() public showCreateEventPopup: boolean;
   @Output() private refresh = new EventEmitter<void>();
   @Output() private createEmitter = new EventEmitter<Event>();
+  @Output() private closeCreateEventPopupEmitter = new EventEmitter<Event>();
 
   constructor(private authService: AuthenticationsService, private fb: FormBuilder) {
     this.person = new Person();
@@ -41,5 +42,6 @@ export class EventFormComponent implements OnInit {
 
   public hideEventFormPopup() {
     this.showCreateEventPopup = !this.showCreateEventPopup;
+    this.closeCreateEventPopupEmitter.emit();
   }
 }

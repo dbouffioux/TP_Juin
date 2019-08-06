@@ -7,27 +7,43 @@
   <div class="tab" *ngIf="showInfoTab" [ngClass]="{'tab-active': showInfoTab}">
     <!-- Lists -->
     <section id="events_list">
-      <app-event-list [events]="events" (delete)="deleteEvent($event)" [isManagement]="true" (getActivityList)="initActivitiesList($event)">
+      <app-event-list
+        [events]="events"
+        (delete)="deleteEvent($event)"
+        [isManagement]="true"
+        (getActivityList)="initActivitiesList($event)">
       </app-event-list>
       <div class="button-container">
         <button (click)="toggleCreateEventPopup()" class="add management-button">+</button>
       </div>
     </section>
     <section id="activities_list">
-      <app-activity-list  (delete)="deleteActivity($event)" [activities]="activities"
-                          (showActivityItem)="toggleActivityItem($event)">
+      <app-activity-list
+        (delete)="deleteActivity($event)"
+        [activities]="activities"
+        (showActivityItem)="toggleActivityItem($event)">
       </app-activity-list>
       <button (click)="toggleCreateActivityPopup()" class="add management-button">+</button>
     </section>
     <!-- End of Lists -->
     <!-- Popups -->
-    <app-event-form [showCreateEventPopup]="showCreateEventPopup" (createEmitter)="createEvent($event)">
+    <app-event-form
+      [showCreateEventPopup]="showCreateEventPopup"
+      (createEmitter)="createEvent($event)"
+      (closeCreateEventPopupEmitter)="toggleCreateEventPopup()">
     </app-event-form>
-    <app-activity-item [showActivityPopup]="showActivityPopup" [activity]="activityToShow" [isManagement]="isManagement"
-                       (delete)="deleteActivity($event)">
+    <app-activity-item
+      [showActivityPopup]="showActivityPopup"
+      [activity]="activityToShow"
+      [isManagement]="isManagement"
+      (delete)="deleteActivity($event)"
+      >
     </app-activity-item>
-    <app-activity-form [showCreateActivityPopup]="showCreateActivityPopup" (create)="createActivity($event)"
-      [activity]="activity" [events]="events">
+    <app-activity-form
+      [showCreateActivityPopup]="showCreateActivityPopup"
+      (create)="createActivity($event)"
+      [activity]="activity" [events]="events"
+      (closeCreateActivityPopupEmitter)="toggleCreateActivityPopup()">
     </app-activity-form>
     <!-- End of popups -->
   </div>

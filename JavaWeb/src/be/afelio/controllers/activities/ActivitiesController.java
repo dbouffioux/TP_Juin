@@ -56,7 +56,6 @@ public class ActivitiesController extends jsonGenerator {
 		System.out.println("ActivitiesController.listActivitiesByPerson()" + event.getActivities().isEmpty());
 
 		jsonGenerate(response, event);
-		
 	}
 
 	public void listActivitiesByPerson(HttpServletRequest request, HttpServletResponse response)  throws IOException {
@@ -68,8 +67,8 @@ public class ActivitiesController extends jsonGenerator {
 				&& personParameters.getLogin() != null && !personParameters.getLogin().isBlank()
 				&& personParameters.getPassword() != null && !personParameters.getPassword().isBlank()) {
 			int id = personParameters.getId();
-		Event event = repositoryActivity.getListActivitiesByPersonId(id);
-		jsonGenerate(response, event);
+			Event event = repositoryActivity.getListActivitiesByPersonId(id);
+			jsonGenerate(response, event);
 		}
 	}
 	
