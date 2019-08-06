@@ -1,0 +1,21 @@
+@import '../../../style/color';
+
+span {
+  display: inline-block;
+  width: 30%;
+}
+section{
+  margin-top: 48px;
+}
+.activity_list--item{
+  cursor: pointer;
+  margin-bottom: 20px;
+  padding: 10px 15px;
+  background-color: $button-background-color;
+  color: $button-text-color;
+
+  &:hover{
+    color: $button-text-hover-color;
+    background-color: $button-hover-background-color;
+  }
+}
