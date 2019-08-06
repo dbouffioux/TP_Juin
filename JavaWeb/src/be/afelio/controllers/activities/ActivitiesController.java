@@ -6,6 +6,8 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import be.afelio.beans.Activity;
@@ -95,6 +97,15 @@ public class ActivitiesController extends jsonGenerator {
 		}
 	}
 
+
+	public void updateActivity(HttpServletRequest request, HttpServletResponse response) throws JsonParseException, JsonMappingException, IOException {
+		int index = request.getPathInfo().lastIndexOf("/");
+		String idActivity = request.getPathInfo().substring(index + 1);
+		int id = Integer.parseInt(idActivity);
+		ObjectMapper mapper = new ObjectMapper();
+		ActivityParameters activityParameters = mapper.readValue(request.getInputStream(), ActivityParameters.class);
+		repositoryActivity.updateActivityById(activityParameters, id);
+	}
 
 	public void deleteActivity(HttpServletRequest request) {
 		int index = request.getPathInfo().lastIndexOf("/");
