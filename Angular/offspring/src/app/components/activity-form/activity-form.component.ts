@@ -39,7 +39,6 @@ export class ActivityFormComponent implements OnInit {
   ngOnInit() { }
 
   public submitForm() {
-    console.log('wtf');
     const formValues = this.activityForm.value;
     const activity = new Activity();
     activity.eventName = formValues.eventName;
