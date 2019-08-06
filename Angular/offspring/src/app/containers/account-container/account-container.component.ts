@@ -91,8 +91,6 @@ export class AccountContainerComponent implements OnInit {
   }
 
   public createEvent(event: Event) {
-    console.log('dans container');
-    console.log(event.name);
     event.personId = this.person.id;
     this.eventService.createEvent(event).subscribe(() => {
       this.initEvents();
@@ -111,12 +109,9 @@ export class AccountContainerComponent implements OnInit {
     });
   }
   public deleteActivity(activity: Activity) {
-    console.log('deleteActivity avant Service ' + activity);
-
     this.activitiesService.deleteActivity(activity.id).subscribe(() => {
       this.initActivities();
       this.isDeleted = true;
-      console.log('dans le deleteActivity');
     }, error => {
       console.log(error);
     });
@@ -124,19 +119,14 @@ export class AccountContainerComponent implements OnInit {
 
   public deleteInscription(inscription: Inscription) {
     this.inscriptionService.deleteInscription(inscription.id).subscribe(() => {
-      console.log('OK');
       this.isDeleted = true;
       this.initInscriptions();
     }, error => {
       this.isDeleted = false;
-      console.log(error);
     });
   }
   public updateProfile(personUpdated: Person) {
-    console.log('container  : ' + personUpdated.firstname);
-
     this.personService.updatePerson(personUpdated).subscribe(() => {
-      console.log('OK');
       localStorage.setItem('Person', JSON.stringify(personUpdated));
     }, error => {
       console.log(error);
@@ -155,15 +145,14 @@ export class AccountContainerComponent implements OnInit {
 
   public toggleTab(tab: string) {
     this.resetTab(this.tabActive);
+    this.tabActive = tab;
     // switch tab status
     switch (tab) {
       case 'info':
         this.showInfoTab = true;
-        this.tabActive = tab;
         break;
       case 'account-update-form':
         this.showAccountUpdateForm = true;
-        this.tabActive = tab;
         break;
     }
   }
@@ -178,12 +167,14 @@ export class AccountContainerComponent implements OnInit {
         break;
     }
   }
+
   public toggleActivityItem(activity: Activity) {
     this.isManagement = true;
     this.showActivityPopup = !this.showActivityPopup;
     this.activityToShow = activity;
     this.isManagement = true;
   }
+
   public toggleCreateEventPopup() {
     this.showCreateEventPopup = !this.showCreateEventPopup;
   }

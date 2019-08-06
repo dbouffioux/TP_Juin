@@ -54,7 +54,8 @@ h1
 }
 
 .form{
-  h2{
+  margin-bottom: 20px;
+  h2, h3{
     padding: 10px 20px;
   }
   .form_input{
@@ -151,5 +152,8 @@ h1
     display: inline-block;
     border: 1px solid;
     padding: 30px 50px;
+    .section-title{
+      margin: 20px 0;
+    }
   }
 }

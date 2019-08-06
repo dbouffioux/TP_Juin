@@ -36,13 +36,11 @@ export class AccountFormComponent implements OnInit {
 
   public onSubmit() {
     const val = this.accountForm.value;
-    console.log('val : ' + this.accountForm.value.firstname);
     this.newPerson.id = this.person.id;
     this.newPerson.firstname = val.firstname;
     this.newPerson.lastname = val.lastname;
     this.newPerson.login = val.login;
     this.newPerson.password = val.password;
-    console.log('val dasn onsubmit : ' + this.newPerson.firstname);
     this.emitter.emit(this.newPerson);
   }
 
