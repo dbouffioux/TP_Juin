@@ -37,6 +37,7 @@ export class AccountContainerComponent implements OnInit {
   public activityToShow: Activity;
   public isManagement: boolean;
   public showCreateActivityPopup: boolean;
+  private activeEvent: number;
 
   constructor(
     private activitiesService: ActivitiesService,
@@ -55,16 +56,18 @@ export class AccountContainerComponent implements OnInit {
 
   ngOnInit() {
     this.person = this.authService.getPerson();
-    this.initActivities();
     this.initEvents();
     this.initInscriptions();
   }
 
-  public initActivities() {
-    this.activitiesService.getAllActivitiesToManage(this.person.id)
-      .subscribe(activities => {
-        this.activities = activities;
+  public initActivitiesList(eventId: number) {
+    this.activities = [];
+    this.eventService.getEventWithAllActivitiesById(eventId).subscribe(event => {
+      event.activities.map(activity => {
+        this.activities.push(activity);
       });
+    });
+    this.activeEvent = eventId;
   }
 
   public initEvents() {
@@ -83,8 +86,6 @@ export class AccountContainerComponent implements OnInit {
   public createActivity(activity: Activity) {
     this.activitiesService.createActivity(activity).subscribe(() => {
       console.log('dans le oncreateActivity');
-      this.initActivities();
-
     }, error => {
       console.log(error);
     });
@@ -104,14 +105,12 @@ export class AccountContainerComponent implements OnInit {
     this.eventService.deleteEvent(eventId).subscribe(() => {
       this.isDeleted = true;
       this.initEvents();
-      this.initActivities();
     }, error => {
       console.log(error);
     });
   }
   public deleteActivity(activity: Activity) {
     this.activitiesService.deleteActivity(activity.id).subscribe(() => {
-      this.initActivities();
       this.isDeleted = true;
     }, error => {
       console.log(error);

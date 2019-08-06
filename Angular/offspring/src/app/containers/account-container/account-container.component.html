@@ -6,7 +6,7 @@
   <div class="tab" *ngIf="showInfoTab" [ngClass]="{'tab-active': showInfoTab}">
     <!-- Lists -->
     <section id="events_list">
-      <app-event-list [events]="events" (delete)="deleteEvent($event)" [isManagement]="true">
+      <app-event-list [events]="events" (delete)="deleteEvent($event)" [isManagement]="true" (getActivityList)="initActivitiesList($event)">
       </app-event-list>
       <div class="button-container">
         <button (click)="toggleCreateEventPopup()" class="add management-button">+</button>
