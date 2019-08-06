@@ -99,7 +99,7 @@ public class DataRepositoryInscription {
 		List<Inscription> list = new ArrayList<>();
 
 		String sql = "SELECT * FROM inscription " + 
-				"WHERE personId = ?";
+				"WHERE person_id = ?";
 		
 		try (Connection connection = dataRepositoryConnection.createConnection();
 				PreparedStatement pstatement = connection.prepareStatement(sql)) {
