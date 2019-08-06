@@ -13,7 +13,7 @@ import { FormGroup, FormBuilder, Validators} from '@angular/forms';
 export class EventFormComponent implements OnInit {
   public eventForm: FormGroup;
   public person: Person;
-  @Input() private showCreateEventPopup: boolean;
+  @Input() public showCreateEventPopup: boolean;
   @Output() private refresh = new EventEmitter<void>();
   @Output() private createEmitter = new EventEmitter<Event>();
 
