@@ -1,5 +1,6 @@
 <section class="menu_tab">
   <h2 (click)="toggleTab('info')" [ngClass]="{'active': showInfoTab}">Compte / Gestion</h2>
+  <h2 (click)="toggleTab('subscription-list')" [ngClass]="{'active': showSubscriptions}">Inscriptions</h2>
   <h2 (click)="toggleTab('account-update-form')" [ngClass]="{'active': showAccountUpdateForm}">Modification compte</h2>
 </section>
 <section class="choices_tab">
@@ -18,10 +19,6 @@
       </app-activity-list>
       <button (click)="toggleCreateActivityPopup()" class="add management-button">+</button>
     </section>
-    <section id="inscriptions_list">
-      <app-inscription (delete)="deleteInscription($event)" [inscriptions]="inscriptions">
-      </app-inscription>
-    </section>
     <!-- End of Lists -->
     <!-- Popups -->
     <app-event-form [showCreateEventPopup]="showCreateEventPopup" (createEmitter)="createEvent($event)">
@@ -36,5 +33,11 @@
   </div>
   <div class="tab" *ngIf="showAccountUpdateForm" [ngClass]="{'tab-active': showAccountUpdateForm}">
     <app-account-form (delete)="deleteProfile()" (emitter)="updateProfile($event)" [person]="person"></app-account-form>
+  </div>
+  <div class="tab" *ngIf="showSubscriptions" [ngClass]="{'tab-active': showSubscriptions}">
+    <section id="inscriptions_list">
+      <app-inscription (delete)="deleteInscription($event)" [inscriptions]="inscriptions">
+      </app-inscription>
+    </section>
   </div>
 </section>
