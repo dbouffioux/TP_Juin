@@ -1,22 +1,8 @@
 @import '../../../style/color';
 
-#events_list{
-  padding: 40px 0 40px 20px;
-  list-style-type: none;
-  li{
-    padding-bottom: 20px;
-    .active{
-      border-bottom: 5px solid $link-color-hover;
-    }
-    a{
-      cursor: pointer;
-      font-size: 20px;
-      color: $link-color;
-      text-decoration: none;
-      border-bottom: 5px solid black;
-      &:hover{
-        border-bottom: 5px solid $link-color-hover;
-      }
-    }
-  }
+#activity_form{
+  background-color: $app-background-color;
+  width: 400px;
+  margin: 150px auto;
+  padding: 30px 50px;
 }

@@ -20,7 +20,7 @@ export class EventFormComponent implements OnInit {
   constructor(private authService: AuthenticationsService, private fb: FormBuilder) {
     this.person = new Person();
     this.eventForm = this.fb.group({
-      event_name: this.fb.control('', [Validators.required]),
+      eventName: this.fb.control('', [Validators.required]),
       begin : this.fb.control('', [Validators.required]),
       finish : this.fb.control('', [Validators.required])
     });
@@ -33,7 +33,7 @@ export class EventFormComponent implements OnInit {
   public createEvent() {
     const val = this.eventForm.value;
     const event = new Event();
-    event.name = val.event_name;
+    event.name = val.eventName;
     event.begin = val.begin;
     event.finish = val.finish;
     this.createEmitter.emit(event);

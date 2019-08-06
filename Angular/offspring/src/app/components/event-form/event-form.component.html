@@ -2,7 +2,7 @@
   <div class="close" (click)="hideEventFormPopup()">Х</div>
   <form class="form" id="event_form" [formGroup]="eventForm">
     <label>Nom de l'évènement : </label>
-    <input formControlName="event_name" name="event_name" type="text">
+    <input formControlName="eventName" name="eventName" type="text">
     <label>Début de l'évènement : </label>
     <input placeholder="Date:" formControlName="begin" name="begin" [owlDateTimeTrigger]="dtb" [owlDateTime]="dtb">
     <owl-date-time #dtb></owl-date-time>

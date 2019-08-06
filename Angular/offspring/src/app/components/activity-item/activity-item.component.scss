@@ -1,22 +1,27 @@
 @import '../../../style/color';
 
-#events_list{
-  padding: 40px 0 40px 20px;
-  list-style-type: none;
-  li{
-    padding-bottom: 20px;
-    .active{
-      border-bottom: 5px solid $link-color-hover;
-    }
-    a{
-      cursor: pointer;
-      font-size: 20px;
-      color: $link-color;
-      text-decoration: none;
-      border-bottom: 5px solid black;
-      &:hover{
-        border-bottom: 5px solid $link-color-hover;
-      }
-    }
-  }
+@import '../../../style/color';
+label {
+  width: 120px;
 }
+section {
+  margin: auto;
+}
+#wrapper {
+  background-color: $app-background-color;
+  width: 30%;
+  margin: 150px auto;
+  vertical-align: middle;
+  padding: 50px 100px;
+}
+ul {
+  vertical-align: middle;
+  list-style: none;
+}
+li {
+  padding: 5px;
+}
+#rightButton {
+  margin-left: 10px;
+}
+
