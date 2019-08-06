@@ -1,22 +1,25 @@
-<h2>Voici la liste de toutes les inscriptions: </h2>
-<table>
-  <tr>
-    <td>Nom de l'évènement</td>
-    <td>Nom de l'activité</td>
-    <td>Début de l'activité</td>
-    <td>Fin de l'activité</td>
-    <td>Description</td>
-    <td>Supprimer inscription</td>
-
-  </tr>
-  <tr *ngFor="let inscription of inscriptions">
-    <td>{{inscription.activity.eventName}}</td>
-    <td>{{inscription.activity.name}} </td>
-    <td>{{inscription.activity.begin | date : 'dd/MM/yy HH:mm'}}</td>
-    <td>{{inscription.activity.finish | date : 'dd/MM/yy HH:mm'}}</td>
-    <td>{{inscription.activity.description}}</td>
-    <td><button (click)="deleteInscription(inscription)">supression</button></td>
-  </tr>
+<h3>Voici la liste de toutes les inscriptions: </h3>
+<table class="table-list">
+  <thead>
+    <tr>
+      <th>Nom de l'évènement</th>
+      <th>Nom de l'activité</th>
+      <th>Début de l'activité</th>
+      <th>Fin de l'activité</th>
+      <th>Description</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let inscription of inscriptions">
+      <td>{{inscription.activity.eventName}}</td>
+      <td>{{inscription.activity.name}} </td>
+      <td>{{inscription.activity.begin | date : 'dd/MM/yy HH:mm'}}</td>
+      <td>{{inscription.activity.finish | date : 'dd/MM/yy HH:mm'}}</td>
+      <td>{{inscription.activity.description}}</td>
+      <td><button class="management-button subscribe" (click)="deleteInscription(inscription)">supression</button></td>
+    </tr>
+  </tbody>
 </table>
 
 <div id=deleted *ngIf="isDeleted">Votre inscription a été supprimée</div>
