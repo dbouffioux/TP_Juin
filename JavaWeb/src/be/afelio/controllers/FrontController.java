@@ -146,6 +146,7 @@ public class FrontController extends HttpServlet {
 				eventsController.add(request, response);
 				break;
 			case "/activity/add":
+				System.out.println("FrontController.doPost() dans le add activity" );
 				activitiesController.add(request, response);
 				break;
 			case "/inscription/add":

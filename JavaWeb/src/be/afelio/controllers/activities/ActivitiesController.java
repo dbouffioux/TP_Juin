@@ -74,7 +74,10 @@ public class ActivitiesController extends jsonGenerator {
 	
 	public void add(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		ObjectMapper mapper = new ObjectMapper();
+		System.out.println("activityController() dans le add activity avant le if" );
 		ActivityParameters activityParameters= mapper.readValue(request.getInputStream(), ActivityParameters.class );
+		System.out.println(activityParameters.getName() + " " + activityParameters.getBegin() + " " +
+							activityParameters.getFinish() + " " + activityParameters.getEventName());
 		if ( activityParameters.getName()!= null
 				&& !activityParameters.getName().isBlank() 
 				&& activityParameters.getBegin() != null
@@ -87,6 +90,7 @@ public class ActivitiesController extends jsonGenerator {
 					activityParameters.getUrl(),
 					activityParameters.getDescription(),
 					activityParameters.getEventName());
+			System.out.println("activityController() dans le add activity dans le if" );
 			repositoryActivity.addActivity(activity);
 		}
 	}

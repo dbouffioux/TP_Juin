@@ -5,11 +5,13 @@
         <div class="label">
           <label for="eventName">Nom de l'évènement : </label>
         </div>
-        <select formControlName="eventName" name="eventName" type="text">
+        <select formControlName="eventName" name="eventName" type="text" >
+          <option value="" selected>Choisissez votre évènement</option>
           <option *ngFor="let event of events">
             {{event.name}}
           </option>
         </select>
+
       </div>
       <div class="form_input">
         <div class="label">

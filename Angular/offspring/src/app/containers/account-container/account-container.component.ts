@@ -87,7 +87,7 @@ export class AccountContainerComponent implements OnInit {
 
   public createActivity(activity: Activity) {
     this.activitiesService.createActivity(activity).subscribe(() => {
-      console.log('dans le oncreateActivity');
+      console.log(activity);
     }, error => {
       console.log(error);
     });
