@@ -4,20 +4,20 @@ public class Inscription {
 
 	protected Integer id;
 	protected Activity activity;
-	protected Integer person_id;
-	protected Integer activity_id;
+	protected Integer personId;
+	protected Integer activityId;
 	
-	public Integer getActivity_id() {
-		return activity_id;
+	public Integer getActivityId() {
+		return activityId;
 	}
-	public void setActivity_id(Integer activity_id) {
-		this.activity_id = activity_id;
+	public void setActivityId(Integer activityId) {
+		this.activityId = activityId;
 	}
-	public Inscription(Integer id, Activity activity, Integer person_id) {
+	public Inscription(Integer id, Activity activity, Integer personId) {
 		super();
 		this.id = id;
 		this.activity = activity;
-		this.person_id = person_id;
+		this.personId = personId;
 	}
 	public Integer getId() {
 		return id;
@@ -30,12 +30,6 @@ public class Inscription {
 	}
 	public void setActivity(Activity activity) {
 		this.activity = activity;
-	}
-	public Integer getPerson_id() {
-		return person_id;
-	}
-	public void setPerson_id(Integer person_id) {
-		this.person_id = person_id;
 	}
 
 	

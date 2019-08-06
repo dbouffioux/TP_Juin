@@ -33,10 +33,10 @@ public class DataRepositoryEvent {
 	private Event createEvent(ResultSet resultSet) throws SQLException {
 		int id = resultSet.getInt("id");
 		String name = resultSet.getString("name");
-		int person_id = resultSet.getInt("person_id");
+		int personId = resultSet.getInt("person_id");
 		Timestamp begin = resultSet.getTimestamp("begin");
 		Timestamp finish = resultSet.getTimestamp("finish");
-		Event event = new Event(id, name, person_id, begin.toLocalDateTime(), finish.toLocalDateTime());
+		Event event = new Event(id, name, personId, begin.toLocalDateTime(), finish.toLocalDateTime());
 		return event;
 	}
 
@@ -48,7 +48,7 @@ public class DataRepositoryEvent {
 	
 				connection.setAutoCommit(true);
 				pstatement.setString(1, event.getName());
-				pstatement.setInt(2, event.getPerson_id());
+				pstatement.setInt(2, event.getPersonId());
 				pstatement.setTimestamp(3, Timestamp.valueOf(event.getBegin()));
 				pstatement.setTimestamp(4, Timestamp.valueOf(event.getFinish()));
 				pstatement.executeUpdate();
@@ -74,7 +74,6 @@ public class DataRepositoryEvent {
 			throw new RuntimeException(sqlException);
 		}
 		return event;
-	
 	}
 
 	public List<Event> findAllEvents() {
@@ -105,8 +104,8 @@ public class DataRepositoryEvent {
 	
 			try (ResultSet resultSet = pstatement.executeQuery()) {
 				while (resultSet.next()) {
-					int event_id = resultSet.getInt("id");
-					Event event = getOneEventWithActivities(event_id);
+					int eventId = resultSet.getInt("id");
+					Event event = getOneEventWithActivities(eventId);
 					list.add(event);
 				}
 			}
@@ -145,16 +144,14 @@ public class DataRepositoryEvent {
 	}
 
 	public void deleteEventById(int id) {
-			String sql = "DELETE FROM event WHERE id = ?";
-			try (Connection connection = dataRepositoryConnection.createConnection();
-					PreparedStatement statement = connection.prepareStatement(sql);) {
-				connection.setAutoCommit(true);
-				statement.setInt(1, id);
-				statement.executeUpdate();
-			} catch (SQLException sqle) {
-				throw new RuntimeException(sqle);
-			}
+		String sql = "DELETE FROM event WHERE id = ?";
+		try (Connection connection = dataRepositoryConnection.createConnection();
+				PreparedStatement statement = connection.prepareStatement(sql);) {
+			connection.setAutoCommit(true);
+			statement.setInt(1, id);
+			statement.executeUpdate();
+		} catch (SQLException sqle) {
+			throw new RuntimeException(sqle);
 		}
-		
-	
+	}
 }
