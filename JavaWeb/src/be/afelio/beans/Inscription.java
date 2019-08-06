@@ -13,11 +13,12 @@ public class Inscription {
 	public void setActivityId(Integer activityId) {
 		this.activityId = activityId;
 	}
-	public Inscription(Integer id, Activity activity, Integer personId) {
+	public Inscription(Integer id, Activity activity, Integer personId, Integer activityId) {
 		super();
 		this.id = id;
 		this.activity = activity;
 		this.personId = personId;
+		this.activityId = activityId;
 	}
 	public Integer getId() {
 		return id;
@@ -30,6 +31,18 @@ public class Inscription {
 	}
 	public void setActivity(Activity activity) {
 		this.activity = activity;
+	}
+	/**
+	 * @return the personId
+	 */
+	public Integer getPersonId() {
+		return personId;
+	}
+	/**
+	 * @param personId the personId to set
+	 */
+	public void setPersonId(Integer personId) {
+		this.personId = personId;
 	}
 
 	

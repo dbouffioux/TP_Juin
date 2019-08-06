@@ -80,7 +80,7 @@ export class HomeContainerComponent implements OnInit {
     this.inscriptionService.getAllInscriptionsForOnePerson(this.person.id).subscribe(
       inscriptions => {
         const inscription = inscriptions.find(inscription1 => {
-          return inscription1.activity.id === activityId;
+          return inscription1.activityId === activityId;
         });
         this.inscriptionID = inscription.id;
         this.inscriptionService.deleteInscription(this.inscriptionID).subscribe(() => {
