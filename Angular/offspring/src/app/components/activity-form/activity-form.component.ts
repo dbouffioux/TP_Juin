@@ -5,13 +5,13 @@ import { ActivitiesService } from 'src/app/services/activities.service';
 import { EventsService } from 'src/app/services/events.service';
 import { Event } from 'src/app/models/event.model';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import {log} from 'util';
 
 @Component({
   selector: 'app-activity-form',
   templateUrl: './activity-form.component.html',
   styleUrls: ['./activity-form.component.scss']
 })
-
 export class ActivityFormComponent implements OnInit {
 
   public event: Event;
@@ -24,7 +24,6 @@ export class ActivityFormComponent implements OnInit {
   @Input() public activity: Activity;
   @Input() public showCreateActivityPopup: boolean;
   @Output() private create = new EventEmitter<Activity>();
-
 
   constructor(private activitiesService: ActivitiesService, private eventService: EventsService, private fb: FormBuilder) {
     this.activityForm = this.fb.group({
@@ -39,16 +38,18 @@ export class ActivityFormComponent implements OnInit {
 
   ngOnInit() { }
 
-  public createActivity() {
+  public submitForm() {
+    console.log('wtf');
     const formValues = this.activityForm.value;
     const activity = new Activity();
+
     activity.eventName = formValues.event_name;
     activity.name = formValues.activity_name;
     activity.begin = formValues.begin;
     activity.finish = formValues.finish;
     activity.description = formValues.description;
     activity.url = formValues.url;
-    console.log(activity);
+
     this.create.emit(activity);
     this.hideActivityFormPopup();
   }

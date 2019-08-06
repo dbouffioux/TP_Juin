@@ -1,6 +1,6 @@
 <section class="popup" *ngIf="showCreateEventPopup">
   <div class="close" (click)="hideEventFormPopup()">Х</div>
-  <form class="form" id="event_form" [formGroup]="eventForm" (ngSubmit)="submitForm()">
+  <form class="form" [formGroup]="eventForm" (ngSubmit)="submitForm()">
     <h2>Créer un événement</h2>
 
     <div class="form_input">

@@ -1,6 +1,6 @@
 <section class="popup" *ngIf="showLoginFormPopup">
   <div class="close" (click)="hideLoginFormPopup()">Х</div>
-  <form class="form" id="login_form" [formGroup]="loginForm" (ngSubmit)="submitForm()">
+  <form class="form" [formGroup]="loginForm" (ngSubmit)="submitForm()">
     <h2>Login</h2>
     <div class="form_input">
       <div class="label">
