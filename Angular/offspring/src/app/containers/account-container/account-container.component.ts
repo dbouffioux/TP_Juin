@@ -94,6 +94,7 @@ export class AccountContainerComponent implements OnInit {
     event.personId = this.person.id;
     this.eventService.createEvent(event).subscribe(() => {
       this.initEvents();
+      this.toggleCreateEventPopup();
     }, error => {
       console.log(error);
     });
