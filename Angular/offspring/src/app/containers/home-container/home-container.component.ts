@@ -41,6 +41,7 @@ export class HomeContainerComponent implements OnInit {
 
   ngOnInit() {
     this.initEventList();
+    this.person = this.authService.getPerson();
   }
 
   public initEventList() {

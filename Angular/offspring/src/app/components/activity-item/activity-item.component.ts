@@ -11,9 +11,7 @@ import { AuthenticationsService } from 'src/app/services/authentications.service
 })
 export class ActivityItemComponent implements OnInit {
 
-  public event: Event;
   public person: Person;
-  public events: Event[];
   public isDeleted: boolean;
   public isCreate: boolean;
 
@@ -30,7 +28,6 @@ export class ActivityItemComponent implements OnInit {
 
   constructor(private authService: AuthenticationsService) {
     this.isManagement = false;
-    this.event = new Event();
   }
 
   ngOnInit() {
@@ -38,12 +35,11 @@ export class ActivityItemComponent implements OnInit {
     this.person = this.authService.getPerson();
   }
 
-  public createNewInscription(event: Event) {
-    if (event) {
-      this.createInscription.emit(this.activity.id);
-    }
+  public createNewInscription() {
+    this.createInscription.emit(this.activity.id);
   }
-  public deleteInscription(event: Event) {
+
+  public deleteInscription() {
     this.deleteTheInscription.emit(this.activity.id);
   }
 

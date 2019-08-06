@@ -29,13 +29,13 @@
       <span *ngIf="isLogged()">
         <div>
           <button *ngIf="!isParticipantValue" class="management-button subscribe" type="button"
-            (click)="createNewInscription($event)">
+            (click)="createNewInscription()">
             Inscription
           </button>
         </div>
         <div>
           <button *ngIf="isParticipantValue" class="management-button subscribe" type="button"
-            (click)="deleteInscription($event)">
+            (click)="deleteInscription()">
             Désinscription
           </button>
         </div>

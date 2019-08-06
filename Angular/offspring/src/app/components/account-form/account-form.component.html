@@ -1,3 +1,4 @@
+<h3 class="section-title"> Modifier les informations vous concernant </h3>
 <form class="form" [formGroup]="accountForm" (ngSubmit)="onSubmit(accountForm)">
 
   <div class="form_input">
@@ -34,7 +35,8 @@
     </button>
   </div>
 </form>
-
-<button *ngIf="isLogged" (click)="deleteProfile()">
+<hr>
+<h3 class="section-title"> Autres actions </h3>
+<button class="management-button delete" *ngIf="isLogged" (click)="deleteProfile()">
   Supprimer profil
 </button>
