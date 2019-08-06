@@ -1,17 +1,34 @@
 <section class="popup" *ngIf="showCreateEventPopup">
   <div class="close" (click)="hideEventFormPopup()">Х</div>
-  <form class="form" id="event_form" [formGroup]="eventForm">
-    <label>Nom de l'évènement : </label>
-    <input formControlName="eventName" name="eventName" type="text">
-    <label>Début de l'évènement : </label>
-    <input placeholder="Date:" formControlName="begin" name="begin" [owlDateTimeTrigger]="dtb" [owlDateTime]="dtb">
-    <owl-date-time #dtb></owl-date-time>
-    <label>Fin de l'évènement : </label>
-    <input placeholder="Date:" formControlName="finish" name="finish" [owlDateTimeTrigger]="dtf" [owlDateTime]="dtf">
-    <owl-date-time #dtf></owl-date-time>
+  <form class="form" id="event_form" [formGroup]="eventForm" (ngSubmit)="submitForm()">
+    <h2>Créer un événement</h2>
 
-    <button type="button" (click)="createEvent()">
-      Créer un nouvel évènement
-    </button>
+    <div class="form_input">
+      <div class="label">
+        <label for="eventName">Nom de l'évènement : </label>
+      </div>
+      <input formControlName="eventName" name="eventName" type="text">
+    </div>
+
+    <div class="form_input">
+      <div class="label">
+        <label for="begin">Début de l'évènement : </label>
+      </div>
+      <input placeholder="Date début" formControlName="begin" name="begin" [owlDateTimeTrigger]="dtb" [owlDateTime]="dtb">
+      <owl-date-time #dtb></owl-date-time>
+    </div>
+
+    <div class="form_input">
+      <div class="label">
+        <label for="finish">Fin de l'évènement : </label>
+      </div>
+      <input placeholder="Date fin" formControlName="finish" name="finish" [owlDateTimeTrigger]="dtf" [owlDateTime]="dtf">
+      <owl-date-time #dtf></owl-date-time>
+    </div>
+    <div class="form_button">
+      <button type="submit"  [disabled]="!eventForm.valid">
+        Créer
+      </button>
+    </div>
   </form>
 </section>

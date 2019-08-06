@@ -9,8 +9,8 @@ import { FormGroup, FormBuilder, Validators} from '@angular/forms';
   templateUrl: './event-form.component.html',
   styleUrls: ['./event-form.component.scss']
 })
-
 export class EventFormComponent implements OnInit {
+
   public eventForm: FormGroup;
   public person: Person;
   @Input() public showCreateEventPopup: boolean;
@@ -30,15 +30,15 @@ export class EventFormComponent implements OnInit {
     this.person = this.authService.getPerson();
   }
 
-  public createEvent() {
+  public submitForm() {
     const val = this.eventForm.value;
     const event = new Event();
     event.name = val.eventName;
     event.begin = val.begin;
     event.finish = val.finish;
     this.createEmitter.emit(event);
-    console.log('ok createEvent', event);
   }
+
   public hideEventFormPopup() {
     this.showCreateEventPopup = !this.showCreateEventPopup;
   }

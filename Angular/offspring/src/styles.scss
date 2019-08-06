@@ -113,15 +113,16 @@ h1
 #events_list,
 #activities_list{
   float: left;
-  width: 50%;
+  width: 60%;
 }
 
 #activities_list {
-  width: 50%;
+  width: 40%;
 }
 
 #inscriptions_list{
   display: inline-block;
+  margin: 20px 0;
 }
 
 // tab management
@@ -151,9 +152,13 @@ h1
   .tab.tab-active{
     display: inline-block;
     border: 1px solid;
-    padding: 30px 50px;
+    padding: 30px;
     .section-title{
       margin: 20px 0;
     }
+  }
+  .button-container{
+    width: 50%;
+    padding-left: 10px;
   }
 }
