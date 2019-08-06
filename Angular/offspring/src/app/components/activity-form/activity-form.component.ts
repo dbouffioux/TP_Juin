@@ -28,8 +28,8 @@ export class ActivityFormComponent implements OnInit {
 
   constructor(private activitiesService: ActivitiesService, private eventService: EventsService, private fb: FormBuilder) {
     this.activityForm = this.fb.group({
-      event_name: this.fb.control('', [Validators.required]),
-      activity_name: this.fb.control('', [Validators.required]),
+      eventName: this.fb.control('', [Validators.required]),
+      activityName: this.fb.control('', [Validators.required]),
       begin: this.fb.control('', [Validators.required]),
       finish: this.fb.control('', [Validators.required]),
       description: this.fb.control(''),
@@ -50,9 +50,10 @@ export class ActivityFormComponent implements OnInit {
     activity.url = formValues.url;
     console.log(activity);
     this.create.emit(activity);
+    this.hideActivityFormPopup();
   }
 
-  public hideEventFormPopup() {
+  public hideActivityFormPopup() {
     this.showCreateActivityPopup = !this.showCreateActivityPopup;
   }
 }
