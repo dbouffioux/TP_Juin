@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { EventItemComponent } from './Components/event-item/event-item.component';
-import { LoginComponent } from './Components/login/login.component';
+import { EventItemComponent } from './components/event-item/event-item.component';
+import { LoginComponent } from './components/login/login.component';
 import { ActivityListComponent } from './components/activity-list/activity-list.component';
 import { ProfileFormComponent } from './components/profile-form/profile-form.component';
 import { AccountContainerComponent } from './containers/account-container/account-container.component';
