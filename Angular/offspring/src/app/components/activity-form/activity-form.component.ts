@@ -42,9 +42,8 @@ export class ActivityFormComponent implements OnInit {
     console.log('wtf');
     const formValues = this.activityForm.value;
     const activity = new Activity();
-
-    activity.eventName = formValues.event_name;
-    activity.name = formValues.activity_name;
+    activity.eventName = formValues.eventName;
+    activity.name = formValues.activityName;
     activity.begin = formValues.begin;
     activity.finish = formValues.finish;
     activity.description = formValues.description;
