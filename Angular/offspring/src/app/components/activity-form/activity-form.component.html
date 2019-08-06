@@ -1,6 +1,6 @@
-<section class="popup" *ngIf="showCreateActivityPopup">
+<section class="popup" *ngIf="showCreateActivityPopup || showUpdateActivityPopup">
   <div class="close" (click)="hideActivityFormPopup()">Х</div>
-    <form class="form" [formGroup]="activityForm" (ngSubmit)="submitForm()">
+    <form class="form" [formGroup]="activityForm" (ng_Submit)="submitForm()">
       <div class="form_input">
         <div class="label">
           <label for="eventName">Nom de l'évènement : </label>

@@ -23,7 +23,10 @@ export class ActivityFormComponent implements OnInit {
   @Input() public events: Event[];
   @Input() public activity: Activity;
   @Input() public showCreateActivityPopup: boolean;
+  @Input() public showUpdateActivityPopup: boolean;
   @Output() private create = new EventEmitter<Activity>();
+  @Output() private update = new EventEmitter<Activity>();
+  @Output() private closeUpdateActivityPopupEmitter = new EventEmitter<Activity>();
   @Output() private closeCreateActivityPopupEmitter = new EventEmitter<Activity>();
 
   constructor(private activitiesService: ActivitiesService, private eventService: EventsService, private fb: FormBuilder) {
@@ -50,12 +53,14 @@ export class ActivityFormComponent implements OnInit {
     activity.url = formValues.url;
 
     this.create.emit(activity);
+    this.update.emit(activity);
     this.hideActivityFormPopup();
   }
 
   public hideActivityFormPopup() {
     this.showCreateActivityPopup = !this.showCreateActivityPopup;
     this.closeCreateActivityPopupEmitter.emit();
+    this.closeUpdateActivityPopupEmitter.emit();
   }
 }
 

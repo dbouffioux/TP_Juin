@@ -19,8 +19,8 @@
           <a href="{{activity.url}}" target="_blank">{{activity.url}}</a>
         </span></li>
       <ng-container *ngIf="isManagement">
-        <li><span><a href="updateActivity/${activity.id}"><button
-                class="management-button update">modification</button></a></span>
+        <li><span><button (click)="toggleUpdateActivityPopup()"
+                class="management-button update">modification</button></span>
           <span id="rightButton"><button (click)="deleteActivity(activity)"
               class="management-button delete">supression</button></span></li>
       </ng-container>
@@ -42,4 +42,12 @@
       </span>
     </ng-container>
   </div>
+
+  <app-activity-form
+    [showCreateActivityPopup]="showUpdateActivityPopup"
+    (update)="updateActivity($event)"
+    [activity]="activity"
+    (closeUpdateActivityPopupEmitter)="toggleUpdateActivityPopup()">
+  </app-activity-form>
+
 </section>
