@@ -11,6 +11,7 @@ import java.util.List;
 
 import be.afelio.beans.Activity;
 import be.afelio.beans.Event;
+import be.afelio.beans.Inscription;
 
 public class DataRepositoryEvent {
 	private DataRepositoryActivity dataRepositoryActivity;
@@ -138,6 +139,11 @@ public class DataRepositoryEvent {
 		Event event = findEventById(idEvent);
 		if (event != null) {
 			List<Activity> list = dataRepositoryActivity.findAllActivitiesForOneEventById(idEvent);
+			for (Activity activity : list) {
+				for (Inscription inscription : activity.getInscriptions()) {
+					System.out.println(inscription.getId());
+				}
+			}
 			event.setActivities(list);
 		}
 		return event;

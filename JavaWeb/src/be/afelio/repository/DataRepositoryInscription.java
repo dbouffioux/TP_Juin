@@ -34,7 +34,7 @@ public class DataRepositoryInscription {
 		int personId = resultSet.getInt("person_id");
 		int activityId = resultSet.getInt("activity_id");
 		Activity activity = dataRepositoryActivity.findOneActivitybyId(activityId);
-		Inscription inscription = new Inscription(id, activity, personId);
+		Inscription inscription = new Inscription(id, activity, personId, activityId);
 		return inscription;
 	}
 
