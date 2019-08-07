@@ -17,6 +17,7 @@ const routes: Routes = [
   {path: 'account', component: AccountContainerComponent},
   {path: 'inscription', component: ProfileFormComponent},
   {path: 'updateAccount', component: UpdateAccountComponent},
+  {path: 'lazy-load', loadChildren: './modules/lazy/lazy.module#LazyModule'},
   {path: '**', redirectTo: '/home'}
 ];
 

@@ -12,8 +12,8 @@
           </option>
           <app-control-messages [control]="activityForm.get('eventName')"></app-control-messages>
         </select>
-        <div class="form_input">
-          <input formControlName="eventName" name="eventName" type="text" value="{{activity.eventName}}" *ngIf="updateActivity()" [(ngModel)]="activity.eventName">
+        <div class="form_input" *ngIf="updateActivity()">
+          <input formControlName="eventName" name="eventName" type="text" value="{{activity.eventName}}" [(ngModel)]="activity.eventName">
         </div>
       </div>
       <div class="form_input">
