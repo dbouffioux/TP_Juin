@@ -3,6 +3,7 @@ import { Activity } from 'src/app/models/activity.model';
 import { Event } from 'src/app/models/event.model';
 import { Person } from 'src/app/models/person.model';
 import { AuthenticationsService } from 'src/app/services/authentications.service';
+import {log} from 'util';
 
 @Component({
   selector: 'app-activity-item',
@@ -23,7 +24,7 @@ export class ActivityItemComponent implements OnInit {
   @Output() private delete = new EventEmitter<Activity>();
   @Output() private refreshButton = new EventEmitter<void>();
   @Output() public hidePopUpEmitter = new EventEmitter<Activity>();
-  @Output() private createInscription = new EventEmitter<number>();
+  @Output() private createInscription = new EventEmitter<Activity>();
   @Output() private deleteTheInscription = new EventEmitter<number>();
 
   constructor(private authService: AuthenticationsService) {
@@ -35,8 +36,8 @@ export class ActivityItemComponent implements OnInit {
     this.person = this.authService.getPerson();
   }
 
-  public createNewInscription() {
-    this.createInscription.emit(this.activity.id);
+  public createNewInscription(activity: Activity) {
+    this.createInscription.emit(this.activity);
   }
 
   public deleteInscription() {
