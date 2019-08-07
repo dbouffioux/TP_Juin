@@ -34,6 +34,7 @@
   <app-profile-form
     [showPopupProfile]="showPopupProfile"
     (createPerson)="createPerson($event)"
-    (resetPopupProfileStateInParent)="togglePopupProfile()">
+    (resetPopupProfileStateInParent)="togglePopupProfile()"
+    [errorMessage500]="errorMessage500">
   </app-profile-form>
 </section>

@@ -19,6 +19,7 @@
         <label for="login">Login : </label>
       </div>
       <input formControlName="login" name="login" type="text">
+      <ng-container *ngIf="errorMessage500"><div class="error500">Login déjà existant</div></ng-container>
     </div>
     <div class="form_input">
       <div class="label">

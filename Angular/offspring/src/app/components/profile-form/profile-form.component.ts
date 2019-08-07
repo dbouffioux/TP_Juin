@@ -12,6 +12,7 @@ export class ProfileFormComponent {
 
   public signInForm: FormGroup;
   public person: Person;
+  @Input() public errorMessage500: boolean;
   @Input() public showPopupProfile: boolean;
   @Output() private createPerson = new EventEmitter<Person>();
   @Output() private resetPopupProfileStateInParent = new EventEmitter<void>();
