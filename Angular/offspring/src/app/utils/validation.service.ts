@@ -1,3 +1,4 @@
+import { FormGroup } from '@angular/forms';
 
 
 export class ValidationService {
@@ -9,9 +10,28 @@ export class ValidationService {
       invalidEmailAddress: 'Adresse email invalide',
       invalidPassword: 'Le mot de passe doit être de minimum 6 caractères de long avec un chiffre.',
       minlength: `Longueur minimum: ${validatorValue.requiredLength}`,
-      maxLength: `Longueur maximale: ${validatorValue.requiredLength}`
+      maxlength: `Longueur maximum ${validatorValue.requiredLength}`,
+      pastDate: 'Date passée non autorisée',
+      finishIsAfterBegin: 'Date de fin doit être supérieur à la date de début'
     };
     return config[validatorName];
+  }
+
+  static finishIsAfterBegin(control) {
+    if (Date.parse(control.get('finish')) > Date.parse(control.get('begin'))) {
+      return null;
+    } else {
+      return { finishIsAfterBegin : true };
+    }
+  }
+
+  static isFuturDate(control) {
+    const now = Date.now();
+    if (Date.parse(control.value) > now) {
+      return null;
+    } else {
+      return { pastDate: true };
+    }
   }
 
   static emailValidator(control) {

@@ -39,13 +39,13 @@
         <div class="label">
           <label>Description : </label>
         </div>
-        <input formControlName="description" name="description" type="text" value="{{activity.description}}" [(ngModel)]="activity.description">
+        <input formControlName="description" name="description" type="text" [(ngModel)]="activity.description">
       </div>
       <div class="form_input">
         <div class="label">
           <label>URL : </label>
         </div>
-        <input formControlName="url" name="url" type="text" value="{{activity.url}}" [(ngModel)]="activity.url">
+        <input formControlName="url" name="url" type="text" [(ngModel)]="activity.url">
       </div>
       <div class="form_button">
         <button type="submit" *ngIf="!updateActivity()">
