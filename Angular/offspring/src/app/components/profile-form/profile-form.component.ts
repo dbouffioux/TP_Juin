@@ -23,11 +23,12 @@ export class ProfileFormComponent {
   constructor(private fb: FormBuilder) {
     this.signInForm = this.fb.group({
       firstname: this.fb.control('', [Validators.required, Validators.minLength(2)]),
-      lastname: this.fb.control('', [Validators.required], Validators.minLength[2]),
-      login: this.fb.control('', [Validators.required], Validators.minLength[4]),
+      lastname: this.fb.control('', [Validators.required, Validators.minLength(2)]),
+      login: this.fb.control('', [Validators.required, Validators.minLength(4)]),
       password: this.fb.control('', [Validators.required, ValidationService.passwordValidator])
     });
   }
+
   public submitForm() {
     const formValues = this.signInForm.value;
     this.person = new Person();
