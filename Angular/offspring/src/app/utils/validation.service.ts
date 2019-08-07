@@ -27,7 +27,7 @@ export class ValidationService {
 
   static isFuturDate(control) {
     const now = Date.now();
-    if (Date.parse(control.value) < now) {
+    if (Date.parse(control.value) > now) {
       return null;
     } else {
       return { pastDate: true };

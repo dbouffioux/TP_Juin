@@ -3,6 +3,7 @@ import { Event } from 'src/app/models/event.model';
 import { Person } from 'src/app/models/person.model';
 import { AuthenticationsService } from 'src/app/services/authentications.service';
 import { FormGroup, FormBuilder, Validators} from '@angular/forms';
+import { ValidationService } from '../../utils/validation.service';
 
 @Component({
   selector: 'app-event-form',
@@ -24,7 +25,7 @@ export class EventFormComponent implements OnInit, OnChanges {
     this.eventForm = this.fb.group({
       eventName: this.fb.control('', [Validators.required, Validators.minLength(4), Validators.maxLength(30)]),
       begin : this.fb.control('', [Validators.required]),
-      finish : this.fb.control('', [Validators.required])
+      finish : this.fb.control('', [Validators.required, ValidationService.finishIsAfterBegin])
     });
    }
 
