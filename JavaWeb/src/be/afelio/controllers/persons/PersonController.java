@@ -27,19 +27,22 @@ public class PersonController extends jsonGenerator {
 	}
 
 	public void add(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		System.out.println("ADD USER in personController");
 		ObjectMapper mapper = new ObjectMapper();
+		Person person = null;
 		PersonParameters personParameters = mapper.readValue(request.getInputStream(), PersonParameters.class);
-		System.out.println("PersonController.doPost()");
 		if (personParameters.getFirstname() != null && !personParameters.getFirstname().isBlank()
 				&& personParameters.getLastname() != null && !personParameters.getLastname().isBlank()
 				&& personParameters.getLogin() != null && !personParameters.getLogin().isBlank()
 				&& personParameters.getPassword() != null && !personParameters.getPassword().isBlank()) {
-			repositoryPerson.addPerson(personParameters.getLastname(), personParameters.getFirstname(),
+			person = repositoryPerson.addPerson(personParameters.getLastname(), personParameters.getFirstname(),
 					personParameters.getLogin(), personParameters.getPassword());
 			request.getSession().setAttribute("Authorization", "true");
 		}
-		list(response);
+
+		jsonGenerate(response, person);
 	}
+
 	public void updatePerson(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		String[] parts = request.getPathInfo().split("/");
 		String idPerson = parts[2];

@@ -19,19 +19,15 @@ public class LoginController extends jsonGenerator {
 	
 	public boolean getConnection(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		boolean passwordValid = false;
+
 		String btoa=request.getParameter("btoa");
-		System.out.println("LoginController.getConnection() param : " + btoa);
-		
-		
 		byte[] decodedBtoa = Base64.getDecoder().decode(btoa);
 		String btoaString= new String(decodedBtoa);
-		String[] parts = btoaString.split(":");
 
+		String[] parts = btoaString.split(":");
 		String login = parts[0];
 		String password = parts[1];
 
-		System.out.println("LoginController.getConnection()" + login +"  " + password);
-		
 		if (login != null
 				&& !login.isBlank()
 				&& password != null
@@ -43,7 +39,6 @@ public class LoginController extends jsonGenerator {
 				request.getSession().setAttribute("Authorization", true);
 				jsonGenerate(response, person);
 			}
-			
 		}	
 		return passwordValid;
 	}

@@ -1,8 +1,6 @@
-import { Component, OnInit , Input, Output, EventEmitter } from '@angular/core';
-import { Person } from 'src/app/models/person.model';
-import { PersonsService } from 'src/app/services/persons.service';
-import { Router } from '@angular/router';
-import { LoginService } from 'src/app/services/login.service';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {Person} from '../../models/person.model';
 
 @Component({
   selector: 'app-profile-form',
@@ -10,43 +8,34 @@ import { LoginService } from 'src/app/services/login.service';
   styleUrls: ['./profile-form.component.scss']
 })
 
-export class ProfileFormComponent implements OnInit {
+export class ProfileFormComponent {
 
-  public persons: Person[];
-
-  @Input() public person: Person;
+  public signInForm: FormGroup;
+  public person: Person;
   @Input() public showPopupProfile: boolean;
-  @Output() private create = new EventEmitter<Person>();
+  @Output() private createPerson = new EventEmitter<Person>();
   @Output() private resetPopupProfileStateInParent = new EventEmitter<void>();
 
-  constructor(
-    private personService: PersonsService,
-    private router: Router,
-    private login: LoginService) {
-      this.person = new Person();
-    }
-
-  ngOnInit() {
-    this.personService.getPersons().subscribe(person => this.persons = person);
+  constructor(private fb: FormBuilder) {
+    this.signInForm = this.fb.group({
+      firstname: this.fb.control('', [Validators.required]),
+      lastname: this.fb.control('', [Validators.required]),
+      login: this.fb.control('', [Validators.required]),
+      password: this.fb.control('', [Validators.required])
+    });
   }
 
-  private setLocalStorage() {
-    if (this.person !== null) {
-      localStorage.setItem('Authorization', 'true');
-      localStorage.setItem('Person', JSON.stringify(this.person ));
-      console.log(localStorage.getItem('Authorization'));
-
-    } else {
-      localStorage.setItem('Authorization', 'false');
-      console.log(localStorage.getItem('Authorization'));
-    }
+  public submitForm() {
+    const formValues = this.signInForm.value;
+    this.person = new Person();
+    this.person.firstname = formValues.firstname;
+    this.person.lastname = formValues.lastname;
+    this.person.login = formValues.login;
+    this.person.password = formValues.password;
+    this.createPerson.emit(this.person);
   }
 
   public hidePopup() {
     this.resetPopupProfileStateInParent.emit();
-  }
-
-  public createPerson() {
-    this.create.emit(this.person);
   }
 }
