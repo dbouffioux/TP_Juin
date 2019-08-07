@@ -12,6 +12,7 @@ import java.util.List;
 
 import be.afelio.beans.Activity;
 import be.afelio.beans.Event;
+import be.afelio.jsonParameters.ActivityParameters;
 
 public class DataRepositoryActivity {
 	private DataRepositoryEvent dataRepositoryEvent;
@@ -182,6 +183,34 @@ public class DataRepositoryActivity {
 			throw new RuntimeException(sqlException);
 		}
 		return event;
+	}
+
+	public void updateActivityById(ActivityParameters activityParameters, int id) {
+		String sql ="UPDATE public.activity " + 
+				"    SET name=?, begin=?, finish=?, url=?, description=?, event_id=? " + 
+				"    WHERE id = ? ";
+		Integer eventId = dataRepositoryEvent.findOneEventByName(activityParameters.getEventName());
+		if (activityParameters.getBegin() != null
+				&& activityParameters.getFinish()!= null
+				&& activityParameters.getName() != null && !activityParameters.getName().isBlank()
+				&& activityParameters.getEventName() != null && !activityParameters.getEventName().isBlank()) {
+			try (Connection connection = dataRepositoryConnection.createConnection();
+					PreparedStatement pstatement = connection.prepareStatement(sql)) {
+	
+				connection.setAutoCommit(true);
+				pstatement.setString(1, activityParameters.getName());
+				pstatement.setTimestamp(2 , Timestamp.valueOf(activityParameters.getBegin()));
+				pstatement.setTimestamp(3, Timestamp.valueOf(activityParameters.getFinish()));
+				pstatement.setString(4, activityParameters.getUrl());
+				pstatement.setString(5, activityParameters.getDescription());
+				pstatement.setInt(6, eventId);
+				pstatement.executeUpdate();
+	
+			} catch (SQLException sqle) {
+				throw new RuntimeException(sqle);
+			}
+		}
+	
 	}
 
 	public void deleteActivityById(int id) {

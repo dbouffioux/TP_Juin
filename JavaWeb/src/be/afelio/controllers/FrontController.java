@@ -146,6 +146,7 @@ public class FrontController extends HttpServlet {
 				eventsController.add(request, response);
 				break;
 			case "/activity/add":
+				System.out.println("FrontController.doPost() dans le add activity" );
 				activitiesController.add(request, response);
 				break;
 			case "/inscription/add":
@@ -178,6 +179,8 @@ public class FrontController extends HttpServlet {
 		if (checkConnection(request, response)) {
 			if (pathInfo.startsWith("/person")) {
 				personController.updatePerson(request, response);
+			}if (pathInfo.startsWith("/activity")) {
+				activitiesController.updateActivity(request, response);
 			}
 		}
 	}

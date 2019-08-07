@@ -49,8 +49,8 @@ export class AccountContainerComponent implements OnInit {
     private router: Router) {
     this.activity = new Activity();
     // set default tabs status
-    this.showInfoTab = true;
-    this.tabActive = 'info';
+    this.showSubscriptions = true;
+    this.tabActive = 'subscription-list';
     this.showAccountUpdateForm = false;
     this.showCreateActivityPopup = false;
     this.showCreateEventPopup = false;
@@ -87,7 +87,7 @@ export class AccountContainerComponent implements OnInit {
 
   public createActivity(activity: Activity) {
     this.activitiesService.createActivity(activity).subscribe(() => {
-      console.log('dans le oncreateActivity');
+      console.log(activity);
     }, error => {
       console.log(error);
     });
