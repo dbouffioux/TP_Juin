@@ -230,7 +230,7 @@ public class FrontController extends HttpServlet {
 				personController.add(request, response);
 				System.out.print("session.getAttribute(Authorization) LA OU CA PLANTE");
 				System.out.print(session.getAttribute("Authorization"));
-				authorization = (boolean) session.getAttribute("Authorization");
+				authorization = Boolean.valueOf((String)session.getAttribute("Authorization"));
 				System.out.println("FrontController.checkConnection() person add authorization:" + authorization);
 			}
 		} else {

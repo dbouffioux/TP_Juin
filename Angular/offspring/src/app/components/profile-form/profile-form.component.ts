@@ -36,6 +36,7 @@ export class ProfileFormComponent {
   }
 
   public hidePopup() {
+    this.showPopupProfile = !this.showPopupProfile;
     this.resetPopupProfileStateInParent.emit();
   }
 }

@@ -19,9 +19,9 @@ export class LoginService {
 
   public getConnection(login: string, password: string): Observable<Person> {
     this.params = new HttpParams().set('btoa', btoa(`${login}:${password}`));
+    this.params.set('observe', 'response');
     return this.http.post<Person>(`${environment.baseUrl}/connection`, this.params,
-      { withCredentials: true })
-      .pipe(catchError((error: any) => throwError(error.json())));
+      { withCredentials: true });
   }
 
   public closeConnection() {
