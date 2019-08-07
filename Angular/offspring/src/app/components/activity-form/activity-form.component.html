@@ -20,7 +20,7 @@
         <div class="label">
           <label for="activityName">Nom de l'activité : </label>
         </div>
-        <input formControlName="activityName" name="activityName" type="text">
+        <input formControlName="activityName" name="activityName" type="text" [(ngModel)]="activity.name">
         <app-control-messages [control]="activityForm.get('activityName')"></app-control-messages>
       </div>
       <div class="form_input">
