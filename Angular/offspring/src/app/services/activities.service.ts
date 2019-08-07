@@ -54,7 +54,7 @@ export class ActivitiesService {
       .pipe(catchError((error: any) => throwError(error.json())));
   }
 
-  updateActivity(activity: Activity) {
+  public updateActivity(activity: Activity) {
     return this.http
       .put<Activity>(`${environment.baseUrl}/activity`, activity,
         { withCredentials: true })

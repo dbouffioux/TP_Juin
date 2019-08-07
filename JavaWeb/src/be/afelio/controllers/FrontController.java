@@ -110,7 +110,7 @@ public class FrontController extends HttpServlet {
 		default:
 			if (pathInfo.startsWith("/event/")) {
 				System.out.println("FrontController.doGet()dans le if event");
-				activitiesController.listForOneEventById(response, request);
+				activitiesController.listForOneEventByName(response, request);
 				
 			} else if (checkConnection(request, response)) {
 				if (pathInfo.startsWith("/inscriptions/")) {

@@ -85,9 +85,9 @@ export class EventItemComponent implements OnInit {
     });
   }
 
-  public refresh(eventId: number) {
-    this.eventService.getEventWithAllActivitiesById(eventId)
-      .subscribe(event => { this.event = event; console.log('dans le getEvent refresh'); });
-  }
+  // public refresh(eventName: string) {
+  //   this.eventService.getEventWithAllActivitiesById(eventName)
+  //     .subscribe(event => { this.event = event; console.log('dans le getEvent refresh'); });
+  // }
 }
 

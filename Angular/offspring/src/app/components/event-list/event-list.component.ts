@@ -18,7 +18,7 @@ export class EventListComponent implements OnInit {
   @Input() public isManagement: boolean;
   @Output() private delete = new EventEmitter<number>();
   @Output() private create = new EventEmitter<Event>();
-  @Output() private getActivityList = new EventEmitter<number>();
+  @Output() private getActivityList = new EventEmitter<string>();
   @Input() public activeEventId: number;
 
   constructor() {
@@ -33,8 +33,8 @@ export class EventListComponent implements OnInit {
     this.create.emit(event);
   }
 
-  public getActivities(eventId: number) {
-    this.getActivityList.emit(eventId);
+  public getActivities(eventName: string) {
+    this.getActivityList.emit(eventName);
   }
 
   public onDelete(id: number) {
