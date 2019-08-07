@@ -12,6 +12,8 @@ import { Person } from 'src/app/models/person.model';
 export class LoginFormComponent {
 
   public loginForm: FormGroup;
+  public errorMessage403 = false;
+  public errorMessage500 = false;
   @Input() public showLoginFormPopup: boolean;
   @Output() public resetLoginFormPopupStateInParent = new EventEmitter<void>();
 
@@ -31,7 +33,11 @@ export class LoginFormComponent {
         (personFound) => {
           this.authService.setLoggin(personFound);
         }, error => {
-          console.log(error);
+          if (error.status === 403) {
+            this.errorMessage403 = true;
+          } else if (error.status === 500) {
+            this.errorMessage500 = true;
+          }
     });
   }
 
