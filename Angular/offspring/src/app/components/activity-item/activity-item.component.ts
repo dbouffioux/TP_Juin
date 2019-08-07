@@ -23,7 +23,7 @@ export class ActivityItemComponent implements OnInit {
   @Output() private showUpdateActivityPopup: boolean;
   @Output() private delete = new EventEmitter<Activity>();
   @Output() private refreshButton = new EventEmitter<void>();
-  @Output() private createInscription = new EventEmitter<number>();
+  @Output() private createInscription = new EventEmitter<Activity>();
   @Output() private hidePopUpEmitter = new EventEmitter<Activity>();
   @Output() private updateActivityEmit = new EventEmitter<Activity>();
   @Output() private deleteTheInscription = new EventEmitter<number>();
