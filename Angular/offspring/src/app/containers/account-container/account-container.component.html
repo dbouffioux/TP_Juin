@@ -36,6 +36,7 @@
       [showActivityPopup]="showActivityPopup"
       [activity]="activityToShow"
       [isManagement]="isManagement"
+      (updateActivityEmit)="updateActivity($event)"
       (delete)="deleteActivity($event)"
       >
     </app-activity-item>

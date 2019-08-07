@@ -111,6 +111,14 @@ export class AccountContainerComponent implements OnInit {
       console.log(error);
     });
   }
+
+  public updateActivity(activity: Activity) {
+    this.activitiesService.updateActivity(activity).subscribe(() => {
+    }, error => {
+      console.log(error);
+    });
+  }
+
   public deleteActivity(activity: Activity) {
     this.activitiesService.deleteActivity(activity.id).subscribe(() => {
       this.isDeleted = true;

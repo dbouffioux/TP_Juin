@@ -99,12 +99,27 @@ public class ActivitiesController extends jsonGenerator {
 
 
 	public void updateActivity(HttpServletRequest request, HttpServletResponse response) throws JsonParseException, JsonMappingException, IOException {
-		int index = request.getPathInfo().lastIndexOf("/");
-		String idActivity = request.getPathInfo().substring(index + 1);
-		int id = Integer.parseInt(idActivity);
+		System.out.println("ActivitiesController.updateActivity()");
 		ObjectMapper mapper = new ObjectMapper();
 		ActivityParameters activityParameters = mapper.readValue(request.getInputStream(), ActivityParameters.class);
-		repositoryActivity.updateActivityById(activityParameters, id);
+		System.out.println("Activity : " + activityParameters.getName() + " - " + activityParameters.getBegin() + " - " + activityParameters.getFinish() + " - " +  activityParameters.getEventName());
+		if ( activityParameters.getName()!= null
+				&& !activityParameters.getName().isBlank()
+				&& activityParameters.getBegin() != null
+				&& activityParameters.getFinish() != null
+				&& activityParameters.getEventName() != null
+				&& !activityParameters.getEventName().isBlank()) {
+			Activity activity = new Activity(
+					activityParameters.getId(),
+					activityParameters.getName(),
+					activityParameters.getBegin(),
+					activityParameters.getFinish(),
+					activityParameters.getUrl(),
+					activityParameters.getDescription(),
+					activityParameters.getEventName());
+			System.out.println("activityController() dans le update activity dans le if");
+			repositoryActivity.updateActivity(activity);
+		}
 	}
 
 	public void deleteActivity(HttpServletRequest request) {

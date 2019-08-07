@@ -1,30 +1,32 @@
 <section class="popup" *ngIf="showCreateActivityPopup || showUpdateActivityPopup">
   <div class="close" (click)="hideActivityFormPopup()">Х</div>
-    <form class="form" [formGroup]="activityForm" (ng_Submit)="submitForm()">
+    <form class="form" [formGroup]="activityForm" (ngSubmit)="submitForm()">
       <div class="form_input">
         <div class="label">
           <label for="eventName">Nom de l'évènement : </label>
         </div>
-        <select formControlName="eventName" name="eventName" type="text" >
+        <select formControlName="eventName" name="eventName" type="text" *ngIf="!updateActivity()">
           <option value="" selected>Choisissez votre évènement</option>
           <option *ngFor="let event of events">
             {{event.name}}
           </option>
         </select>
-
+        <div class="form_input">
+          <input formControlName="eventName" name="eventName" type="text" value="{{activity.eventName}}" *ngIf="updateActivity()" [(ngModel)]="activity.eventName">
+        </div>
       </div>
       <div class="form_input">
         <div class="label">
           <label for="activityName">Nom de l'activité : </label>
         </div>
-        <input formControlName="activityName" name="activityName" type="text">
+        <input formControlName="activityName" name="activityName" type="text" value="{{activity.name}}" [(ngModel)]="activity.name">
       </div>
       <div class="form_input">
         <div class="label">
           <label>Début de l'activité : </label>
         </div>
-        <input placeholder="Date Time:" formControlName="begin" name="begin" [owlDateTimeTrigger]="dtb"
-               [owlDateTime]="dtb">
+        <input placeholder="Date Time:" formControlName="begin" name="begin" type="owlDateTime" [owlDateTimeTrigger]="dtb"
+               [owlDateTime]="dtb" [(ngModel)]="activity.begin">
         <owl-date-time #dtb></owl-date-time>
       </div>
       <div class="form_input">
@@ -32,24 +34,27 @@
           <label>Fin de l'activité : </label>
         </div>
         <input placeholder="Date Time:" formControlName="finish" name="finish" [owlDateTimeTrigger]="dtf"
-               [owlDateTime]="dtf">
+               [owlDateTime]="dtf" [(ngModel)]="activity.finish">
         <owl-date-time #dtf></owl-date-time>
       </div>
       <div class="form_input">
         <div class="label">
           <label>Description : </label>
         </div>
-        <input formControlName="description" name="description" type="text">
+        <input formControlName="description" name="description" type="text" value="{{activity.description}}" [(ngModel)]="activity.description">
       </div>
       <div class="form_input">
         <div class="label">
           <label>URL : </label>
         </div>
-        <input formControlName="url" name="url" type="text">
+        <input formControlName="url" name="url" type="text" value="{{activity.url}}" [(ngModel)]="activity.url">
       </div>
       <div class="form_button">
-        <button type="submit">
+        <button type="submit" *ngIf="!updateActivity()">
           Créer
+        </button>
+        <button type="submit" *ngIf="updateActivity()">
+          Modifier
         </button>
       </div>
     </form>

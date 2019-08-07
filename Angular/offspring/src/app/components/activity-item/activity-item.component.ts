@@ -57,7 +57,6 @@ export class ActivityItemComponent implements OnInit {
   }
 
   public updateActivity(activity: Activity) {
-    console.log(activity);
     this.updateActivityEmit.emit(activity);
   }
 
@@ -66,7 +65,6 @@ export class ActivityItemComponent implements OnInit {
   }
 
   toggleUpdateActivityPopup() {
-    console.log();
     this.showUpdateActivityPopup = !this.showUpdateActivityPopup;
   }
 

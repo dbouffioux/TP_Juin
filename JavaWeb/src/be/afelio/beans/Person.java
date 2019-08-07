@@ -12,6 +12,8 @@ private static final long serialVersionUID = 7762537910490355991L;
 	protected String login;
 	protected String password;
 
+	public Person() { }
+	
 	public Person(Integer id, String firstname, String lastname, String login, String password) {
 		super();
 		this.id = id;

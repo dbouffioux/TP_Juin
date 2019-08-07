@@ -45,15 +45,17 @@ export class ActivityFormComponent implements OnInit {
   public submitForm() {
     const formValues = this.activityForm.value;
     const activity = new Activity();
-    activity.eventName = formValues.eventName;
-    activity.name = formValues.activityName;
-    activity.begin = formValues.begin;
-    activity.finish = formValues.finish;
-    activity.description = formValues.description;
-    activity.url = formValues.url;
-
-    this.create.emit(activity);
-    this.update.emit(activity);
+    this.activity.eventName = formValues.eventName;
+    this.activity.name = formValues.activityName;
+    this.activity.begin = formValues.begin;
+    this.activity.finish = formValues.finish;
+    this.activity.description = formValues.description;
+    this.activity.url = formValues.url;
+    if (this.updateActivity()) {
+      this.update.emit(this.activity);
+    } else {
+      this.create.emit(this.activity);
+    }
     this.hideActivityFormPopup();
   }
 
@@ -61,6 +63,14 @@ export class ActivityFormComponent implements OnInit {
     this.showCreateActivityPopup = !this.showCreateActivityPopup;
     this.closeCreateActivityPopupEmitter.emit();
     this.closeUpdateActivityPopupEmitter.emit();
+  }
+
+  public updateActivity(): boolean {
+    if (this.activity.id !== undefined) {
+      return true;
+    } else {
+      return false;
+    }
   }
 }
 
