@@ -20,10 +20,12 @@ export class ActivityItemComponent implements OnInit {
   @Input() public activity: Activity;
   @Input() public activities: Activity[];
   @Input() public showActivityPopup: boolean;
+  @Output() private showUpdateActivityPopup: boolean;
   @Output() private delete = new EventEmitter<Activity>();
   @Output() private refreshButton = new EventEmitter<void>();
-  @Output() public hidePopUpEmitter = new EventEmitter<Activity>();
-  @Output() private createInscription = new EventEmitter<Activity>();
+  @Output() private createInscription = new EventEmitter<number>();
+  @Output() private hidePopUpEmitter = new EventEmitter<Activity>();
+  @Output() private updateActivityEmit = new EventEmitter<Activity>();
   @Output() private deleteTheInscription = new EventEmitter<number>();
 
   constructor(private authService: AuthenticationsService) {
@@ -54,7 +56,16 @@ export class ActivityItemComponent implements OnInit {
     this.hidePopUpEmitter.emit(this.activity);
   }
 
+  public updateActivity(activity: Activity) {
+    this.updateActivityEmit.emit(activity);
+  }
+
   public isLogged(): boolean {
     return this.authService.isLogged();
   }
+
+  toggleUpdateActivityPopup() {
+    this.showUpdateActivityPopup = !this.showUpdateActivityPopup;
+  }
+
 }

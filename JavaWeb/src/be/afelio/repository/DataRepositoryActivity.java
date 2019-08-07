@@ -185,38 +185,39 @@ public class DataRepositoryActivity {
 		return event;
 	}
 
-	public void updateActivityById(ActivityParameters activityParameters, int id) {
-		String sql ="UPDATE public.activity " + 
-				"    SET name=?, begin=?, finish=?, url=?, description=?, event_id=? " + 
-				"    WHERE id = ? ";
-		Integer eventId = dataRepositoryEvent.findOneEventByName(activityParameters.getEventName());
-		if (activityParameters.getBegin() != null
-				&& activityParameters.getFinish()!= null
-				&& activityParameters.getName() != null && !activityParameters.getName().isBlank()
-				&& activityParameters.getEventName() != null && !activityParameters.getEventName().isBlank()) {
+	public void updateActivity(Activity activity) {
+		String sql ="UPDATE public.activity " +
+					"SET name=?, begin=?, finish=?, url=?, description=?, event_id=? " +
+					"WHERE id = ? ";
+		Integer eventId = dataRepositoryEvent.findOneEventByName(activity.getEventName());
+		if (activity.getBegin() != null
+				&& activity.getFinish()!= null
+				&& activity.getName() != null && !activity.getName().isBlank()
+				&& activity.getEventName() != null && !activity.getEventName().isBlank()
+				&& activity.getId() != null) {
 			try (Connection connection = dataRepositoryConnection.createConnection();
-					PreparedStatement pstatement = connection.prepareStatement(sql)) {
-	
+				 PreparedStatement pstatement = connection.prepareStatement(sql)) {
+
 				connection.setAutoCommit(true);
-				pstatement.setString(1, activityParameters.getName());
-				pstatement.setTimestamp(2 , Timestamp.valueOf(activityParameters.getBegin()));
-				pstatement.setTimestamp(3, Timestamp.valueOf(activityParameters.getFinish()));
-				pstatement.setString(4, activityParameters.getUrl());
-				pstatement.setString(5, activityParameters.getDescription());
-				pstatement.setInt(6, eventId);
+				pstatement.setString(1, activity.getName());
+				pstatement.setTimestamp(2 , Timestamp.valueOf(activity.getBegin()));
+				pstatement.setTimestamp(3, Timestamp.valueOf(activity.getFinish()));
+				pstatement.setString(4, activity.getUrl());
+				pstatement.setString(5, activity.getDescription());
+				pstatement.setInt(6, dataRepositoryEvent.findOneEventByName(activity.getEventName()));
+				pstatement.setInt(7, activity.getId());
 				pstatement.executeUpdate();
-	
+
 			} catch (SQLException sqle) {
 				throw new RuntimeException(sqle);
 			}
 		}
-	
 	}
 
 	public void deleteActivityById(int id) {
 		String sql = "DELETE FROM activity WHERE id = ?";
 		try (Connection connection = dataRepositoryConnection.createConnection();
-				PreparedStatement statement = connection.prepareStatement(sql);) {
+			 PreparedStatement statement = connection.prepareStatement(sql);) {
 			connection.setAutoCommit(true);
 			statement.setInt(1, id);
 			statement.executeUpdate();

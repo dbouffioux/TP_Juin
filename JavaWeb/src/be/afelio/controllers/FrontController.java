@@ -180,6 +180,7 @@ public class FrontController extends HttpServlet {
 			if (pathInfo.startsWith("/person")) {
 				personController.updatePerson(request, response);
 			}if (pathInfo.startsWith("/activity")) {
+				System.out.println("FrontController.doPut() dans le if " + pathInfo);
 				activitiesController.updateActivity(request, response);
 			}
 		}
@@ -234,7 +235,7 @@ public class FrontController extends HttpServlet {
 				System.out.println("FrontController.checkConnection() person add authorization:" + authorization);
 			}
 		} else {
-			System.out.println(session.getAttribute("Authorization"));
+			System.out.println("FrontController.checkConnection() : " + session.getAttribute("Authorization"));
 			authorization = (boolean) session.getAttribute("Authorization");
 		}
 		return authorization;

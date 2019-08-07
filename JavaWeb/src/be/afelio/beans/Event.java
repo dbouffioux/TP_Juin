@@ -21,6 +21,7 @@ public class Event {
 	protected LocalDateTime finish;
 	protected List<Activity> activities;
 	
+	public Event() { }
 	
 	public Event(Integer id, String name, Integer personId
 				, LocalDateTime begin, LocalDateTime finish) {
