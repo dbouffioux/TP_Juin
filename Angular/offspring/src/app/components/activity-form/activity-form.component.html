@@ -10,6 +10,7 @@
           <option *ngFor="let event of events">
             {{event.name}}
           </option>
+          <app-control-messages [control]="activityForm.get('eventName')"></app-control-messages>
         </select>
 
       </div>
@@ -18,6 +19,7 @@
           <label for="activityName">Nom de l'activité : </label>
         </div>
         <input formControlName="activityName" name="activityName" type="text">
+        <app-control-messages [control]="activityForm.get('activityName')"></app-control-messages>
       </div>
       <div class="form_input">
         <div class="label">
@@ -26,6 +28,7 @@
         <input placeholder="Date Time:" formControlName="begin" name="begin" [owlDateTimeTrigger]="dtb"
                [owlDateTime]="dtb">
         <owl-date-time #dtb></owl-date-time>
+        <app-control-messages [control]="activityForm.get('begin')"></app-control-messages>
       </div>
       <div class="form_input">
         <div class="label">
@@ -34,6 +37,7 @@
         <input placeholder="Date Time:" formControlName="finish" name="finish" [owlDateTimeTrigger]="dtf"
                [owlDateTime]="dtf">
         <owl-date-time #dtf></owl-date-time>
+        <app-control-messages [control]="activityForm.get('finish')"></app-control-messages>
       </div>
       <div class="form_input">
         <div class="label">
