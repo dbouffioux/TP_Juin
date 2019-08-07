@@ -21,7 +21,7 @@ export class HomeContainerComponent implements OnInit {
   public activities: Activity[];
   public showActivityPopup: boolean;
   public activityToShow: Activity;
-  public activeEvent: number;
+  public activeEvent: string;
   public activity: Activity;
   public inscription: Inscription;
   public person: Person;
@@ -36,7 +36,7 @@ export class HomeContainerComponent implements OnInit {
     private router: Router) {
     this.activities = [];
     this.showActivityPopup = false;
-    this.activeEvent = 0;
+    this.activeEvent = null;
     this.person = this.authService.getPerson();
     this.inscription = new Inscription();
   }
@@ -52,14 +52,14 @@ export class HomeContainerComponent implements OnInit {
     });
   }
 
-  public initActivitiesList(eventId: number) {
+  public initActivitiesList(eventName: string) {
     this.activities = [];
-    this.eventService.getEventWithAllActivitiesById(eventId).subscribe(event => {
+    this.eventService.getEventWithAllActivitiesById(eventName).subscribe(event => {
       event.activities.map(activity => {
         this.activities.push(activity);
       });
     });
-    this.activeEvent = eventId;
+    this.activeEvent = eventName;
   }
   public createInscription(activity: Activity) {
     this.inscription.activityId = activity.id;

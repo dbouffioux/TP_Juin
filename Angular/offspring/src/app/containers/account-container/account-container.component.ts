@@ -37,7 +37,7 @@ export class AccountContainerComponent implements OnInit {
   public activityToShow: Activity;
   public isManagement: boolean;
   public showCreateActivityPopup: boolean;
-  private activeEvent: number;
+  private activeEvent: string;
   private showSubscriptions: boolean;
 
   constructor(
@@ -62,14 +62,14 @@ export class AccountContainerComponent implements OnInit {
     this.initInscriptions();
   }
 
-  public initActivitiesList(eventId: number) {
+  public initActivitiesList(eventName: string) {
     this.activities = [];
-    this.eventService.getEventWithAllActivitiesById(eventId).subscribe(event => {
+    this.eventService.getEventWithAllActivitiesById(eventName).subscribe(event => {
       event.activities.map(activity => {
         this.activities.push(activity);
       });
     });
-    this.activeEvent = eventId;
+    this.activeEvent = eventName;
   }
 
   public initEvents() {
@@ -121,7 +121,7 @@ export class AccountContainerComponent implements OnInit {
 
   public deleteActivity(activity: Activity) {
     this.activitiesService.deleteActivity(activity.id).subscribe(() => {
-      this.isDeleted = true;
+      this.initActivitiesList(activity.eventName);
     }, error => {
       console.log(error);
     });

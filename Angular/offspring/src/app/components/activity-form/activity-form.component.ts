@@ -16,7 +16,6 @@ export class ActivityFormComponent implements OnInit {
 
   public event: Event;
   public person: Person;
-  public persons: Person[];
   public activities: Activity[];
   public activityForm: FormGroup;
 
@@ -25,14 +24,15 @@ export class ActivityFormComponent implements OnInit {
   @Input() public showCreateActivityPopup: boolean;
   @Input() public showUpdateActivityPopup: boolean;
   @Output() private create = new EventEmitter<Activity>();
+  @Output() private refresh = new EventEmitter<Event>();
   @Output() private update = new EventEmitter<Activity>();
   @Output() private closeUpdateActivityPopupEmitter = new EventEmitter<Activity>();
   @Output() private closeCreateActivityPopupEmitter = new EventEmitter<Activity>();
 
   constructor(private activitiesService: ActivitiesService, private eventService: EventsService, private fb: FormBuilder) {
     this.activityForm = this.fb.group({
-      eventName: this.fb.control('', [Validators.required]),
-      activityName: this.fb.control('', [Validators.required]),
+      event: this.fb.control('', [Validators.required]),
+      activityName: this.fb.control('', [Validators.required, Validators.minLength(4), Validators.maxLength(20)]),
       begin: this.fb.control('', [Validators.required]),
       finish: this.fb.control('', [Validators.required]),
       description: this.fb.control(''),
@@ -45,7 +45,7 @@ export class ActivityFormComponent implements OnInit {
   public submitForm() {
     const formValues = this.activityForm.value;
     const activity = new Activity();
-    this.activity.eventName = formValues.eventName;
+    this.activity.eventName = formValues.event;
     this.activity.name = formValues.activityName;
     this.activity.begin = formValues.begin;
     this.activity.finish = formValues.finish;
@@ -55,6 +55,7 @@ export class ActivityFormComponent implements OnInit {
       this.update.emit(this.activity);
     } else {
       this.create.emit(this.activity);
+      this.refresh.emit(formValues.event);
     }
     this.hideActivityFormPopup();
   }

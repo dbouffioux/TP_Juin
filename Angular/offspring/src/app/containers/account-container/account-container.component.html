@@ -43,6 +43,7 @@
     <app-activity-form
       [showCreateActivityPopup]="showCreateActivityPopup"
       (create)="createActivity($event)"
+      (refresh)="initActivitiesList($event)"
       [activity]="activity" [events]="events"
       (closeCreateActivityPopupEmitter)="toggleCreateActivityPopup()">
     </app-activity-form>
