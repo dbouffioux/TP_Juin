@@ -8,9 +8,20 @@ export class ValidationService {
       required: 'Required',
       invalidEmailAddress: 'Invalid email address',
       invalidPassword: 'Invalid password. Password must be at least 6 characters long, and contain a number.',
-      minlength: `Minimum length ${validatorValue.requiredLength}`
+      minlength: `Minimum length ${validatorValue.requiredLength}`,
+      maxlength: `Maximum length ${validatorValue.requiredLength}`,
+      pastDate: 'Choose a futur date'
     };
     return config[validatorName];
+  }
+
+  static isFuturDate(control) {
+    const now = Date.now();
+    if (Date.parse(control.value) > now) {
+      return null;
+    } else {
+      return { pastDate: true };
+    }
   }
 
   static emailValidator(control) {

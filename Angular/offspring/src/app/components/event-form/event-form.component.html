@@ -8,9 +8,7 @@
         <label for="eventName">Nom de l'évènement : </label>
       </div>
       <input formControlName="eventName" name="eventName" type="text" required>
-      <div *ngIf="eventName.errors.required">
-
-      </div>
+      <app-control-messages [control]="eventForm.get('eventName')"></app-control-messages>
     </div>
 
     <div class="form_input">
@@ -19,6 +17,7 @@
       </div>
       <input placeholder="Date début" formControlName="begin" name="begin" [owlDateTimeTrigger]="dtb" [owlDateTime]="dtb">
       <owl-date-time #dtb></owl-date-time>
+      <app-control-messages [control]="eventForm.get('begin')"></app-control-messages>
     </div>
 
     <div class="form_input">
@@ -27,6 +26,7 @@
       </div>
       <input placeholder="Date fin" formControlName="finish" name="finish" [owlDateTimeTrigger]="dtf" [owlDateTime]="dtf">
       <owl-date-time #dtf></owl-date-time>
+      <app-control-messages [control]="eventForm.get('finish')"></app-control-messages>
     </div>
     <div class="form_button">
       <button type="submit"  [disabled]="!eventForm.valid">
