@@ -1,6 +1,5 @@
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { Activity } from 'src/app/models/activity.model';
-import { Event } from 'src/app/models/event.model';
 import { Person } from 'src/app/models/person.model';
 import { AuthenticationsService } from 'src/app/services/authentications.service';
 
