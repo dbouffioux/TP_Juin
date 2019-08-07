@@ -1,30 +1,35 @@
 <section class="popup" *ngIf="showPopupProfile">
   <div class="close" (click)="hidePopup()">Х</div>
-  <h2>Inscription : </h2>
-
-  <form action="">
-    <div>
-      <label for="firstname">Prénom : </label>
-      <input name="firstanme" type="text" [(ngModel)]="person.firstname">
+  <form  class="form"  [formGroup]="signInForm" (ngSubmit)="submitForm()">
+    <h2>Inscription</h2>
+    <div class="form_input">
+      <div class="label">
+        <label for="firstname">Prénom : </label>
+      </div>
+      <input formControlName="firstname" name="firstname" type="text">
     </div>
-    <div>
-      <label for="lastname">Nom : </label>
-      <input name="lastname" type="text" [(ngModel)]="person.lastname">
+    <div class="form_input">
+      <div class="label">
+        <label for="lastname">Nom : </label>
+      </div>
+      <input formControlName="lastname" name="lastname" type="text">
     </div>
-    <div>
-      <label for="login">login : </label>
-      <input name="login" type="text" [(ngModel)]="person.login">
+    <div class="form_input">
+      <div class="label">
+        <label for="login">Login : </label>
+      </div>
+      <input formControlName="login" name="login" type="text">
     </div>
-    <div>
-      <label for="password">password : </label>
-      <input name="password" type="text" [(ngModel)]="person.password">
+    <div class="form_input">
+      <div class="label">
+        <label for="password">Mot de passe : </label>
+      </div>
+      <input formControlName="password" name="password" type="text">
+    </div>
+    <div class="form_button">
+      <button type="submit" [disabled]="!signInForm.valid">
+        Login
+      </button>
     </div>
   </form>
-
-  <div *ngIf="isCreate">Votre profil est créé</div>
-  <div>
-    <button type="button" (click)="onCreate()">
-      S'inscrire
-    </button>
-  </div>
 </section>

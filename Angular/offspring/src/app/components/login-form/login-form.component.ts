@@ -9,7 +9,7 @@ import { Person } from 'src/app/models/person.model';
   templateUrl: './login-form.component.html',
   styleUrls: ['./login-form.component.scss']
 })
-export class LoginFormComponent implements OnInit {
+export class LoginFormComponent {
 
   public loginForm: FormGroup;
   @Input() public showLoginFormPopup: boolean;
@@ -21,9 +21,6 @@ export class LoginFormComponent implements OnInit {
       password: this.fb.control('', [Validators.required])
     });
    }
-
-  ngOnInit() {
-  }
 
   public submitForm() {
     const formValues = this.loginForm.value;

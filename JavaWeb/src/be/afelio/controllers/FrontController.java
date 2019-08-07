@@ -225,6 +225,8 @@ public class FrontController extends HttpServlet {
 				}
 			} else if (pathInfo.startsWith("/person/add")) {
 				personController.add(request, response);
+				System.out.print("session.getAttribute(Authorization) LA OU CA PLANTE");
+				System.out.print(session.getAttribute("Authorization"));
 				authorization = (boolean) session.getAttribute("Authorization");
 				System.out.println("FrontController.checkConnection() person add authorization:" + authorization);
 			}
