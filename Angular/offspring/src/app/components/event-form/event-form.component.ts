@@ -11,6 +11,7 @@ import { FormGroup, FormBuilder, Validators} from '@angular/forms';
 })
 export class EventFormComponent implements OnInit {
 
+  public minBegin: Date;
   public person: Person;
   public eventForm: FormGroup;
   public dateTimeRange: Date[];
@@ -28,6 +29,7 @@ export class EventFormComponent implements OnInit {
    }
 
   ngOnInit() {
+    this.minBegin = new Date();
     this.person = this.authService.getPerson();
   }
 

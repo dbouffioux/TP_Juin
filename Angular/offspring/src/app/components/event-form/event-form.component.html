@@ -13,11 +13,12 @@
       <div class="label">
         <label for="begin">Début de l'évènement : </label>
       </div>
-      <input placeholder="Date Time:" formControlName="begin" name="begin" type="owlDateTime"
+      <input placeholder="Date de l'évènement :" formControlName="begin" name="begin" type="owlDateTime"
              [owlDateTimeTrigger]="dtr"
              [owlDateTime]="dtr"
              [(ngModel)]="dateTimeRange"
-             [selectMode]="'range'">
+             [selectMode]="'range'"
+             [min]="minBegin">
       <owl-date-time #dtr></owl-date-time>
     </div>
     <div class="form_button">
