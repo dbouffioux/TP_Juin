@@ -1,6 +1,8 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {Person} from '../../models/person.model';
+import {validate} from 'codelyzer/walkerFactory/walkerFn';
+import {ValidationService} from '../../utils/validation.service';
 
 @Component({
   selector: 'app-profile-form',
@@ -16,16 +18,16 @@ export class ProfileFormComponent {
   @Input() public showPopupProfile: boolean;
   @Output() private createPerson = new EventEmitter<Person>();
   @Output() private resetPopupProfileStateInParent = new EventEmitter<void>();
+  private control = new FormControl();
 
   constructor(private fb: FormBuilder) {
     this.signInForm = this.fb.group({
-      firstname: this.fb.control('', [Validators.required]),
-      lastname: this.fb.control('', [Validators.required]),
-      login: this.fb.control('', [Validators.required]),
-      password: this.fb.control('', [Validators.required])
+      firstname: this.fb.control('', [Validators.required, Validators.minLength(2)]),
+      lastname: this.fb.control('', [Validators.required], Validators.minLength[2]),
+      login: this.fb.control('', [Validators.required], Validators.minLength[4]),
+      password: this.fb.control('', [Validators.required, ValidationService.passwordValidator])
     });
   }
-
   public submitForm() {
     const formValues = this.signInForm.value;
     this.person = new Person();

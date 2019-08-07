@@ -7,25 +7,30 @@
         <label for="firstname">Prénom : </label>
       </div>
       <input formControlName="firstname" name="firstname" type="text">
+      <app-control-messages [control]="signInForm.get('firstname')"></app-control-messages>
     </div>
     <div class="form_input">
       <div class="label">
         <label for="lastname">Nom : </label>
       </div>
       <input formControlName="lastname" name="lastname" type="text">
+      <app-control-messages [control]="signInForm.get('lastname')"></app-control-messages>
     </div>
     <div class="form_input">
       <div class="label">
         <label for="login">Login : </label>
       </div>
       <input formControlName="login" name="login" type="text">
-      <ng-container *ngIf="errorMessage500"><div class="error500">Login déjà existant</div></ng-container>
-    </div>
-    <div class="form_input">
+      <app-control-messages [control]="signInForm.get('login')"></app-control-messages>
+      <ng-container *ngIf="errorMessage500">
+        <div class="error500">Login déjà existant</div>
+      </ng-container>
+
       <div class="label">
         <label for="password">Mot de passe : </label>
       </div>
-      <input formControlName="password" name="password" type="text">
+      <input formControlName="password" name="password" type="text" required validate>
+      <app-control-messages [control]="signInForm.get('password')"></app-control-messages>
     </div>
     <div class="form_button">
       <button type="submit" [disabled]="!signInForm.valid">
