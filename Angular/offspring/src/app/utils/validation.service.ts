@@ -8,7 +8,8 @@ export class ValidationService {
       required: 'Requis',
       invalidEmailAddress: 'Adresse email invalide',
       invalidPassword: 'Le mot de passe doit être de minimum 6 caractères de long avec un chiffre.',
-      minlength: `Longueur minimum: ${validatorValue.requiredLength}`
+      minlength: `Longueur minimum: ${validatorValue.requiredLength}`,
+      maxLength: `Longueur maximale: ${validatorValue.requiredLength}`
     };
     return config[validatorName];
   }

@@ -1,7 +1,7 @@
 <h3>Events</h3>
 <ul id="events_list">
   <li *ngFor="let event of events">
-    <a (click)="getActivities(event.id)" [ngClass]="{'active': event.id === activeEventId}">
+    <a (click)="getActivities(event.name)" [ngClass]="{'active': event.id === activeEventId}">
       {{event.name}}
     </a>
     <button class="delete management-button" *ngIf="isManagement" (click)="onDelete(event.id)">X</button>

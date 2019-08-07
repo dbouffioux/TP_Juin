@@ -3,14 +3,14 @@
     <form class="form" [formGroup]="activityForm" (ngSubmit)="submitForm()">
       <div class="form_input">
         <div class="label">
-          <label for="eventName">Nom de l'évènement : </label>
+          <label for="event">Nom de l'évènement : </label>
         </div>
-        <select formControlName="eventName" name="eventName" type="text" *ngIf="!updateActivity()">
+        <select formControlName="event" name="event" type="text" *ngIf="!updateActivity()">
           <option value="" selected>Choisissez votre évènement</option>
-          <option *ngFor="let event of events">
+          <option *ngFor="let event of events" value="{{event.name}}">
             {{event.name}}
           </option>
-          <app-control-messages [control]="activityForm.get('eventName')"></app-control-messages>
+          <app-control-messages [control]="activityForm.get('event')"></app-control-messages>
         </select>
         <div class="form_input">
           <input formControlName="eventName" name="eventName" type="text" value="{{activity.eventName}}" *ngIf="updateActivity()" [(ngModel)]="activity.eventName">

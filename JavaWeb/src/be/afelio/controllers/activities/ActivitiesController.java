@@ -50,11 +50,10 @@ public class ActivitiesController extends jsonGenerator {
 		jsonGenerate(response, activity);
 	}
 
-	public void listForOneEventById(HttpServletResponse response, HttpServletRequest request) throws IOException {
+	public void listForOneEventByName(HttpServletResponse response, HttpServletRequest request) throws IOException {
 		String pathInfoString=request.getPathInfo();
 		String[] parts = pathInfoString.split("/");
-		int id = Integer.parseInt(parts[2]);
-		Event event = repositoryEvent.getOneEventWithActivities(id);
+		Event event = repositoryEvent.getOneEventWithActivities(repositoryEvent.findOneEventByName(parts[2]));
 		System.out.println("ActivitiesController.listActivitiesByPerson()" + event.getActivities().isEmpty());
 
 		jsonGenerate(response, event);
