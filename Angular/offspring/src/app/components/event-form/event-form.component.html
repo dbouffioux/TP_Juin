@@ -15,16 +15,16 @@
       <div class="label">
         <label for="begin">Début de l'évènement : </label>
       </div>
-      <input placeholder="Date début" formControlName="begin" name="begin" [owlDateTimeTrigger]="dtb" [owlDateTime]="dtb">
+      <input placeholder="Date début" formControlName="begin" name="begin" [owlDateTimeTrigger]="dtb" [owlDateTime]="dtb" [min]="minBegin">
       <owl-date-time #dtb></owl-date-time>
-      <app-control-messages [control]="eventForm.get('begin')"></app-control-messages>
+      <app-control-messages [control]="eventForm.get('begin')" ></app-control-messages>
     </div>
 
     <div class="form_input">
       <div class="label">
         <label for="finish">Fin de l'évènement : </label>
       </div>
-      <input placeholder="Date fin" formControlName="finish" name="finish" [owlDateTimeTrigger]="dtf" [owlDateTime]="dtf">
+      <input placeholder="Date fin" formControlName="finish" name="finish" [owlDateTimeTrigger]="dtf" [owlDateTime]="dtf" [min]="minFinish">
       <owl-date-time #dtf></owl-date-time>
       <app-control-messages [control]="eventForm.get('finish')"></app-control-messages>
     </div>

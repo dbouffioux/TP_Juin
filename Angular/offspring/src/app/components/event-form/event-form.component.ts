@@ -1,4 +1,4 @@
-import { Component, OnInit , Input, Output, EventEmitter} from '@angular/core';
+import { Component, OnInit , Input, Output, EventEmitter, OnChanges, SimpleChange} from '@angular/core';
 import { Event } from 'src/app/models/event.model';
 import { Person } from 'src/app/models/person.model';
 import { AuthenticationsService } from 'src/app/services/authentications.service';
@@ -9,12 +9,13 @@ import { FormGroup, FormBuilder, Validators} from '@angular/forms';
   templateUrl: './event-form.component.html',
   styleUrls: ['./event-form.component.scss']
 })
-export class EventFormComponent implements OnInit {
+export class EventFormComponent implements OnInit, OnChanges {
 
   public eventForm: FormGroup;
   public person: Person;
+  @Input() public minBegin: Date;
+  @Input() public minFinish: Date;
   @Input() public showCreateEventPopup: boolean;
-  @Output() private refresh = new EventEmitter<void>();
   @Output() private createEmitter = new EventEmitter<Event>();
   @Output() private closeCreateEventPopupEmitter = new EventEmitter<Event>();
 
@@ -29,6 +30,12 @@ export class EventFormComponent implements OnInit {
 
   ngOnInit() {
     this.person = this.authService.getPerson();
+    this.minBegin = new Date();
+    this.minFinish = new Date();
+  }
+
+  ngOnChanges() {
+    this.minFinish = this.eventForm.value.begin;
   }
 
   public submitForm() {
