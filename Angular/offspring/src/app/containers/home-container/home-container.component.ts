@@ -7,6 +7,7 @@ import { InscriptionsService } from 'src/app/services/inscriptions.service';
 import { ActivitiesService } from 'src/app/services/activities.service';
 import { AuthenticationsService } from 'src/app/services/authentications.service';
 import { Person } from 'src/app/models/person.model';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-home-container',
@@ -31,7 +32,8 @@ export class HomeContainerComponent implements OnInit {
     private eventService: EventsService,
     private inscriptionService: InscriptionsService,
     private activityService: ActivitiesService,
-    private authService: AuthenticationsService) {
+    private authService: AuthenticationsService,
+    private router: Router) {
     this.activities = [];
     this.showActivityPopup = false;
     this.activeEvent = 0;
@@ -59,12 +61,12 @@ export class HomeContainerComponent implements OnInit {
     });
     this.activeEvent = eventId;
   }
-  public createInscription(activityId: number) {
-    this.inscription.activityId = activityId;
+  public createInscription(activity: Activity) {
+    this.inscription.activityId = activity.id;
     this.inscription.personId = this.person.id;
-
     this.inscriptionService.createInscription(this.inscription).subscribe(() => {
       this.isParticipantValue = true;
+      this.router.navigate([`/account`]);
     }
     );
   }
@@ -72,8 +74,10 @@ export class HomeContainerComponent implements OnInit {
   public toggleActivityItem(activity: Activity) {
     this.showActivityPopup = !this.showActivityPopup;
     this.activityToShow = activity;
-    this.isParticipantValue = false;
-    this.isParticipant(activity);
+    if (this.person.id != null) {
+      console.log(this.person.id)
+      this.isParticipant(activity);
+    }
   }
 
   public deleteInscription(activityId: number) {
@@ -85,6 +89,7 @@ export class HomeContainerComponent implements OnInit {
         this.inscriptionID = inscription.id;
         this.inscriptionService.deleteInscription(this.inscriptionID).subscribe(() => {
           this.isParticipantValue = false;
+          this.router.navigate([`/account`]);
         }, error => {
           console.log(error);
         });
@@ -95,9 +100,12 @@ export class HomeContainerComponent implements OnInit {
   public isParticipant(activity: Activity) {
     if (this.person.id !== null) {
       const inscription = activity.inscriptions.find((participant) => {
+        console.log(participant.personId);
         return participant.personId === this.person.id;
       });
-      this.isParticipantValue = inscription.personId === this.person.id;
+      if (inscription != null) {
+        this.isParticipantValue = inscription.personId === this.person.id;
+      }
     }
   }
 }
