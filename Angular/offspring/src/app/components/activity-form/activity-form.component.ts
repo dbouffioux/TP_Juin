@@ -16,6 +16,7 @@ export class ActivityFormComponent implements OnInit {
 
   public event: Event;
   public person: Person;
+  public dateTimeRange: Date[];
   public activities: Activity[];
   public activityForm: FormGroup;
 
@@ -34,7 +35,6 @@ export class ActivityFormComponent implements OnInit {
       event: this.fb.control('', [Validators.required]),
       activityName: this.fb.control('', [Validators.required, Validators.minLength(4), Validators.maxLength(20)]),
       begin: this.fb.control('', [Validators.required]),
-      finish: this.fb.control('', [Validators.required]),
       description: this.fb.control(''),
       url: this.fb.control('')
     });
@@ -47,8 +47,8 @@ export class ActivityFormComponent implements OnInit {
     const activity = new Activity();
     this.activity.eventName = formValues.event;
     this.activity.name = formValues.activityName;
-    this.activity.begin = formValues.begin;
-    this.activity.finish = formValues.finish;
+    this.activity.begin = this.dateTimeRange[0];
+    this.activity.finish = this.dateTimeRange[1];
     this.activity.description = formValues.description;
     this.activity.url = formValues.url;
     if (this.updateActivity()) {

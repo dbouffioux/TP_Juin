@@ -12,11 +12,10 @@ import { ValidationService } from '../../utils/validation.service';
 })
 export class EventFormComponent implements OnInit, OnChanges {
 
-  public eventForm: FormGroup;
+  public minBegin: Date;
   public person: Person;
-  @Input() event?: Event;
-  @Input() public minBegin: Date;
-  @Input() public minFinish: Date;
+  public eventForm: FormGroup;
+  public dateTimeRange: Date[];
   @Input() public showCreateEventPopup: boolean;
   @Output() private createEmitter = new EventEmitter<Event>();
   @Output() private closeCreateEventPopupEmitter = new EventEmitter<Event>();
@@ -25,12 +24,12 @@ export class EventFormComponent implements OnInit, OnChanges {
     this.person = new Person();
     this.eventForm = this.fb.group({
       eventName: this.fb.control('', [Validators.required, Validators.minLength(4), Validators.maxLength(30)]),
-      begin : this.fb.control('', [Validators.required]),
-      finish : this.fb.control('', [Validators.required, ValidationService.finishIsAfterBegin])
+      begin : this.fb.control('', [Validators.required])
     });
    }
 
   ngOnInit() {
+    this.minBegin = new Date();
     this.person = this.authService.getPerson();
     this.minBegin = new Date();
     this.minFinish = new Date();
@@ -44,8 +43,9 @@ export class EventFormComponent implements OnInit, OnChanges {
     const val = this.eventForm.value;
     const event = new Event();
     event.name = val.eventName;
-    event.begin = val.begin;
-    event.finish = val.finish;
+    event.begin = this.dateTimeRange[0];
+    event.finish = this.dateTimeRange[1];
+    console.log(event)
     this.createEmitter.emit(event);
   }
 
