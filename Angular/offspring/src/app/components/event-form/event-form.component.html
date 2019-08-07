@@ -2,31 +2,23 @@
   <div class="close" (click)="hideEventFormPopup()">Х</div>
   <form class="form" [formGroup]="eventForm" (ngSubmit)="submitForm()">
     <h2>Créer un événement</h2>
-
     <div class="form_input">
       <div class="label">
         <label for="eventName">Nom de l'évènement : </label>
       </div>
       <input formControlName="eventName" name="eventName" type="text" >
       <app-control-messages [control]="eventForm.get('eventName')"></app-control-messages>
-
-      </div>
-    
-
+    </div>
     <div class="form_input">
       <div class="label">
         <label for="begin">Début de l'évènement : </label>
       </div>
-      <input placeholder="Date début" formControlName="begin" name="begin" [owlDateTimeTrigger]="dtb" [owlDateTime]="dtb">
-      <owl-date-time #dtb></owl-date-time>
-    </div>
-
-    <div class="form_input">
-      <div class="label">
-        <label for="finish">Fin de l'évènement : </label>
-      </div>
-      <input placeholder="Date fin" formControlName="finish" name="finish" [owlDateTimeTrigger]="dtf" [owlDateTime]="dtf">
-      <owl-date-time #dtf></owl-date-time>
+      <input placeholder="Date Time:" formControlName="begin" name="begin" type="owlDateTime"
+             [owlDateTimeTrigger]="dtr"
+             [owlDateTime]="dtr"
+             [(ngModel)]="dateTimeRange"
+             [selectMode]="'range'">
+      <owl-date-time #dtr></owl-date-time>
     </div>
     <div class="form_button">
       <button type="submit"  [disabled]="!eventForm.valid">

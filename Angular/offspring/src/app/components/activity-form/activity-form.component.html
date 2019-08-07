@@ -27,19 +27,13 @@
         <div class="label">
           <label>Début de l'activité : </label>
         </div>
-        <input placeholder="Date Time:" formControlName="begin" name="begin" type="owlDateTime" [owlDateTimeTrigger]="dtb"
-               [owlDateTime]="dtb" [(ngModel)]="activity.begin">
-        <owl-date-time #dtb></owl-date-time>
+        <input placeholder="Date Time:" formControlName="begin" name="begin" type="owlDateTime"
+               [owlDateTimeTrigger]="dtr"
+               [owlDateTime]="dtr"
+               [(ngModel)]="dateTimeRange"
+               [selectMode]="'range'">
+        <owl-date-time #dtr></owl-date-time>
         <app-control-messages [control]="activityForm.get('begin')"></app-control-messages>
-      </div>
-      <div class="form_input">
-        <div class="label">
-          <label>Fin de l'activité : </label>
-        </div>
-        <input placeholder="Date Time:" formControlName="finish" name="finish" [owlDateTimeTrigger]="dtf"
-               [owlDateTime]="dtf" [(ngModel)]="activity.finish">
-        <owl-date-time #dtf></owl-date-time>
-        <app-control-messages [control]="activityForm.get('finish')"></app-control-messages>
       </div>
       <div class="form_input">
         <div class="label">

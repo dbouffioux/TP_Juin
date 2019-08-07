@@ -11,8 +11,9 @@ import { FormGroup, FormBuilder, Validators} from '@angular/forms';
 })
 export class EventFormComponent implements OnInit {
 
-  public eventForm: FormGroup;
   public person: Person;
+  public eventForm: FormGroup;
+  public dateTimeRange: Date[];
   @Input() public showCreateEventPopup: boolean;
   @Output() private refresh = new EventEmitter<void>();
   @Output() private createEmitter = new EventEmitter<Event>();
@@ -22,8 +23,7 @@ export class EventFormComponent implements OnInit {
     this.person = new Person();
     this.eventForm = this.fb.group({
       eventName: this.fb.control('', [Validators.required, Validators.minLength(4), Validators.maxLength(30)]),
-      begin : this.fb.control('', [Validators.required]),
-      finish : this.fb.control('', [Validators.required])
+      begin : this.fb.control('', [Validators.required])
     });
    }
 
@@ -35,8 +35,9 @@ export class EventFormComponent implements OnInit {
     const val = this.eventForm.value;
     const event = new Event();
     event.name = val.eventName;
-    event.begin = val.begin;
-    event.finish = val.finish;
+    event.begin = this.dateTimeRange[0];
+    event.finish = this.dateTimeRange[1];
+    console.log(event)
     this.createEmitter.emit(event);
   }
 
