@@ -29,24 +29,34 @@ public class DataRepositoryPerson {
 		return person;
 	}
 
-	public void addPerson(String lastname, String firstname, String login, String password) {
+	public Person addPerson(String lastname, String firstname, String login, String password) {
+		Person person = null;
 		if (lastname != null && !lastname.isBlank() && firstname != null && !firstname.isBlank() && login != null
 				&& !login.isBlank() && password != null && !password.isBlank()) {
 			String sql = "insert into person(lastname, firstname, login, password) values (?, ?, ?, ?)";
+			int generatedId;
+
 			try (Connection connection = dataRepositoryConnection.createConnection();
-					PreparedStatement pstatement = connection.prepareStatement(sql)) {
-	
+					PreparedStatement pstatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+
 				connection.setAutoCommit(true);
 				pstatement.setString(1, lastname);
 				pstatement.setString(2, firstname);
 				pstatement.setString(3, login);
 				pstatement.setString(4, password);
 				pstatement.executeUpdate();
-	
+				try (ResultSet rs = pstatement.getGeneratedKeys()) {
+					if (rs.next()) {
+						generatedId = rs.getInt(1);
+						person = this.findOnePersonById(generatedId);
+					}
+				}
+
 			} catch (SQLException sqlException) {
 				throw new RuntimeException(sqlException);
 			}
 		}
+		return person;
 	}
 
 	public List<Person> findAllPersons() {

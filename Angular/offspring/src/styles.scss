@@ -71,6 +71,12 @@ h1
       width: 100%;
       padding: 5px 15px;
     }
+    error{
+      background-color: red;
+      color: white;
+      font-size: 20px;
+      font-weight: bold;
+    }
   }
   .form_button{
     clear: both;
@@ -89,6 +95,20 @@ h1
       padding: 10px 20px;
       margin-top: 10px;
     }
+  }
+  .error403{
+    background-color: red;
+    color: white;
+    font-size: 20px;
+    padding: 5px 8px;
+    font-weight: bold;
+  }
+  .error500{
+    background-color: red;
+    color: white;
+    font-size: 20px;
+    padding: 5px 8px;
+    font-weight: bold;
   }
 }
 

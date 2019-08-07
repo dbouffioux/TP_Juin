@@ -1,7 +1,7 @@
-drop table inscription
-drop table activity
-drop table event
-drop table person
+drop table inscription;
+drop table activity;
+drop table event;
+drop table person;
 
 
 CREATE TABLE person (

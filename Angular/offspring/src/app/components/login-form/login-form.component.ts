@@ -9,9 +9,11 @@ import { Person } from 'src/app/models/person.model';
   templateUrl: './login-form.component.html',
   styleUrls: ['./login-form.component.scss']
 })
-export class LoginFormComponent implements OnInit {
+export class LoginFormComponent {
 
   public loginForm: FormGroup;
+  public errorMessage403 = false;
+  public errorMessage500 = false;
   @Input() public showLoginFormPopup: boolean;
   @Output() public resetLoginFormPopupStateInParent = new EventEmitter<void>();
 
@@ -22,9 +24,6 @@ export class LoginFormComponent implements OnInit {
     });
    }
 
-  ngOnInit() {
-  }
-
   public submitForm() {
     const formValues = this.loginForm.value;
     this.loginService.getConnection(
@@ -34,7 +33,11 @@ export class LoginFormComponent implements OnInit {
         (personFound) => {
           this.authService.setLoggin(personFound);
         }, error => {
-          console.log(error);
+          if (error.status === 403) {
+            this.errorMessage403 = true;
+          } else if (error.status === 500) {
+            this.errorMessage500 = true;
+          }
     });
   }
 

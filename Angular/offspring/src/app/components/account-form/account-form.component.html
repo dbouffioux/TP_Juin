@@ -5,7 +5,8 @@
     <div class="label">
       <label for="firstname">Prénom : </label>
     </div>
-    <input formControlName="firstname" name="firstanme" type="text">
+    <input formControlName="firstname" name="firstname" type="text">
+    <app-control-messages [control]="accountForm.get('firstname')"></app-control-messages>
   </div>
 
   <div class="form_input">
@@ -13,6 +14,7 @@
       <label for="lastname">Nom : </label>
     </div>
     <input formControlName="lastname" name="lastname" type="text">
+    <app-control-messages [control]="accountForm.get('lastname')"></app-control-messages>
   </div>
 
   <div class="form_input">
@@ -20,6 +22,7 @@
       <label for="login">Login : </label>
     </div>
     <input formControlName="login" name="login" type="text">
+    <app-control-messages [control]="accountForm.get('login')"></app-control-messages>
   </div>
 
   <div class="form_input">
@@ -27,6 +30,7 @@
       <label for="password">Mot de passe : </label>
     </div>
     <input formControlName="password" name="password" type="password">
+    <app-control-messages [control]="accountForm.get('password')"></app-control-messages>
   </div>
 
   <div class="form_button">

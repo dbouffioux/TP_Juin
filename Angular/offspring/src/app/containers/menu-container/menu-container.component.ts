@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
+import { Component, Output, EventEmitter, Input } from '@angular/core';
 import { AuthenticationsService } from 'src/app/services/authentications.service';
 import { Person } from 'src/app/models/person.model';
 import { PersonsService } from '../../services/persons.service';
@@ -10,25 +10,21 @@ import { LoginService } from '../../services/login.service';
   templateUrl: './menu-container.component.html',
   styleUrls: ['./menu-container.component.scss']
 })
-
-export class MenuContainerComponent implements OnInit {
+export class MenuContainerComponent{
 
   public showMenuProfile: boolean;
   public showPopupProfile: boolean;
   public person: Person;
   public isCreate: boolean;
-
+  public errorMessage500 = false;
 
   constructor(
-    private login: LoginService,
+    private loginService: LoginService,
     private authService: AuthenticationsService,
     private personService: PersonsService,
     private router: Router) {
     this.showMenuProfile = false;
     this.showPopupProfile = false;
-  }
-
-  ngOnInit() {
   }
 
   public isLogged(): boolean {
@@ -44,8 +40,6 @@ export class MenuContainerComponent implements OnInit {
   }
 
   public togglePopupProfile() {
-    console.log('togglePopupProfile');
-
     this.showPopupProfile = !this.showPopupProfile;
   }
 
@@ -53,26 +47,18 @@ export class MenuContainerComponent implements OnInit {
     this.authService.logout();
   }
 
-  private setLocalStorage() {
-    if (this.person !== null) {
-      localStorage.setItem('Authorization', 'true');
-      localStorage.setItem('Person', JSON.stringify(this.person));
-      console.log(localStorage.getItem('Authorization'));
-
-    } else {
-      localStorage.setItem('Authorization', 'false');
-      console.log(localStorage.getItem('Authorization'));
-    }
-  }
-
-  public onCreate() {
-    this.personService.createPerson(this.person).subscribe(() => {
-      console.log('OK');
-      this.isCreate = true;
-      this.setLocalStorage();
-      this.login.getConnection(this.person.login, this.person.password).subscribe();
-      this.router.navigate(['/home']);
+  public createPerson(person: Person) {
+    this.person = person;
+    this.personService.createPerson(person).subscribe(() => {
+      this.errorMessage500 = false;
+      this.togglePopupProfile();
+      this.authService.setLoggin(this.person);
+      this.loginService.getConnection(this.person.login, this.person.password).subscribe();
+      this.router.navigate(['/home']).then(r => {});
     }, error => {
+      if (error.status === 500) {
+        this.errorMessage500 = true;
+      }
       console.log(error);
     });
   }

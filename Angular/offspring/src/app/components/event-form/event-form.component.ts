@@ -21,7 +21,7 @@ export class EventFormComponent implements OnInit {
   constructor(private authService: AuthenticationsService, private fb: FormBuilder) {
     this.person = new Person();
     this.eventForm = this.fb.group({
-      eventName: this.fb.control('', [Validators.required]),
+      eventName: this.fb.control('', [Validators.required, Validators.minLength(4), Validators.maxLength(30)]),
       begin : this.fb.control('', [Validators.required]),
       finish : this.fb.control('', [Validators.required])
     });
