@@ -10,6 +10,7 @@
       <app-event-list
         [events]="events"
         (delete)="deleteEvent($event)"
+        (update)="toggleCreateEventPopup($event)"
         [isManagement]="true"
         (getActivityList)="initActivitiesList($event)">
       </app-event-list>
@@ -30,15 +31,15 @@
     <app-event-form
       [showCreateEventPopup]="showCreateEventPopup"
       (createEmitter)="createEvent($event)"
-      (closeCreateEventPopupEmitter)="toggleCreateEventPopup()">
+      (closeCreateEventPopupEmitter)="toggleCreateEventPopup()"
+      [event]="event">
     </app-event-form>
     <app-activity-item
       [showActivityPopup]="showActivityPopup"
       [activity]="activityToShow"
       [isManagement]="isManagement"
       (updateActivityEmit)="updateActivity($event)"
-      (delete)="deleteActivity($event)"
-      >
+      (delete)="deleteActivity($event)">
     </app-activity-item>
     <app-activity-form
       [showCreateActivityPopup]="showCreateActivityPopup"

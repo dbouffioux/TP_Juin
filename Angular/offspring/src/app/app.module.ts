@@ -27,8 +27,7 @@ import { AccountContainerComponent } from './containers/account-container/accoun
 import { HomeContainerComponent } from './containers/home-container/home-container.component';
 import { ActivityItemComponent } from './components/activity-item/activity-item.component';
 import { AccountFormComponent } from './components/account-form/account-form.component';
-import {ControlMessagesComponent} from './utils/control-message.component';
-// import { ParticlesModule } from 'angular-particle';
+import { ControlMessagesComponent } from './utils/control-message.component';
 
 @NgModule({
   declarations: [
@@ -59,8 +58,7 @@ import {ControlMessagesComponent} from './utils/control-message.component';
     FormsModule,
     ReactiveFormsModule,
     OwlDateTimeModule,
-    OwlNativeDateTimeModule,
-    // ParticlesModule
+    OwlNativeDateTimeModule
   ],
   providers: [
     ActivitiesService,

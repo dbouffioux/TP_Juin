@@ -14,6 +14,7 @@ export class EventFormComponent implements OnInit, OnChanges {
 
   public eventForm: FormGroup;
   public person: Person;
+  @Input() event?: Event;
   @Input() public minBegin: Date;
   @Input() public minFinish: Date;
   @Input() public showCreateEventPopup: boolean;

@@ -19,7 +19,7 @@ export class EventsService {
       .pipe(catchError((error: any) => throwError(error.json())));
   }
 
-  public getEventWithAllActivitiesById(name: string): Observable<Event> {
+  public getEventWithAllActivitiesByName(name: string): Observable<Event> {
     console.log(name);
     return this.http.get<Event>(`${environment.baseUrl}/event/${name}`,
       { withCredentials: true })

@@ -43,7 +43,7 @@ export class EventItemComponent implements OnInit {
     this.route.params.subscribe(params => {
       const id = params.id;
       console.log(id);
-      this.eventService.getEventWithAllActivitiesById(id).subscribe(event => { this.event = event; console.log('dans le getEvent'); });
+      this.eventService.getEventWithAllActivitiesByName(id).subscribe(event => { this.event = event; console.log('dans le getEvent'); });
     });
   }
 

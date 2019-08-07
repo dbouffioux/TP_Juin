@@ -64,7 +64,7 @@ export class AccountContainerComponent implements OnInit {
 
   public initActivitiesList(eventName: string) {
     this.activities = [];
-    this.eventService.getEventWithAllActivitiesById(eventName).subscribe(event => {
+    this.eventService.getEventWithAllActivitiesByName(eventName).subscribe(event => {
       event.activities.map(activity => {
         this.activities.push(activity);
       });
@@ -87,7 +87,6 @@ export class AccountContainerComponent implements OnInit {
 
   public createActivity(activity: Activity) {
     this.activitiesService.createActivity(activity).subscribe(() => {
-      console.log(activity);
     }, error => {
       console.log(error);
     });
@@ -191,8 +190,13 @@ export class AccountContainerComponent implements OnInit {
     this.isManagement = true;
   }
 
-  public toggleCreateEventPopup() {
+  public toggleCreateEventPopup(name?: string) {
     this.showCreateEventPopup = !this.showCreateEventPopup;
+    this.eventService.getEventWithAllActivitiesByName(name).subscribe(
+      event => {
+        this.event = event;
+      }
+    );
   }
 
   public toggleCreateActivityPopup() {

@@ -54,7 +54,7 @@ export class HomeContainerComponent implements OnInit {
 
   public initActivitiesList(eventName: string) {
     this.activities = [];
-    this.eventService.getEventWithAllActivitiesById(eventName).subscribe(event => {
+    this.eventService.getEventWithAllActivitiesByName(eventName).subscribe(event => {
       event.activities.map(activity => {
         this.activities.push(activity);
       });
