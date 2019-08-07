@@ -16,6 +16,7 @@ export class MenuContainerComponent{
   public showPopupProfile: boolean;
   public person: Person;
   public isCreate: boolean;
+  public errorMessage500 = false;
 
   constructor(
     private loginService: LoginService,
@@ -49,10 +50,15 @@ export class MenuContainerComponent{
   public createPerson(person: Person) {
     this.person = person;
     this.personService.createPerson(person).subscribe(() => {
+      this.errorMessage500 = false;
+      this.togglePopupProfile();
       this.authService.setLoggin(this.person);
       this.loginService.getConnection(this.person.login, this.person.password).subscribe();
       this.router.navigate(['/home']).then(r => {});
     }, error => {
+      if (error.status === 500) {
+        this.errorMessage500 = true;
+      }
       console.log(error);
     });
   }

@@ -1,15 +1,18 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { Person } from '../models/person.model';
 import { environment } from 'src/environments/environment';
 import { catchError } from 'rxjs/operators';
+import {Status} from 'tslint/lib/runner';
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class PersonsService {
+
+  private params: HttpParams;
 
   constructor(private http: HttpClient) { }
 
@@ -21,7 +24,7 @@ export class PersonsService {
 
   public createPerson(payload: Person): Observable<Person> {
     console.log();
-
+    this.params = new HttpParams().set('observe', 'response');
     return this.http
       .post<Person>(`${environment.baseUrl}/person/add`, payload,
         {
@@ -29,7 +32,9 @@ export class PersonsService {
             localStorage.getItem('Authorization')),
           withCredentials: true
         })
-      .pipe(catchError((error: any) => throwError(error.json())));
+      .pipe(catchError((error: Status) => {
+        return throwError(error.valueOf());
+      }));
   }
 
   public deleteProfile(personId: number): Observable<boolean> {
