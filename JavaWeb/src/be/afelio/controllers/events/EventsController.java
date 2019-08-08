@@ -69,10 +69,12 @@ public class EventsController extends jsonGenerator{
 		ObjectMapper mapper = new ObjectMapper();
 		System.out.print(request.getInputStream());
 		EventParameters eventParameters= mapper.readValue(request.getInputStream(), EventParameters.class );
-		if ( eventParameters.getName()!= null
+		if ( eventParameters.getId() != null
+				&& eventParameters.getName() != null
 				&& !eventParameters.getName().isBlank()
-				&& eventParameters.getBegin()!= null
-				&& eventParameters.getFinish()!= null) {
+				&& eventParameters.getPersonId() != null
+				&& eventParameters.getBegin() != null
+				&& eventParameters.getFinish() != null) {
 			Event event = new Event(eventParameters.getId(),
 					eventParameters.getName(),
 					eventParameters.getPersonId(),
