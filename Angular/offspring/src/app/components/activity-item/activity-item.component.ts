@@ -46,7 +46,6 @@ export class ActivityItemComponent implements OnInit {
     this.deleteTheInscription.emit(this.activity.id);
   }
   public showConfirmDelete() {
-    console.log('dans le showConfirmDelete');
     this.showConfirmDel = !this.showConfirmDel;
   }
   public deleteActivity() {

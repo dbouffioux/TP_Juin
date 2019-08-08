@@ -17,9 +17,15 @@
       <td>{{inscription.activity.begin | date : 'dd/MM/yy HH:mm'}}</td>
       <td>{{inscription.activity.finish | date : 'dd/MM/yy HH:mm'}}</td>
       <td>{{inscription.activity.description}}</td>
-      <td><button class="management-button subscribe" (click)="deleteInscription(inscription)">supression</button></td>
+      <td><button class="management-button subscribe" (click)="showConfirmDelete()">supression</button></td>
+      <ng-container *ngIf="showConfirmDel">
+        <app-confirm-delete
+          (confirmDelete)="deleteInscription(inscription)"
+          (hidePopUpConfirmDelete)="showConfirmDelete()"
+          [showConfirmDelete]="showConfirmDel" ></app-confirm-delete>
+      </ng-container>
+
     </tr>
   </tbody>
 </table>
 
-<div id=deleted *ngIf="isDeleted">Votre inscription a été supprimée</div>

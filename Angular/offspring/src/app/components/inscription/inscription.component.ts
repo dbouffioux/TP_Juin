@@ -11,8 +11,8 @@ import { Person } from 'src/app/models/person.model';
 
 export class InscriptionComponent implements OnInit {
 
-  public isDeleted: boolean;
   public person: Person;
+  public showConfirmDel: boolean;
 
   @Input() public inscriptions: Inscription[];
   @Input() public inscription: Inscription;
@@ -26,6 +26,10 @@ export class InscriptionComponent implements OnInit {
     this.person = JSON.parse(localStorage.getItem('Person'));
   }
   public deleteInscription(inscription: Inscription) {
+    this.showConfirmDelete();
     this.delete.emit(inscription);
+  }
+  public showConfirmDelete() {
+    this.showConfirmDel = !this.showConfirmDel;
   }
 }
