@@ -39,6 +39,7 @@ export class AccountContainerComponent implements OnInit {
   public showCreateActivityPopup: boolean;
   private activeEvent: string;
   private showSubscriptions: boolean;
+  private showConfirmDelete: boolean;
 
   constructor(
     private activitiesService: ActivitiesService,
@@ -217,5 +218,8 @@ export class AccountContainerComponent implements OnInit {
 
   public toggleCreateActivityPopup() {
     this.showCreateActivityPopup = !this.showCreateActivityPopup;
+  }
+  public toggleConfirmDelete() {
+    this.showConfirmDelete = !this.showConfirmDelete;
   }
 }

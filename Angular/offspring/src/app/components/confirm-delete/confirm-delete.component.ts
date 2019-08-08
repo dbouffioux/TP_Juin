@@ -1,4 +1,4 @@
-import {Component, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 
 @Component({
   selector: 'app-confirm-delete',
@@ -7,12 +7,18 @@ import {Component, OnInit, Output} from '@angular/core';
 })
 export class ConfirmDeleteComponent implements OnInit {
 
-  canDel: boolean
-  @Output() canDelete
+  canDel: boolean;
+  @Input() public showConfirmDelete: boolean ;
+  @Output() private canDelete = new EventEmitter<void>();
+  @Output() private resetLoginFormPopupStateInParent = new EventEmitter<void>();
 
   constructor() { }
 
   ngOnInit() {
+    console.log(this.showConfirmDelete);
+  }
+  public hideConfirmDeletePopup() {
+    this.showConfirmDelete = false;
   }
 
 }
