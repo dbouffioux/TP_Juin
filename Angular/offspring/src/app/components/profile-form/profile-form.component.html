@@ -25,7 +25,8 @@
       <ng-container *ngIf="errorMessage500">
         <div class="error500">Login déjà existant</div>
       </ng-container>
-
+    </div>
+    <div class="form_input">
       <div class="label">
         <label for="password">Mot de passe : </label>
       </div>
@@ -34,7 +35,7 @@
     </div>
     <div class="form_button">
       <button type="submit" [disabled]="!signInForm.valid">
-        Login
+        Inscription
       </button>
     </div>
   </form>

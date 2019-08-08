@@ -29,6 +29,7 @@ h1
   font-weight: bold;
   font-size: 60px;
   color: black;
+  margin-bottom: 30px;
 }
 
 /* Generic reusable classes */
@@ -56,20 +57,24 @@ h1
 .form{
   background-color: $app-background-color;
   width: 400px;
-  margin: 100px auto;
+  margin: 10px auto;
   padding: 30px 50px;
   h2, h3{
     padding: 10px 20px;
   }
   .form_input{
-    margin: 10px 20px;
-    float: left;
+    .label{
+      margin-bottom: 5px;
+    }
+    margin: 20px auto;
     width: 80%;
     input, select{
-      border-radius: 4px;
-      height: 25px;
+      height: 40px;
       width: 100%;
       padding: 5px 15px;
+      box-sizing: border-box;
+      border: none;
+      box-shadow: 1px 1px 1px #1f2833;
     }
     error{
       background-color: red;
@@ -80,8 +85,11 @@ h1
   }
   .form_button{
     clear: both;
-    width: 20%;
+    width: 50%;
     margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     button{
       background-color: $button-background-color;
       border: none;
@@ -95,26 +103,21 @@ h1
       padding: 10px 20px;
       margin-top: 10px;
     }
+    .form--nopopup{
+      padding: 10px;
+      margin: 50px auto;
+    }
   }
-  .error403{
+  .error403, .error500, .error403{
     background-color: red;
     color: white;
-    font-size: 20px;
-    padding: 5px 8px;
+    font-size: 15px;
+    padding: 20px 15px;
     font-weight: bold;
+    width: 82%;
+    margin: 10px auto;
+    text-align: center;
   }
-  .error500{
-    background-color: red;
-    color: white;
-    font-size: 20px;
-    padding: 5px 8px;
-    font-weight: bold;
-  }
-}
-
-.form.form--nopopup{
-  padding: 10px;
-  margin: 50px auto;
 }
 
 .management-button, .button{
@@ -188,7 +191,7 @@ h1
   }
   .tab.tab-active{
     display: inline-block;
-    border: 1px solid;
+    border-top: 1px solid;
     padding: 30px;
     width: 100%;
     .section-title{
