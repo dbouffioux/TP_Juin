@@ -27,7 +27,7 @@ export class ActivityFormComponent implements OnInit {
   @Input() public showCreateActivityPopup: boolean;
   @Input() public showUpdateActivityPopup: boolean;
   @Output() private create = new EventEmitter<Activity>();
-  @Output() private refresh = new EventEmitter<Event>();
+  @Output() private refresh = new EventEmitter<string>();
   @Output() private update = new EventEmitter<Activity>();
   @Output() private closeUpdateActivityPopupEmitter = new EventEmitter<Activity>();
   @Output() private closeCreateActivityPopupEmitter = new EventEmitter<Activity>();
@@ -48,8 +48,8 @@ export class ActivityFormComponent implements OnInit {
 
   public submitForm() {
     const formValues = this.activityForm.value;
-    const activity = new Activity();
-    this.activity.eventName = formValues.event;
+    this.event = JSON.parse(formValues.event);
+    this.activity.eventName = this.event.name;
     this.activity.name = formValues.activityName;
     this.activity.begin = this.dateTimeRange[0];
     this.activity.finish = this.dateTimeRange[1];
@@ -59,7 +59,7 @@ export class ActivityFormComponent implements OnInit {
       this.update.emit(this.activity);
     } else {
       this.create.emit(this.activity);
-      this.refresh.emit(formValues.event);
+      this.refresh.emit(this.event.name);
     }
     this.hideActivityFormPopup();
   }
