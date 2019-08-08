@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output, OnChanges } from '@angular/core';
 import { Activity } from 'src/app/models/activity.model';
 import { Person } from 'src/app/models/person.model';
 import { ActivitiesService } from 'src/app/services/activities.service';
@@ -15,11 +15,13 @@ import {log} from 'util';
 export class ActivityFormComponent implements OnInit {
 
   public event: Event;
+  public  minDate: Date;
+  public  maxDate: Date;
   public person: Person;
+  public disabled: boolean;
   public dateTimeRange: Date[];
   public activities: Activity[];
   public activityForm: FormGroup;
-
   @Input() public events: Event[];
   @Input() public activity: Activity;
   @Input() public showCreateActivityPopup: boolean;
@@ -40,7 +42,9 @@ export class ActivityFormComponent implements OnInit {
     });
   }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.disabled = false;
+  }
 
   public submitForm() {
     const formValues = this.activityForm.value;
@@ -71,6 +75,20 @@ export class ActivityFormComponent implements OnInit {
       return true;
     } else {
       return false;
+    }
+  }
+
+  public eventSelect(eventJson: string) {
+    this.event = JSON.parse(eventJson);
+    this.dateTimeRange = null;
+    if (this.event !== null) {
+      this.minDate = this.event.begin;
+      this.maxDate = this.event.finish;
+      this.disabled = true;
+    } else {
+      this.minDate = new Date();
+      this.maxDate = new Date();
+      this.disabled = false;
     }
   }
 }
