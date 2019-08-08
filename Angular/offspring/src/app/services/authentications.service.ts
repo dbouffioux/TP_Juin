@@ -37,6 +37,6 @@ export class AuthenticationsService {
     this.loginService.closeConnection().subscribe();
   }
   public isConnected(): boolean {
-    return localStorage.getItem('Authorization') === 'true';
+    return !localStorage.getItem('auth');
   }
 }
