@@ -16,9 +16,9 @@ CREATE TABLE event (
 	id  SERIAL PRIMARY KEY ,
 	name varchar(20) NOT NULL UNIQUE,
 	person_id int NOT NULL
-	CONSTRAINT FK_person_id REFERENCES person (id),
+	CONSTRAINT FK_person_id REFERENCES person (id) ON DELETE CASCADE,
 	begin timestamp with time zone NOT NULL,
-	finish timestamp with time zone NOT NULL
+	finish timestamp with time zone NOT NULL 
 );
 
 CREATE TABLE activity(
