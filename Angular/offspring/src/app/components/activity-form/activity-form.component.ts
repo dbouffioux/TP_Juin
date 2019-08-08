@@ -3,14 +3,12 @@ import { Activity } from 'src/app/models/activity.model';
 import { Person } from 'src/app/models/person.model';
 import { Event } from 'src/app/models/event.model';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-
 @Component({
   selector: 'app-activity-form',
   templateUrl: './activity-form.component.html',
   styleUrls: ['./activity-form.component.scss']
 })
 export class ActivityFormComponent implements OnInit {
-
   public  minDate: Date;
   public  maxDate: Date;
   public person: Person;
@@ -28,7 +26,6 @@ export class ActivityFormComponent implements OnInit {
   @Output() private update = new EventEmitter<Activity>();
   @Output() private closeUpdateActivityPopupEmitter = new EventEmitter<Activity>();
   @Output() private closeCreateActivityPopupEmitter = new EventEmitter<Activity>();
-
   constructor(private fb: FormBuilder) {
     this.activityForm = this.fb.group({
       event: this.fb.control('', [Validators.required]),
@@ -38,10 +35,9 @@ export class ActivityFormComponent implements OnInit {
       url: this.fb.control('')
     });
   }
-
   ngOnInit() {
     this.disabled = false;
-    if (this.updateActivity()) {
+    if (this.updateActivity() && this.events !== undefined) {
       console.log('dans le if ^^');
       this.disabled = true;
       this.event = this.events.find( event => {
@@ -55,31 +51,30 @@ export class ActivityFormComponent implements OnInit {
       console.log(this.event);
     }
   }
-
   public submitForm() {
     const formValues = this.activityForm.value;
-    this.event = JSON.parse(formValues.event);
-    this.activity.eventName = this.event.name;
     this.activity.name = formValues.activityName;
     this.activity.begin = this.dateTimeRange[0];
     this.activity.finish = this.dateTimeRange[1];
     this.activity.description = formValues.description;
     this.activity.url = formValues.url;
     if (this.updateActivity()) {
+      this.activity.eventName = this.event.name;
       this.update.emit(this.activity);
+      this.refresh.emit(this.activity.eventName);
     } else {
+      this.event = JSON.parse(formValues.event);
+      this.activity.eventName = this.event.name;
       this.create.emit(this.activity);
-      this.refresh.emit(this.event.name);
+      this.refresh.emit(this.activity.eventName);
     }
     this.hideActivityFormPopup();
   }
-
   public hideActivityFormPopup() {
     this.showCreateActivityPopup = !this.showCreateActivityPopup;
     this.closeCreateActivityPopupEmitter.emit();
     this.closeUpdateActivityPopupEmitter.emit();
   }
-
   public updateActivity(): boolean {
     if (this.activity.id !== undefined) {
       return true;
@@ -87,7 +82,6 @@ export class ActivityFormComponent implements OnInit {
       return false;
     }
   }
-
   public eventSelect(eventJson: string) {
     this.event = JSON.parse(eventJson);
     this.dateTimeRange = null;
@@ -102,4 +96,3 @@ export class ActivityFormComponent implements OnInit {
     }
   }
 }
-

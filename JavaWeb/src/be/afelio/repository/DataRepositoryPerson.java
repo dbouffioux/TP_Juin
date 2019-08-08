@@ -118,6 +118,7 @@ public class DataRepositoryPerson {
 				&& !person.getLogin().isBlank()
 				&& person.getPassword() != null
 				&& !person.getPassword().isBlank()) {
+			System.out.println(person.toString());
 			try (Connection connection = dataRepositoryConnection.createConnection();
 					PreparedStatement pstatement = connection.prepareStatement(sql)) {
 	

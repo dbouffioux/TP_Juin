@@ -59,8 +59,16 @@ private static final long serialVersionUID = 7762537910490355991L;
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	
-	
-	
 
+
+	@Override
+	public String toString() {
+		return "Person{" +
+				"id=" + id +
+				", firstname='" + firstname + '\'' +
+				", lastname='" + lastname + '\'' +
+				", login='" + login + '\'' +
+				", password='" + password + '\'' +
+				'}';
+	}
 }

@@ -75,7 +75,6 @@ export class HomeContainerComponent implements OnInit {
     this.showActivityPopup = !this.showActivityPopup;
     this.activityToShow = activity;
     if (this.person.id != null) {
-      console.log(this.person.id)
       this.isParticipant(activity);
     }
   }
@@ -100,7 +99,6 @@ export class HomeContainerComponent implements OnInit {
   public isParticipant(activity: Activity) {
     if (this.person.id !== null) {
       const inscription = activity.inscriptions.find((participant) => {
-        console.log(participant.personId);
         return participant.personId === this.person.id;
       });
       if (inscription != null) {

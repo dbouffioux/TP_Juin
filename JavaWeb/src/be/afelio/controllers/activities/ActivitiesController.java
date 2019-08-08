@@ -116,7 +116,6 @@ public class ActivitiesController extends jsonGenerator {
 					activityParameters.getUrl(),
 					activityParameters.getDescription(),
 					activityParameters.getEventName());
-			System.out.println("activityController() dans le update activity dans le if");
 			repositoryActivity.updateActivity(activity);
 		}
 	}
