@@ -27,6 +27,7 @@ import { HomeContainerComponent } from './containers/home-container/home-contain
 import { ActivityItemComponent } from './components/activity-item/activity-item.component';
 import { AccountFormComponent } from './components/account-form/account-form.component';
 import {ControlMessagesComponent} from './utils/control-message.component';
+import {AuthGuard} from './services/auth-guard.service';
 // import { ParticlesModule } from 'angular-particle';
 
 @NgModule({
@@ -66,7 +67,8 @@ import {ControlMessagesComponent} from './utils/control-message.component';
     EventsService,
     InscriptionsService,
     LoginService,
-    AuthenticationsService
+    AuthenticationsService,
+    AuthGuard
   ],
   bootstrap: [AppComponent]
 })

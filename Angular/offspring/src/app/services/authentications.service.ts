@@ -36,4 +36,7 @@ export class AuthenticationsService {
     localStorage.setItem('Person', '');
     this.loginService.closeConnection().subscribe();
   }
+  public isConnected(): boolean {
+    return !!localStorage.getItem('auth');
+  }
 }
