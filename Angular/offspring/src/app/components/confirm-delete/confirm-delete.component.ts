@@ -9,16 +9,21 @@ export class ConfirmDeleteComponent implements OnInit {
 
   canDel: boolean;
   @Input() public showConfirmDelete: boolean ;
-  @Output() private canDelete = new EventEmitter<void>();
-  @Output() private resetLoginFormPopupStateInParent = new EventEmitter<void>();
+  @Output() private hidePopUpConfirmDelete = new EventEmitter<void>();
+  @Output() private confirmDelete = new EventEmitter<void>();
 
   constructor() { }
 
   ngOnInit() {
     console.log(this.showConfirmDelete);
   }
+  public yes() {
+    this.confirmDelete.emit();
+    this.showConfirmDelete = false;
+  }
   public hideConfirmDeletePopup() {
     this.showConfirmDelete = false;
+    this.hidePopUpConfirmDelete.emit();
   }
 
 }

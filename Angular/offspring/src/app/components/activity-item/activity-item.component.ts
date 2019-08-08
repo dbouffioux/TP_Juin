@@ -47,11 +47,11 @@ export class ActivityItemComponent implements OnInit {
   }
   public showConfirmDelete() {
     console.log('dans le showConfirmDelete');
-    this.showConfirmDel = true;
+    this.showConfirmDel = !this.showConfirmDel;
   }
-  public deleteActivity(activity: Activity) {
+  public deleteActivity() {
     this.showActivityPopup = false;
-    this.delete.emit(activity);
+    this.delete.emit(this.activity);
     this.refreshButton.emit();
   }
 

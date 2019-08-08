@@ -51,6 +51,8 @@
   </app-activity-form>
   <ng-container *ngIf="showConfirmDel">
     <app-confirm-delete
+      (confirmDelete)="deleteActivity($event)"
+      (hidePopUpConfirmDelete)="showConfirmDelete()"
       [showConfirmDelete]="showConfirmDel" ></app-confirm-delete>
   </ng-container>
 

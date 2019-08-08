@@ -1,12 +1,17 @@
 <section class="popup" *ngIf="showConfirmDelete">
   <div class="close" (click)="hideConfirmDeletePopup()">Х</div>
-  <form class="form" [formGroup]="confirmDeleteForm" (ngSubmit)="submitForm()">
+  <div class="form">
     <h2>Etes-vous sûr de vouloir supprimer?</h2>
+    <div class="form_button">
       <button (click)="yes()" >
         OUI
       </button>
-    <button (click)="hideConfirmDeletePopup()" >
-      NON
-    </button>
-  </form>
+    </div>
+    <div class="form_button">
+     <button (click)="hideConfirmDeletePopup()" >
+       NON
+     </button>
+    </div>
+
+  </div>
 </section>
