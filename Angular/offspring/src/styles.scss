@@ -54,6 +54,8 @@ h1
   }
 }
 
+/* form style related */
+
 .form{
   background-color: $app-background-color;
   width: 400px;
@@ -138,6 +140,8 @@ h1
   }
 }
 
+/* management buttons */
+
 .management-button, .button{
   background-color: $button-background-color;
   border: none;
@@ -168,6 +172,8 @@ h1
   }
 }
 
+/* lists that appear multiple times */
+
 #events_list,
 #activities_list{
   float: left;
@@ -183,7 +189,7 @@ h1
   margin: 20px 0;
 }
 
-// tab management
+/* tab management */
 
 .menu_tab{
   h2{
