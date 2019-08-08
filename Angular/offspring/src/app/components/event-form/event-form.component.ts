@@ -41,7 +41,7 @@ export class EventFormComponent implements OnInit, OnChanges {
     event.name = val.eventName;
     event.begin = this.dateTimeRange[0];
     event.finish = this.dateTimeRange[1];
-    console.log(event)
+    console.log(event);
     this.createEmitter.emit(event);
   }
 
