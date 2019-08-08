@@ -2,6 +2,9 @@
   <div class="close" (click)="hidePopup()">Х</div>
   <form  class="form"  [formGroup]="signInForm" (ngSubmit)="submitForm()">
     <h2>Inscription</h2>
+    <ng-container *ngIf="errorMessage500">
+      <div class="error500">Login déjà existant</div>
+    </ng-container>
     <div class="form_input">
       <div class="label">
         <label for="firstname">Prénom : </label>
@@ -22,9 +25,6 @@
       </div>
       <input formControlName="login" name="login" type="text">
       <app-control-messages [control]="signInForm.get('login')"></app-control-messages>
-      <ng-container *ngIf="errorMessage500">
-        <div class="error500">Login déjà existant</div>
-      </ng-container>
     </div>
     <div class="form_input">
       <div class="label">

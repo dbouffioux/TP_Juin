@@ -47,11 +47,12 @@
     [showCreateActivityPopup]="showUpdateActivityPopup"
     (update)="updateActivity($event)"
     [activity]="activity"
+    [events]="events"
     (closeUpdateActivityPopupEmitter)="toggleUpdateActivityPopup()">
   </app-activity-form>
   <ng-container *ngIf="showConfirmDel">
     <app-confirm-delete
-      (confirmDelete)="deleteActivity($event)"
+      (confirmDelete)="deleteActivity()"
       (hidePopUpConfirmDelete)="showConfirmDelete()"
       [showConfirmDelete]="showConfirmDel" ></app-confirm-delete>
   </ng-container>

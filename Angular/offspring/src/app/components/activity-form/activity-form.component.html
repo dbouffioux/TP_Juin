@@ -27,16 +27,21 @@
         <div class="label">
           <label>Date de l'activité : </label>
         </div>
-        <input placeholder="Date de l'activité :" formControlName="begin" name="begin" type="owlDateTime"
-               [min]="minDate"
-               [max]="maxDate"
-               [owlDateTimeTrigger]="dtr"
-               [owlDateTime]="dtr"
-               [(ngModel)]="dateTimeRange"
-               [selectMode]="'range'"
-               autocomplete="off">
-        <owl-date-time #dtr disabled="{{!disabled}}"></owl-date-time>
-        <app-control-messages [control]="activityForm.get('begin')"></app-control-messages>
+
+        {{event.begin}}
+
+        <div>
+          <input placeholder="Date de l'activité :" formControlName="begin" name="begin" type="owlDateTime"
+                    [min]="minDate"
+                    [max]="maxDate"
+                    [owlDateTimeTrigger]="dtr"
+                    [owlDateTime]="dtr"
+                    [(ngModel)]="dateTimeRange"
+                    [selectMode]="'range'"
+                    autocomplete="off">
+          <owl-date-time #dtr disabled="{{!disabled}}"></owl-date-time>
+          <app-control-messages [control]="activityForm.get('begin')"></app-control-messages>
+        </div>
       </div>
       <div class="form_input">
         <div class="label">
