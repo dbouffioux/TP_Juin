@@ -21,7 +21,7 @@
       <ng-container *ngIf="isManagement">
         <li><span><button (click)="toggleUpdateActivityPopup()"
                 class="management-button update">modification</button></span>
-          <span id="rightButton"><button (click)="deleteActivity(activity)"
+          <span id="rightButton"><button (click)="showConfirmDelete()"
               class="management-button delete">supression</button></span></li>
       </ng-container>
     </ul>
@@ -50,5 +50,11 @@
     [events]="events"
     (closeUpdateActivityPopupEmitter)="toggleUpdateActivityPopup()">
   </app-activity-form>
+  <ng-container *ngIf="showConfirmDel">
+    <app-confirm-delete
+      (confirmDelete)="deleteActivity($event)"
+      (hidePopUpConfirmDelete)="showConfirmDelete()"
+      [showConfirmDelete]="showConfirmDel" ></app-confirm-delete>
+  </ng-container>
 
 </section>

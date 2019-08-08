@@ -14,6 +14,7 @@ export class ActivityItemComponent implements OnInit {
   public person: Person;
   public isCreate: boolean;
   public isDeleted: boolean;
+  public showConfirmDel: boolean;
   @Input() public events: Event[];
   @Input() public activity: Activity;
   @Input() public isManagement: boolean;
@@ -44,10 +45,13 @@ export class ActivityItemComponent implements OnInit {
   public deleteInscription() {
     this.deleteTheInscription.emit(this.activity.id);
   }
-
-  public deleteActivity(activity: Activity) {
+  public showConfirmDelete() {
+    console.log('dans le showConfirmDelete');
+    this.showConfirmDel = !this.showConfirmDel;
+  }
+  public deleteActivity() {
     this.showActivityPopup = false;
-    this.delete.emit(activity);
+    this.delete.emit(this.activity);
     this.refreshButton.emit();
   }
 
