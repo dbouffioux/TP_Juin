@@ -15,7 +15,7 @@ public class EventParameters {
 	protected LocalDateTime begin;
 	@JsonDeserialize(using = LocalDateDeserializer.class)
 	protected LocalDateTime finish;
-	protected Activity activities;
+	protected Activity[] activities;
 	
 	
 	
@@ -49,10 +49,10 @@ public class EventParameters {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	public Activity getActivities() {
+	public Activity[] getActivities() {
 		return activities;
 	}
-	public void setActivities(Activity activities) {
+	public void setActivities(Activity[] activities) {
 		this.activities = activities;
 	}
 	

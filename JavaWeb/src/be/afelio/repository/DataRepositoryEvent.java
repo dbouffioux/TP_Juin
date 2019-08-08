@@ -160,4 +160,28 @@ public class DataRepositoryEvent {
 			throw new RuntimeException(sqle);
 		}
 	}
+
+    public void updateEvent(Event event) {
+		String sql ="UPDATE public.event " +
+				"SET name=?, begin=?, finish=?" +
+				"WHERE id = ? ";
+		if (event.getBegin() != null
+				&& event.getFinish()!= null
+				&& event.getName() != null && !event.getName().isBlank()
+				&& event.getId() != null) {
+			try (Connection connection = dataRepositoryConnection.createConnection();
+				 PreparedStatement pstatement = connection.prepareStatement(sql)) {
+
+				connection.setAutoCommit(true);
+				pstatement.setString(1, event.getName());
+				pstatement.setTimestamp(2 , Timestamp.valueOf(event.getBegin()));
+				pstatement.setTimestamp(3, Timestamp.valueOf(event.getFinish()));
+				pstatement.setInt(4, event.getId());
+				pstatement.executeUpdate();
+
+			} catch (SQLException sqle) {
+				throw new RuntimeException(sqle);
+			}
+		}
+    }
 }

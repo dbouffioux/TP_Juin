@@ -1,7 +1,8 @@
 <section class="popup" *ngIf="showCreateEventPopup">
   <div class="close" (click)="hideEventFormPopup()">Х</div>
   <form class="form" [formGroup]="eventForm" (ngSubmit)="submitForm()">
-    <h2>Créer un événement</h2>
+    <h2 *ngIf="!isUpdate">Créer un événement</h2>
+    <h2 *ngIf="isUpdate">Modifier un événement</h2>
     <div class="form_input">
       <div class="label">
         <label for="eventName">Nom de l'évènement : </label>
@@ -22,8 +23,11 @@
       <owl-date-time #dtr></owl-date-time>
     </div>
     <div class="form_button">
-      <button type="submit"  [disabled]="!eventForm.valid">
-        Créer
+      <button *ngIf="!isUpdate" type="submit" [disabled]="!eventForm.valid">
+        <span >Créer</span>
+      </button>
+      <button *ngIf="isUpdate" type="submit">
+        <span >Modifier</span>
       </button>
     </div>
   </form>

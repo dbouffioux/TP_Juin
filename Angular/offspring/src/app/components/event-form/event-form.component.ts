@@ -1,8 +1,8 @@
-import { Component, OnInit , Input, Output, EventEmitter, OnChanges, SimpleChange} from '@angular/core';
-import { Event } from 'src/app/models/event.model';
-import { Person } from 'src/app/models/person.model';
-import { AuthenticationsService } from 'src/app/services/authentications.service';
-import { FormGroup, FormBuilder, Validators} from '@angular/forms';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output} from '@angular/core';
+import {Event} from 'src/app/models/event.model';
+import {Person} from 'src/app/models/person.model';
+import {AuthenticationsService} from 'src/app/services/authentications.service';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-event-form',
@@ -14,11 +14,13 @@ export class EventFormComponent implements OnInit, OnChanges {
   public minBegin: Date;
   public person: Person;
   public eventForm: FormGroup;
-  @Input() event: Event;
   public dateTimeRange: Date[];
+  public isUpdate: boolean;
+  @Input() event: Event;
   @Input() public showCreateEventPopup: boolean;
   @Output() private createEmitter = new EventEmitter<Event>();
-  @Output() private closeCreateEventPopupEmitter = new EventEmitter<Event>();
+  @Output() private updateEmitter = new EventEmitter<Event>();
+  @Output() private closeEventPopupEmitter = new EventEmitter<Event>();
 
   constructor(private authService: AuthenticationsService, private fb: FormBuilder) {
     this.person = new Person();
@@ -29,24 +31,32 @@ export class EventFormComponent implements OnInit, OnChanges {
    }
 
   ngOnInit() {
+    this.isUpdate = this.event.name !== '';
     this.minBegin = new Date();
     this.person = this.authService.getPerson();
+    this.eventForm.patchValue({eventName: this.event.name});
+    this.dateTimeRange = [];
+    this.dateTimeRange[0] = this.event.begin;
+    this.dateTimeRange[1] = this.event.finish;
+    this.eventForm.patchValue({begin: this.dateTimeRange});
   }
 
   ngOnChanges() { }
 
   public submitForm() {
     const val = this.eventForm.value;
-    const event = new Event();
-    event.name = val.eventName;
-    event.begin = this.dateTimeRange[0];
-    event.finish = this.dateTimeRange[1];
-    console.log(event)
-    this.createEmitter.emit(event);
+    this.event.name = val.eventName;
+    this.event.begin = this.dateTimeRange[0];
+    this.event.finish = this.dateTimeRange[1];
+    if (this.isUpdate) {
+      this.updateEmitter.emit(this.event);
+    } else {
+      this.createEmitter.emit(this.event);
+    }
   }
 
   public hideEventFormPopup() {
     this.showCreateEventPopup = !this.showCreateEventPopup;
-    this.closeCreateEventPopupEmitter.emit();
+    this.closeEventPopupEmitter.emit();
   }
 }
