@@ -37,9 +37,9 @@ export class AccountContainerComponent implements OnInit {
   public activityToShow: Activity;
   public isManagement: boolean;
   public showCreateActivityPopup: boolean;
-  private activeEvent: string;
   private showSubscriptions: boolean;
   private showConfirmDelete: boolean;
+  public activeEventId: number;
 
   constructor(
     private activitiesService: ActivitiesService,
@@ -61,6 +61,7 @@ export class AccountContainerComponent implements OnInit {
     this.person = this.authService.getPerson();
     this.initEvents();
     this.initInscriptions();
+    this.activeEventId = null;
   }
 
   public initActivitiesList(eventName: string) {
@@ -68,9 +69,9 @@ export class AccountContainerComponent implements OnInit {
     this.eventService.getEventWithAllActivitiesByName(eventName).subscribe(event => {
       event.activities.map(activity => {
         this.activities.push(activity);
+        this.activeEventId = event.id;
       });
     });
-    this.activeEvent = eventName;
   }
 
   public initEvents() {

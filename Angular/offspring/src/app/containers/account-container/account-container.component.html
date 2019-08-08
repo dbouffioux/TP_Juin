@@ -12,6 +12,7 @@
         (delete)="deleteEvent($event)"
         (update)="toggleEventPopup($event)"
         [isManagement]="true"
+        [activeEventId]="activeEventId"
         (getActivityList)="initActivitiesList($event)">
       </app-event-list>
       <div class="button-container">
