@@ -1,11 +1,8 @@
 import { Component, OnInit, Input, EventEmitter, Output, OnChanges } from '@angular/core';
 import { Activity } from 'src/app/models/activity.model';
 import { Person } from 'src/app/models/person.model';
-import { ActivitiesService } from 'src/app/services/activities.service';
-import { EventsService } from 'src/app/services/events.service';
 import { Event } from 'src/app/models/event.model';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import {log} from 'util';
 
 @Component({
   selector: 'app-activity-form',
@@ -32,7 +29,7 @@ export class ActivityFormComponent implements OnInit {
   @Output() private closeUpdateActivityPopupEmitter = new EventEmitter<Activity>();
   @Output() private closeCreateActivityPopupEmitter = new EventEmitter<Activity>();
 
-  constructor(private activitiesService: ActivitiesService, private eventService: EventsService, private fb: FormBuilder) {
+  constructor(private fb: FormBuilder) {
     this.activityForm = this.fb.group({
       event: this.fb.control('', [Validators.required]),
       activityName: this.fb.control('', [Validators.required, Validators.minLength(4), Validators.maxLength(20)]),
