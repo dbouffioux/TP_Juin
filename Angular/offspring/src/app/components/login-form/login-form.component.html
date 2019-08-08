@@ -2,7 +2,7 @@
   <div class="close" (click)="hideLoginFormPopup()">Х</div>
   <form class="form" [formGroup]="loginForm" (ngSubmit)="submitForm()">
     <h2>Login</h2>
-    <ng-container *ngIf="errorMessage403"><div class= "error403">La combinaison login/password est fausse</div></ng-container>
+    <ng-container *ngIf="errorMessage403"><div class= "error403">La combinaison login/password est incorrecte</div></ng-container>
     <ng-container *ngIf="errorMessage500"><div class= "error500">Le serveur est inaccessible</div></ng-container>
     <div class="form_input">
       <div class="label">

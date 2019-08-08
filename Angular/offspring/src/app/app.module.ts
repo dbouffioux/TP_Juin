@@ -26,7 +26,10 @@ import { AccountContainerComponent } from './containers/account-container/accoun
 import { HomeContainerComponent } from './containers/home-container/home-container.component';
 import { ActivityItemComponent } from './components/activity-item/activity-item.component';
 import { AccountFormComponent } from './components/account-form/account-form.component';
-import { ControlMessagesComponent } from './utils/control-message.component';
+import {ControlMessagesComponent} from './utils/control-message.component';
+import {AuthGuard} from './services/auth-guard.service';
+import { ConfirmDeleteComponent } from './components/confirm-delete/confirm-delete.component';
+// import { ParticlesModule } from 'angular-particle';
 
 @NgModule({
   declarations: [
@@ -46,7 +49,8 @@ import { ControlMessagesComponent } from './utils/control-message.component';
     ActivityItemComponent,
     AccountFormComponent,
     ActivityFormComponent,
-    ControlMessagesComponent
+    ControlMessagesComponent,
+    ConfirmDeleteComponent
   ],
   imports: [
     BrowserModule,
@@ -64,7 +68,8 @@ import { ControlMessagesComponent } from './utils/control-message.component';
     EventsService,
     InscriptionsService,
     LoginService,
-    AuthenticationsService
+    AuthenticationsService,
+    AuthGuard
   ],
   bootstrap: [AppComponent]
 })
