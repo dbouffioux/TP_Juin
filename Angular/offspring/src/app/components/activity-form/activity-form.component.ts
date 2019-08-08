@@ -6,6 +6,7 @@ import { EventsService } from 'src/app/services/events.service';
 import { Event } from 'src/app/models/event.model';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import {log} from 'util';
+import {element} from "protractor";
 
 @Component({
   selector: 'app-activity-form',
@@ -14,7 +15,6 @@ import {log} from 'util';
 })
 export class ActivityFormComponent implements OnInit {
 
-  public event: Event;
   public  minDate: Date;
   public  maxDate: Date;
   public person: Person;
@@ -22,6 +22,7 @@ export class ActivityFormComponent implements OnInit {
   public dateTimeRange: Date[];
   public activities: Activity[];
   public activityForm: FormGroup;
+  @Input() public event: Event;
   @Input() public events: Event[];
   @Input() public activity: Activity;
   @Input() public showCreateActivityPopup: boolean;
@@ -44,6 +45,19 @@ export class ActivityFormComponent implements OnInit {
 
   ngOnInit() {
     this.disabled = false;
+    if (this.updateActivity()) {
+      console.log('dans le if ^^');
+      this.disabled = true;
+      this.event = this.events.find( event => {
+        return event.name === this.activity.eventName;
+      });
+      this.minDate = this.event.begin;
+      this.maxDate = this.event.finish;
+      this.dateTimeRange = new Array();
+      this.dateTimeRange[0] = this.event.begin;
+      this.dateTimeRange[1] = this.event.finish;
+      console.log(this.event);
+    }
   }
 
   public submitForm() {

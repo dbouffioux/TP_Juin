@@ -16,23 +16,17 @@ export class EventListComponent implements OnInit {
   public showCreateEventPopup: boolean;
   @Input() public events: Event[];
   @Input() public isManagement: boolean;
+  @Input() public activeEventId: number;
+  @Output() private create = new EventEmitter<Event>();
   @Output() private delete = new EventEmitter<number>();
   @Output() private update = new EventEmitter<string>();
-  @Output() private create = new EventEmitter<Event>();
   @Output() private getActivityList = new EventEmitter<string>();
-  @Input() public activeEventId: number;
 
   constructor() {
     this.event = new Event();
   }
 
-  ngOnInit() {
-
-  }
-
-  public onCreate(event: Event) {
-    this.create.emit(event);
-  }
+  ngOnInit() { }
 
   public getActivities(eventName: string) {
     this.getActivityList.emit(eventName);
@@ -44,9 +38,5 @@ export class EventListComponent implements OnInit {
 
   public onUpdate(name: string) {
     this.update.emit(name);
-  }
-
-  public toggleShowCreateEventPopup() {
-    this.showCreateEventPopup = !this.showCreateEventPopup;
   }
 }

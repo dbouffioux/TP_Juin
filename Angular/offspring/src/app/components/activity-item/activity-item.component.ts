@@ -12,19 +12,19 @@ import {log} from 'util';
 export class ActivityItemComponent implements OnInit {
 
   public person: Person;
-  public isDeleted: boolean;
   public isCreate: boolean;
-
-  @Input() public isManagement: boolean;
-  @Input() public isParticipantValue: boolean;
+  public isDeleted: boolean;
+  @Input() public events: Event[];
   @Input() public activity: Activity;
+  @Input() public isManagement: boolean;
   @Input() public activities: Activity[];
   @Input() public showActivityPopup: boolean;
+  @Input() public isParticipantValue: boolean;
   @Output() private showUpdateActivityPopup: boolean;
   @Output() private delete = new EventEmitter<Activity>();
   @Output() private refreshButton = new EventEmitter<void>();
-  @Output() private createInscription = new EventEmitter<Activity>();
   @Output() private hidePopUpEmitter = new EventEmitter<Activity>();
+  @Output() private createInscription = new EventEmitter<Activity>();
   @Output() private updateActivityEmit = new EventEmitter<Activity>();
   @Output() private deleteTheInscription = new EventEmitter<number>();
 
@@ -38,7 +38,7 @@ export class ActivityItemComponent implements OnInit {
   }
 
   public createNewInscription(activity: Activity) {
-    this.createInscription.emit(this.activity);
+    this.createInscription.emit(activity);
   }
 
   public deleteInscription() {

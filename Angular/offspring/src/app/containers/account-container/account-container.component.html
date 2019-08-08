@@ -38,6 +38,7 @@
     <app-activity-item
       [showActivityPopup]="showActivityPopup"
       [activity]="activityToShow"
+      [events]="events"
       [isManagement]="isManagement"
       (updateActivityEmit)="updateActivity($event)"
       (delete)="deleteActivity($event)">
@@ -46,7 +47,8 @@
       [showCreateActivityPopup]="showCreateActivityPopup"
       (create)="createActivity($event)"
       (refresh)="initActivitiesList($event)"
-      [activity]="activity" [events]="events"
+      [activity]="activity"
+      [events]="events"
       (closeCreateActivityPopupEmitter)="toggleCreateActivityPopup()">
     </app-activity-form>
     <!-- End of popups -->
