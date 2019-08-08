@@ -177,7 +177,7 @@ public class FrontController extends HttpServlet {
 		setHeaders(response);
 
 		if (checkConnection(request, response)) {
-			if (pathInfo.startsWith("/person")) {
+			if (pathInfo.startsWith("/person/")) {
 				personController.updatePerson(request, response);
 			} else if (pathInfo.startsWith("/activity")) {
 				activitiesController.updateActivity(request, response);
