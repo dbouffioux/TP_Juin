@@ -17,6 +17,7 @@ export class EventListComponent implements OnInit {
   @Input() public events: Event[];
   @Input() public isManagement: boolean;
   @Output() private delete = new EventEmitter<number>();
+  @Output() private update = new EventEmitter<string>();
   @Output() private create = new EventEmitter<Event>();
   @Output() private getActivityList = new EventEmitter<string>();
   @Input() public activeEventId: number;
@@ -39,6 +40,10 @@ export class EventListComponent implements OnInit {
 
   public onDelete(id: number) {
     this.delete.emit(id);
+  }
+
+  public onUpdate(name: string) {
+    this.update.emit(name);
   }
 
   public toggleShowCreateEventPopup() {

@@ -64,4 +64,21 @@ public class EventsController extends jsonGenerator{
 		int id = Integer.parseInt(idEv);
 		repositoryEvent.deleteEventById(id);
 	}
+
+    public void updateEvent(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		ObjectMapper mapper = new ObjectMapper();
+		System.out.print(request.getInputStream());
+		EventParameters eventParameters= mapper.readValue(request.getInputStream(), EventParameters.class );
+		if ( eventParameters.getName()!= null
+				&& !eventParameters.getName().isBlank()
+				&& eventParameters.getBegin()!= null
+				&& eventParameters.getFinish()!= null) {
+			Event event = new Event(eventParameters.getId(),
+					eventParameters.getName(),
+					eventParameters.getPersonId(),
+					eventParameters.getBegin(),
+					eventParameters.getFinish());
+			repositoryEvent.updateEvent(event);
+		}
+    }
 }

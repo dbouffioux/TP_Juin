@@ -4,11 +4,11 @@ import { Observable, throwError } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { catchError } from 'rxjs/operators';
 import { Event } from 'src/app/models/event.model';
+import {Activity} from '../models/activity.model';
 
 @Injectable({
   providedIn: 'root'
 })
-
 export class EventsService {
 
   constructor(private http: HttpClient) { }
@@ -19,16 +19,13 @@ export class EventsService {
       .pipe(catchError((error: any) => throwError(error.json())));
   }
 
-  public getEventWithAllActivitiesById(name: string): Observable<Event> {
-    console.log(name);
+  public getEventWithAllActivitiesByName(name: string): Observable<Event> {
     return this.http.get<Event>(`${environment.baseUrl}/event/${name}`,
       { withCredentials: true })
       .pipe(catchError((error: any) => throwError(error.json())));
   }
 
   public getEventByPersonId(id: number): Observable<Event[]> {
-    console.log(id);
-
     return this.http.post<Event[]>(`${environment.baseUrl}/eventsByPersonId`, { personId: id },
       {
         withCredentials: true,
@@ -45,7 +42,6 @@ export class EventsService {
   }
 
   public deleteEvent(personId: number): Observable<boolean> {
-    console.log('dans le service de suppression d ev ' + localStorage.getItem('Authorization') + 'nb : ' + personId);
     return this.http
       .delete<boolean>(`${environment.baseUrl}/event/${personId}`,
         {
@@ -53,5 +49,12 @@ export class EventsService {
             localStorage.getItem('Authorization')),
           withCredentials: true
         });
+  }
+
+  updateEvent(event: Event) {
+    return this.http
+      .put<Event>(`${environment.baseUrl}/event`, event,
+        { withCredentials: true })
+      .pipe(catchError((error: any) => throwError(error.json())));
   }
 }

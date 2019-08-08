@@ -5,7 +5,10 @@
       {{activity.name}} le {{activity.begin | date : 'dd/MM/yy'}}
     </div>
   </div>
-  <div class="" *ngIf="activities?.length === 0">
+  <div *ngIf="activities?.length === 0">
+    Il n'y a encore aucune activité pour cet événement
+  </div>
+  <div class="" *ngIf="activities === undefined">
     Sélectionnez un événement
   </div>
 </section>

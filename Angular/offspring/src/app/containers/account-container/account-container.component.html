@@ -10,11 +10,12 @@
       <app-event-list
         [events]="events"
         (delete)="deleteEvent($event)"
+        (update)="toggleEventPopup($event)"
         [isManagement]="true"
         (getActivityList)="initActivitiesList($event)">
       </app-event-list>
       <div class="button-container">
-        <button (click)="toggleCreateEventPopup()" class="add management-button">+</button>
+        <button (click)="toggleEventPopup()" class="add management-button">+</button>
       </div>
     </section>
     <section id="activities_list">
@@ -27,18 +28,19 @@
     </section>
     <!-- End of Lists -->
     <!-- Popups -->
-    <app-event-form
-      [showCreateEventPopup]="showCreateEventPopup"
+    <app-event-form *ngIf="showEventPopup"
+      [showCreateEventPopup]="showEventPopup"
       (createEmitter)="createEvent($event)"
-      (closeCreateEventPopupEmitter)="toggleCreateEventPopup()">
+      (updateEmitter)="updateEvent($event)"
+      (closeEventPopupEmitter)="toggleEventPopup()"
+      [event]="event">
     </app-event-form>
     <app-activity-item
       [showActivityPopup]="showActivityPopup"
       [activity]="activityToShow"
       [isManagement]="isManagement"
       (updateActivityEmit)="updateActivity($event)"
-      (delete)="deleteActivity($event)"
-      >
+      (delete)="deleteActivity($event)">
     </app-activity-item>
     <app-activity-form
       [showCreateActivityPopup]="showCreateActivityPopup"

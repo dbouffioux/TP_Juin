@@ -60,8 +60,7 @@ import { ConfirmDeleteComponent } from './components/confirm-delete/confirm-dele
     FormsModule,
     ReactiveFormsModule,
     OwlDateTimeModule,
-    OwlNativeDateTimeModule,
-    // ParticlesModule
+    OwlNativeDateTimeModule
   ],
   providers: [
     ActivitiesService,

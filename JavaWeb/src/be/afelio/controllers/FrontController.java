@@ -179,9 +179,10 @@ public class FrontController extends HttpServlet {
 		if (checkConnection(request, response)) {
 			if (pathInfo.startsWith("/person")) {
 				personController.updatePerson(request, response);
-			}if (pathInfo.startsWith("/activity")) {
-				System.out.println("FrontController.doPut() dans le if " + pathInfo);
+			} else if (pathInfo.startsWith("/activity")) {
 				activitiesController.updateActivity(request, response);
+			} else if (pathInfo.startsWith("/event")){
+				eventsController.updateEvent(request, response);
 			}
 		}
 	}

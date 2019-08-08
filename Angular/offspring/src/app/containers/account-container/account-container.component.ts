@@ -32,7 +32,7 @@ export class AccountContainerComponent implements OnInit {
   public tabsStatuses: any;
   public tabActive: any;
   // event-form pop-up
-  public showCreateEventPopup: boolean;
+  public showEventPopup: boolean;
   public showActivityPopup: boolean;
   public activityToShow: Activity;
   public isManagement: boolean;
@@ -53,7 +53,7 @@ export class AccountContainerComponent implements OnInit {
     this.tabActive = 'subscription-list';
     this.showAccountUpdateForm = false;
     this.showCreateActivityPopup = false;
-    this.showCreateEventPopup = false;
+    this.showEventPopup = false;
   }
 
   ngOnInit() {
@@ -64,7 +64,7 @@ export class AccountContainerComponent implements OnInit {
 
   public initActivitiesList(eventName: string) {
     this.activities = [];
-    this.eventService.getEventWithAllActivitiesById(eventName).subscribe(event => {
+    this.eventService.getEventWithAllActivitiesByName(eventName).subscribe(event => {
       event.activities.map(activity => {
         this.activities.push(activity);
       });
@@ -87,7 +87,6 @@ export class AccountContainerComponent implements OnInit {
 
   public createActivity(activity: Activity) {
     this.activitiesService.createActivity(activity).subscribe(() => {
-      console.log(activity);
     }, error => {
       console.log(error);
     });
@@ -97,7 +96,7 @@ export class AccountContainerComponent implements OnInit {
     event.personId = this.person.id;
     this.eventService.createEvent(event).subscribe(() => {
       this.initEvents();
-      this.toggleCreateEventPopup();
+      this.toggleEventPopup();
     }, error => {
       console.log(error);
     });
@@ -105,6 +104,7 @@ export class AccountContainerComponent implements OnInit {
 
   public deleteEvent(eventId: number) {
     this.eventService.deleteEvent(eventId).subscribe(() => {
+      this.activities = [];
       this.isDeleted = true;
       this.initEvents();
     }, error => {
@@ -112,8 +112,18 @@ export class AccountContainerComponent implements OnInit {
     });
   }
 
+  public updateEvent(event: Event) {
+    this.eventService.updateEvent(event).subscribe(() => {
+      this.initEvents();
+      this.toggleEventPopup();
+    }, error => {
+      console.log(error);
+    });
+  }
+
   public updateActivity(activity: Activity) {
     this.activitiesService.updateActivity(activity).subscribe(() => {
+      this.initActivitiesList(activity.eventName);
     }, error => {
       console.log(error);
     });
@@ -191,8 +201,18 @@ export class AccountContainerComponent implements OnInit {
     this.isManagement = true;
   }
 
-  public toggleCreateEventPopup() {
-    this.showCreateEventPopup = !this.showCreateEventPopup;
+  public toggleEventPopup(name?: string) {
+    if (name !== undefined) {
+      this.eventService.getEventWithAllActivitiesByName(name).subscribe(
+        event => {
+          this.event = event;
+          this.showEventPopup = !this.showEventPopup;
+        }
+      );
+    } else {
+      this.event = new Event();
+      this.showEventPopup = !this.showEventPopup;
+    }
   }
 
   public toggleCreateActivityPopup() {
