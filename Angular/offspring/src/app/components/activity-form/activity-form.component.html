@@ -34,7 +34,6 @@
                [owlDateTime]="dtr"
                [(ngModel)]="dateTimeRange"
                [selectMode]="'range'"
-               [disabled]="!disabled"
                autocomplete="off">
         <owl-date-time #dtr disabled="{{!disabled}}"></owl-date-time>
         <app-control-messages [control]="activityForm.get('begin')"></app-control-messages>
