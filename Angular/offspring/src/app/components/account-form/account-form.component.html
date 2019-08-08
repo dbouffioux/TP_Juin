@@ -41,6 +41,12 @@
 </form>
 <hr>
 <h3 class="section-title"> Autres actions </h3>
-<button class="management-button delete" *ngIf="isLogged" (click)="deleteProfile()">
+<button class="management-button delete" *ngIf="isLogged" (click)="showConfirmDelete()">
   Supprimer profil
 </button>
+<ng-container *ngIf="showConfirmDel">
+  <app-confirm-delete
+    (confirmDelete)="deleteProfile()"
+    (hidePopUpConfirmDelete)="showConfirmDelete()"
+    [showConfirmDelete]="showConfirmDel" ></app-confirm-delete>
+</ng-container>

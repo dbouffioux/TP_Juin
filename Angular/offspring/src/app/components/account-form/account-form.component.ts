@@ -14,6 +14,7 @@ export class AccountFormComponent implements OnInit {
   public isLogged: boolean;
   public newPerson: Person;
   public accountForm: FormGroup;
+  public showConfirmDel: boolean;
   @Output() public emitter = new EventEmitter<Person>();
   @Output() public delete = new EventEmitter<void>();
 
@@ -46,6 +47,10 @@ export class AccountFormComponent implements OnInit {
 
   public deleteProfile() {
     this.delete.emit();
+  }
+  public showConfirmDelete() {
+    console.log('dans le showConfirmDelete');
+    this.showConfirmDel = !this.showConfirmDel;
   }
 }
 
