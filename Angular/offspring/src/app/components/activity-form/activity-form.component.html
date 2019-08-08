@@ -5,9 +5,9 @@
         <div class="label">
           <label for="event">Nom de l'évènement : </label>
         </div>
-        <select formControlName="event" name="event" type="text" *ngIf="!updateActivity()">
-          <option value="" selected>Choisissez votre évènement</option>
-          <option *ngFor="let event of events" value="{{event.name}}">
+        <select #selectList formControlName="event" name="event" type="text" *ngIf="!updateActivity()" (change)="eventSelect(selectList.value)">
+          <option value="null" selected>Choisissez votre évènement</option>
+          <option *ngFor="let event of events" value="{{event | json}}">
             {{event.name}}
           </option>
           <app-control-messages [control]="activityForm.get('event')"></app-control-messages>
@@ -28,11 +28,15 @@
           <label>Début de l'activité : </label>
         </div>
         <input placeholder="Date Time:" formControlName="begin" name="begin" type="owlDateTime"
+               [min]="minDate"
+               [max]="maxDate"
                [owlDateTimeTrigger]="dtr"
                [owlDateTime]="dtr"
                [(ngModel)]="dateTimeRange"
-               [selectMode]="'range'">
-        <owl-date-time #dtr></owl-date-time>
+               [selectMode]="'range'"
+               [disabled]="!disabled"
+               autocomplete="off">
+        <owl-date-time #dtr disabled="{{!disabled}}"></owl-date-time>
         <app-control-messages [control]="activityForm.get('begin')"></app-control-messages>
       </div>
       <div class="form_input">
