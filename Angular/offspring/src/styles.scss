@@ -82,6 +82,24 @@ h1
       font-size: 20px;
       font-weight: bold;
     }
+    .form_input_error{
+      position: relative;
+      background-color: red;
+      color: white;
+      padding: 10px;
+      margin-top: 6px;
+      font-size: 14px;
+      .triangle{
+        width: 0;
+        height: 0;
+        border-left: 5px solid transparent;
+        border-right: 5px solid transparent;
+        border-bottom: 5px solid #f85a5a;
+        position: absolute;
+        top: -5px;
+        left: 19px;
+      }
+    }
   }
   .form_button{
     clear: both;
