@@ -28,6 +28,7 @@ import { ActivityItemComponent } from './components/activity-item/activity-item.
 import { AccountFormComponent } from './components/account-form/account-form.component';
 import {ControlMessagesComponent} from './utils/control-message.component';
 import {AuthGuard} from './services/auth-guard.service';
+import { ConfirmDeleteComponent } from './components/confirm-delete/confirm-delete.component';
 // import { ParticlesModule } from 'angular-particle';
 
 @NgModule({
@@ -48,7 +49,8 @@ import {AuthGuard} from './services/auth-guard.service';
     ActivityItemComponent,
     AccountFormComponent,
     ActivityFormComponent,
-    ControlMessagesComponent
+    ControlMessagesComponent,
+    ConfirmDeleteComponent
   ],
   imports: [
     BrowserModule,
