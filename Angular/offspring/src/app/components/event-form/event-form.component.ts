@@ -31,12 +31,9 @@ export class EventFormComponent implements OnInit, OnChanges {
   ngOnInit() {
     this.minBegin = new Date();
     this.person = this.authService.getPerson();
-    this.minBegin = new Date();
   }
 
-  ngOnChanges() {
-    this.minBegin = this.eventForm.value.begin;
-  }
+  ngOnChanges() { }
 
   public submitForm() {
     const val = this.eventForm.value;
