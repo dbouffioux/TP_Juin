@@ -48,9 +48,8 @@ export class PersonsService {
   }
 
   public updatePerson(personUpdated: Person) {
-    console.log('service : ' + personUpdated.id);
-
-    return this.http.put(`${environment.baseUrl}/person/${personUpdated.id}`, personUpdated,
+    console.log('service : ', personUpdated);
+    return this.http.put(`${environment.baseUrl}/person/`, personUpdated,
       {
         headers: new HttpHeaders().set('Authorization', localStorage.getItem('Authorization')),
         withCredentials: true

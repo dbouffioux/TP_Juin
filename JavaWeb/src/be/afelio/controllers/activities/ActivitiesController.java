@@ -101,8 +101,8 @@ public class ActivitiesController extends jsonGenerator {
 		System.out.println("ActivitiesController.updateActivity()");
 		ObjectMapper mapper = new ObjectMapper();
 		ActivityParameters activityParameters = mapper.readValue(request.getInputStream(), ActivityParameters.class);
-		System.out.println("Activity : " + activityParameters.getName() + " - " + activityParameters.getBegin() + " - " + activityParameters.getFinish() + " - " +  activityParameters.getEventName());
-		if ( activityParameters.getName()!= null
+		if ( activityParameters.getId() != null
+				&& activityParameters.getName()!= null
 				&& !activityParameters.getName().isBlank()
 				&& activityParameters.getBegin() != null
 				&& activityParameters.getFinish() != null

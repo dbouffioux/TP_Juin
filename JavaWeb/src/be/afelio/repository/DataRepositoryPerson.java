@@ -101,7 +101,7 @@ public class DataRepositoryPerson {
 	
 	}
 
-	public void updatePersonById(PersonParameters personParameters, int id) {
+	public void updatePerson(Person person) {
 		String sql = "UPDATE person "
 				   + "SET firstname = ?, "
 				   + "	 lastname = ?, "
@@ -109,19 +109,24 @@ public class DataRepositoryPerson {
 				   + "	 password = ? "
 				   + "WHERE id = ? ";
 	
-		if (personParameters.getLastname() != null && !personParameters.getLastname().isBlank()
-				&& personParameters.getFirstname() != null && !personParameters.getFirstname().isBlank()
-				&& personParameters.getLogin() != null && !personParameters.getLogin().isBlank()
-				&& personParameters.getPassword() != null && !personParameters.getPassword().isBlank()) {
+		if (person.getId() != null
+				&&person.getLastname() != null
+				&& !person.getLastname().isBlank()
+				&& person.getFirstname() != null
+				&& !person.getFirstname().isBlank()
+				&& person.getLogin() != null
+				&& !person.getLogin().isBlank()
+				&& person.getPassword() != null
+				&& !person.getPassword().isBlank()) {
 			try (Connection connection = dataRepositoryConnection.createConnection();
 					PreparedStatement pstatement = connection.prepareStatement(sql)) {
 	
 				connection.setAutoCommit(true);
-				pstatement.setString(1, personParameters.getFirstname());
-				pstatement.setString(2, personParameters.getLastname());
-				pstatement.setString(3, personParameters.getLogin());
-				pstatement.setString(4, personParameters.getPassword());
-				pstatement.setInt(5, id);
+				pstatement.setString(1, person.getFirstname());
+				pstatement.setString(2, person.getLastname());
+				pstatement.setString(3, person.getLogin());
+				pstatement.setString(4, person.getPassword());
+				pstatement.setInt(5, person.getId());
 				pstatement.executeUpdate();
 	
 			} catch (SQLException sqle) {
