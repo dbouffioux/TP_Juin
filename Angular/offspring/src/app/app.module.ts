@@ -13,7 +13,6 @@ import { InscriptionComponent } from './components/inscription/inscription.compo
 import { InscriptionsService } from './services/inscriptions.service';
 import { ActivityFormComponent } from './components/activity-form/activity-form.component';
 import { EventFormComponent } from './components/event-form/event-form.component';
-import { EventItemComponent } from './components/event-item/event-item.component';
 import { LoginComponent } from './components/login/login.component';
 import { LoginService } from './services/login.service';
 import { UpdateAccountComponent } from './components/updateAccount/updateAccount.component';
@@ -36,7 +35,6 @@ import { ControlMessagesComponent } from './utils/control-message.component';
     InscriptionComponent,
     ActivityFormComponent,
     EventFormComponent,
-    EventItemComponent,
     LoginComponent,
     UpdateAccountComponent,
     MenuContainerComponent,

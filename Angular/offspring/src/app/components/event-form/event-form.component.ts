@@ -3,7 +3,6 @@ import { Event } from 'src/app/models/event.model';
 import { Person } from 'src/app/models/person.model';
 import { AuthenticationsService } from 'src/app/services/authentications.service';
 import { FormGroup, FormBuilder, Validators} from '@angular/forms';
-import { ValidationService } from '../../utils/validation.service';
 
 @Component({
   selector: 'app-event-form',
@@ -15,6 +14,7 @@ export class EventFormComponent implements OnInit, OnChanges {
   public minBegin: Date;
   public person: Person;
   public eventForm: FormGroup;
+  @Input() event: Event;
   public dateTimeRange: Date[];
   @Input() public showCreateEventPopup: boolean;
   @Output() private createEmitter = new EventEmitter<Event>();
@@ -31,13 +31,9 @@ export class EventFormComponent implements OnInit, OnChanges {
   ngOnInit() {
     this.minBegin = new Date();
     this.person = this.authService.getPerson();
-    this.minBegin = new Date();
-    this.minFinish = new Date();
   }
 
-  ngOnChanges() {
-    this.minFinish = this.eventForm.value.begin;
-  }
+  ngOnChanges() { }
 
   public submitForm() {
     const val = this.eventForm.value;
